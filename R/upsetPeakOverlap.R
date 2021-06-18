@@ -64,8 +64,7 @@ makeVenn4upSet <- function(peaks, conds = names(peaks), conds_order = conds, plo
 #'
 #' @export
 
-upsetPeaks <- function(peaks, conds = names(peaks), conds_order = conds,
-                       title = NULL, order.by = "freq",
+upsetPeaks <- function(peaks, conds = names(peaks), conds_order = conds, order.by = "freq",
                        mainbar.y.label = "Intersect size", sets.x.label = "Set size",
                        ...){
 
@@ -79,20 +78,9 @@ upsetPeaks <- function(peaks, conds = names(peaks), conds_order = conds,
   x <- makeVenn4upSet(peaks, conds, conds_order, plot = F)
 
   # draw upset plot with options
-  if(is.null(title)) {
-    upset <- UpSetR::upset(data = x$matrix, order.by = order.by, sets.x.label = sets.x.label, mainbar.y.label = mainbar.y.label)
-    return(upset)
-
-  } else {
-    plot.new()
-    UpSetR::upset(data = x$matrix, order.by = order.by, sets.x.label = sets.x.label, mainbar.y.label = mainbar.y.label)
-    #grid.edit(gPath = 'arrange', name="upset")
-    #vp <- grid.grab()
-    #grid.arrange( grobs = list( vp ), top=title, cols=1 )
-  }
+  upset <- UpSetR::upset(data = x$matrix, order.by = order.by, sets.x.label = sets.x.label, mainbar.y.label = mainbar.y.label)
+  return(upset)
 }
-
-#upsetPeaks(peaks)
 
 # ggUpsetPeaks() -------------------------
 
@@ -106,14 +94,16 @@ upsetPeaks <- function(peaks, conds = names(peaks), conds_order = conds,
 #' @param peaks List of dataframes with the genomic coordinates of the regions to overlap. Dataframes must contain the columns seqnames, start, end.
 #' @param conds Character with the same length as the 'peaks' list. The names that are given to the diferente objects in the 'peaks' list. Default: 'names(peaks)'
 #' @param conds_order Character of the same length as 'conds'. Same values as in 'conds' but with the desired order of priority. Default: 'conds'.
-#' @param title
-#' @param subtitle
-#' @param caption
+#' @param num_size Numeric of length 1. Size of the labels indicating the size of each intersection. Default: 4.
+#' @param order_by_freq Logical of length 1. If TRUE (the default), the intersections are arranged by descending order of size. Default: TRUE.
+#' @param title Character of length 1. Title of the plot. Default: NULL.
+#' @param subtitle Character of length 1. Subtitle of the plot. Default: NULL.
+#' @param caption Character of length 1. Caption written at the bottom of the plot. Default: NULL.
 #'
 #' @export
 
 ggUpsetPeaks <- function(peaks, conds = names(peaks), conds_order = conds,
-                         order_by_freq = T,
+                         order_by_freq = T, num_size = 4,
                          title = NULL, subtitle = NULL, caption = NULL){
 
   # Load required packages
@@ -152,10 +142,11 @@ ggUpsetPeaks <- function(peaks, conds = names(peaks), conds_order = conds,
 
   # Draw the barplot of the intersections
   barPlot <- ggplot(countMatrix, aes(Intersection, Counts)) +
-    geom_col(fill = "black", width = 0.6) +
-    #ggtitle("Title", "Subtitile") +
+    geom_col(fill = "black", width = 0.5) +
+    geom_text(aes(label = Counts, y = Counts + max(Counts)*0.04), size = num_size) +
+    scale_y_continuous(expand = c(0,0), limits = c(0, max(countMatrix$Counts)*1.1)) +
     ylab("Intersection size") +
-    theme_pubclean(base_size = 9) +
+    theme_pubclean(base_size = 10) +
     theme(axis.text.x = element_blank(),
           axis.line.x = element_blank(),
           axis.line.y = element_line(color = "black"),
@@ -172,7 +163,7 @@ ggUpsetPeaks <- function(peaks, conds = names(peaks), conds_order = conds,
     ggforestplot::geom_stripes(odd = "#22222222", even = "#00000000") +
     scale_x_reverse(expand = c(0, 0)) +
     scale_y_discrete(position = "right") +
-    theme_pubclean(base_size = 9, flip = T) +
+    theme_pubclean(base_size = 10, flip = T) +
     theme(axis.text.y = element_blank(),
           axis.ticks = element_blank(),
           axis.line.x = element_line(color = "black"),
@@ -192,13 +183,14 @@ ggUpsetPeaks <- function(peaks, conds = names(peaks), conds_order = conds,
     geom_point(size = 4) +
     geom_line(aes(group = Intersection), size = 1.5) +
     xlab("Intersections") +
-    theme_pubr(base_size = 10) +
+    theme_pubclean(base_size = 10) +
     theme(axis.text.x = element_blank(),
           axis.ticks = element_blank(),
           axis.title.y = element_blank(),
           axis.title.x = element_text(face = "bold"),
           plot.subtitle = element_text(face = "italic"),
-          plot.title = element_text(face = "bold"))
+          plot.title = element_text(face = "bold"),
+          axis.line = element_line(color = "black"))
 
 
   # Create layout to use with patchwork
@@ -221,7 +213,3 @@ ggUpsetPeaks <- function(peaks, conds = names(peaks), conds_order = conds,
   return(upsetPlot)
 
 }
-
-#ggUpsetPeaks(peaks, title = "This is an upset plots", subtitle = "With two sets of peaks", caption = "the intersections are made with makeVennDiagram", order_by_freq = T)
-
-
