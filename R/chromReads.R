@@ -31,6 +31,7 @@ chromReads <- function(bamfile, chr.filt = c("Un", "random"),
   require(ggplot2)
   require(dplyr)
   require(stringr)
+  require(ggpubr)
 
   # Calculate the number of reads mapping to each chromosome with Rsamtools::idxstatsBam()
   chromReads <- idxstatsBam(bamfile)

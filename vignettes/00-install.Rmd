@@ -1,0 +1,36 @@
+---
+title: "Install <code>plotmics</code>"
+author: "Adrià Mitjavila Ventura"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    self_contained: yes
+    mode: selfcontained
+vignette: >
+  %\VignetteIndexEntry{chromReads()}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 4, fig.height = 4)
+devtools::load_all("..")
+```
+
+# Install `plotmics`
+
+```{r eval=FALSE}
+# install devtools if not installed
+if(!require(devtools)){ install.packages("devtools") }
+
+# install plotmics if not installed
+if(!require(plotmics)){ devtools::install_github("amitjavilaventura/plotmics") }
+```
+
+```{r results=FALSE}
+# load plotmics
+library(plotmics)
+```
