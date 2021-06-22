@@ -8,4 +8,4 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-URL: https://amitjavilaventura.github.io/chromHMMviewR/index.html, https://github.com/amitjavilaventura/chromHMMviewR
+URL: https://amitjavilaventura.github.io/plotmics/index.html, https://github.com/amitjavilaventura/plotmics
