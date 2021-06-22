@@ -1,4 +1,4 @@
-# seqViewR  <img src="seqViewR.png" align="right" alt="" width="350" />
+# `plotmics`  <img src="plotmics.png" align="right" alt="" width="350" />
 
 Visualize omics and sequencing data in R.
 
