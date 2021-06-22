@@ -1,0 +1,147 @@
+---
+title: "volcanoPlot()"
+author: "Adrià Mitjavila Ventura"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    self_contained: yes
+    mode: selfcontained
+vignette: >
+  %\VignetteIndexEntry{chromReads()}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 4, fig.height = 4)
+devtools::load_all("..")
+library(dplyr)
+library(purrr)
+```
+
+# Load `plotmics`
+
+```{r results=FALSE}
+# load plotmics
+library(plotmics)
+```
+
+# Run `volcanoPlot()`
+
+`volcanoPlot()` draws an `ggplot2`-based volcanoPlot with the *Log2(fold change)* at the X axis and the *-Log10(adjusted p-value)* in the Y axis.
+
+## Required
+
+As input, `barDEGs` takes a data frame with the columns `Geneid`, `log2FoldChange`, `padj` and `DEG`. The `DEG` column must have the values *Upregulated*, *Downregulated* and *NS*.
+
+```{r}
+# read the dataframes into a list
+deg_list <- list.files("../testdata", "diff_exp", full.names = T, recursive = T) %>%
+  purrr::set_names(paste("cond", 1:3, sep = "")) %>%
+  purrr::map(~read.delim(.x))
+
+deg_list[[1]] %>% head()
+```
+
+## Minimum  run
+
+```{r include=FALSE}
+volcanoPlot(df = deg_list[[1]])
+```
+
+```{r include=T}
+volcanoPlot(df = deg_list[[1]])
+```
+
+## Change thresholds
+
+```{r}
+volcanoPlot(df = deg_list[[1]], log2FC = 4, pval = 0.001)
+```
+
+## Customize plot
+
+### Change axis limits
+
+```{r}
+volcanoPlot(df = deg_list[[1]], xlim = c(-5,5), ylim = c(0,10))
+```
+
+### Specify titles
+
+```{r}
+volcanoPlot(df = deg_list[[1]], main = "This is a title", sub = "This is a subtitle", 
+            xlab = "This is the X-axis label", ylab = "This is the Y-axis label")
+```
+
+```{r}
+volcanoPlot(df = deg_list[[1]], main = "This is a title", sub = "This is a subtitle", 
+            xlab = "This is the X-axis label", ylab = "This is the Y-axis label", 
+            mainSize = 19, subSize = 15, axisLabelSize = 14, 
+            axisTextSize = 15)
+```
+
+### Change DEG numbers
+
+**Change size of DEG number labels**
+
+```{r}
+volcanoPlot(df = deg_list[[1]], labelSize = 12)
+```
+
+**Change color of DEG number labels**
+
+```{r}
+volcanoPlot(df = deg_list[[1]], labelColor = c("gold4", "blue"))
+```
+
+```{r}
+volcanoPlot(df = deg_list[[1]], labelColor = c("black"))
+```
+
+**Change position of DEG number labels**
+
+```{r}
+volcanoPlot(df = deg_list[[1]], labelPos = 30)
+```
+
+### Change point colors
+
+```{r}
+volcanoPlot(df = deg_list[[1]], pointColor = c("cornflowerblue", "gray", "gold3"))
+```
+
+### Show genes names
+
+**5 most significant genes**
+
+```{r}
+volcanoPlot(df = deg_list[[1]], degsLabel = T)
+```
+
+**Change number of genes to show**
+
+```{r}
+volcanoPlot(df = deg_list[[1]], degsLabel = T, degsLabelNum = 20)
+```
+
+**Show wanted genes**
+
+```{r}
+genes_to_show <- c("Lef1", "Mtor", "Ctnna1")
+
+volcanoPlot(df = deg_list[[1]], degsLabel = genes_to_show, degsLabelSize = 5)
+```
+
+**Change size of gene labels**
+
+```{r}
+volcanoPlot(df = deg_list[[1]], degsLabel = T, degsLabelSize = 10)
+```
+
+### Further costumization
+
+Since `barDEGs()` outputs a `ggplot2`-based scatter plot, it can be further customized with `scales` or `theme`, etc.

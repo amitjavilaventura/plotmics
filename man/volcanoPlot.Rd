@@ -9,7 +9,7 @@ volcanoPlot(
   xlim = c(-10, 10),
   ylim = c(0, 30),
   pval = 0.05,
-  log2FC = 1.5,
+  log2FC = 1,
   main = NULL,
   mainSize = 9,
   sub = NULL,
@@ -38,7 +38,7 @@ volcanoPlot(
 
 \item{pval}{Numerical. p-value threshold used to call de DEGs. It is used to draw a dashed line in this value. Default: 0.05.}
 
-\item{log2FC}{Numerical. log2FC threshold (in absolute value) used to call the DEGs. It is used to draw two lines in this value (positive and negative). Default: 1.5.}
+\item{log2FC}{Numerical. log2FC threshold (in absolute value) used to call the DEGs. It is used to draw two lines in this value (positive and negative). Default: 1.}
 
 \item{main}{Character. The title of the volcano plot. Default: NULL.}
 

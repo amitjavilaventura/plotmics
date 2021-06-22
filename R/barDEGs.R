@@ -17,13 +17,16 @@
 #' @param yaxis Logical of length 1. Whether to draw the text of the Y axis (contrast names) or not. Default: FALSE.
 #' @param colors Character of length 2. Colors for the downregulated and upregulated genes. Default: c("green", "red")
 #' @param alpha Numeric of length 1. Alpha (transparency) value for the vars. Deefault: 0.5
+#' @param log2FC Numeric of length 1. Threshold for the log2FoldChange to define a gene as differentially expressed. Default: 1.
+#' @param pval Numeric of length 1. Threshold for the adjusted p-value to define a gene as differentially expressed. Default: 0.05.
 #'
 #' @export
 
 barDEGs <- function(deg_list, deg_names = names(deg_list),
-                       name_pos = "min", xlim = NULL, position_num = 10,
-                       xaxis = F, yaxis = F,
-                       colors = c("green", "red"), alpha = 0.5){
+                    name_pos = "min", xlim = NULL, position_num = 10,
+                    xaxis = F, yaxis = F,
+                    colors = c("green", "red"), alpha = 0.5,
+                    log2FC = 1, pval = 0.05){
 
   # Load packages
   require(dplyr)
@@ -40,6 +43,11 @@ barDEGs <- function(deg_list, deg_names = names(deg_list),
   else if(!is.logical(xaxis) | !is.logical(yaxis)){ stop("Both 'xaxis' and 'yaxis' must be a logical vector of length 1.") }
   else if(!is.character(colors) | length(colors) != 2){ stop("'colors' must be a character vector of length 2 with valid color names/codes.") }
   else if(!is.numeric(alpha) | alpha < 0 | alpha > 1){ stop("'alpha' must be a numeric vector of length 1 with a value between 0 and 1")}
+
+
+  # Mutate deg_list to be able to change the log2FC and pvalue thresholds for defining the DEGs
+  deg_list <- deg_list %>% purrr::map(~dplyr::mutate(.x, DEG = if_else(log2FoldChange >= log2FC & padj <= pval, "Upregulated",
+                                                                       if_else(log2FoldChange <= -log2FC & padj <= pval, "Downregulated", "NS"))))
 
   # Named list of DEGs
   deg_numbers <- deg_list %>%
@@ -82,9 +90,9 @@ barDEGs <- function(deg_list, deg_names = names(deg_list),
     ggplot(aes(number, contrast, fill = DEG)) +
     geom_col(color = "black", width = 0.5, alpha = alpha) +
     # Add the number of DEGs to each bar
-    geom_text(mapping = aes(label = n, x = pos_num, hjust = hjust_num), size = 3) +
+    geom_text(mapping = aes(label = n, x = pos_num, hjust = hjust_num), size = 3, na.rm = TRUE) +
     # Add the name of the contrast
-    geom_text(mapping = aes(label = contrast_name, x = contrast_pos, hjust = hjust_num), size = 3)  +
+    geom_text(mapping = aes(label = contrast_name, x = contrast_pos, hjust = hjust_num), size = 3, na.rm = TRUE)  +
     # Change default colors
     scale_fill_manual(values = c(colors[1], colors[2])) +
     # Add vertical line at 0

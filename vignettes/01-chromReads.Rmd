@@ -90,4 +90,4 @@ chromReads(bamfile = "../testdata/sampleX.bam", percent.label = F)
 
 ## Further customization
 
-Since `chromReads` output a `ggplot2`-based barplot, you can further customize it with `scales` or `theme`, etc.
+Since `chromReads` outputs a `ggplot2`-based barplot, you can further customize it with `scales` or `theme`, etc.

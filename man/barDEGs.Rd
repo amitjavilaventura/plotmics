@@ -13,7 +13,9 @@ barDEGs(
   xaxis = F,
   yaxis = F,
   colors = c("green", "red"),
-  alpha = 0.5
+  alpha = 0.5,
+  log2FC = 1,
+  pval = 0.05
 )
 }
 \arguments{
@@ -34,6 +36,10 @@ barDEGs(
 \item{colors}{Character of length 2. Colors for the downregulated and upregulated genes. Default: c("green", "red")}
 
 \item{alpha}{Numeric of length 1. Alpha (transparency) value for the vars. Deefault: 0.5}
+
+\item{log2FC}{Numeric of length 1. Threshold for the log2FoldChange to define a gene as differentially expressed. Default: 1.}
+
+\item{pval}{Numeric of length 1. Threshold for the adjusted p-value to define a gene as differentially expressed. Default: 0.05.}
 }
 \value{
 A ggplot2-based barplot with the upregulated and downregulated genes in each contrast.

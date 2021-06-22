@@ -1,6 +1,10 @@
 pandoc: 2.11.4
 pkgdown: 1.6.1
 pkgdown_sha: ~
-articles: {}
-last_built: 2021-06-22T14:31Z
+articles:
+  00-install: 00-install.html
+  01-chromReads: 01-chromReads.html
+  02-barDEGs: 02-barDEGs.html
+  03-volcanoPlot: 03-volcanoPlot.html
+last_built: 2021-06-22T18:40Z
 

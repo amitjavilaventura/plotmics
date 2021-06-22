@@ -56,6 +56,12 @@ barDEGs(deg_list = deg_list)
 barDEGs(deg_list = deg_list)
 ```
 
+## Change thresholds
+
+```{r}
+barDEGs(deg_list = deg_list, pval = 0.1, log2FC = 1)
+```
+
 ## Customize plot
 
 ### Names of conditions
@@ -98,3 +104,8 @@ barDEGs(deg_list = deg_list, xlim = c(-1000, 1000))
 
 
 
+
+
+### Further costumization
+
+Since `barDEGs()` outputs a `ggplot2`-based barplot, it can be further customized with `scales` or `theme`, etc.

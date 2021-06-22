@@ -16,7 +16,7 @@
 #' @param xlim Numerical of length 2. The limits of the x axis where the log2FC is plotted. Default: c(-10,10).
 #' @param ylim Numerical of length 2. The limits of the y axis where the -log10(adj_pval) is plotted.  Default: c(0,30).
 #' @param pval Numerical. p-value threshold used to call de DEGs. It is used to draw a dashed line in this value. Default: 0.05.
-#' @param log2FC Numerical. log2FC threshold (in absolute value) used to call the DEGs. It is used to draw two lines in this value (positive and negative). Default: 1.5.
+#' @param log2FC Numerical. log2FC threshold (in absolute value) used to call the DEGs. It is used to draw two lines in this value (positive and negative). Default: 1.
 #' @param main Character. The title of the volcano plot. Default: NULL.
 #' @param mainSize Numerical. The size of the title. Default: 9.
 #' @param sub Character. The subtitle of the volcano plot. Default: NULL
@@ -38,7 +38,7 @@
 #' @export
 
 volcanoPlot <- function(df, xlim = c(-10,10), ylim = c(0,30),
-                        pval = 0.05, log2FC = 1.5,
+                        pval = 0.05, log2FC = 1,
                         main = NULL, mainSize = 9, sub = NULL, subSize = 8,
                         labelSize = 7, labelColor = c("darkgreen", "red"), labelPos = 0,
                         xlab = bquote(~Log[2]~ "FC"), ylab = (bquote(~-Log[10]~italic(P))),
@@ -53,6 +53,9 @@ volcanoPlot <- function(df, xlim = c(-10,10), ylim = c(0,30),
   # Check if inputs are OK
   if(!is.data.frame(df) | !c('Geneid', 'padj', 'log2FoldChange', 'DEG') %in% colnames(df)){ stop("'df' must be a data frame with the columns 'Geneid', 'padj', 'log2FoldChange' and 'DEG'.") }
   else if(length(pointColor) != 3 | !is.character(pointColor)){ stop("'pointColor' must be a character vector of length 3 with valid color names or codes.") }
+
+  df <- df %>% dplyr::mutate(DEG = if_else(log2FoldChange >= log2FC & padj <= pval, "Upregulated",
+                                     if_else(log2FoldChange <= -log2FC & padj <= pval, "Downregulated", "NS")))
 
   df <- df %>%
 
