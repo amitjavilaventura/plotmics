@@ -30,7 +30,7 @@ devtools::install_github("amitjavilaventura/plotmics")
 
 ## Contributors
 
-This package has been developed by [Adrià Mitjavila Ventura](https://amitjavilaventura.github.io). 
+This package has been developed by [Adrià Mitjavila Ventura](https://amitjavilaventura.github.io), with some contributions from [dfernandezperez](https://github.com/dfernandezperez)
 
 If you want to contribute to this package, make a post in the issues section in this repository or fork this repository adding your code and do a pull request.
 
