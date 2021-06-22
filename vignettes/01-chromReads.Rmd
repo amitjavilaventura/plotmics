@@ -29,7 +29,7 @@ library(plotmics)
 
 # Run `chromReads()`
 
-`chromReads()` draws an horizontal barplot with the number and percentage of reads mapped to each chromosome. 
+`chromReads()` draws an `ggplot2`-based horizontal barplot with the number and percentage of reads mapped to each chromosome. 
 
 It takes the path to a BAM file as an input. This BAM file must have a valid index.
 
@@ -40,3 +40,54 @@ chromReads(bamfile = "../testdata/sampleX.bam")
 ```{r}
 chromReads(bamfile = "../testdata/sampleX.bam")
 ```
+
+The bar shows the reads mapped into each chromosome and the number at the right is the percentage of the total reads (including the filtered chromosomes).
+
+## Filter chromosomes
+
+Using the parameter `chr.filt`, the undesired chromosomes can be filtered out. 
+
+This parameter requires a character vector with part of the names of the chromosomes to be filtered. Let's remove the *chr2L* and *chr2R* chromosomes:
+
+```{r}
+chromReads(bamfile = "../testdata/sampleX.bam", chr.filt = "chr2")
+```
+
+Now try removing the *chrX* and *chrY* chromosomes:
+
+```{r}
+chromReads(bamfile = "../testdata/sampleX.bam", chr.filt = c("X", "Y"))
+```
+
+Note that the percentage of reads does not change, since it's computed using all the reads from all the chromosomes.
+
+## Add titles, etc
+
+Using the parameters `main`, `subtitle`, `xlab` and `ylab` you can customize the title, the subtitle the X-axis label and the Y-axis label, respectively. 
+
+```{r}
+chromReads(bamfile = "../testdata/sampleX.bam", main = "This is a title", 
+           subtitle = "This is a subtitle", xlab = "This the label of the X axis",
+           ylab = "This is the label of the Y axis")
+```
+
+Moreover, you can customize the size of the previous mentioned labels, as well as the percentage label:
+
+```{r}
+chromReads(bamfile = "../testdata/sampleX.bam", main = "This is a title", 
+           subtitle = "This is a subtitle", xlab = "This the label of the X axis",
+           ylab = "This is the label of the Y axis", 
+           main.size = 16, sub.size = 10, axis.size = 14, percent.size = 9)
+```
+
+## Remove percentage labels
+
+By setting `percent.label` to FALSE, you can remove the percentage labels.
+
+```{r}
+chromReads(bamfile = "../testdata/sampleX.bam", percent.label = F)
+```
+
+## Further customization
+
+Since `chromReads` output a `ggplot2`-based barplot, you can further customize it with `scales` or `theme`, etc.

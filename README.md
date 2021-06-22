@@ -2,15 +2,15 @@
 
 Visualize omics and sequencing data in R.
 
-## Goal
+## Information
 
 The goal of this package is to provide simple functions to visualize several omics and sequencing data:
 
-* `chromReads()`: draws a barplot with the number and the percentage of reads mapped to each chromosome.
-* `barDEGs()`: draws an horizontal barplot with the upregulated and downregulated genes coming from DESeq2.
-* `volcanoPlot()`: draws an volcano plot with the DE data coming out from DESeq2.
-* `DEcompare()`: draws a scatter plot comparing the Log2FCs of two different contrasts.
-* `barAnno()`: takes a modified output of `ChIPseeker::annotatePeak()` and plots the proportion of peaks in distal or promoter regions.
+* `chromReads()`: draws a `ggplot2`-based horizontal barplot with the number and the percentage of reads mapped to each chromosome.
+* `barDEGs()`: draws a `ggplot2`-based horizontal barplot with the upregulated and downregulated genes coming from DESeq2.
+* `volcanoPlot()`: draws a `ggplot2`-based volcano plot with the DE data coming out from DESeq2.
+* `DEcompare()`: draws a `ggplot2`-based scatter plot comparing the Log2FCs of two different contrasts.
+* `barAnno()`: takes a list of modified outputs from `ChIPseeker::annotatePeak()`, computes the proportion of peaks in distal or promoter regions and draws a `ggplot2`-based barplot with the correseponding proportion for each sample.
 * `getVennCounts()`: helper function that calls `ChIPpeakAnno::makeVennDiagram()` to intersect different sets of peaks and returns the Venn counts and a list of the peaks present in each set of peaks.
 * `upsetPeaks()`: calls `getVennCounts()` and draws an UpSet plot using the Venn counts and the `UpSetR` package.
 * `ggUpsetPeaks()`: calls `getVennCounts()` and draws a `ggplot2`-based UpSet plot using the Venn counts.
