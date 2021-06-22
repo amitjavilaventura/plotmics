@@ -1,16 +1,11 @@
-Package: seqViewR
-Title: What the Package Does (One Line, Title Case)
+Package: plotmics
+Title: Visualize Omics And Seequencing Data In R
 Version: 0.0.0.9000
-Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Authors@R: Adria Mitjavila Ventura <adria.mitjavila@gmail.com>
+Description: The goal of this package is to provide simple functions to visualize several omics and sequencing data.
+License: MIT
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+URL: https://amitjavilaventura.github.io/chromHMMviewR/index.html, https://github.com/amitjavilaventura/chromHMMviewR

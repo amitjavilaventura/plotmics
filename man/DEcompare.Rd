@@ -4,7 +4,19 @@
 \alias{DEcompare}
 \title{DEcompare}
 \usage{
-DEcompare(deg_list, threshold = 1.5, genes = NULL, xlim = c(-10, 10), ylim = c(-10, 10), xlab = "Contrast1", ylab = "Contrast2", main = "Comparison of Log2FC", subtitle = paste(xlab, "vs", ylab), color_corners = c("pink", "lightgreen", "cornflowerblue", "yellow"), alpha_corners = c(.7))
+DEcompare(
+  deg_list,
+  threshold = 1.5,
+  genes = NULL,
+  xlim = c(-10, 10),
+  ylim = c(-10, 10),
+  xlab = "Contrast1",
+  ylab = "Contrast2",
+  main = "Comparison of Log2FC",
+  subtitle = paste(xlab, "vs", ylab),
+  color_corners = c("pink", "lightgreen", "cornflowerblue", "yellow"),
+  alpha_corners = c(0.7)
+)
 }
 \arguments{
 \item{deg_list}{List of lenght 2. Must contain data frames with the columns Geneid, log2FoldChange, padj and DEG. Values in 'Geneid' must be the same in both data frames.+}

@@ -4,7 +4,17 @@
 \alias{barDEGs}
 \title{barDEGs}
 \usage{
-barDEGs(deg_list, deg_names = names(deg_list), name_pos = "min", xlim = NULL, xaxis = F, yaxis = F, colors = c("green", "red"), alpha = 0.5)
+barDEGs(
+  deg_list,
+  deg_names = names(deg_list),
+  name_pos = "min",
+  xlim = NULL,
+  position_num = 10,
+  xaxis = F,
+  yaxis = F,
+  colors = c("green", "red"),
+  alpha = 0.5
+)
 }
 \arguments{
 \item{deg_list}{Named list of dataframes with, at least, a column named DEG with the values 'Downregulated', "Upregulated" and "NS"}

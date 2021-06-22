@@ -63,6 +63,54 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#seqviewr-" class="anchor"></a>seqViewR <img src="seqViewR.png" align="right" alt="" width="350">
 </h1></div>
+<p>Visualize omics and sequencing data in R.</p>
+<div id="goal" class="section level2">
+<h2 class="hasAnchor">
+<a href="#goal" class="anchor"></a>Goal</h2>
+<p>The goal of this package is to provide simple functions to visualize several omics and sequencing data:</p>
+<ul>
+<li>
+<code><a href="reference/chromReads.html">chromReads()</a></code>: draws a barplot with the number and the percentage of reads mapped to each chromosome.</li>
+<li>
+<code><a href="reference/barDEGs.html">barDEGs()</a></code>: draws an horizontal barplot with the upregulated and downregulated genes coming from DESeq2.</li>
+<li>
+<code><a href="reference/volcanoPlot.html">volcanoPlot()</a></code>: draws an volcano plot with the DE data coming out from DESeq2.</li>
+<li>
+<code><a href="reference/DEcompare.html">DEcompare()</a></code>: draws a scatter plot comparing the Log2FCs of two different contrasts.</li>
+<li>
+<code><a href="reference/barAnno.html">barAnno()</a></code>: takes a modified output of <code><a href="https://rdrr.io/pkg/ChIPseeker/man/annotatePeak.html">ChIPseeker::annotatePeak()</a></code> and plots the proportion of peaks in distal or promoter regions.</li>
+<li>
+<code><a href="reference/getVennCounts.html">getVennCounts()</a></code>: helper function that calls <code><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/makeVennDiagram.html">ChIPpeakAnno::makeVennDiagram()</a></code> to intersect different sets of peaks and returns the Venn counts and a list of the peaks present in each set of peaks.</li>
+<li>
+<code><a href="reference/upsetPeaks.html">upsetPeaks()</a></code>: calls <code><a href="reference/getVennCounts.html">getVennCounts()</a></code> and draws an UpSet plot using the Venn counts and the <code>UpSetR</code> package.</li>
+<li>
+<code><a href="reference/ggUpsetPeaks.html">ggUpsetPeaks()</a></code>: calls <code><a href="reference/getVennCounts.html">getVennCounts()</a></code> and draws a <code>ggplot2</code>-based UpSet plot using the Venn counts.</li>
+<li>
+<code>ggVennCounts()</code>: calls <code><a href="reference/getVennCounts.html">getVennCounts()</a></code> and draws a Venn diagram using the package <code>ggvenn</code>.</li>
+</ul>
+</div>
+<div id="install-plotmics" class="section level2">
+<h2 class="hasAnchor">
+<a href="#install-plotmics" class="anchor"></a>Install <code>plotmics</code>
+</h2>
+<p>To install <code>plotmics</code> you have to run the following command in R:</p>
+<pre><code><a href="https://rdrr.io/r/utils/install.packages.html"># install the devtools package from CRAN
+install.packages("devtools")
+
+# install plotmics from this Github repository 
+devtools::install_github("amitjavilaventura/plotmics")</a></code></pre>
+</div>
+<div id="contributors" class="section level2">
+<h2 class="hasAnchor">
+<a href="#contributors" class="anchor"></a>Contributors</h2>
+<p>This package has been developed by <a href="https://amitjavilaventura.github.io">Adrià Mitjavila Ventura</a>.</p>
+<p>If you want to contribute to this package, make a post in the issues section in this repository or fork this repository adding your code and do a pull request.</p>
+</div>
+<div id="cite" class="section level2">
+<h2 class="hasAnchor">
+<a href="#cite" class="anchor"></a>Cite</h2>
+<p>If you use this package, please cite <a href="">this repository</a> and give it a star.</p>
+</div>
 </div>
   </div>
 

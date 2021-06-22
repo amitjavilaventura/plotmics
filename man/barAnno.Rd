@@ -4,13 +4,22 @@
 \alias{barAnno}
 \title{barAnno}
 \usage{
-barAnno(anno_list, anno_names = names(anno_list), names_order = unique(names), protein = NULL, protein_order = unique(protein), main = NULL, subtitle = NULL, ylab = NULL, xlab = NULL, color_palette = "Set2", legend_position = "right", anno_num = 2,  position_fill = T, xangle = 20)
-
-Function for ChIP-seq and ATAC-seq.
-It must be used after the function annotatePeak() from the R package ChIPseeker. @seealso \code{\link{annotatePeak}}
-
-It takes a list of annotation objects that come as output of annotatePeak() and changes the features to "Promoter", "Distal" and "Gene body" (or to "Promoter" and "Distal"). Finally it plots a bargraph with the distribution of all the proportions
-As a ggplot2-based function, it allows to add more layers to format the plot.
+barAnno(
+  anno_list,
+  anno_names = names(anno_list),
+  names_order = unique(anno_names),
+  protein = NULL,
+  protein_order = unique(protein),
+  main = NULL,
+  subtitle = NULL,
+  ylab = NULL,
+  xlab = NULL,
+  color_palette = "Set2",
+  legend_position = "right",
+  anno_num = 2,
+  fill_position = T,
+  xangle = 20
+)
 }
 \arguments{
 \item{anno_list}{Named list of annotation objects that come from annotatePeak().}
@@ -46,4 +55,10 @@ barAnno
 }
 \author{
 amitjavilaventura
+
+Function for ChIP-seq and ATAC-seq.
+It must be used after the function annotatePeak() from the R package ChIPseeker. @seealso \code{\link{annotatePeak}}
+
+It takes a list of annotation objects that come as output of annotatePeak() and changes the features to "Promoter", "Distal" and "Gene body" (or to "Promoter" and "Distal"). Finally it plots a bargraph with the distribution of all the proportions
+As a ggplot2-based function, it allows to add more layers to format the plot.
 }

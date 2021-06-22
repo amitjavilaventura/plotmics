@@ -4,9 +4,19 @@
 \alias{chromReads}
 \title{chromReads}
 \usage{
-chromReads(bamfile, chr.filt = c("Un", "random") main = NULL, main.size = 13, subtitle = NULL, sub.size = 11, xlab = "Mapped reads", ylab = "Chromosome", axis.size = 9, percent.label = T, percent.size = 3)
-Function counts the reads mapped to each chromosome and plots a bar graph.
-It uses the function idxstatsBam() from the Rsamtools R package. Run help("idxstatsBam") for more information.
+chromReads(
+  bamfile,
+  chr.filt = c("Un", "random"),
+  main = NULL,
+  main.size = 13,
+  subtitle = NULL,
+  sub.size = 11,
+  xlab = "Mapped reads",
+  ylab = "Chromosome",
+  axis.size = 9,
+  percent.label = T,
+  percent.size = 3
+)
 }
 \arguments{
 \item{bamfile}{Character of lenght 1. Path and name of the BAM file whose reads are to be mapped.}
@@ -36,4 +46,7 @@ chromReads
 }
 \author{
 amitjavilaventura
+
+Function counts the reads mapped to each chromosome and plots a bar graph.
+It uses the function idxstatsBam() from the Rsamtools R package. Run help("idxstatsBam") for more information.
 }

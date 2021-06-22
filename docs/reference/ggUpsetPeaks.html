@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • seqViewR</title>
+<title>ggUpsetPeaks — ggUpsetPeaks • seqViewR</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,8 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="ggUpsetPeaks — ggUpsetPeaks" />
+<meta property="og:description" content="ggUpsetPeaks" />
 
 
 
@@ -58,7 +59,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -100,90 +101,75 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>ggUpsetPeaks</h1>
+    
+    <div class="hidden name"><code>ggUpsetPeaks.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>ggUpsetPeaks</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>ggUpsetPeaks</span><span class='op'>(</span>
+  <span class='va'>peaks</span>,
+  conds <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>peaks</span><span class='op'>)</span>,
+  conds_order <span class='op'>=</span> <span class='va'>conds</span>,
+  order_by_freq <span class='op'>=</span> <span class='cn'>T</span>,
+  num_size <span class='op'>=</span> <span class='fl'>4</span>,
+  title <span class='op'>=</span> <span class='cn'>NULL</span>,
+  subtitle <span class='op'>=</span> <span class='cn'>NULL</span>,
+  caption <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="DEcompare.html">DEcompare()</a></code> </p>
-        </td>
-        <td><p>DEcompare</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="barAnno.html">barAnno()</a></code> </p>
-        </td>
-        <td><p>barAnno</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="barDEGs.html">barDEGs()</a></code> </p>
-        </td>
-        <td><p>barDEGs</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="chromReads.html">chromReads()</a></code> </p>
-        </td>
-        <td><p>chromReads</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="getVennCounts.html">getVennCounts()</a></code> </p>
-        </td>
-        <td><p>getVennCounts</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggUpsetPeaks.html">ggUpsetPeaks()</a></code> </p>
-        </td>
-        <td><p>ggUpsetPeaks</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggVennPeaks.html">ggVennPeaks()</a></code> <code><a href="ggVennPeaks.html">ggVennPeaks()</a></code> </p>
-        </td>
-        <td><p>ggVennPeaks</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="upsetPeaks.html">upsetPeaks()</a></code> </p>
-        </td>
-        <td><p>upsetPeaks</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="volcanoPlot.html">volcanoPlot()</a></code> </p>
-        </td>
-        <td><p>volcanoPlot()</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>peaks</th>
+      <td><p>List of dataframes with the genomic coordinates of the regions to overlap. Dataframes must contain the columns seqnames, start, end.</p></td>
+    </tr>
+    <tr>
+      <th>conds</th>
+      <td><p>Character with the same length as the 'peaks' list. The names that are given to the diferente objects in the 'peaks' list. Default: 'names(peaks)'</p></td>
+    </tr>
+    <tr>
+      <th>conds_order</th>
+      <td><p>Character of the same length as 'conds'. Same values as in 'conds' but with the desired order of priority. Default: 'conds'.</p></td>
+    </tr>
+    <tr>
+      <th>order_by_freq</th>
+      <td><p>Logical of length 1. If TRUE (the default), the intersections are arranged by descending order of size. Default: TRUE.</p></td>
+    </tr>
+    <tr>
+      <th>num_size</th>
+      <td><p>Numeric of length 1. Size of the labels indicating the size of each intersection. Default: 4.</p></td>
+    </tr>
+    <tr>
+      <th>title</th>
+      <td><p>Character of length 1. Title of the plot. Default: NULL.</p></td>
+    </tr>
+    <tr>
+      <th>subtitle</th>
+      <td><p>Character of length 1. Subtitle of the plot. Default: NULL.</p></td>
+    </tr>
+    <tr>
+      <th>caption</th>
+      <td><p>Character of length 1. Caption written at the bottom of the plot. Default: NULL.</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>plyranges</p>
+<p>Function that calls 'getVennCounts' and draws an ggplot2-based upset plot.</p>
+<p>ggUpsetPeaks(peaks, conds = names(peaks), conds_order = cond, order_by_freq = T, num_size = 4, title = NULL, subtitle = NULL, caption = NULL</p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>amitjavilaventura</p>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
