@@ -1,0 +1,100 @@
+---
+title: "barDEGs()"
+author: "Adrià Mitjavila Ventura"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    self_contained: yes
+    mode: selfcontained
+vignette: >
+  %\VignetteIndexEntry{chromReads()}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 4, fig.height = 4)
+devtools::load_all("..")
+library(dplyr)
+library(purrr)
+```
+
+# Load `plotmics`
+
+```{r results=FALSE}
+# load plotmics
+library(plotmics)
+```
+
+# Run `barDEGs()`
+
+`barDEGs()` draws an `ggplot2`-based horizontal barplot with the nubmer of upregulated and downregulated genes coming out from a DESeq analysis.
+
+## Required
+
+As input, `barDEGs` takes a named list of data frames with the columns `log2FoldChange`, `padj` and `DEG`. The `DEG` column must have the values *Upregulated*, *Downregulated* and *NS*.
+
+```{r}
+# read the dataframes into a list
+deg_list <- list.files("../testdata", "diff_exp", full.names = T, recursive = T) %>%
+  purrr::set_names(paste("cond", 1:3, sep = "")) %>%
+  purrr::map(~read.delim(.x))
+
+deg_list[[1]] %>% head()
+```
+
+## Minimum  run
+
+```{r include=FALSE}
+barDEGs(deg_list = deg_list)
+```
+
+```{r include=T}
+barDEGs(deg_list = deg_list)
+```
+
+## Customize plot
+
+### Names of conditions
+
+```{r}
+barDEGs(deg_list = deg_list, deg_names = c("Condition 1", "Condition 2", "Condition 3"))
+```
+
+### Position of condition labels
+
+```{r}
+barDEGs(deg_list = deg_list, name_pos = "right")
+```
+
+```{r}
+barDEGs(deg_list = deg_list, name_pos = "left")
+```
+
+```{r}
+barDEGs(deg_list = deg_list, name_pos = "none")
+```
+
+### Labels in Y-axis
+
+```{r}
+barDEGs(deg_list = deg_list, name_pos = "none", yaxis = T)
+```
+
+### DEGs in X-axis
+
+```{r}
+barDEGs(deg_list = deg_list, xaxis = T)
+```
+
+### X axis limits
+
+```{r}
+barDEGs(deg_list = deg_list, xlim = c(-1000, 1000))
+```
+
+
+

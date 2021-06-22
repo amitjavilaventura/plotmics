@@ -29,6 +29,7 @@ barDEGs <- function(deg_list, deg_names = names(deg_list),
   require(dplyr)
   require(purrr)
   require(ggplot2)
+  require(ggpubr)
 
   # Check that inputs are OK
   if(!is.list(deg_list)){ stop("'deg_list' must be a named list of data frames.") }
