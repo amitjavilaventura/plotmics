@@ -4,8 +4,6 @@
 #' @title DEcompare
 #' @author amitjavilaventura
 #'
-#' @usage DEcompare(deg_list, threshold = 1.5, genes = NULL, xlim = c(-10, 10), ylim = c(-10, 10), xlab = "Contrast1", ylab = "Contrast2", main = "Comparison of Log2FC", subtitle = paste(xlab, "vs", ylab), color_corners = c("pink", "lightgreen", "cornflowerblue", "yellow"), alpha_corners = c(.7))
-#'
 #' @param deg_list List of lenght 2. Must contain data frames with the columns Geneid, log2FoldChange, padj and DEG. Values in 'Geneid' must be the same in both data frames.+
 #' @param threshold Numeric of lenght 1. Threshold for the log2FoldChange. It is used to draw horizontal and vertical lines. Default: 1.5.
 #' @param genes Charachter of indefined lenght or NULL. Genes to be written in the plot. Default: NULL.

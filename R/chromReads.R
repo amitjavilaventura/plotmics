@@ -4,7 +4,6 @@
 #' @title chromReads
 #' @author amitjavilaventura
 #'
-#' @usage chromReads(bamfile, chr.filt = c("Un", "random") main = NULL, main.size = 13, subtitle = NULL, sub.size = 11, xlab = "Mapped reads", ylab = "Chromosome", axis.size = 9, percent.label = T, percent.size = 3)
 #' Function counts the reads mapped to each chromosome and plots a bar graph.
 #' It uses the function idxstatsBam() from the Rsamtools R package. Run help("idxstatsBam") for more information.
 #'
@@ -59,7 +58,11 @@ chromReads <- function(bamfile, chr.filt = c("Un", "random"),
     ggtitle(main, subtitle) +
 
     # General formatting
-    theme_chromReads(main.size = main.size, sub.size = sub.size, axis.size = axis.size)
+    theme_pubr(border = T, margin = T, legend = "none") +
+    theme(plot.title = element_text(face = "bold", size = main.size, hjust = .5),
+          plot.subtitle = element_text(face = "italic", size = sub.size, hjust = .5),
+          axis.title = element_text(face = "bold", size = axis.size),
+          legend.title = element_blank())
 
   # Annotate labels (percentages)
   if(percent.label == T){
@@ -72,4 +75,3 @@ chromReads <- function(bamfile, chr.filt = c("Un", "random"),
   # Return bar graph
   return(b)
 }
-

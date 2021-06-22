@@ -1,89 +1,3 @@
-getVennCounts <- function(peaks, conds = names(peaks), conds_order = conds, plot = F){
-
-  require(pkgcond)
-  require(purrr) %>% suppress_messages() %>% suppress_warnings()
-  require(dplyr) %>% suppress_messages() %>% suppress_warnings()
-  require(plyranges) %>% suppress_messages() %>% suppress_warnings()
-  require(magrittr) %>% suppress_messages() %>% suppress_warnings()
-  require(ChIPpeakAnno) %>% suppress_messages() %>% suppress_warnings()
-
-  if(!is.list(peaks)){ stop("'peaks' must be a (named) list of dataframes with the columns 'seqnames', 'start' and 'end'.") }
-  else if(is.null(conds)){ stop("'conds' must a not-NULL character vector with the conditions of the data frames in 'peaks.") }
-  else if(length(peaks) != length(conds)){ stop("'peaks' and 'conds' must have the same length.") }
-
-  len <- length(peaks)
-
-  peaks <- peaks %>% set_names(nm = conds)
-
-  overlaps <- peaks[conds_order] %>%
-    purrr::map(~as_granges(.x)) %>%
-    makeVennDiagram(plot = plot) %>%
-    suppress_messages() %>% suppress_warnings()
-
-  overlaps <- overlaps$vennCounts
-
-  matrix <- matrix(data = rep(0, len), ncol = len, byrow=T) %>% set_colnames(conds_order)
-  for(row in 1:nrow(overlaps)){
-
-    counts <- overlaps[row, len+1]
-
-    m <- matrix(rep(overlaps[row, 1:len], counts), ncol = len, byrow = T)
-
-    matrix <- rbind(matrix, m)
-
-  }
-
-  x <- matrix %>%
-    na.omit %>%
-    as.data.frame() %>%
-    dplyr::mutate(rowSum = rowSums(.)) %>%
-    dplyr::filter(rowSum != 0) %>%
-    dplyr::mutate(peak = paste("peak", 1:nrow(.), sep = "")) %>%
-    dplyr::select(peak, everything(), -rowSum)
-
-  return(list("matrix" = x, "vennCounts" = overlaps))
-
-}
-
-# upsetPeaks() -------------------------
-
-#' @title upsetPeaks
-#' @author amitjavilaventura
-#'
-#' @seealso plyranges
-#' @seealso UpSetR
-#'
-#' @usage upsetPeaks(peaks, names = names(peaks), names_order = names)
-#'
-#' @param peaks List of dataframes with the genomic coordinates of the regions to overlap. Dataframes must contain the columns seqnames, start, end.
-#' @param conds Character with the same length as the 'peaks' list. The names that are given to the diferente objects in the 'peaks' list. Default: 'names(peaks)'
-#' @param conds_order Character of the same length as 'conds'. Same values as in 'conds' but with the desired order of priority. Default: 'conds'.
-#' @param title (Not available yet) Character of length 1 or NULL. Title of the plot shown at the top. Passed through grid.arrange(). If NULL, title is not shown. Default: NULL
-#' @param order.by Same as in UpSetR::upset(). One of "freq", "degree" or both.
-#' @param mainbar.y.label Same as in UpSetR::upset().
-#' @param sets.x.label Same as in UpSetR::upset().
-#' @param ... Further arguments to be passed through 'UpSetR::upset()'.
-#'
-#' @export
-
-upsetPeaks <- function(peaks, conds = names(peaks), conds_order = conds, order.by = "freq",
-                       mainbar.y.label = "Intersect size", sets.x.label = "Set size",
-                       ...){
-
-  # Load required packages
-  require(UpSetR)
-  require(grid)
-  require(gridExtra)
-
-  #
-  # call makeVenn4upSet to retrieve the peak matrix
-  x <- getVennCounts(peaks, conds, conds_order, plot = F)
-
-  # draw upset plot with options
-  upset <- UpSetR::upset(data = x$matrix, order.by = order.by, sets.x.label = sets.x.label, mainbar.y.label = mainbar.y.label)
-  return(upset)
-}
-
 # ggUpsetPeaks() -------------------------
 
 #' @title ggUpsetPeaks
@@ -91,7 +5,9 @@ upsetPeaks <- function(peaks, conds = names(peaks), conds_order = conds, order.b
 #'
 #' @seealso plyranges
 #'
-#' @usage ggUpsetPeaks(peaks, conds = names(peaks), conds_order = cond)
+#' Function that calls 'getVennCounts' and draws an ggplot2-based upset plot.
+#'
+#' ggUpsetPeaks(peaks, conds = names(peaks), conds_order = cond, order_by_freq = T, num_size = 4, title = NULL, subtitle = NULL, caption = NULL
 #'
 #' @param peaks List of dataframes with the genomic coordinates of the regions to overlap. Dataframes must contain the columns seqnames, start, end.
 #' @param conds Character with the same length as the 'peaks' list. The names that are given to the diferente objects in the 'peaks' list. Default: 'names(peaks)'
@@ -225,7 +141,7 @@ ggUpsetPeaks <- function(peaks, conds = names(peaks), conds_order = conds,
 #' @seealso ggvenn
 #' @seealso makeVennDiagram
 #'
-#' @usage ggVennPeaks(peak_list, peak_names = names(peak_list), percent = T, fill = c("blue", "gold3"), alpha = .4, color = "black", text_color = "black", name_size = 5, label_size = 3
+#' ggVennPeaks(peak_list, peak_names = names(peak_list), percent = T, fill = c("blue", "gold3"), alpha = .4, color = "black", text_color = "black", name_size = 5, label_size = 3
 #'
 #' @param peak_list List of dataframes with the genomic coordinates of the regions to overlap. Dataframes must contain the columns seqnames, start, end.
 #' @param peak_names Character with the same length as the 'peaks' list. The names that are given to the diferente objects in the 'peaks' list. Default: 'names(peaks)'

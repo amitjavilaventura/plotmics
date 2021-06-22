@@ -4,8 +4,6 @@
 #' @title barAnno
 #' @author amitjavilaventura
 #'
-#' @usage barAnno(anno_list, anno_names = names(anno_list), names_order = unique(names), protein = NULL, protein_order = unique(protein), main = NULL, subtitle = NULL, ylab = NULL, xlab = NULL, color_palette = "Set2", legend_position = "right", anno_num = 2,  position_fill = T, xangle = 20)
-#'
 #' Function for ChIP-seq and ATAC-seq.
 #' It must be used after the function annotatePeak() from the R package ChIPseeker. @seealso \code{\link{annotatePeak}}
 #'

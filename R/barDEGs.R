@@ -6,8 +6,6 @@
 #'
 #' It takes a named list with the DE data of different contrasts and draws an horizontal barplot with the up (right) and downregulated (left) genes.
 #'
-#' @usage barDEGs(deg_list, deg_names = names(deg_list), name_pos = "min", xlim = NULL, xaxis = F, yaxis = F, colors = c("green", "red"), alpha = 0.5)
-#'
 #' @returns A ggplot2-based barplot with the upregulated and downregulated genes in each contrast.
 #'
 #' @param deg_list Named list of dataframes with, at least, a column named DEG with the values 'Downregulated', "Upregulated" and "NS"
@@ -90,8 +88,15 @@ barDEGs <- function(deg_list, deg_names = names(deg_list),
     scale_fill_manual(values = c(colors[1], colors[2])) +
     # Add vertical line at 0
     geom_vline(aes(xintercept = 0), size = 0.5) +
-    # Call custom theme_updownbar
-    theme_barDEGs(xaxis = xaxis, yaxis = yaxis)
+    # Custom theme
+    theme_pubr(border = F, margin = T, legend = "bottom") +
+    theme(axis.title = element_blank(),
+          legend.title = element_blank(),
+          axis.line = element_blank(),
+          axis.ticks = element_blank())
+
+  if(!xaxis){ updown_bar <- updown_bar + theme(axis.text.x = element_blank()) }
+  if(!yaxis){ updown_bar <- updown_bar + theme(axis.text.y = element_blank()) }
 
   # Change limits of xaxis
   if(!is.null(xlim)){updown_bar <- updown_bar + coord_cartesian(xlim = c(xlim[1], xlim[2]))}
