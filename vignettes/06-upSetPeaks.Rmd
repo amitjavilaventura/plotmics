@@ -1,0 +1,107 @@
+---
+title: "upsetPeaks()"
+author: "Adrià Mitjavila Ventura"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    self_contained: yes
+    mode: selfcontained
+vignette: >
+  %\VignetteIndexEntry{upsetPeaks()}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 4, fig.height = 4)
+devtools::load_all("..")
+library(dplyr)
+library(purrr)
+
+peak_list <- list.files("../testdata", "peak", full.names = T, recursive = T) %>%
+  purrr::set_names(c("PeakX", "PeakY")) %>%
+  purrr::map(~read.delim(.x))  
+upsetPeaks(peak_list)
+```
+
+# Load `plotmics`
+
+```{r results=FALSE}
+# load plotmics
+library(plotmics)
+```
+
+# Run `upsetPeaks()`
+
+`upsetPeaks()` draws an UpSet plot with the intersections between different sets of peaks using the function `getVennCounts()` (which calls `ChIPpeakAnno::makeVennDiagram()`) the and the package `UpSetR`.
+
+Look at the [`UpSetR` package documentation](https://cran.rstudio.com/web/packages/UpSetR/).
+
+Look at the [`makeVennDiagram()` function documentation](https://www.rdocumentation.org/packages/ChIPpeakAnno/versions/3.6.5/topics/makeVennDiagram)
+
+## Required input
+
+As input, `upsetPeaks()` takes a named list of data frames with the columns `seqnames`, `start` and `end`.
+
+```{r}
+# read the peak annotation into a list
+peak_list <- list.files("../testdata", "peak", full.names = T, recursive = T) %>%
+  purrr::set_names(c("PeakX", "PeakY")) %>%
+  purrr::map(~read.delim(.x))
+
+peak_list[[1]][1:5, 1:7]
+```
+
+## `getVennCounts()`
+
+`getVennCounts()` calls `ChIPpeakAnno::makeVennDiagram()`, retrieves the Venn counts (number of overlaps between different sets of peaks) and builds a matrix of the peaks present in each set.
+
+```{r}
+venn_counts <- getVennCounts(peaks = peak_list)
+```
+
+```{r}
+venn_counts$vennCounts
+```
+
+```{r}
+venn_counts$matrix[1:5,]
+```
+
+`upsetPeaks()` calls the function `getVennCounts()` and builds the UpSet plot of the peaks using the Venn counts.
+
+## Default run
+
+```{r}
+upsetPeaks(peak_list)
+```
+
+## Customize plot
+
+### Change condition names
+
+```{r}
+upsetPeaks(peak_list, conds = c("Condition 1", "Condition 2"))
+```
+
+```{r}
+upsetPeaks(peak_list, conds = c("Condition 1", "Condition 2"), conds_order = c("Condition 2", "Condition 1"))
+```
+
+### Different order
+
+```{r}
+upsetPeaks(peak_list, order.by = "freq") # default
+upsetPeaks(peak_list, order.by = "degree")
+upsetPeaks(peak_list, order.by = c("freq", "degree"))
+```
+
+### Change labels
+
+```{r}
+upsetPeaks(peak_list, mainbar.y.label = "This is an Y label for the main barplot", 
+           sets.x.label = "This is the X label for the set size")
+```

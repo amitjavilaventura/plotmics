@@ -6,5 +6,10 @@ articles:
   01-chromReads: 01-chromReads.html
   02-barDEGs: 02-barDEGs.html
   03-volcanoPlot: 03-volcanoPlot.html
-last_built: 2021-06-22T18:40Z
+  04-DEcompare: 04-DEcompare.html
+  05-barAnno: 05-barAnno.html
+  06-upSetPeaks: 06-upSetPeaks.html
+  07-ggUpsetPeaks: 07-ggUpsetPeaks.html
+  08-ggVennPeaks: 08-ggVennPeaks.html
+last_built: 2021-06-23T13:39Z
 

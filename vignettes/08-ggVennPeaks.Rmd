@@ -1,0 +1,133 @@
+---
+title: "ggVennPeaks()"
+author: "Adrià Mitjavila Ventura"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    self_contained: yes
+    mode: selfcontained
+vignette: >
+  %\VignetteIndexEntry{ggVennPeaks()}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 4, fig.height = 4)
+devtools::load_all("..")
+library(dplyr)
+library(purrr)
+
+peak_list <- list.files("../testdata", "peak", full.names = T, recursive = T) %>%
+  purrr::set_names(c("PeakX", "PeakY"))  %>%
+  purrr::map(~read.delim(.x))
+ggVennPeaks(peak_list)
+```
+
+
+# Load `plotmics`
+
+```{r results=FALSE}
+# load plotmics
+library(plotmics)
+```
+
+# Run `ggVennPeaks()`
+
+`ggVennPeaks()` draws an Venn diagram plot with the intersections between different sets of peaks using the function `getVennCounts()` (which calls `ChIPpeakAnno::makeVennDiagram()`) and the `ggvenn` package.
+
+Look at the [`ggvenn` package documentation](https://github.com/yanlinlin82/ggvenn).
+
+Look at the [`makeVennDiagram()` function documentation](https://www.rdocumentation.org/packages/ChIPpeakAnno/versions/3.6.5/topics/makeVennDiagram).
+
+## Required input
+
+As input, `ggVennPeaks()` takes a named list of data frames with the columns `seqnames`, `start` and `end`.
+
+```{r}
+# read the peak annotation into a list
+peak_list <- list.files("../testdata", "peak", full.names = T, recursive = T) %>%
+  purrr::set_names(c("PeakX", "PeakY")) %>%
+  purrr::map(~read.delim(.x))
+
+peak_list[[1]][1:5, 1:7]
+```
+
+## `getVennCounts()`
+
+`getVennCounts()` calls `ChIPpeakAnno::makeVennDiagram()`, retrieves the Venn counts (number of overlaps between different sets of peaks) and builds a matrix of the peaks present in each set.
+
+```{r}
+venn_counts <- getVennCounts(peak_list)
+```
+
+```{r}
+venn_counts$vennCounts
+```
+
+```{r}
+venn_counts$matrix[1:5,]
+```
+
+`ggVennPeaks()` calls the function `getVennCounts()` and builds the Venn diagram using the peak matrix and the `ggvenn` package.
+
+## Default run
+
+```{r}
+ggVennPeaks(peak_list)
+```
+
+## Customize plot
+
+### Set names
+
+```{r}
+ggVennPeaks(peak_list, peak_names = c("Condition 1", "Condition 2"))
+```
+
+### Remove percentage
+
+```{r}
+ggVennPeaks(peak_list, percent = F)
+```
+
+### Set colors
+
+```{r}
+ggVennPeaks(peak_list, in_fill = c("Green", "Darkred"))
+```
+
+```{r}
+ggVennPeaks(peak_list, in_fill = c("Green", "Darkred"), alpha = .2)
+```
+
+### Other colors
+
+```{r}
+ggVennPeaks(peak_list, out_color = "blue")
+```
+
+```{r}
+ggVennPeaks(peak_list, text_color = "red")
+```
+
+```{r}
+ggVennPeaks(peak_list, name_color = c("red", "blue"))
+```
+
+### Text sizes
+
+```{r}
+ggVennPeaks(peak_list, label_size = 10)
+```
+
+```{r}
+ggVennPeaks(peak_list, name_size = 10)
+```
+
+### Further costumization
+
+Since `ggVennPeaks()` outputs a `ggvenn`-based Venn diagram and `ggvenn` is based in `ggplot2`, it can be further customized with `scales` or `theme`.

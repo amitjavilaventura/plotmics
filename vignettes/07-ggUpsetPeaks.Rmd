@@ -1,0 +1,117 @@
+---
+title: "ggUpsetPeaks()"
+author: "Adrià Mitjavila Ventura"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    self_contained: yes
+    mode: selfcontained
+vignette: >
+  %\VignetteIndexEntry{ggUpsetPeaks()}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 4, fig.height = 4)
+devtools::load_all("..")
+library(dplyr)
+library(purrr)
+
+peak_list <- list.files("../testdata", "peak", full.names = T, recursive = T) %>%
+  purrr::set_names(c("PeakX", "PeakY")) %>%
+  purrr::map(~read.delim(.x)) 
+ggUpsetPeaks(peak_list)
+```
+
+
+# Load `plotmics`
+
+```{r results=FALSE}
+# load plotmics
+library(plotmics)
+```
+
+# Run `ggUpsetPeaks()`
+
+`ggUpsetPeaks()` draws an UpSet plot with the intersections between different sets of peaks using the function `getVennCounts()` (which calls `ChIPpeakAnno::makeVennDiagram()`), builds each part of the plot separatelly using `ggplot2` and puts all plots together using `patchwork`.
+
+Look at the [`patchwork` package documentation](https://patchwork.data-imaginist.com/)
+
+Look at the [`makeVennDiagram()` function documentation](https://www.rdocumentation.org/packages/ChIPpeakAnno/versions/3.6.5/topics/makeVennDiagram)
+
+## Required input
+
+As input, `ggUpsetPeaks()` takes a named list of data frames with the columns `seqnames`, `start` and `end`.
+
+```{r}
+# read the peak annotation into a list
+peak_list <- list.files("../testdata", "peak", full.names = T, recursive = T) %>%
+  purrr::set_names(c("PeakX", "PeakY")) %>%
+  purrr::map(~read.delim(.x))
+
+peak_list[[1]][1:5, 1:7]
+```
+
+## `getVennCounts()`
+
+`getVennCounts()` calls `ChIPpeakAnno::makeVennDiagram()`, retrieves the Venn counts (number of overlaps between different sets of peaks) and builds a matrix of the peaks present in each set.
+
+```{r}
+venn_counts <- getVennCounts(peak_list)
+```
+
+```{r}
+venn_counts$vennCounts
+```
+
+```{r}
+venn_counts$matrix[1:5,]
+```
+
+`ggUpsetPeaks()` calls the function `getVennCounts()` and builds the UpSet plot of the peaks using the Venn counts.
+
+## Default run
+
+```{r}
+ggUpsetPeaks(peak_list)
+```
+
+## Customize plot
+
+### Condition names
+
+```{r}
+ggUpsetPeaks(peak_list, conds = c("Condition_1", "Condition_2"))
+```
+
+```{r}
+#ggUpsetPeaks(peak_list, conds = c("Condition_1", "Condition_2"), conds_order = c("Condition_2", "Condition_1"))
+```
+
+### Don't sort by frequency
+
+```{r}
+ggUpsetPeaks(peak_list, order_by_freq = F)
+```
+
+### Size label
+
+```{r}
+ggUpsetPeaks(peak_list, num_size = 10)
+```
+
+### Set titles
+
+```{r}
+ggUpsetPeaks(peak_list, title = "This is a title", subtitle = "This is a subtitle", 
+             caption = "This is a caption", )
+```
+
+
+### Further costumization
+
+Since `ggUpsetPeaks()` outputs a `ggplot2`- and `patchwork`-based UpSet plot, it can be further customized with `scales` or `theme` and using the `patchwork` syntax.

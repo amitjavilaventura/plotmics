@@ -1,0 +1,158 @@
+---
+title: "barAnno()"
+author: "Adrià Mitjavila Ventura"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    self_contained: yes
+    mode: selfcontained
+vignette: >
+  %\VignetteIndexEntry{barAnno()}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 4, fig.height = 4)
+devtools::load_all("..")
+library(dplyr)
+library(purrr)
+
+peak_list <- list.files("../testdata", "peak", full.names = T, recursive = T) %>%
+  purrr::set_names(c("PeakX", "PeakY")) %>%
+  purrr::map(~read.delim(.x))
+barAnno(anno_list = peak_list)
+```
+
+# Load `plotmics`
+
+```{r results=FALSE}
+# load plotmics
+library(plotmics)
+```
+
+# Run `barAnno()`
+
+`barAnno()` draws an `ggplot2`-based barplot ...
+
+## Required input
+
+As input, `barAnno()` takes a named list of data frames with the column `annotation`.
+
+```{r}
+# read the peak annotation into a list
+peak_list <- list.files("../testdata", "peak", full.names = T, recursive = T) %>%
+  purrr::set_names(c("PeakX", "PeakY")) %>%
+  purrr::map(~read.delim(.x))
+
+peak_list[[1]][1:5, 1:7]
+```
+
+## Default run
+
+```{r include=T}
+barAnno(anno_list = peak_list)
+```
+
+## Number of peaks
+
+```{r}
+barAnno(anno_list = peak_list, fill_position = F)
+```
+
+## Genomic annotations
+
+```{r}
+barAnno(anno_list = peak_list, anno_num = 3)
+```
+
+```{r}
+barAnno(anno_list = peak_list, anno_num = "all")
+```
+
+### Change names
+
+```{r}
+barAnno(anno_list = peak_list, anno_names = c("Condition X", "Condition Y"))
+```
+
+
+```{r}
+barAnno(anno_list = peak_list, 
+        anno_names = c("Condition X", "Condition Y"), 
+        names_order = c("Condition Y", "Condition X"))
+```
+
+## Customize plot
+
+### Divide pannels
+
+```{r}
+barAnno(anno_list = peak_list, anno_names = c("Cond1", "Cond1"), protein = c("protX", "protY"))
+```
+
+```{r}
+barAnno(anno_list = peak_list, anno_names = c("Cond1", "Cond1"), 
+        protein = c("protX", "protY"), protein_order = c("protY", "protX"))
+```
+
+```{r}
+barAnno(anno_list = peak_list, anno_names = c("Cond1", "Cond2"), protein = c("protX", "protY"))
+```
+
+
+
+### Set titles
+
+```{r}
+barAnno(anno_list = peak_list, main = "This is a title", subtitle = "This is a subtitle",
+        xlab = "This is the X-axis label", ylab = "This is the Y-axis label")
+```
+
+### Legend position
+
+```{r}
+barAnno(anno_list = peak_list, legend_position = "none")
+```
+
+```{r}
+barAnno(anno_list = peak_list, legend_position = "left")
+```
+
+```{r}
+barAnno(anno_list = peak_list, legend_position = "bottom")
+```
+
+```{r}
+barAnno(anno_list = peak_list, legend_position = "top")
+```
+
+### Change X text angle
+
+```{r}
+barAnno(anno_list = peak_list, xangle = 60)
+```
+
+### Change color palette
+
+Available palettes can be found here: <https://ggplot2.tidyverse.org/reference/scale_brewer.html>
+
+```{r}
+barAnno(anno_list = peak_list, color_palette = "Set1")
+```
+
+```{r}
+barAnno(anno_list = peak_list, color_palette = "Pastel2")
+```
+
+```{r}
+barAnno(anno_list = peak_list, color_palette = "Oranges")
+```
+
+
+### Further costumization
+
+Since `barAnno()` outputs a `ggplot2`-based bar plot, it can be further customized with `scales` or `theme`, etc.
