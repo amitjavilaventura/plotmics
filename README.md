@@ -14,7 +14,7 @@ The goal of this package is to provide simple functions to visualize several omi
 * `getVennCounts()`: helper function that calls `ChIPpeakAnno::makeVennDiagram()` to intersect different sets of peaks and returns the Venn counts and a list of the peaks present in each set of peaks.
 * `upsetPeaks()`: calls `getVennCounts()` and draws an UpSet plot using the Venn counts and the `UpSetR` package.
 * `ggUpsetPeaks()`: calls `getVennCounts()` and draws a `ggplot2`-based UpSet plot using the Venn counts.
-* `ggVennCounts()`: calls `getVennCounts()` and draws a Venn diagram using the package `ggvenn`.
+* `ggVennPeaks()`: calls `getVennCounts()` and draws a Venn diagram using the package `ggvenn`.
 
 ## Install `plotmics` 
 
