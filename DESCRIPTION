@@ -1,7 +1,8 @@
 Package: plotmics
 Title: Visualize Omics And Seequencing Data In R
-Version: 0.0.0.9000
-Authors@R: person("Adria","Mitjavila Ventura", email = "adria.mitjavila@gmail.com")
+Version: 0.1.0
+Author: Adria Mitjavila Ventura
+Maintainer: Adria Mitjavila Ventura <adria.mitjavila94@gmail.com>
 Description: The goal of this package is to provide simple functions to visualize several omics and sequencing data.
 License: MIT
 Encoding: UTF-8

@@ -37,12 +37,12 @@ getVennCounts <- function(peaks, conds = names(peaks), conds_order = conds, plot
 
   overlaps <- peaks %>%
     purrr::map(~plyranges::as_granges(.x)) %>%
-    makeVennDiagram(Peaks = ., plot = plot) %>%
+    makeVennDiagram(Peaks = ., NameOfPeaks = conds, plot = plot) %>%
     suppress_messages() %>% suppress_warnings()
 
   overlaps <- overlaps$vennCounts
 
-  matrix <- matrix(data = rep(0, len), ncol = len, byrow=T) %>% set_colnames(conds_order)
+  matrix <- matrix(data = rep(0, len), ncol = len, byrow=T) %>% set_colnames(conds)
   for(row in 1:nrow(overlaps)){
 
     counts <- overlaps[row, len+1]

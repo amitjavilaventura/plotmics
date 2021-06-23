@@ -60,19 +60,33 @@ peak_list[[1]][1:5, 1:7]
 
 `getVennCounts()` calls `ChIPpeakAnno::makeVennDiagram()`, retrieves the Venn counts (number of overlaps between different sets of peaks) and builds a matrix of the peaks present in each set.
 
-```{r}
+```{r eval=FALSE}
 venn_counts <- getVennCounts(peak_list)
 ```
 
-```{r}
+```{r eval=FALSE}
 venn_counts$vennCounts
+#      PeakX PeakY Counts
+# [1,]     0     0      0
+# [2,]     0     1     70
+# [3,]     1     0    977
+# [4,]     1     1     23
+# attr(,"class")
+# [1] "VennCounts"
 ```
 
-```{r}
+```{r eval=FALSE}
 venn_counts$matrix[1:5,]
+# peak    PeakX   PeakY
+# peak1   0       1
+# peak2	  0	      1
+# peak3	  0	      1
+# peak4	  0	      1
+# peak5	  0	      1
 ```
 
 `ggUpsetPeaks()` calls the function `getVennCounts()` and builds the UpSet plot of the peaks using the Venn counts.
+
 
 ## Default run
 
