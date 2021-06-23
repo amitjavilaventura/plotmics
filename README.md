@@ -36,4 +36,4 @@ If you want to contribute to this package, make a post in the issues section in 
 
 ## Cite
 
-If you use this package, please cite [this repository]() and give it a star.
+If you use this package, please cite [this repository](https://github.com/amitjavilaventura/plotmics) and give it a star.
