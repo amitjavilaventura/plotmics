@@ -16,7 +16,9 @@
 #' @param xaxis Logical of length 1. Whether to draw the text of the X axis (number of DE) or not. Default: FALSE.
 #' @param yaxis Logical of length 1. Whether to draw the text of the Y axis (contrast names) or not. Default: FALSE.
 #' @param colors Character of length 2. Colors for the downregulated and upregulated genes. Default: c("green", "red")
-#' @param alpha Numeric of length 1. Alpha (transparency) value for the vars. Deefault: 0.5
+#' @param alpha Numeric of length 1. Alpha (transparency) value for the vars. Deefault: 0.5.
+#' @param num_size Numeric of length 1. Size of the number of DEGs written in the bars. Default: 3.
+#' @param name_size Numeric of length 1. Size of the names of the contrasts  written next to the bars. Default: 3.
 #' @param log2FC Numeric of length 1. Threshold for the log2FoldChange to define a gene as differentially expressed. Default: 1.
 #' @param pval Numeric of length 1. Threshold for the adjusted p-value to define a gene as differentially expressed. Default: 0.05.
 #'
@@ -26,6 +28,7 @@ barDEGs <- function(deg_list, deg_names = names(deg_list),
                     name_pos = "min", xlim = NULL, position_num = 10,
                     xaxis = F, yaxis = F,
                     colors = c("green", "red"), alpha = 0.5,
+                    num_size = 3, name_size = 3,
                     log2FC = 1, pval = 0.05){
 
   # Load packages
@@ -90,9 +93,9 @@ barDEGs <- function(deg_list, deg_names = names(deg_list),
     ggplot(aes(number, contrast, fill = DEG)) +
     geom_col(color = "black", width = 0.5, alpha = alpha) +
     # Add the number of DEGs to each bar
-    geom_text(mapping = aes(label = n, x = pos_num, hjust = hjust_num), size = 3, na.rm = TRUE) +
+    geom_text(mapping = aes(label = n, x = pos_num, hjust = hjust_num), size = num_size, na.rm = TRUE) +
     # Add the name of the contrast
-    geom_text(mapping = aes(label = contrast_name, x = contrast_pos, hjust = hjust_num), size = 3, na.rm = TRUE)  +
+    geom_text(mapping = aes(label = contrast_name, x = contrast_pos, hjust = hjust_num), size = name_size, na.rm = TRUE)  +
     # Change default colors
     scale_fill_manual(values = c(colors[1], colors[2])) +
     # Add vertical line at 0
