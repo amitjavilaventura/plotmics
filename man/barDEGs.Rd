@@ -14,6 +14,8 @@ barDEGs(
   yaxis = F,
   colors = c("green", "red"),
   alpha = 0.5,
+  num_size = 3,
+  name_size = 3,
   log2FC = 1,
   pval = 0.05
 )
@@ -35,7 +37,11 @@ barDEGs(
 
 \item{colors}{Character of length 2. Colors for the downregulated and upregulated genes. Default: c("green", "red")}
 
-\item{alpha}{Numeric of length 1. Alpha (transparency) value for the vars. Deefault: 0.5}
+\item{alpha}{Numeric of length 1. Alpha (transparency) value for the vars. Deefault: 0.5.}
+
+\item{num_size}{Numeric of length 1. Size of the number of DEGs written in the bars. Default: 3.}
+
+\item{name_size}{Numeric of length 1. Size of the names of the contrasts  written next to the bars. Default: 3.}
 
 \item{log2FC}{Numeric of length 1. Threshold for the log2FoldChange to define a gene as differentially expressed. Default: 1.}
 
