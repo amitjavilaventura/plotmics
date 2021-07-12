@@ -4,12 +4,12 @@
 #' @title ggVennPeaks
 #' @author amitjavilaventura
 #'
-#' Function that calls 'getVennCounts' and draws a VennDiagram of peak intersections using the ggvenn package.
+#' @description Function that calls 'getVennCounts()' and draws a VennDiagram of peak intersections using the ggvenn package.
 #'
-#' ggVennPeaks(peak_list, peak_names = names(peak_list), percent = T, fill = c("blue", "gold3"), alpha = .4, color = "black", text_color = "black", name_size = 5, label_size = 3)
+#' @usage ggVennPeaks(peak_list, peak_names = names(peak_list), percent = T, fill = c("blue", "gold3"), alpha = .4, color = "black", text_color = "black", name_size = 5, label_size = 3, title = "", subtitle = "")
 #'
-#' @seealso ggvenn
-#' @seealso makeVennDiagram
+#' @seealso ggvenn::ggvenn()
+#' @seealso ChIPseeker::makeVennDiagram()
 #'
 #' @param peak_list List of dataframes with the genomic coordinates of the regions to overlap. Dataframes must contain the columns seqnames, start, end.
 #' @param peak_names Character with the same length as the 'peaks' list. The names that are given to the diferente objects in the 'peaks' list. Default: 'names(peaks)'
@@ -22,13 +22,16 @@
 #' @param text_color Character of length 1. Color of the text inside the Venn circles (i.e. number of peaks and percentage in each intersection). Default: "black"
 #' @param name_size Numeric of length 1. Size of the name of each peak set. Default: 5
 #' @param label_size Numeric of length 1. Size of the text inside the Venn circles. Default: 3
+#' @param title Character of length 1. Title of the plot. Can be NULL. Default: ""
+#' @param subtitle Character of length 1. Title of the plot. Can be NULL. Default: ""
+#'
 #'
 #' @export
 
 ggVennPeaks <- function(peak_list, peak_names = names(peak_list), percent = T,
                         in_fill = c("blue", "gold3"), alpha = .4,
                         out_color = "black", name_color = "black", text_color = "black",
-                        name_size = 5, label_size = 3){
+                        name_size = 5, label_size = 3, title = "", subtitle = ""){
 
   # Load requireed packages
   require(ggvenn)
@@ -62,6 +65,12 @@ ggVennPeaks <- function(peak_list, peak_names = names(peak_list), percent = T,
                          stroke_color =  out_color,
                          set_name_color = name_color, set_name_size = name_size,
                          text_color = text_color, text_size = label_size)
+
+  if(!is.null(title)){
+    venn <- venn + labs(title = title, subtitle = subtitle) +
+      theme(plot.title = element_text(face = "bold", hjust = .5),
+            plot.subtitle = element_text(face = "italic", hjust = .5))
+  }
 
   # Return the Venn diagram.
   return(venn)

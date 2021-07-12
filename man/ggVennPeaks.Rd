@@ -4,18 +4,7 @@
 \alias{ggVennPeaks}
 \title{ggVennPeaks}
 \usage{
-ggVennPeaks(
-  peak_list,
-  peak_names = names(peak_list),
-  percent = T,
-  in_fill = c("blue", "gold3"),
-  alpha = 0.4,
-  out_color = "black",
-  name_color = "black",
-  text_color = "black",
-  name_size = 5,
-  label_size = 3
-)
+ggVennPeaks(peak_list, peak_names = names(peak_list), percent = T, fill = c("blue", "gold3"), alpha = .4, color = "black", text_color = "black", name_size = 5, label_size = 3, title = "", subtitle = "")
 }
 \arguments{
 \item{peak_list}{List of dataframes with the genomic coordinates of the regions to overlap. Dataframes must contain the columns seqnames, start, end.}
@@ -38,19 +27,19 @@ Character of the same length as 'conds'. Same values as in 'conds' but with the 
 \item{name_size}{Numeric of length 1. Size of the name of each peak set. Default: 5}
 
 \item{label_size}{Numeric of length 1. Size of the text inside the Venn circles. Default: 3}
+
+\item{title}{Character of length 1. Title of the plot. Can be NULL. Default: ""}
+
+\item{subtitle}{Character of length 1. Title of the plot. Can be NULL. Default: ""}
 }
 \description{
-ggVennPeaks
+Function that calls 'getVennCounts()' and draws a VennDiagram of peak intersections using the ggvenn package.
 }
 \seealso{
-ggvenn
+ggvenn::ggvenn()
 
-makeVennDiagram
+ChIPseeker::makeVennDiagram()
 }
 \author{
 amitjavilaventura
-
-Function that calls 'getVennCounts' and draws a VennDiagram of peak intersections using the ggvenn package.
-
-ggVennPeaks(peak_list, peak_names = names(peak_list), percent = T, fill = c("blue", "gold3"), alpha = .4, color = "black", text_color = "black", name_size = 5, label_size = 3)
 }

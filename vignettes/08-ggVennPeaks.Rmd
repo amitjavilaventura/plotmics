@@ -102,6 +102,13 @@ ggVennPeaks(peak_list)
 ggVennPeaks(peak_list, peak_names = c("Condition 1", "Condition 2"))
 ```
 
+### Title and subtitle
+
+```{r}
+ggVennPeaks(peak_list, peak_names = c("Condition 1", "Condition 2"), 
+            title = "This is a title", subtitle = "This is a subtitle")
+```
+
 ### Remove percentage
 
 ```{r}
