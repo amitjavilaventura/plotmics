@@ -34,7 +34,7 @@ barAnno(anno_list = peak_list)
 library(plotmics)
 ```
 
-# Run `barAnno()`
+# Run `barAnno()` {.tabset}
 
 `barAnno()` draws an `ggplot2`-based barplot ...
 
@@ -42,28 +42,71 @@ library(plotmics)
 
 As input, `barAnno()` takes a named list of data frames with the column `annotation`.
 
+First, peak coordinates have to be read and the coordinate columns must be named as *seqnames*, *start* and *end*. ^Note: Since I will work with lists, I will use the `purrr` package for most of the data transformations.^
+
 ```{r}
-# read the peak annotation into a list
+# read the peaks into a list
 peak_list <- list.files("../testdata", "peak", full.names = T, recursive = T) %>%
   purrr::set_names(c("PeakX", "PeakY")) %>%
-  purrr::map(~read.delim(.x))
+  purrr::map(~read.delim(.x)) %>%
+  # the files have the already annotated peaks, but we
+  # will use only the coordinates to make the annotation ourselves
+  # the columns seqnames, start and end are required
+  purrr::map(~dplyr::select(.x, seqnames, start, end))
 
-peak_list[[1]][1:5, 1:7]
+peak_list[[1]][1:5,]
+```
+
+Then, can use `ChIPseeker::annotatePeak()` to annotate the peaks into genomic regions.
+
+```{r results=FALSE}
+# Load annotations for mouse mm10 genome
+library(TxDb.Mmusculus.UCSC.mm10.knownGene)
+library(org.Mm.eg.db)
+
+# Annotate peaks into csAnno object
+peak_list_csAnno <- peak_list %>%
+  # convert to granges
+  purrr::map(~plyranges::as_granges(.x)) %>%
+  # annotate peaks
+  purrr::map(~ChIPseeker::annotatePeak(peak = .x, tssRegion = c(-2500, 2500), 
+                                       TxDb = TxDb.Mmusculus.UCSC.mm10.knownGene,
+                                       annoDb = "org.Mm.eg.db", level = "transcript"))
+```
+
+Now that peaks are annotated in the different genomic regions and we have created a *csAnno* object for each set of peaks, we must retrieve the `anno` data frame inside each *csAnno* object. This is not really necessary, since the corresponding transformations are already done inside `barAnno()`, but it is recommendable in case we want to do more things with these data.
+
+```{r}
+peak_list <- peak_list_csAnno %>% purrr::map(~as_tibble(.x))
 ```
 
 ## Default run
+
+We can run `barAnno()` using as input:
+
+* The list of data frames with the coordinates of the peaks and the annotated regions
 
 ```{r include=T}
 barAnno(anno_list = peak_list)
 ```
 
-## Number of peaks
+* The list of *csAnno* objects that output from `ChIPseeker::annotatePeak()`
+
+```{r include=T}
+barAnno(anno_list = peak_list_csAnno)
+```
+
+## Plot number of peaks
 
 ```{r}
 barAnno(anno_list = peak_list, fill_position = F)
 ```
 
 ## Genomic annotations
+
+```{r}
+barAnno(anno_list = peak_list, anno_num = 2) # default
+```
 
 ```{r}
 barAnno(anno_list = peak_list, anno_num = 3)
@@ -73,7 +116,7 @@ barAnno(anno_list = peak_list, anno_num = 3)
 barAnno(anno_list = peak_list, anno_num = "all")
 ```
 
-### Change names
+## Change names
 
 ```{r}
 barAnno(anno_list = peak_list, anno_names = c("Condition X", "Condition Y"))
@@ -87,6 +130,20 @@ barAnno(anno_list = peak_list,
 ```
 
 ## Customize plot
+
+### Change bar width
+
+```{r include=T}
+barAnno(anno_list = peak_list, width = 0.6) # default
+```
+
+```{r include=T}
+barAnno(anno_list = peak_list, width = 0.9)
+```
+
+```{r include=T}
+barAnno(anno_list = peak_list, width = 1)
+```
 
 ### Divide pannels
 
@@ -103,9 +160,7 @@ barAnno(anno_list = peak_list, anno_names = c("Cond1", "Cond1"),
 barAnno(anno_list = peak_list, anno_names = c("Cond1", "Cond2"), protein = c("protX", "protY"))
 ```
 
-
-
-### Set titles
+### Set labels
 
 ```{r}
 barAnno(anno_list = peak_list, main = "This is a title", subtitle = "This is a subtitle",
@@ -138,7 +193,7 @@ barAnno(anno_list = peak_list, xangle = 60)
 
 ### Change color palette
 
-Available palettes can be found here: <https://ggplot2.tidyverse.org/reference/scale_brewer.html>
+If the length of `color_palette` argument in `barAnno()` is 1 (e.g. `Set2`, the default), the function uses a predefined palette passed through `scale_fill_brewer()`. Available palettes can be found here: <https://ggplot2.tidyverse.org/reference/scale_brewer.html>. For example:
 
 ```{r}
 barAnno(anno_list = peak_list, color_palette = "Set1")
@@ -150,6 +205,28 @@ barAnno(anno_list = peak_list, color_palette = "Pastel2")
 
 ```{r}
 barAnno(anno_list = peak_list, color_palette = "Oranges")
+```
+
+Nevertheless, if `color_palette` is a character vector of length greater than 1 and has valid color names (e.g. `c("blue", "gold3")`), the function takes these colors and passes them through `scale_fill_manual()` to fill the bars. If the number of annotated regions is greater than the default of 2 (i.e. `anno_num = 3` or `anno_num = "all"`), the number of colors passed through `color_palette` must be the same length.
+
+```{r}
+barAnno(anno_list = peak_list, color_palette = c("blue", "gold3"), anno_num = 2)
+```
+
+```{r}
+barAnno(anno_list = peak_list, color_palette = c("blue", "gold3", "pink"), anno_num = 3)
+```
+
+```{r}
+barAnno(anno_list = peak_list, anno_num = "all", 
+        color_palette = c("blue", "gold3", "pink", "darkgreen", "darkred", "orange", "purple"))
+```
+
+The colors can be also generated through other functions, such as `rainbow()` or `circlize::rand_col()`.
+
+```{r}
+barAnno(anno_list = peak_list, anno_num = "all", 
+        color_palette = rainbow(n = 7))
 ```
 
 

@@ -18,7 +18,8 @@ barAnno(
   legend_position = "right",
   anno_num = 2,
   fill_position = T,
-  xangle = 20
+  xangle = 20,
+  width = 0.6
 )
 }
 \arguments{
@@ -46,7 +47,9 @@ barAnno(
 
 \item{fill_position}{Logical. If TRUE (default), it the plotted bars will represent proportion of peaks in each feature. If FALSE, the bars will have the height of the total number of peaks with the correspondent feature color.}
 
-\item{xangle}{Integer number. Angle of the text in the X axis}
+\item{xangle}{Numerical of length 1. Angle of the text in the X axis. Default: 20.}
+
+\item{width}{Numerical of length 1. Width of the bar in relative units. Default: 0.6}
 
 \item{palette}{Character of lenght 1. Color palette used to color the bars through the function \code{scale_fill_brewer()}. Default: "Set1".}
 }
