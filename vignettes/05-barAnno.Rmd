@@ -59,9 +59,9 @@ peak_list[[1]][1:5,]
 
 Then, can use `ChIPseeker::annotatePeak()` to annotate the peaks into genomic regions.
 
-```{r results=FALSE}
+```{r results='hide'}
 # Load annotations for mouse mm10 genome
-library(TxDb.Mmusculus.UCSC.mm10.knownGene)
+library(TxDb.Mmusculus.UCSC.mm10.knownGene) 
 library(org.Mm.eg.db)
 
 # Annotate peaks into csAnno object
