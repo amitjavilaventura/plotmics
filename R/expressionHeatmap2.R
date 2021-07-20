@@ -45,12 +45,14 @@
 #' @param ylab Character of length 1 or NULL. Title of the Y axis. If row dendogram is plotted, the Y axis is placed to the right. Default: NULL.
 #' @param axis_text_size Numerical of length 1. Size of the text in the axes. Default: 10
 #' @param axis_x_angle Numerical of length 1. Angle of the text in the X axis. Default: 90
+#' @param scale Character of length 1 or NULL. One of c("rows", "cols"). If "rows", it scales data by row; if "cols", it scales data by columns; if NULL (the default), it does not scale the data. Default: NULL.
+#'
 #' @export
 
 expressionHeatmap2 <- function(expr_list,
                                expr_names = names(expr_list),
                                genes = c("Lef1", "Tcf7l1", "Tcf7l2", "Tcf7"),
-                               clust_rows = T,
+                               clust_rows = F,
                                clust_cols = F,
                                show_dend_rows = F,
                                show_dend_cols = F,
@@ -77,7 +79,8 @@ expressionHeatmap2 <- function(expr_list,
                                xlab = "",
                                ylab = NULL,
                                axis_text_size = 10,
-                               x_axis_angle = 90){
+                               x_axis_angle = 90,
+                               scale = NULL){
 
   # Load required packages
   require(plyr)
@@ -108,6 +111,12 @@ expressionHeatmap2 <- function(expr_list,
     plyr::join_all(by = "Geneid") %>%
     dplyr::relocate(Geneid)
 
+  ## Scale
+  if(!is.null(scale)){
+    if("rows" %in% scale) { expr[,2:length(expr)] <- expr[,2:length(expr)] %>% t() %>% scale() %>% t() }
+    if("cols" %in% scale) { expr[,2:length(expr)] <- expr[,2:length(expr)] %>% scale() }
+  }
+
   # Melt df with all Log2FCs
   expr.m <- reshape2::melt(expr, variable.name = "Condition", id.vars = "Geneid", value.name = "Expr")
 
@@ -116,7 +125,7 @@ expressionHeatmap2 <- function(expr_list,
   if(is.null(legend_scale)){
     lower    <- min(expr.m$Expr)
     higher   <- max(expr.m$Expr)
-    midpoint <- (higher-lower)/2
+    midpoint <- (higher-abs(lower))/2
     breaks   <- round(seq(from = lower, to = higher, by = (higher-lower)/legend_breaks_num))
   } else {
     lower    <- legend_scale[1]
@@ -141,14 +150,14 @@ expressionHeatmap2 <- function(expr_list,
                                                 ticks.colour = NA,
                                                 barheight = unit(legend_height, "mm"))) +
 
-    theme_pubr(border = T, legend = "right", margin = T, x.text.angle = 90) +
+    theme_pubr(border = T, legend = "right", margin = T) + # format the plot
     theme(plot.title = element_text(face = "bold"),
           plot.subtitle = element_text(face = "italic"),
           axis.title = element_text(face = "bold"),
-          axis.text.x = element_text(vjust = .5),
+          axis.text  = element_text(size = axis_text_size),
+          axis.text.x = element_text(angle = x_axis_angle, hjust = .5, vjust = .5),
           panel.border = element_rect(size = 1.1)) +
-    labs(x = xlab, y = ylab)
-
+    xlab(xlab) + ylab(ylab)
 
   ##Write lfc values
   if(write_label){ hm <- hm + geom_text(aes(label = round(Expr, label_digits)), size = label_size, color = label_color) }

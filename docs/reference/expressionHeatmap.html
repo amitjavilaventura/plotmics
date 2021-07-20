@@ -230,11 +230,15 @@ and draws a heatmap using ggplot.</p>
     </tr>
     <tr>
       <th>legend_breaks_num</th>
-      <td><p>Numerical of length 1. The number of breaks you want in the legend. Default: 5.</p></td>
+      <td><p>Numerical of length 1. Only 'legend_scale' is NULL. The number of breaks you want in the legend. Default: 5.</p></td>
+    </tr>
+    <tr>
+      <th>legend_breaks_by</th>
+      <td><p>Numerical of length 1. Only 'legend_scale' is numerical (e.g. <code><a href='https://rdrr.io/r/base/c.html'>c(-1,1)</a></code>). The distance between the breaks of the legend. Default: .5.</p></td>
     </tr>
     <tr>
       <th>legend_midpoint</th>
-      <td><p>Numerical of length 1. Only if scale is not NULL. Point where the central color of the legend will placed. Default: 0</p></td>
+      <td><p>Numerical of length 1. Only if 'legend_scale' is not NULL. Point where the central color of the legend will placed. Default: 0</p></td>
     </tr>
     <tr>
       <th>legend_height</th>
@@ -275,6 +279,10 @@ and draws a heatmap using ggplot.</p>
     <tr>
       <th>axis_text_size</th>
       <td><p>Numerical of length 1. Size of the text in the axes. Default: 10</p></td>
+    </tr>
+    <tr>
+      <th>scale</th>
+      <td><p>Character of length 1 or NULL. One of c("rows", "cols"). If "rows", it scales data by row; if "cols", it scales data by columns; if NULL (the default), it does not scale the data. Default: NULL.</p></td>
     </tr>
     <tr>
       <th>df</th>

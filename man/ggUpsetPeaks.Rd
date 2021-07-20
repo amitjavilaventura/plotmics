@@ -4,7 +4,7 @@
 \alias{ggUpsetPeaks}
 \title{ggUpsetPeaks}
 \usage{
-ggUpsetPeaks(peaks, conds = names(peaks), conds_order = cond, order_by_freq = T, num_size = 4, title = NULL, subtitle = NULL, caption = NULL
+`ggUpsetPeaks(peaks, conds = names(peaks), conds_order = cond, order_by_freq = T, num_size = 4, title = NULL, subtitle = NULL, caption = NULL)`
 }
 \arguments{
 \item{peaks}{List of dataframes with the genomic coordinates of the regions to overlap. Dataframes must contain the columns seqnames, start, end.}

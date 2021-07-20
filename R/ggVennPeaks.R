@@ -66,7 +66,8 @@ ggVennPeaks <- function(peak_list, peak_names = names(peak_list), percent = T,
                          fill_color = in_fill, fill_alpha = alpha,
                          stroke_color =  out_color,
                          set_name_color = name_color, set_name_size = name_size,
-                         text_color = text_color, text_size = label_size)
+                         text_color = text_color, text_size = label_size) +
+    scale_y_discrete(expand = c(0,0.5))
 
   if(!is.null(title)){
     venn <- venn + labs(title = title, subtitle = subtitle) +

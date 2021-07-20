@@ -29,8 +29,9 @@
 #' @param hm_width Numerical of length 1. Width of the heatmap in mm. Default: (ncol(df)-1)*10.
 #' @param hm_colors Character of length 3. Colors in the lower limit, midpoint (defined by 'legend_midpoint') and higher limit, respectively. Default: c("cornflowerblue", "white", "gold3").
 #' @param legend_scale Numerical of length 2 or NULL. If NULL, the color scale of the heatmap will take the minimum and the maximum values as limits. If numerical, the color scale will take the first as the lower limit and the second element as the higher limit. Default: NULL.
-#' @param legend_breaks_num Numerical of length 1. The number of breaks you want in the legend. Default: 5.
-#' @param legend_midpoint Numerical of length 1. Only if scale is not NULL. Point where the central color of the legend will placed. Default: 0
+#' @param legend_breaks_num Numerical of length 1. Only 'legend_scale' is NULL. The number of breaks you want in the legend. Default: 5.
+#' @param legend_breaks_by Numerical of length 1. Only 'legend_scale' is numerical (e.g. `c(-1,1)`). The distance between the breaks of the legend. Default: .5.
+#' @param legend_midpoint Numerical of length 1. Only if 'legend_scale' is not NULL. Point where the central color of the legend will placed. Default: 0
 #' @param legend_height Numerical of length 1. Height of the legend which, by default, is the height of the heatmap. Default: hm_height.
 #' @param legend_title Character of length 1 or NULL. Title of the legend, placed in the right part of it. Default: NULL.
 #' @param dend_cols_prop Numerical of length 1. Proportion (from 0 to 1) of the columns dendogram compared to the heatmap height. Default: 0.1.
@@ -42,11 +43,13 @@
 #' @param ylab Character of length 1 or NULL. Title of the Y axis. If row dendogram is plotted, the Y axis is placed to the right. Default: NULL.
 #' @param axis_text_size Numerical of length 1. Size of the text in the axes. Default: 10
 #' @param axis_x_angle Numerical of length 1. Angle of the text in the X axis. Default: 90
+#' @param scale Character of length 1 or NULL. One of c("rows", "cols"). If "rows", it scales data by row; if "cols", it scales data by columns; if NULL (the default), it does not scale the data. Default: NULL.
+#'
 #' @export
 
 expressionHeatmap <- function(expr_df,
                               genes = c("TCF7", "TCF7L1", "TCF7L2", "LEF1"),
-                              clust_rows = T,
+                              clust_rows = F,
                               clust_cols = F,
                               show_dend_rows = F,
                               show_dend_cols = F,
@@ -61,6 +64,7 @@ expressionHeatmap <- function(expr_df,
                               hm_colors = c("cornflowerblue", "white", "gold3"),
                               legend_scale = NULL,
                               legend_breaks_num = 5,
+                              legend_breaks_by = .5,
                               legend_midpoint = 0,
                               legend_height = hm_height,
                               legend_title = NULL,
@@ -72,7 +76,8 @@ expressionHeatmap <- function(expr_df,
                               xlab = "",
                               ylab = NULL,
                               axis_text_size = 10,
-                              x_axis_angle = 90){
+                              x_axis_angle = 90,
+                              scale = NULL){
 
   # Load requireed packages
   require(dplyr)
@@ -82,22 +87,30 @@ expressionHeatmap <- function(expr_df,
   require(ggpubr)
   require(patchwork)
 
-  # Check that inputs are OK
+  # Check that inputs are OK -----
   if(!is.data.frame(expr_df)){ stop("'df' must be a data frame with 'Geneid' in the first column and the other columns with the expression values to plot.") }
   else if(!("Geneid" %in% colnames(expr_df))){ stop("'df' must have a character first column named 'Geneid'") }
   if(show_dend_rows & !clust_rows){ stop("To plot the rows dendogram (`show_dend_rows = T`), `clust_rows` must be TRUE") }
   if(show_dend_cols & !clust_cols){ stop("To plot the columns dendogram (`show_dend_cols = T`), `clust_cols` must be TRUE") }
 
-  # Filter dataframe to get only desired genes.
-  #  Then melt dataframe.
-  expr <- expr_df %>% dplyr::relocate(Geneid) %>% dplyr::filter(Geneid %in% genes)
+  # Format data frame -----
+  ## Filter dataframe to get only desired genes
+  expr <- expr_df %>% dplyr::relocate(Geneid) %>% dplyr::filter(Geneid %in% genes) %>% as.data.frame()
+
+  ## Scale
+  if(!is.null(scale)){
+    if("rows" %in% scale) { expr[,2:length(expr)] <- expr[,2:length(expr)] %>% t() %>% scale() %>% t() }
+    if("cols" %in% scale) { expr[,2:length(expr)] <- expr[,2:length(expr)] %>% scale() }
+  }
+
+  ## Melt data frame
   expr.m <- expr %>% reshape2::melt(value.name = "Expr", variable.name = "Condition")
 
   # Get the legend breaks.
   if(is.null(legend_scale)){
     lower    <- min(expr.m$Expr)
     higher   <- max(expr.m$Expr)
-    midpoint <- (higher-lower)/2
+    midpoint <- (higher-abs(lower))/2
     breaks   <- round(seq(from = lower, to = higher, by = (higher-lower)/legend_breaks_num))
   } else {
     lower    <- legend_scale[1]

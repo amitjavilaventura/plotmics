@@ -67,6 +67,8 @@
 
 \item{axis_text_size}{Numerical of length 1. Size of the text in the axes. Default: 10}
 
+\item{scale}{Character of length 1 or NULL. One of c("rows", "cols"). If "rows", it scales data by row; if "cols", it scales data by columns; if NULL (the default), it does not scale the data. Default: NULL.}
+
 \item{axis_x_angle}{Numerical of length 1. Angle of the text in the X axis. Default: 90}
 }
 \description{

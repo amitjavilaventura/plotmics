@@ -37,9 +37,11 @@
 
 \item{legend_scale}{Numerical of length 2 or NULL. If NULL, the color scale of the heatmap will take the minimum and the maximum values as limits. If numerical, the color scale will take the first as the lower limit and the second element as the higher limit. Default: NULL.}
 
-\item{legend_breaks_num}{Numerical of length 1. The number of breaks you want in the legend. Default: 5.}
+\item{legend_breaks_num}{Numerical of length 1. Only 'legend_scale' is NULL. The number of breaks you want in the legend. Default: 5.}
 
-\item{legend_midpoint}{Numerical of length 1. Only if scale is not NULL. Point where the central color of the legend will placed. Default: 0}
+\item{legend_breaks_by}{Numerical of length 1. Only 'legend_scale' is numerical (e.g. \code{c(-1,1)}). The distance between the breaks of the legend. Default: .5.}
+
+\item{legend_midpoint}{Numerical of length 1. Only if 'legend_scale' is not NULL. Point where the central color of the legend will placed. Default: 0}
 
 \item{legend_height}{Numerical of length 1. Height of the legend which, by default, is the height of the heatmap. Default: hm_height.}
 
@@ -60,6 +62,8 @@
 \item{ylab}{Character of length 1 or NULL. Title of the Y axis. If row dendogram is plotted, the Y axis is placed to the right. Default: NULL.}
 
 \item{axis_text_size}{Numerical of length 1. Size of the text in the axes. Default: 10}
+
+\item{scale}{Character of length 1 or NULL. One of c("rows", "cols"). If "rows", it scales data by row; if "cols", it scales data by columns; if NULL (the default), it does not scale the data. Default: NULL.}
 
 \item{df}{Dataframe with a 'Geneid' column and several columns with numerical expression data for different samples, such as TPMs or Log2FC.}
 
