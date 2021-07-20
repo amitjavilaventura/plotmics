@@ -16,8 +16,8 @@ The goal of this package is to provide simple functions to visualize several omi
 * `ggUpsetPeaks()`: calls `getVennCounts()` and draws a `ggplot2`-based UpSet plot using the Venn counts.
 * `ggVennPeaks()`: calls `getVennCounts()` and draws a Venn diagram using the package `ggvenn`.
 * `plotDendogram()`: helper function to draw a dendogram for the heatmaps in `expressionHeatmap()` and `expressionHeatmap2()`.
-* `expressionHeatmap()`: function that takes a data frame of expression data (including *Geneid*) and plots a heatmap of the selected genes.
-* `expressionHeatmap2()`: function that takes a list of data frames with the columns *Geneid* and *log2FoldChange* (it can be another data, such as TPM, but this is easier since it is how it output from `DESeq2`) and plots a heatmap with the selected genes.
+* `expressionHeatmap()`: function that takes a data frame of expression data (including *Geneid*) and plots a heatmap of the selected genes. It can be any expression data, but it is better for expression values, counts, normalized counts in which the frist column is the *Geneid* and the other columns are each of the samples that are to be plotted.
+* `expressionHeatmap2()`: function that takes a list of data frames with the columns *Geneid* and *log2FoldChange* (it can be another type data, such as FPKMs, but its easier to maintain the name of *log2FoldChange* since it is how it output from `DESeq2`) and plots a heatmap with the selected genes. It is better for *log2FoldChange* heatmaps in which each element in the list is a data frame that outputs from `DESeq2`.
 
 ## Install `plotmics` 
 
@@ -40,3 +40,7 @@ If you want to contribute to this package, make a post in the issues section in 
 ## Cite
 
 If you use this package, please cite [this repository](https://github.com/amitjavilaventura/plotmics) and give it a star.
+
+## Updates
+
+* `v1.0.0`: first version.
