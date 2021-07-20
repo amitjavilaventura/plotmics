@@ -1,24 +1,26 @@
-# expressionHeatmap() -------------------------
+# expressionHeatmap2() -------------------------
 
-#' @title expressionHeatmap
+#' @title expressionHeatmap2
 #' @author amitjavilaventura
 #'
 #' @description
-#' Function that takes a data frame with a Geneid column and several columns for expression data (e.g. TPMs, Log2FC...)
+#' Function that takes a list of dataframes with expression data and the columns 'Geneid' and 'log2FoldChange'.
 #' and draws a heatmap using ggplot.
 #'
 #' @seealso `plotDendogram`
 #' @seealso `stats::hclust`
 #' @seealso `stats::dist`
 #'
-#' @usage `expressionHeatmap(df, genes = c("TCF7", "TCF7L1", "TCF7L2", "LEF1"), clust_rows = T, clust_cols = F, show_dend_rows = F, show_dend_cols = F, dist_method = "euclidean", hclust_method = "ward.D", write_label = T, label_size = 4, label_color = "black", label_digits = 2, hm_height = length(genes)*10, hm_width = (ncol(df)-1)*10, hm_colors = c("cornflowerblue", "white", "gold3"), legend_scale = NULL, legend_breaks_num = 5, legend_midpoint = 0, legend_height = hm_height, legend_title = NULL, dend_cols_prop = .1, dend_rows_prop = .2, title = "", subtitle = "", caption = NULL, xlab = "", ylab = NULL, axis_text_size = 10, x_axis_angle = 90)`
+#' @usage `expressionHeatmap2((expr_list,expr_names = names(expr_list),genes = c("Lef1", "Tcf7l1", "Tcf7l2", "Tcf7"),clust_rows = T, clust_cols = F, show_dend_rows = F, show_dend_cols = F, dist_method = "euclidean", hclust_method = "ward.D", write_label = T, label_size = 3, label_color = "black", label_digits = 2, hm_height = length(genes)*10, hm_width = length(expr_list)*10, hm_colors = c("cornflowerblue", "white", "gold3"), legend_scale = c(-1.5, 1.5), legend_breaks_num = 5, legend_breaks_by = .5, legend_midpoint = 0, legend_height = hm_height, legend_title = NULL, dend_cols_prop = .1, dend_rows_prop = .2, title = "", subtitle = "", caption = NULL, xlab = "", ylab = NULL, axis_text_size = 10, x_axis_angle = 90))`
 #'
-#' @param df Dataframe with a 'Geneid' column and several columns with numerical expression data for different samples, such as TPMs or Log2FC.
+#'
+#' @param expr_list List of dataframes with, at least, the columns 'Geneid' and 'log2FoldChange'. Better if it's a named list.
+#' @param expr_names Character of namesof equal length to 'expr_list'. Names of the elements in 'expr_list'. Default: names(expr_list)
 #' @param genes Character. Names of the genes to be plotted. They must present in the column 'Geneid' of 'df'.
 #' @param clust_rows Logical of length 1. Whether to cluster the rows (TRUE) or not (FALSE) using `hclust`. Default: T.
-#' @param clust_cols Logical of length 1. Whether to cluster the columns (TRUE) or not (FALSE) using `hclust`. Default: F.
-#' @param show_dend_rows Logical of length 1. Whether to draw the dendogram of the rows clustering (TRUE) or not (FALSE). It only works with 'clust_rows = T'. Default: F.
-#' @param show_dend_cols Logical of length 1. Whether to draw the dendogram of the columns clustering (TRUE) or not (FALSE). It only works with 'clust_cols = T'. Default: F.
+#' @param clust_cols Logical of length 1. Whether to cluster the columns (TRUE) or not (FALSE) using `hclust`. Default: T.
+#' @param show_dend_rows Logical of length 1. Whether to draw the dendogram of the rows clustering (TRUE) or not (FALSE). It works only with 'clust_rows = T'. Default: T.
+#' @param show_dend_cols Logical of length 1. Whether to draw the dendogram of the columns clustering (TRUE) or not (FALSE). It works only with 'clust_cols = T'. Default: T.
 #' @param hclust_method Character of length 1. Method for hierarchical clustering. One of `"ward.D"`, `"ward.D2"`, `"single"`, `"complete"`, `"average"` (= UPGMA), `"mcquitty"` (= WPGMA), `"median"` (= WPGMC) or `"centroid"` (= UPGMC). Default: "ward.D"
 #' @param dist_method Character of length 1. Distance calculation. One of `"euclidean"`, `"maximum"`, `"manhattan"`, "`canberra"`, `"binary"` or `"minkowski"`. Default: "euclidean".
 #' @param write_label Logical of length 1. Whether to write the expression values in the heatmap (TRUE) or not (FALSE). Default: T.
@@ -28,8 +30,9 @@
 #' @param hm_height Numerical of length 1. Height of the heatmap in mm. Default: length(genes)*10.
 #' @param hm_width Numerical of length 1. Width of the heatmap in mm. Default: (ncol(df)-1)*10.
 #' @param hm_colors Character of length 3. Colors in the lower limit, midpoint (defined by 'legend_midpoint') and higher limit, respectively. Default: c("cornflowerblue", "white", "gold3").
-#' @param legend_scale Numerical of length 2 or NULL. If NULL, the color scale of the heatmap will take the minimum and the maximum values as limits. If numerical, the color scale will take the first as the lower limit and the second element as the higher limit. Default: NULL.
-#' @param legend_breaks_num Numerical of length 1. The number of breaks you want in the legend. Default: 5.
+#' @param legend_scale Numerical of length 2 or NULL. If NULL, the color scale of the heatmap will take the minimum and the maximum values as limits. If numerical, the color scale will take the first as the lower limit and the second element as the higher limit. Default: c(-1.5, 1.5).
+#' @param legend_breaks_num Numerical of length 1. Only if 'legend_scale = NULL'. The number of breaks you want in the legend. Default: 5.
+#' @param legend_breaks_by Numerical of length 1. Only 'legend_scale' is numerical (e.g. `c(-1,1)`). The distance between the breaks of the legend. Default: .5.
 #' @param legend_midpoint Numerical of length 1. Only if scale is not NULL. Point where the central color of the legend will placed. Default: 0
 #' @param legend_height Numerical of length 1. Height of the legend which, by default, is the height of the heatmap. Default: hm_height.
 #' @param legend_title Character of length 1 or NULL. Title of the legend, placed in the right part of it. Default: NULL.
@@ -44,55 +47,71 @@
 #' @param axis_x_angle Numerical of length 1. Angle of the text in the X axis. Default: 90
 #' @export
 
-expressionHeatmap <- function(expr_df,
-                              genes = c("TCF7", "TCF7L1", "TCF7L2", "LEF1"),
-                              clust_rows = T,
-                              clust_cols = F,
-                              show_dend_rows = F,
-                              show_dend_cols = F,
-                              dist_method = "euclidean",
-                              hclust_method = "ward.D",
-                              write_label = T,
-                              label_size = 3,
-                              label_color = "black",
-                              label_digits = 2,
-                              hm_height = length(genes)*10,
-                              hm_width = (ncol(expr_df)-1)*10,
-                              hm_colors = c("cornflowerblue", "white", "gold3"),
-                              legend_scale = NULL,
-                              legend_breaks_num = 5,
-                              legend_midpoint = 0,
-                              legend_height = hm_height,
-                              legend_title = NULL,
-                              dend_cols_prop = .1,
-                              dend_rows_prop = .2,
-                              title = "",
-                              subtitle = "",
-                              caption = NULL,
-                              xlab = "",
-                              ylab = NULL,
-                              axis_text_size = 10,
-                              x_axis_angle = 90){
+expressionHeatmap2 <- function(expr_list,
+                               expr_names = names(expr_list),
+                               genes = c("Lef1", "Tcf7l1", "Tcf7l2", "Tcf7"),
+                               clust_rows = T,
+                               clust_cols = F,
+                               show_dend_rows = F,
+                               show_dend_cols = F,
+                               dist_method = "euclidean",
+                               hclust_method = "ward.D",
+                               write_label = T,
+                               label_size = 3,
+                               label_color = "black",
+                               label_digits = 2,
+                               hm_height = length(genes)*10,
+                               hm_width = length(expr_list)*10,
+                               hm_colors = c("cornflowerblue", "white", "gold3"),
+                               legend_scale = c(-1.5, 1.5),
+                               legend_breaks_num = 5,
+                               legend_breaks_by = .5,
+                               legend_midpoint = 0,
+                               legend_height = hm_height,
+                               legend_title = NULL,
+                               dend_cols_prop = .1,
+                               dend_rows_prop = .2,
+                               title = "",
+                               subtitle = "",
+                               caption = NULL,
+                               xlab = "",
+                               ylab = NULL,
+                               axis_text_size = 10,
+                               x_axis_angle = 90){
 
-  # Load requireed packages
+  # Load required packages
+  require(plyr)
   require(dplyr)
+  require(purrr)
   require(reshape2)
   require(ggplot2)
-  require(ggh4x)
   require(ggpubr)
+  require(ggh4x)
+  require(ggdendro)
   require(patchwork)
 
   # Check that inputs are OK
-  if(!is.data.frame(expr_df)){ stop("'df' must be a data frame with 'Geneid' in the first column and the other columns with the expression values to plot.") }
-  else if(!("Geneid" %in% colnames(expr_df))){ stop("'df' must have a character first column named 'Geneid'") }
+  if(!is.list(expr_list)){ stop("'expr_list' must be a (named) list of dataframes with, at least, the columns 'Geneid' and 'log2FoldChange'.") }
+  else if(!(sum(sapply(expr_list, class) == "data.frame") == length(expr_list))){ stop("'expr_list' must be a (named) list of dataframes with, at least, the columns 'Geneid' and 'log2FoldChange'.") }
+  else if(!(sum(sapply(expr_list, colnames) == "Geneid") == length(expr_list))){ stop("Each data frame in the list must have the column 'Geneid' with the names of the genes.") }
+  else if(!(sum(sapply(expr_list, colnames) == "log2FoldChange") == length(expr_list))){ stop("Each data frame in the list must have the column 'log2FoldChange' with the expression values of each gene.") }
   if(show_dend_rows & !clust_rows){ stop("To plot the rows dendogram (`show_dend_rows = T`), `clust_rows` must be TRUE") }
   if(show_dend_cols & !clust_cols){ stop("To plot the columns dendogram (`show_dend_cols = T`), `clust_cols` must be TRUE") }
 
-  # Filter dataframe to get only desired genes.
-  #  Then melt dataframe.
-  expr <- expr_df %>% dplyr::relocate(Geneid) %>% dplyr::filter(Geneid %in% genes)
-  expr.m <- expr %>% reshape2::melt(value.name = "Expr", variable.name = "Condition")
 
+  # Bind Log2FCs from all genes in all contrasts
+  expr <- expr_list %>%
+    purrr::set_names(expr_names) %>%
+    purrr::map(~dplyr::select(.x, Geneid, log2FoldChange)) %>%
+    purrr::map(~dplyr::filter(.x, Geneid %in% genes)) %>%
+    purrr::imap(~magrittr::set_colnames(.x, value = c("Geneid", .y))) %>%
+    plyr::join_all(by = "Geneid") %>%
+    dplyr::relocate(Geneid)
+
+  # Melt df with all Log2FCs
+  expr.m <- reshape2::melt(expr, variable.name = "Condition", id.vars = "Geneid", value.name = "Expr")
+
+  # Initialize heatmap -----
   # Get the legend breaks.
   if(is.null(legend_scale)){
     lower    <- min(expr.m$Expr)
@@ -103,18 +122,18 @@ expressionHeatmap <- function(expr_df,
     lower    <- legend_scale[1]
     higher   <- legend_scale[2]
     midpoint <- legend_midpoint
-    breaks   <- round(seq(from = lower, to = higher, by = legend_breaks_num))
+    breaks   <- (seq(from = lower, to = higher, by = legend_breaks_by))
   }
 
-  # Initialize the heatmap with ggplot
+  ## Plot heatmap
   hm <- ggplot(expr.m, aes(Condition, Geneid) ) +
     geom_tile(aes(fill = Expr)) +
-    ggh4x::force_panelsizes(rows = unit(hm_height, "mm"),  # force height of the heatmap
-                            cols = unit(hm_width, "mm")) + # force width of the heatmap
-    coord_fixed() +  # fix the coordinates
-    scale_fill_gradient2(limits = c(lower, higher), midpoint = midpoint, # setup the legend
+    force_panelsizes(rows = unit(hm_height, "mm"),
+                     cols = unit(hm_width, "mm"))  +
+    coord_fixed() +
+    scale_fill_gradient2(limits = c(legend_scale[1], legend_scale[2]), midpoint = legend_midpoint,
                          breaks = breaks,
-                         low = hm_colors[1], high = hm_colors[3], mid = hm_colors[2],
+                         low = hm_colors[1], mid = hm_colors[2], high = hm_colors[3],
                          guide = guide_colorbar(title = legend_title,
                                                 title.position = "right",
                                                 title.theme = element_text(angle = 270, hjust = .5, vjust = .5),
@@ -122,25 +141,24 @@ expressionHeatmap <- function(expr_df,
                                                 ticks.colour = NA,
                                                 barheight = unit(legend_height, "mm"))) +
 
-    theme_pubr(border = T, legend = "right", margin = T) + # format the plot
+    theme_pubr(border = T, legend = "right", margin = T, x.text.angle = 90) +
     theme(plot.title = element_text(face = "bold"),
           plot.subtitle = element_text(face = "italic"),
           axis.title = element_text(face = "bold"),
-          axis.text  = element_text(size = axis_text_size),
-          axis.text.x = element_text(angle = x_axis_angle, hjust = .5, vjust = .5),
+          axis.text.x = element_text(vjust = .5),
           panel.border = element_rect(size = 1.1)) +
-    xlab(xlab) + ylab(ylab)
+    labs(x = xlab, y = ylab)
 
-  # Write thee label of the expression values
+
+  ##Write lfc values
   if(write_label){ hm <- hm + geom_text(aes(label = round(Expr, label_digits)), size = label_size, color = label_color) }
-
 
   # Hierarchical clustering -----
   if(clust_rows){
     # Hierarchical clustering of rows alone
     hclust_rows <- hclust( dist(expr[-1], method = dist_method), method = hclust_method )
 
-    # Position of the Y axis
+    # Position of Y axis
     if(show_dend_rows) { ytext_pos = "right" }
     else { ytext_pos = "left" }
 
@@ -200,7 +218,7 @@ expressionHeatmap <- function(expr_df,
   }
 
 
-  # Return heatmap
+
   return(heatmap)
 
 }

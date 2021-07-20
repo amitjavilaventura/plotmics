@@ -47,7 +47,10 @@
 
 
 <meta property="og:title" content="barAnno — barAnno" />
-<meta property="og:description" content="barAnno" />
+<meta property="og:description" content="Function for ChIP-seq and ATAC-seq.
+It must be used after the function annotatePeak() from the R package ChIPseeker. @seealso `annotatePeak`
+It takes a list of annotation objects that come as output of annotatePeak() and changes the features to &quot;Promoter&quot;, &quot;Distal&quot; and &quot;Gene body&quot; (or to &quot;Promoter&quot; and &quot;Distal&quot;). Finally it plots a bargraph with the distribution of all the proportions
+As a ggplot2-based function, it allows to add more layers to format the plot." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -158,7 +161,10 @@
     </div>
 
     <div class="ref-description">
-    <p>barAnno</p>
+    <p>Function for ChIP-seq and ATAC-seq.
+It must be used after the function annotatePeak() from the R package ChIPseeker. @seealso <code>`annotatePeak`</code>
+It takes a list of annotation objects that come as output of annotatePeak() and changes the features to "Promoter", "Distal" and "Gene body" (or to "Promoter" and "Distal"). Finally it plots a bargraph with the distribution of all the proportions
+As a ggplot2-based function, it allows to add more layers to format the plot.</p>
     </div>
 
     <pre class="usage"><span class='fu'>barAnno</span><span class='op'>(</span>
@@ -244,13 +250,12 @@
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/ChIPseeker/man/annotatePeak.html'>ChIPseeker::annotatePeak</a></code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>amitjavilaventura</p>
-<p>Function for ChIP-seq and ATAC-seq.
-It must be used after the function annotatePeak() from the R package ChIPseeker. @seealso <code>annotatePeak</code></p>
-<p>It takes a list of annotation objects that come as output of annotatePeak() and changes the features to "Promoter", "Distal" and "Gene body" (or to "Promoter" and "Distal"). Finally it plots a bargraph with the distribution of all the proportions
-As a ggplot2-based function, it allows to add more layers to format the plot.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

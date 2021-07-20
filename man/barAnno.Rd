@@ -54,14 +54,14 @@ barAnno(
 \item{palette}{Character of lenght 1. Color palette used to color the bars through the function \code{scale_fill_brewer()}. Default: "Set1".}
 }
 \description{
-barAnno
+Function for ChIP-seq and ATAC-seq.
+It must be used after the function annotatePeak() from the R package ChIPseeker. @seealso \code{\link{`annotatePeak`}}
+It takes a list of annotation objects that come as output of annotatePeak() and changes the features to "Promoter", "Distal" and "Gene body" (or to "Promoter" and "Distal"). Finally it plots a bargraph with the distribution of all the proportions
+As a ggplot2-based function, it allows to add more layers to format the plot.
+}
+\seealso{
+\code{ChIPseeker::annotatePeak}
 }
 \author{
 amitjavilaventura
-
-Function for ChIP-seq and ATAC-seq.
-It must be used after the function annotatePeak() from the R package ChIPseeker. @seealso \code{\link{annotatePeak}}
-
-It takes a list of annotation objects that come as output of annotatePeak() and changes the features to "Promoter", "Distal" and "Gene body" (or to "Promoter" and "Distal"). Finally it plots a bargraph with the distribution of all the proportions
-As a ggplot2-based function, it allows to add more layers to format the plot.
 }

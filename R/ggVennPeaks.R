@@ -4,12 +4,14 @@
 #' @title ggVennPeaks
 #' @author amitjavilaventura
 #'
-#' @description Function that calls 'getVennCounts()' and draws a VennDiagram of peak intersections using the ggvenn package.
+#' @description
+#' Function that calls 'getVennCounts()' and draws a VennDiagram of
+#' peak intersections using the `ggvenn` package.
 #'
 #' @usage ggVennPeaks(peak_list, peak_names = names(peak_list), percent = T, fill = c("blue", "gold3"), alpha = .4, color = "black", text_color = "black", name_size = 5, label_size = 3, title = "", subtitle = "")
 #'
-#' @seealso ggvenn::ggvenn()
-#' @seealso ChIPseeker::makeVennDiagram()
+#' @seealso `ggvenn::ggvenn`
+#' @seealso `ChIPseeker::makeVennDiagram`
 #'
 #' @param peak_list List of dataframes with the genomic coordinates of the regions to overlap. Dataframes must contain the columns seqnames, start, end.
 #' @param peak_names Character with the same length as the 'peaks' list. The names that are given to the diferente objects in the 'peaks' list. Default: 'names(peaks)'

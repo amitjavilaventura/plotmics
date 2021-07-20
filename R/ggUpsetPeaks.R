@@ -3,11 +3,14 @@
 #' @title ggUpsetPeaks
 #' @author amitjavilaventura
 #'
+#' @usage
+#' `ggUpsetPeaks(peaks, conds = names(peaks), conds_order = cond, order_by_freq = T, num_size = 4, title = NULL, subtitle = NULL, caption = NULL)`
+#'
 #' @seealso plyranges
 #'
+#' @description
 #' Function that calls 'getVennCounts' and draws an ggplot2-based upset plot.
 #'
-#' ggUpsetPeaks(peaks, conds = names(peaks), conds_order = cond, order_by_freq = T, num_size = 4, title = NULL, subtitle = NULL, caption = NULL
 #'
 #' @param peaks List of dataframes with the genomic coordinates of the regions to overlap. Dataframes must contain the columns seqnames, start, end.
 #' @param conds Character with the same length as the 'peaks' list. The names that are given to the diferente objects in the 'peaks' list. Default: 'names(peaks)'

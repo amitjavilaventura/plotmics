@@ -40,7 +40,8 @@ DEcompare(
 \item{colors}{Character of length 1 to 4. If too short, it will be recycled. Colors for each of the corners: top-left, bottom-left, top-right, bottom-right. Default: c("pink", "lightgreen", "cornflowerblue", "yellow")}
 }
 \description{
-DEcompare
+Function that takes a list of 2 dataframes with expression data
+and compares the log2FoldChange values of the two data sets.
 }
 \author{
 amitjavilaventura

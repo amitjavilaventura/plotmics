@@ -4,7 +4,9 @@
 #' @title barDEGs
 #' @author amitjavilaventura
 #'
-#' It takes a named list with the DE data of different contrasts and draws an horizontal barplot with the up (right) and downregulated (left) genes.
+#' @description
+#' It takes a named list with the DE data of different contrasts and
+#' draws an horizontal barplot with the up (right) and downregulated (left) genes.
 #'
 #' @returns A ggplot2-based barplot with the upregulated and downregulated genes in each contrast.
 #'

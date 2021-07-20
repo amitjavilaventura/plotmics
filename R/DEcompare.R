@@ -4,6 +4,10 @@
 #' @title DEcompare
 #' @author amitjavilaventura
 #'
+#' @description
+#' Function that takes a list of 2 dataframes with expression data
+#' and compares the log2FoldChange values of the two data sets.
+#'
 #' @param deg_list List of lenght 2. Must contain data frames with the columns Geneid, log2FoldChange, padj and DEG. Values in 'Geneid' must be the same in both data frames.+
 #' @param threshold Numeric of lenght 1. Threshold for the log2FoldChange. It is used to draw horizontal and vertical lines. Default: 1.5.
 #' @param genes Charachter of indefined lenght or NULL. Genes to be written in the plot. Default: NULL.

@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="ggUpsetPeaks — ggUpsetPeaks" />
-<meta property="og:description" content="ggUpsetPeaks" />
+<meta property="og:description" content="Function that calls 'getVennCounts' and draws an ggplot2-based upset plot." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -158,19 +158,10 @@
     </div>
 
     <div class="ref-description">
-    <p>ggUpsetPeaks</p>
+    <p>Function that calls 'getVennCounts' and draws an ggplot2-based upset plot.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ggUpsetPeaks</span><span class='op'>(</span>
-  <span class='va'>peaks</span>,
-  conds <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>peaks</span><span class='op'>)</span>,
-  conds_order <span class='op'>=</span> <span class='va'>conds</span>,
-  order_by_freq <span class='op'>=</span> <span class='cn'>T</span>,
-  num_size <span class='op'>=</span> <span class='fl'>4</span>,
-  title <span class='op'>=</span> <span class='cn'>NULL</span>,
-  subtitle <span class='op'>=</span> <span class='cn'>NULL</span>,
-  caption <span class='op'>=</span> <span class='cn'>NULL</span>
-<span class='op'>)</span></pre>
+    <pre class="usage">ggUpsetPeaks(peaks, conds = names(peaks), conds_order = cond, order_by_freq = T, num_size = 4, title = NULL, subtitle = NULL, caption = NULL</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -211,9 +202,7 @@
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>plyranges</p>
-<p>Function that calls 'getVennCounts' and draws an ggplot2-based upset plot.</p>
-<p>ggUpsetPeaks(peaks, conds = names(peaks), conds_order = cond, order_by_freq = T, num_size = 4, title = NULL, subtitle = NULL, caption = NULL</p></div>
+    <div class='dont-index'><p>plyranges</p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>amitjavilaventura</p>

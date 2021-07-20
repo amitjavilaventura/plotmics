@@ -51,10 +51,9 @@ barDEGs(
 A ggplot2-based barplot with the upregulated and downregulated genes in each contrast.
 }
 \description{
-barDEGs
+It takes a named list with the DE data of different contrasts and
+draws an horizontal barplot with the up (right) and downregulated (left) genes.
 }
 \author{
 amitjavilaventura
-
-It takes a named list with the DE data of different contrasts and draws an horizontal barplot with the up (right) and downregulated (left) genes.
 }

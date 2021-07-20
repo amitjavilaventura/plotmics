@@ -4,6 +4,7 @@
 #' @title chromReads
 #' @author amitjavilaventura
 #'
+#' @description
 #' Function counts the reads mapped to each chromosome and plots a bar graph.
 #' It uses the function idxstatsBam() from the Rsamtools R package. Run help("idxstatsBam") for more information.
 #'

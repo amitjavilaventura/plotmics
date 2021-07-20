@@ -16,15 +16,13 @@ getVennCounts(peaks, conds = names(peaks), conds_order = conds, plot = F)
 \item{plot}{Logical of lenght 1. Whether to draw the the 'makeVennDiagram()' plot or not. Default: FALSE}
 }
 \description{
-getVennCounts
+Function that calls 'ChIPpeakAnno::makeVennDiagram()' to obtain the venn counts.
+It also does a list of peaks and with several variables corresponding to the presence of these peaks in each set.
+It's a helper for other functions to draw Venn diagrams or UpSet plots for peak intersections.
 }
 \seealso{
 \code{ChIPpeakAnno::makeVennDiagram}
 }
 \author{
 amitjavilaventura
-
-Function that calls 'ChIPpeakAnno::makeVennDiagram()' to obtain the venn counts.
-It also does a list of peaks and with several variables corresponding to the presence of these peaks in each set.
-It's a helper for other functions to draw Venn diagrams or UpSet plots for peak intersections.
 }

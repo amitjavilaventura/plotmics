@@ -15,6 +15,9 @@ The goal of this package is to provide simple functions to visualize several omi
 * `upsetPeaks()`: calls `getVennCounts()` and draws an UpSet plot using the Venn counts and the `UpSetR` package.
 * `ggUpsetPeaks()`: calls `getVennCounts()` and draws a `ggplot2`-based UpSet plot using the Venn counts.
 * `ggVennPeaks()`: calls `getVennCounts()` and draws a Venn diagram using the package `ggvenn`.
+* `plotDendogram()`: helper function to draw a dendogram for the heatmaps in `expressionHeatmap()` and `expressionHeatmap2()`.
+* `expressionHeatmap()`: function that takes a data frame of expression data (including *Geneid*) and plots a heatmap of the selected genes.
+* `expressionHeatmap2()`: function that takes a list of data frames with the columns *Geneid* and *log2FoldChange* (it can be another data, such as TPM, but this is easier since it is how it output from `DESeq2`) and plots a heatmap with the selected genes.
 
 ## Install `plotmics` 
 

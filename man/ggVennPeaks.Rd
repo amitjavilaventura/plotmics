@@ -33,12 +33,13 @@ Character of the same length as 'conds'. Same values as in 'conds' but with the 
 \item{subtitle}{Character of length 1. Title of the plot. Can be NULL. Default: ""}
 }
 \description{
-Function that calls 'getVennCounts()' and draws a VennDiagram of peak intersections using the ggvenn package.
+Function that calls 'getVennCounts()' and draws a VennDiagram of
+peak intersections using the \code{ggvenn} package.
 }
 \seealso{
-ggvenn::ggvenn()
+\code{ggvenn::ggvenn}
 
-ChIPseeker::makeVennDiagram()
+\code{ChIPseeker::makeVennDiagram}
 }
 \author{
 amitjavilaventura

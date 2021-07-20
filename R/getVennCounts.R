@@ -3,6 +3,7 @@
 #' @title getVennCounts
 #' @author amitjavilaventura
 #'
+#' @description
 #' Function that calls 'ChIPpeakAnno::makeVennDiagram()' to obtain the venn counts.
 #' It also does a list of peaks and with several variables corresponding to the presence of these peaks in each set.
 #' It's a helper for other functions to draw Venn diagrams or UpSet plots for peak intersections.

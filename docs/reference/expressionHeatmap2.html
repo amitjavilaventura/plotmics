@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>expressionHeatmap — expressionHeatmap • plotmics</title>
+<title>expressionHeatmap2 — expressionHeatmap2 • plotmics</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="expressionHeatmap — expressionHeatmap" />
-<meta property="og:description" content="Function that takes a data frame with a Geneid column and several columns for expression data (e.g. TPMs, Log2FC...)
+<meta property="og:title" content="expressionHeatmap2 — expressionHeatmap2" />
+<meta property="og:description" content="Function that takes a list of dataframes with expression data and the columns 'Geneid' and 'log2FoldChange'.
 and draws a heatmap using ggplot." />
 <meta property="og:image" content="/logo.png" />
 
@@ -153,21 +153,29 @@ and draws a heatmap using ggplot." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>expressionHeatmap</h1>
-    <small class="dont-index">Source: <a href='https://github.com/amitjavilaventura/plotmics/blob/master/R/expressionHeatmap.R'><code>R/expressionHeatmap.R</code></a></small>
-    <div class="hidden name"><code>expressionHeatmap.Rd</code></div>
+    <h1>expressionHeatmap2</h1>
+    <small class="dont-index">Source: <a href='https://github.com/amitjavilaventura/plotmics/blob/master/R/expressionHeatmap2.R'><code>R/expressionHeatmap2.R</code></a></small>
+    <div class="hidden name"><code>expressionHeatmap2.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Function that takes a data frame with a Geneid column and several columns for expression data (e.g. TPMs, Log2FC...)
+    <p>Function that takes a list of dataframes with expression data and the columns 'Geneid' and 'log2FoldChange'.
 and draws a heatmap using ggplot.</p>
     </div>
 
-    <pre class="usage"><span class='va'>`expressionHeatmap(df, genes = c("TCF7", "TCF7L1", "TCF7L2", "LEF1"), clust_rows = T, clust_cols = F, show_dend_rows = F, show_dend_cols = F, dist_method = "euclidean", hclust_method = "ward.D", write_label = T, label_size = 4, label_color = "black", label_digits = 2, hm_height = length(genes)*10, hm_width = (ncol(df)-1)*10, hm_colors = c("cornflowerblue", "white", "gold3"), legend_scale = NULL, legend_breaks_num = 5, legend_midpoint = 0, legend_height = hm_height, legend_title = NULL, dend_cols_prop = .1, dend_rows_prop = .2, title = "", subtitle = "", caption = NULL, xlab = "", ylab = NULL, axis_text_size = 10, x_axis_angle = 90)`</span></pre>
+    <pre class="usage"><span class='va'>`expressionHeatmap2((expr_list,expr_names = names(expr_list),genes = c("Lef1", "Tcf7l1", "Tcf7l2", "Tcf7"),clust_rows = T, clust_cols = F, show_dend_rows = F, show_dend_cols = F, dist_method = "euclidean", hclust_method = "ward.D", write_label = T, label_size = 3, label_color = "black", label_digits = 2, hm_height = length(genes)*10, hm_width = length(expr_list)*10, hm_colors = c("cornflowerblue", "white", "gold3"), legend_scale = c(-1.5, 1.5), legend_breaks_num = 5, legend_breaks_by = .5, legend_midpoint = 0, legend_height = hm_height, legend_title = NULL, dend_cols_prop = .1, dend_rows_prop = .2, title = "", subtitle = "", caption = NULL, xlab = "", ylab = NULL, axis_text_size = 10, x_axis_angle = 90))`</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>expr_list</th>
+      <td><p>List of dataframes with, at least, the columns 'Geneid' and 'log2FoldChange'. Better if it's a named list.</p></td>
+    </tr>
+    <tr>
+      <th>expr_names</th>
+      <td><p>Character of namesof equal length to 'expr_list'. Names of the elements in 'expr_list'. Default: names(expr_list)</p></td>
+    </tr>
     <tr>
       <th>genes</th>
       <td><p>Character. Names of the genes to be plotted. They must present in the column 'Geneid' of 'df'.</p></td>
@@ -178,15 +186,15 @@ and draws a heatmap using ggplot.</p>
     </tr>
     <tr>
       <th>clust_cols</th>
-      <td><p>Logical of length 1. Whether to cluster the columns (TRUE) or not (FALSE) using <code>hclust</code>. Default: F.</p></td>
+      <td><p>Logical of length 1. Whether to cluster the columns (TRUE) or not (FALSE) using <code>hclust</code>. Default: T.</p></td>
     </tr>
     <tr>
       <th>show_dend_rows</th>
-      <td><p>Logical of length 1. Whether to draw the dendogram of the rows clustering (TRUE) or not (FALSE). It only works with 'clust_rows = T'. Default: F.</p></td>
+      <td><p>Logical of length 1. Whether to draw the dendogram of the rows clustering (TRUE) or not (FALSE). It works only with 'clust_rows = T'. Default: T.</p></td>
     </tr>
     <tr>
       <th>show_dend_cols</th>
-      <td><p>Logical of length 1. Whether to draw the dendogram of the columns clustering (TRUE) or not (FALSE). It only works with 'clust_cols = T'. Default: F.</p></td>
+      <td><p>Logical of length 1. Whether to draw the dendogram of the columns clustering (TRUE) or not (FALSE). It works only with 'clust_cols = T'. Default: T.</p></td>
     </tr>
     <tr>
       <th>dist_method</th>
@@ -226,11 +234,15 @@ and draws a heatmap using ggplot.</p>
     </tr>
     <tr>
       <th>legend_scale</th>
-      <td><p>Numerical of length 2 or NULL. If NULL, the color scale of the heatmap will take the minimum and the maximum values as limits. If numerical, the color scale will take the first as the lower limit and the second element as the higher limit. Default: NULL.</p></td>
+      <td><p>Numerical of length 2 or NULL. If NULL, the color scale of the heatmap will take the minimum and the maximum values as limits. If numerical, the color scale will take the first as the lower limit and the second element as the higher limit. Default: c(-1.5, 1.5).</p></td>
     </tr>
     <tr>
       <th>legend_breaks_num</th>
-      <td><p>Numerical of length 1. The number of breaks you want in the legend. Default: 5.</p></td>
+      <td><p>Numerical of length 1. Only if 'legend_scale = NULL'. The number of breaks you want in the legend. Default: 5.</p></td>
+    </tr>
+    <tr>
+      <th>legend_breaks_by</th>
+      <td><p>Numerical of length 1. Only 'legend_scale' is numerical (e.g. <code><a href='https://rdrr.io/r/base/c.html'>c(-1,1)</a></code>). The distance between the breaks of the legend. Default: .5.</p></td>
     </tr>
     <tr>
       <th>legend_midpoint</th>
@@ -275,10 +287,6 @@ and draws a heatmap using ggplot.</p>
     <tr>
       <th>axis_text_size</th>
       <td><p>Numerical of length 1. Size of the text in the axes. Default: 10</p></td>
-    </tr>
-    <tr>
-      <th>df</th>
-      <td><p>Dataframe with a 'Geneid' column and several columns with numerical expression data for different samples, such as TPMs or Log2FC.</p></td>
     </tr>
     <tr>
       <th>axis_x_angle</th>

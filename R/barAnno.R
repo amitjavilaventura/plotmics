@@ -4,11 +4,13 @@
 #' @title barAnno
 #' @author amitjavilaventura
 #'
+#' @description
 #' Function for ChIP-seq and ATAC-seq.
-#' It must be used after the function annotatePeak() from the R package ChIPseeker. @seealso \code{\link{annotatePeak}}
-#'
+#' It must be used after the function annotatePeak() from the R package ChIPseeker. @seealso \code{\link{`annotatePeak`}}
 #' It takes a list of annotation objects that come as output of annotatePeak() and changes the features to "Promoter", "Distal" and "Gene body" (or to "Promoter" and "Distal"). Finally it plots a bargraph with the distribution of all the proportions
 #' As a ggplot2-based function, it allows to add more layers to format the plot.
+#'
+#' @seealso `ChIPseeker::annotatePeak`
 #'
 #' @param anno_list Named list of annotation objects that come from annotatePeak().
 #' @param anno_names Charachter vector of the same length as 'anno_list'. Names that will be given to each of the objects in anno_list. Not that will be the names plotted in the bargraph

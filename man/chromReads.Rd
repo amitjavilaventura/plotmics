@@ -45,11 +45,9 @@ chromReads(
 \item{percent.size}{Character of lenght 1. Size of the percentage drawn in the plot.}
 }
 \description{
-chromReads
+Function counts the reads mapped to each chromosome and plots a bar graph.
+It uses the function idxstatsBam() from the Rsamtools R package. Run help("idxstatsBam") for more information.
 }
 \author{
 amitjavilaventura
-
-Function counts the reads mapped to each chromosome and plots a bar graph.
-It uses the function idxstatsBam() from the Rsamtools R package. Run help("idxstatsBam") for more information.
 }
