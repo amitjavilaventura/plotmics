@@ -46,7 +46,7 @@ ggVennPeaks <- function(peak_list, peak_names = names(peak_list), percent = T,
   else if(length(peak_list) != length(peak_names)){ stop("'peak_names' must be a character vector with the same length as 'peak_list'.") }
 
   # Get Venn Counts and the peaks in each set
-  x <- getVennCounts(peak_list)
+  x <- getVennCounts(peaks = peak_list, conds = peak_names)
 
   # Transform the matrix of thee peaks in each set in ordeer to plot the Venn
   y <- x$matrix %>%

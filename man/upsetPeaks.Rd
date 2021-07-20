@@ -32,7 +32,7 @@ upsetPeaks(
 \item{title}{(Not available yet) Character of length 1 or NULL. Title of the plot shown at the top. Passed through grid.arrange(). If NULL, title is not shown. Default: NULL}
 }
 \description{
-upsetPeaks
+This function calls 'getVennCounts()' and draws and UpSet plot using the UpSetR package.
 }
 \seealso{
 plyranges
@@ -41,6 +41,4 @@ UpSetR
 }
 \author{
 amitjavilaventura
-
-This function calls 'getVennCounts()' and draws and UpSet plot using the UpSetR package.
 }

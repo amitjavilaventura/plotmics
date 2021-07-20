@@ -7,8 +7,7 @@
 #' It also does a list of peaks and with several variables corresponding to the presence of these peaks in each set.
 #' It's a helper for other functions to draw Venn diagrams or UpSet plots for peak intersections.
 #'
-#' @seealso ChIPpeakAnno
-#' @seealso plyranges
+#' @seealso `ChIPpeakAnno::makeVennDiagram`
 #'
 #' @param peaks List of dataframes with the genomic coordinates of the regions to overlap. Dataframes must contain the columns seqnames, start, end.
 #' @param conds Character with the same length as the 'peaks' list. The names that are given to the diferente objects in the 'peaks' list. Default: 'names(peaks)'

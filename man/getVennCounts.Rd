@@ -19,9 +19,7 @@ getVennCounts(peaks, conds = names(peaks), conds_order = conds, plot = F)
 getVennCounts
 }
 \seealso{
-ChIPpeakAnno
-
-plyranges
+\code{ChIPpeakAnno::makeVennDiagram}
 }
 \author{
 amitjavilaventura

@@ -3,6 +3,7 @@
 #' @title upsetPeaks
 #' @author amitjavilaventura
 #'
+#' @description
 #' This function calls 'getVennCounts()' and draws and UpSet plot using the UpSetR package.
 #'
 #' @seealso plyranges
