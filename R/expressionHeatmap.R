@@ -116,7 +116,7 @@ expressionHeatmap <- function(expr_df,
     lower    <- legend_scale[1]
     higher   <- legend_scale[2]
     midpoint <- legend_midpoint
-    breaks   <- round(seq(from = lower, to = higher, by = legend_breaks_num))
+    breaks   <- round(seq(from = lower, to = higher, by = legend_breaks_by))
   }
 
   # Initialize the heatmap with ggplot
@@ -140,7 +140,7 @@ expressionHeatmap <- function(expr_df,
           plot.subtitle = element_text(face = "italic"),
           axis.title = element_text(face = "bold"),
           axis.text  = element_text(size = axis_text_size),
-          axis.text.x = element_text(angle = x_axis_angle, hjust = .5, vjust = .5),
+          axis.text.x = element_text(angle = 90, hjust = .5, vjust = .5),
           panel.border = element_rect(size = 1.1)) +
     xlab(xlab) + ylab(ylab)
 

@@ -24,8 +24,8 @@ The goal of this package is to provide simple functions to visualize several omi
 To install `plotmics` you have to run the following command in R:
 
 ```
-# install the devtools package from CRAN
-install.packages("devtools")
+# if not installed, install the devtools package from CRAN 
+if(!require(devtools)) { install.packages("devtools") }
 
 # install plotmics from this Github repository 
 devtools::install_github("amitjavilaventura/plotmics")
