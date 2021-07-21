@@ -84,7 +84,7 @@ expressionHeatmap2 <- function(expr_list,
                                xlab = "",
                                ylab = NULL,
                                axis_title_size = 11, axis_text_size = 10,
-                               scale = NULL){
+                               scale = NULL, show_gene_names = T){
 
   # Load required packages
   require(plyr)
@@ -161,13 +161,17 @@ expressionHeatmap2 <- function(expr_list,
     theme(plot.title = element_text(face = "bold", size = title_size, hjust = title_hjust),
           plot.subtitle = element_text(face = "italic", size = subtitle_size, hjust = title_hjust),
           axis.title = element_text(face = "bold", size = axis_title_size),
+          axis.ticks.y = element_blank(),
           axis.text  = element_text(size = axis_text_size),
           axis.text.x = element_text(angle = 90, hjust = .5, vjust = .5),
           panel.border = element_rect(size = 1.1)) +
     xlab(xlab) + ylab(ylab)
 
-  ##Write lfc values
+  ## Write lfc values
   if(write_label){ hm <- hm + geom_text(aes(label = round(Expr, label_digits)), size = label_size, color = label_color) }
+
+  ## Remove gene names
+  if(!show_gene_names){ hm <- hm + theme(axis.text.y = element_blank()) }
 
   # Hierarchical clustering -----
   if(clust_rows){

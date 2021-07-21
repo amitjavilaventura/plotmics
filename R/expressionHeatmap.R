@@ -86,7 +86,8 @@ expressionHeatmap <- function(expr_df,
                               axis_text_size = 10,
                               axis_title_size = 11,
                               title_hjust = 0,
-                              scale = NULL){
+                              scale = NULL,
+                              show_gene_names = T){
 
   # Load requireed packages
   require(dplyr)
@@ -98,7 +99,7 @@ expressionHeatmap <- function(expr_df,
 
   # Check that inputs are OK -----
   if(!is.data.frame(expr_df)){ stop("'df' must be a data frame with 'Geneid' in the first column and the other columns with the expression values to plot.") }
-  else if(!("Geneid" %in% colnames(expr_df))){ stop("'df' must have a character first column named 'Geneid'") }
+  if(!("Geneid" %in% colnames(expr_df))){ stop("'df' must have a character first column named 'Geneid'") }
   if(show_dend_rows & !clust_rows){ stop("To plot the rows dendogram (`show_dend_rows = T`), `clust_rows` must be TRUE") }
   if(show_dend_cols & !clust_cols){ stop("To plot the columns dendogram (`show_dend_cols = T`), `clust_cols` must be TRUE") }
 
@@ -153,6 +154,7 @@ expressionHeatmap <- function(expr_df,
           plot.subtitle = element_text(face = "italic", size = subtitle_size, hjust = title_hjust),
           plot.caption = element_text(size = caption_size),
           axis.title = element_text(face = "bold", size = axis_title_size),
+          axis.ticks.y = element_blank(),
           axis.text  = element_text(size = axis_text_size),
           axis.text.x = element_text(angle = 90, hjust = .5, vjust = .5),
           panel.border = element_rect(size = 1.1)) +
@@ -161,6 +163,8 @@ expressionHeatmap <- function(expr_df,
   # Write thee label of the expression values
   if(write_label){ hm <- hm + geom_text(aes(label = round(Expr, label_digits)), size = label_size, color = label_color) }
 
+  # Remove row names
+  if(!show_gene_names){ hm <- hm + theme(axis.text.y = element_blank()) }
 
   # Hierarchical clustering -----
   if(clust_rows){
