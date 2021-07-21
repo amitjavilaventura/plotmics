@@ -133,6 +133,9 @@ and draws a heatmap using ggplot." />
     <li>
       <a href="../articles/09-expressionHeatmap.html">expressionHeatmap()</a>
     </li>
+    <li>
+      <a href="../articles/10-expressionHeatmap2.html">expressionHeatmap2()</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -280,8 +283,28 @@ and draws a heatmap using ggplot.</p>
       <td><p>Character of length 1 or NULL. Title of the Y axis. If row dendogram is plotted, the Y axis is placed to the right. Default: NULL.</p></td>
     </tr>
     <tr>
+      <th>title_size</th>
+      <td><p>Numerical of length 1. Size of the plot title. Default: 13.</p></td>
+    </tr>
+    <tr>
+      <th>subtitle_size</th>
+      <td><p>Numerical of length 1. Size of the plot subtitle. Default: 12.</p></td>
+    </tr>
+    <tr>
+      <th>caption_size</th>
+      <td><p>Numerical of length 1. Size of the plot caption. Default: 7.</p></td>
+    </tr>
+    <tr>
       <th>axis_text_size</th>
-      <td><p>Numerical of length 1. Size of the text in the axes. Default: 10</p></td>
+      <td><p>Numerical of length 1. Size of the text in the axes. Default: 10.</p></td>
+    </tr>
+    <tr>
+      <th>axis_title_size</th>
+      <td><p>Numerical of length 1. Size of the axes titles. Default: 11.</p></td>
+    </tr>
+    <tr>
+      <th>title_hjust</th>
+      <td><p>Numerical of length 1. Horizontal justification for the title and the subtitle. Default: 0.</p></td>
     </tr>
     <tr>
       <th>scale</th>
@@ -290,10 +313,6 @@ and draws a heatmap using ggplot.</p>
     <tr>
       <th>df</th>
       <td><p>Dataframe with a 'Geneid' column and several columns with numerical expression data for different samples, such as TPMs or Log2FC.</p></td>
-    </tr>
-    <tr>
-      <th>axis_x_angle</th>
-      <td><p>Numerical of length 1. Angle of the text in the X axis. Default: 90</p></td>
     </tr>
     </table>
 

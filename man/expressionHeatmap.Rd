@@ -61,13 +61,21 @@
 
 \item{ylab}{Character of length 1 or NULL. Title of the Y axis. If row dendogram is plotted, the Y axis is placed to the right. Default: NULL.}
 
-\item{axis_text_size}{Numerical of length 1. Size of the text in the axes. Default: 10}
+\item{title_size}{Numerical of length 1. Size of the plot title. Default: 13.}
+
+\item{subtitle_size}{Numerical of length 1. Size of the plot subtitle. Default: 12.}
+
+\item{caption_size}{Numerical of length 1. Size of the plot caption. Default: 7.}
+
+\item{axis_text_size}{Numerical of length 1. Size of the text in the axes. Default: 10.}
+
+\item{axis_title_size}{Numerical of length 1. Size of the axes titles. Default: 11.}
+
+\item{title_hjust}{Numerical of length 1. Horizontal justification for the title and the subtitle. Default: 0.}
 
 \item{scale}{Character of length 1 or NULL. One of c("rows", "cols"). If "rows", it scales data by row; if "cols", it scales data by columns; if NULL (the default), it does not scale the data. Default: NULL.}
 
 \item{df}{Dataframe with a 'Geneid' column and several columns with numerical expression data for different samples, such as TPMs or Log2FC.}
-
-\item{axis_x_angle}{Numerical of length 1. Angle of the text in the X axis. Default: 90}
 }
 \description{
 Function that takes a data frame with a Geneid column and several columns for expression data (e.g. TPMs, Log2FC...)

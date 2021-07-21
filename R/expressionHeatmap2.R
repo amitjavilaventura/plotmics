@@ -43,8 +43,13 @@
 #' @param caption Character of length 1 or NULL. Caption of the plot; placed at the bottom. Default: NULL.
 #' @param xlab Character of length 1 or NULL. Title of the X axis. Default: "
 #' @param ylab Character of length 1 or NULL. Title of the Y axis. If row dendogram is plotted, the Y axis is placed to the right. Default: NULL.
+#' @param legend_title_size Numerical of length 1. Size of the legend title. Default: 8
+#' @param title_size Numerical of length 1. Size of the plot title. Default: 13.
+#' @param subtitle_size Numerical of length 1. Size of the plot subtitle. Default: 13.
+#' @param caption_size Numerical of length 1. Size of the plot caption. Default: 7.
+#' @param axis_title_size Numerical of length 1. Size of the axis titles. Default: 10
 #' @param axis_text_size Numerical of length 1. Size of the text in the axes. Default: 10
-#' @param axis_x_angle Numerical of length 1. Angle of the text in the X axis. Default: 90
+#' @param title_hjust Numerical of length 1. Justification of the plot title and subtitle. Default: 0.
 #' @param scale Character of length 1 or NULL. One of c("rows", "cols"). If "rows", it scales data by row; if "cols", it scales data by columns; if NULL (the default), it does not scale the data. Default: NULL.
 #'
 #' @export
@@ -70,16 +75,15 @@ expressionHeatmap2 <- function(expr_list,
                                legend_breaks_by = .5,
                                legend_midpoint = 0,
                                legend_height = hm_height,
-                               legend_title = NULL,
+                               legend_title = NULL, legend_title_size = 8,
                                dend_cols_prop = .1,
                                dend_rows_prop = .2,
-                               title = "",
-                               subtitle = "",
-                               caption = NULL,
+                               title = "", title_size = 13, title_hjust = 0,
+                               subtitle = "", subtitle_size = 12,
+                               caption = NULL, caption_size = 7,
                                xlab = "",
                                ylab = NULL,
-                               axis_text_size = 10,
-                               x_axis_angle = 90,
+                               axis_title_size = 11, axis_text_size = 10,
                                scale = NULL){
 
   # Load required packages
@@ -125,7 +129,7 @@ expressionHeatmap2 <- function(expr_list,
   if(is.null(legend_scale)){
     lower    <- min(expr.m$Expr)
     higher   <- max(expr.m$Expr)
-    midpoint <- (higher-abs(lower))/2
+    midpoint <- (higher+(lower))/2
     breaks   <- round(seq(from = lower, to = higher, by = (higher-lower)/legend_breaks_num))
   } else {
     lower    <- legend_scale[1]
@@ -140,22 +144,25 @@ expressionHeatmap2 <- function(expr_list,
     force_panelsizes(rows = unit(hm_height, "mm"),
                      cols = unit(hm_width, "mm"))  +
     coord_fixed() +
-    scale_fill_gradient2(limits = c(legend_scale[1], legend_scale[2]), midpoint = legend_midpoint,
+    scale_fill_gradient2(limits = c(legend_scale[1], legend_scale[2]), midpoint = midpoint,
                          breaks = breaks,
+                         oob = scales::squish,
                          low = hm_colors[1], mid = hm_colors[2], high = hm_colors[3],
                          guide = guide_colorbar(title = legend_title,
                                                 title.position = "right",
-                                                title.theme = element_text(angle = 270, hjust = .5, vjust = .5),
+                                                title.theme = element_text(angle = 270,
+                                                                           hjust = .5, vjust = .5,
+                                                                           size = legend_title_size),
                                                 frame.colour = "black", frame.linewidth = 1.5,
                                                 ticks.colour = NA,
                                                 barheight = unit(legend_height, "mm"))) +
 
     theme_pubr(border = T, legend = "right", margin = T) + # format the plot
-    theme(plot.title = element_text(face = "bold"),
-          plot.subtitle = element_text(face = "italic"),
-          axis.title = element_text(face = "bold"),
+    theme(plot.title = element_text(face = "bold", size = title_size, hjust = title_hjust),
+          plot.subtitle = element_text(face = "italic", size = subtitle_size, hjust = title_hjust),
+          axis.title = element_text(face = "bold", size = axis_title_size),
           axis.text  = element_text(size = axis_text_size),
-          axis.text.x = element_text(angle = x_axis_angle, hjust = .5, vjust = .5),
+          axis.text.x = element_text(angle = 90, hjust = .5, vjust = .5),
           panel.border = element_rect(size = 1.1)) +
     xlab(xlab) + ylab(ylab)
 

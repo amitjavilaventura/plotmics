@@ -133,6 +133,9 @@ and draws a heatmap using ggplot." />
     <li>
       <a href="../articles/09-expressionHeatmap.html">expressionHeatmap()</a>
     </li>
+    <li>
+      <a href="../articles/10-expressionHeatmap2.html">expressionHeatmap2()</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -260,6 +263,10 @@ and draws a heatmap using ggplot.</p>
       <td><p>Character of length 1 or NULL. Title of the legend, placed in the right part of it. Default: NULL.</p></td>
     </tr>
     <tr>
+      <th>legend_title_size</th>
+      <td><p>Numerical of length 1. Size of the legend title. Default: 8</p></td>
+    </tr>
+    <tr>
       <th>dend_cols_prop</th>
       <td><p>Numerical of length 1. Proportion (from 0 to 1) of the columns dendogram compared to the heatmap height. Default: 0.1.</p></td>
     </tr>
@@ -272,12 +279,28 @@ and draws a heatmap using ggplot.</p>
       <td><p>Character of length 1 or NULL. Title of the plot. Default: "".</p></td>
     </tr>
     <tr>
+      <th>title_size</th>
+      <td><p>Numerical of length 1. Size of the plot title. Default: 13.</p></td>
+    </tr>
+    <tr>
+      <th>title_hjust</th>
+      <td><p>Numerical of length 1. Justification of the plot title and subtitle. Default: 0.</p></td>
+    </tr>
+    <tr>
       <th>subtitle</th>
       <td><p>Character of length 1 or NULL. Subtitle of the plot. Default: "".</p></td>
     </tr>
     <tr>
+      <th>subtitle_size</th>
+      <td><p>Numerical of length 1. Size of the plot subtitle. Default: 13.</p></td>
+    </tr>
+    <tr>
       <th>caption</th>
       <td><p>Character of length 1 or NULL. Caption of the plot; placed at the bottom. Default: NULL.</p></td>
+    </tr>
+    <tr>
+      <th>caption_size</th>
+      <td><p>Numerical of length 1. Size of the plot caption. Default: 7.</p></td>
     </tr>
     <tr>
       <th>xlab</th>
@@ -288,16 +311,16 @@ and draws a heatmap using ggplot.</p>
       <td><p>Character of length 1 or NULL. Title of the Y axis. If row dendogram is plotted, the Y axis is placed to the right. Default: NULL.</p></td>
     </tr>
     <tr>
+      <th>axis_title_size</th>
+      <td><p>Numerical of length 1. Size of the axis titles. Default: 10</p></td>
+    </tr>
+    <tr>
       <th>axis_text_size</th>
       <td><p>Numerical of length 1. Size of the text in the axes. Default: 10</p></td>
     </tr>
     <tr>
       <th>scale</th>
       <td><p>Character of length 1 or NULL. One of c("rows", "cols"). If "rows", it scales data by row; if "cols", it scales data by columns; if NULL (the default), it does not scale the data. Default: NULL.</p></td>
-    </tr>
-    <tr>
-      <th>axis_x_angle</th>
-      <td><p>Numerical of length 1. Angle of the text in the X axis. Default: 90</p></td>
     </tr>
     </table>
 

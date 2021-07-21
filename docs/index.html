@@ -90,6 +90,9 @@
     <li>
       <a href="articles/09-expressionHeatmap.html">expressionHeatmap()</a>
     </li>
+    <li>
+      <a href="articles/10-expressionHeatmap2.html">expressionHeatmap2()</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -153,11 +156,11 @@
 <a href="#install-plotmics" class="anchor"></a>Install <code>plotmics</code>
 </h2>
 <p>To install <code>plotmics</code> you have to run the following command in R:</p>
-<pre><code><a href="https://rdrr.io/r/utils/install.packages.html"># install the devtools package from CRAN
-install.packages("devtools")
+<pre><code># if not installed, install the devtools package from CRAN 
+if(!require(devtools)) { install.packages("devtools") }
 
 # install plotmics from this Github repository 
-devtools::install_github("amitjavilaventura/plotmics")</a></code></pre>
+devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 </div>
 <div id="contributors" class="section level2">
 <h2 class="hasAnchor">
@@ -181,6 +184,7 @@ devtools::install_github("amitjavilaventura/plotmics")</a></code></pre>
 <ul>
 <li>Rescale <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code> output to remove blank space around the Venn diagram.</li>
 <li>Add possibility to scale (<code><a href="https://rdrr.io/r/base/scale.html">scale()</a></code>) data by rows or columns in <code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>.</li>
+<li>Add minor formatting options in <code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>.</li>
 </ul>
 </li>
 </ul>

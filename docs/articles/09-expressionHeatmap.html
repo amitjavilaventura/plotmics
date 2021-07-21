@@ -90,6 +90,9 @@
     <li>
       <a href="../articles/09-expressionHeatmap.html">expressionHeatmap()</a>
     </li>
+    <li>
+      <a href="../articles/10-expressionHeatmap2.html">expressionHeatmap2()</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -141,7 +144,7 @@
 <div id="required-input" class="section level2">
 <h2 class="hasAnchor">
 <a href="#required-input" class="anchor"></a>Required input</h2>
-<p>As input, <code><a href="../reference/expressionHeatmap.html">expressionHeatmap()</a></code> takes a takes a data frame with expression data for many genes and samples. The first column -named <em>Geneid</em>- must have the gene names and the other columns must have numerical values with the expression data (e.g. TPM values) for each gene and sample.</p>
+<p>As input, <code><a href="../reference/expressionHeatmap.html">expressionHeatmap()</a></code> takes a data frame with expression data for many genes and samples. The first column -named <em>Geneid</em>- must have the gene names and the other columns must have numerical values with the expression data (e.g. TPM values) for each gene and sample.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read the peak annotation into a list</span>
 <span class="va">tpm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span><span class="st">"../testdata/tpm.tsv"</span><span class="op">)</span>
@@ -166,11 +169,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using Geneid as id variables</code></pre>
-<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-3-1.png" width="288" style="display: block; margin: auto;"></p>
-</div>
-<div id="select-the-genes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#select-the-genes" class="anchor"></a>Select the genes</h2>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-3-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="clustering" class="section level2">
 <h2 class="hasAnchor">
@@ -180,7 +179,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>,
                   clust_rows <span class="op">=</span> <span class="cn">T</span>, clust_cols <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using Geneid as id variables</code></pre>
-<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-4-1.png" width="288" style="display: block; margin: auto;"></p>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-4-1.png" width="384" style="display: block; margin: auto;"></p>
 <div id="other-methods" class="section level3">
 <h3 class="hasAnchor">
 <a href="#other-methods" class="anchor"></a>Other methods</h3>
@@ -191,7 +190,7 @@
                   clust_rows <span class="op">=</span> <span class="cn">T</span>, clust_cols <span class="op">=</span> <span class="cn">T</span>, 
                   dist_method <span class="op">=</span> <span class="st">"manhattan"</span>, hclust_method <span class="op">=</span> <span class="st">"median"</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using Geneid as id variables</code></pre>
-<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-5-1.png" width="288" style="display: block; margin: auto;"></p>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-5-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="show-dendograms" class="section level3">
 <h3 class="hasAnchor">
@@ -204,7 +203,7 @@
                   show_dend_rows <span class="op">=</span> <span class="cn">T</span>, show_dend_cols <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using Geneid as id variables</code></pre>
 <pre><code>## Loading required package: ggdendro</code></pre>
-<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-6-1.png" width="288" style="display: block; margin: auto;"></p>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-6-1.png" width="384" style="display: block; margin: auto;"></p>
 <p>The size of the dendograms can be changed by setting their proportion to the height of the heatmap -for the column dendogram- or to its width -for the row dendogram-. To do so, the arguments <code>dend_rows_prop</code> and <code>dend_cols_prop</code> must be set to a value between 0 and 1.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>,
@@ -212,7 +211,7 @@
                   show_dend_rows <span class="op">=</span> <span class="cn">T</span>, show_dend_cols <span class="op">=</span> <span class="cn">T</span>, 
                   dend_rows_prop <span class="op">=</span> <span class="fl">0.5</span>, dend_cols_prop <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using Geneid as id variables</code></pre>
-<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-7-1.png" width="288" style="display: block; margin: auto;"></p>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-7-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div id="scaling" class="section level2">
@@ -222,11 +221,11 @@
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>, scale <span class="op">=</span> <span class="st">"rows"</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using Geneid as id variables</code></pre>
-<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-8-1.png" width="288" style="display: block; margin: auto;"></p>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-8-1.png" width="384" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>, scale <span class="op">=</span> <span class="st">"cols"</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using Geneid as id variables</code></pre>
-<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-9-1.png" width="288" style="display: block; margin: auto;"></p>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-9-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="legend-scale" class="section level2">
 <h2 class="hasAnchor">
@@ -237,26 +236,26 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>, 
                   legend_scale <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using Geneid as id variables</code></pre>
-<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-10-1.png" width="288" style="display: block; margin: auto;"></p>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-10-1.png" width="384" style="display: block; margin: auto;"></p>
 <p>Even if <code>legend_scale = NULL</code>, using the argument <code>legend_breaks_num</code> we can put as many breaks as we want.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>, 
                   legend_scale <span class="op">=</span> <span class="cn">NULL</span>, legend_breaks_num <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using Geneid as id variables</code></pre>
-<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-11-1.png" width="288" style="display: block; margin: auto;"></p>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-11-1.png" width="384" style="display: block; margin: auto;"></p>
 <p>To set a custom scale, the <code>legend_scale</code> argument must be set to a numerical vector of length 2 (e.g. <code><a href="https://rdrr.io/r/base/c.html">c(0,200)</a></code>). In such case, the argument <code>legend_breaks_by</code> will be used instead of <code>legend_breaks_num</code> to define the distance between the breaks in the legend and the <code>legend_midpoint</code> argument will be set to the midpoint of the legend (passed through <code>scale_fill_gradient(midpoint = legend_midpoint)</code>).</p>
 <p>By default, these values are set to <code>legend_breaks_by = .5</code> and <code>legend_midpoint = 0</code>, but it is recommended to change them.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>, 
                   legend_scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">200</span><span class="op">)</span>, legend_breaks_by <span class="op">=</span> <span class="fl">50</span>, legend_midpoint <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using Geneid as id variables</code></pre>
-<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-12-1.png" width="288" style="display: block; margin: auto;"></p>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-12-1.png" width="384" style="display: block; margin: auto;"></p>
 <p>The <code>legend_midpoint</code> argument will affect the color scale of our heatmap, since the middle color will be set to the value we pass through this argument.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>, 
                   legend_scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">200</span><span class="op">)</span>, legend_breaks_by <span class="op">=</span> <span class="fl">50</span>, legend_midpoint <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using Geneid as id variables</code></pre>
-<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-13-1.png" width="288" style="display: block; margin: auto;"></p>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-13-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="customize-plot" class="section level2">
 <h2 class="hasAnchor">
@@ -268,18 +267,18 @@
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>, write_label <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using Geneid as id variables</code></pre>
-<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-14-1.png" width="288" style="display: block; margin: auto;"></p>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-14-1.png" width="384" style="display: block; margin: auto;"></p>
 <p>If what is needed is to change the size, or color of the written values, the arguments <code>label_size</code> and <code>label_color</code> should be changed to the desired value.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>, 
                   label_size <span class="op">=</span> <span class="fl">2</span>, label_color <span class="op">=</span> <span class="st">"darkred"</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using Geneid as id variables</code></pre>
-<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-15-1.png" width="288" style="display: block; margin: auto;"></p>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-15-1.png" width="384" style="display: block; margin: auto;"></p>
 <p>Furthermore, the number of decimals to round the expression values to can be changed using <code>label_digits</code>.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>, label_digits <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using Geneid as id variables</code></pre>
-<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-16-1.png" width="288" style="display: block; margin: auto;"></p>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-16-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="heatmap-size" class="section level3">
 <h3 class="hasAnchor">
@@ -289,7 +288,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>,
                   hm_height <span class="op">=</span> <span class="fl">70</span>, hm_width <span class="op">=</span> <span class="fl">70</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using Geneid as id variables</code></pre>
-<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-17-1.png" width="288" style="display: block; margin: auto;"></p>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-17-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="colors" class="section level3">
 <h3 class="hasAnchor">
@@ -299,14 +298,14 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>,
                   hm_colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"gray"</span>, <span class="st">"red"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using Geneid as id variables</code></pre>
-<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-18-1.png" width="288" style="display: block; margin: auto;"></p>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-18-1.png" width="384" style="display: block; margin: auto;"></p>
 <p>Note that if <code>legend_midpoint</code> value is the midpoint where the second color will be placed.</p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>,
                   legend_scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">200</span><span class="op">)</span>, legend_midpoint <span class="op">=</span> <span class="fl">40</span>, legend_breaks_by <span class="op">=</span> <span class="fl">40</span>, 
                   hm_colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"gray"</span>, <span class="st">"red"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using Geneid as id variables</code></pre>
-<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-19-1.png" width="288" style="display: block; margin: auto;"></p>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-19-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="title-subtitle-and-caption" class="section level3">
 <h3 class="hasAnchor">
@@ -316,7 +315,20 @@
                   title <span class="op">=</span> <span class="st">"This is a title"</span>, subtitle <span class="op">=</span> <span class="st">"This is a subtitle"</span>, 
                   caption <span class="op">=</span> <span class="st">"This is a caption"</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using Geneid as id variables</code></pre>
-<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-20-1.png" width="288" style="display: block; margin: auto;"></p>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-20-1.png" width="384" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>,
+                  title <span class="op">=</span> <span class="st">"This is a title"</span>, subtitle <span class="op">=</span> <span class="st">"This is a subtitle"</span>, 
+                  caption <span class="op">=</span> <span class="st">"This is a caption"</span>, title_hjust <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span></code></pre></div>
+<pre><code>## Using Geneid as id variables</code></pre>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-21-1.png" width="384" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>,
+                  title <span class="op">=</span> <span class="st">"This is a title"</span>, title_size <span class="op">=</span> <span class="fl">20</span>,
+                  subtitle <span class="op">=</span> <span class="st">"This is a subtitle"</span>, subtitle_size <span class="op">=</span> <span class="fl">18</span>,
+                  caption <span class="op">=</span> <span class="st">"This is a caption"</span>, caption_size <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></code></pre></div>
+<pre><code>## Using Geneid as id variables</code></pre>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-22-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="axis" class="section level3">
 <h3 class="hasAnchor">
@@ -324,20 +336,25 @@
 <div id="axis-titles" class="section level4">
 <h4 class="hasAnchor">
 <a href="#axis-titles" class="anchor"></a>Axis titles</h4>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>,
                   xlab <span class="op">=</span> <span class="st">"X axis title"</span>, ylab <span class="op">=</span> <span class="st">"Y axis title"</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using Geneid as id variables</code></pre>
-<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-21-1.png" width="288" style="display: block; margin: auto;"></p>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-23-1.png" width="384" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>,
+                  xlab <span class="op">=</span> <span class="st">"X axis title"</span>, ylab <span class="op">=</span> <span class="st">"Y axis title"</span>, axis_title_size <span class="op">=</span> <span class="fl">17</span><span class="op">)</span></code></pre></div>
+<pre><code>## Using Geneid as id variables</code></pre>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-24-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="axis-text-size" class="section level4">
 <h4 class="hasAnchor">
 <a href="#axis-text-size" class="anchor"></a>Axis text size</h4>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>,
                   axis_text_size <span class="op">=</span> <span class="fl">17</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using Geneid as id variables</code></pre>
-<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-22-1.png" width="288" style="display: block; margin: auto;"></p>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-25-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div id="legend" class="section level3">
@@ -347,20 +364,25 @@
 <h4 class="hasAnchor">
 <a href="#legend-height" class="anchor"></a>Legend height</h4>
 <p>By default, the legend height is set to the same height as the heatmap, but it can be changed using the argument <code>legend_height</code>.</p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>,
                   legend_height <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using Geneid as id variables</code></pre>
-<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-23-1.png" width="288" style="display: block; margin: auto;"></p>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-26-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="legend-title" class="section level4">
 <h4 class="hasAnchor">
 <a href="#legend-title" class="anchor"></a>Legend title</h4>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>,
                   legend_title <span class="op">=</span> <span class="st">"Legend Title"</span><span class="op">)</span></code></pre></div>
 <pre><code>## Using Geneid as id variables</code></pre>
-<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-24-1.png" width="288" style="display: block; margin: auto;"></p>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-27-1.png" width="384" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>,
+                  legend_title <span class="op">=</span> <span class="st">"Legend Title"</span>, legend_title_size <span class="op">=</span> <span class="fl">18</span><span class="op">)</span></code></pre></div>
+<pre><code>## Using Geneid as id variables</code></pre>
+<p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-28-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div id="further-costumization" class="section level3">

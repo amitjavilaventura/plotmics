@@ -51,25 +51,35 @@
 
 \item{legend_title}{Character of length 1 or NULL. Title of the legend, placed in the right part of it. Default: NULL.}
 
+\item{legend_title_size}{Numerical of length 1. Size of the legend title. Default: 8}
+
 \item{dend_cols_prop}{Numerical of length 1. Proportion (from 0 to 1) of the columns dendogram compared to the heatmap height. Default: 0.1.}
 
 \item{dend_rows_prop}{Numerical of length 1. Proportion (from 0 to 1) of the rows dendogram compared to the heatmap width Default: 0.2.}
 
 \item{title}{Character of length 1 or NULL. Title of the plot. Default: "".}
 
+\item{title_size}{Numerical of length 1. Size of the plot title. Default: 13.}
+
+\item{title_hjust}{Numerical of length 1. Justification of the plot title and subtitle. Default: 0.}
+
 \item{subtitle}{Character of length 1 or NULL. Subtitle of the plot. Default: "".}
 
+\item{subtitle_size}{Numerical of length 1. Size of the plot subtitle. Default: 13.}
+
 \item{caption}{Character of length 1 or NULL. Caption of the plot; placed at the bottom. Default: NULL.}
+
+\item{caption_size}{Numerical of length 1. Size of the plot caption. Default: 7.}
 
 \item{xlab}{Character of length 1 or NULL. Title of the X axis. Default: "}
 
 \item{ylab}{Character of length 1 or NULL. Title of the Y axis. If row dendogram is plotted, the Y axis is placed to the right. Default: NULL.}
 
+\item{axis_title_size}{Numerical of length 1. Size of the axis titles. Default: 10}
+
 \item{axis_text_size}{Numerical of length 1. Size of the text in the axes. Default: 10}
 
 \item{scale}{Character of length 1 or NULL. One of c("rows", "cols"). If "rows", it scales data by row; if "cols", it scales data by columns; if NULL (the default), it does not scale the data. Default: NULL.}
-
-\item{axis_x_angle}{Numerical of length 1. Angle of the text in the X axis. Default: 90}
 }
 \description{
 Function that takes a list of dataframes with expression data and the columns 'Geneid' and 'log2FoldChange'.

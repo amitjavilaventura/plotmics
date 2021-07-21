@@ -47,3 +47,4 @@ If you use this package, please cite [this repository](https://github.com/amitja
 * `v1.1.0`: 
   + Rescale `ggVennPeaks()` output to remove blank space around the Venn diagram.
   + Add possibility to scale (`scale()`) data by rows or columns in `expressionHeatmap()` and `expressionHeatmap2()`.
+  + Add minor formatting options in `expressionHeatmap()` and `expressionHeatmap2()`.
