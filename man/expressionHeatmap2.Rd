@@ -4,7 +4,7 @@
 \alias{expressionHeatmap2}
 \title{expressionHeatmap2}
 \usage{
-`expressionHeatmap2((expr_list,expr_names = names(expr_list),genes = c("Lef1", "Tcf7l1", "Tcf7l2", "Tcf7"),clust_rows = T, clust_cols = F, show_dend_rows = F, show_dend_cols = F, dist_method = "euclidean", hclust_method = "ward.D", write_label = T, label_size = 3, label_color = "black", label_digits = 2, hm_height = length(genes)*10, hm_width = length(expr_list)*10, hm_colors = c("cornflowerblue", "white", "gold3"), legend_scale = c(-1.5, 1.5), legend_breaks_num = 5, legend_breaks_by = .5, legend_midpoint = 0, legend_height = hm_height, legend_title = NULL, dend_cols_prop = .1, dend_rows_prop = .2, title = "", subtitle = "", caption = NULL, xlab = "", ylab = NULL, axis_text_size = 10, x_axis_angle = 90))`
+`expressionHeatmap2((expr_list, expr_names = names(expr_list), genes, clust_rows = T, clust_cols = F, show_dend_rows = F, show_dend_cols = F, dist_method = "euclidean", hclust_method = "ward.D", write_label = T, label_size = 3, label_color = "black", label_digits = 2, hm_height = length(genes)*10, hm_width = length(expr_list)*10, hm_colors = c("cornflowerblue", "white", "gold3"), legend_scale = c(-1.5, 1.5), legend_breaks_num = 5, legend_breaks_by = .5, legend_midpoint = 0, legend_height = hm_height, legend_title = NULL, dend_cols_prop = .1, dend_rows_prop = .2, title = "", subtitle = "", caption = NULL, xlab = "", ylab = NULL, axis_text_size = 10, x_axis_angle = 90))`
 }
 \arguments{
 \item{expr_list}{List of dataframes with, at least, the columns 'Geneid' and 'log2FoldChange'. Better if it's a named list.}
