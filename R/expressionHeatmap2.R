@@ -30,6 +30,7 @@
 #' @param hm_height Numerical of length 1. Height of the heatmap in mm. Default: length(genes)*10.
 #' @param hm_width Numerical of length 1. Width of the heatmap in mm. Default: (ncol(df)-1)*10.
 #' @param hm_colors Character of length 3. Colors in the lower limit, midpoint (defined by 'legend_midpoint') and higher limit, respectively. Default: c("cornflowerblue", "white", "gold3").
+#' @param border_color Character of length 1 or NA. Color of the border of each cell in the heatmap. Default: NA.
 #' @param legend_scale Numerical of length 2 or NULL. If NULL, the color scale of the heatmap will take the minimum and the maximum values as limits. If numerical, the color scale will take the first as the lower limit and the second element as the higher limit. Default: c(-1.5, 1.5).
 #' @param legend_breaks_num Numerical of length 1. Only if 'legend_scale = NULL'. The number of breaks you want in the legend. Default: 5.
 #' @param legend_breaks_by Numerical of length 1. Only 'legend_scale' is numerical (e.g. `c(-1,1)`). The distance between the breaks of the legend. Default: .5.
@@ -70,6 +71,7 @@ expressionHeatmap2 <- function(expr_list,
                                hm_height = length(genes)*10,
                                hm_width = length(expr_list)*10,
                                hm_colors = c("cornflowerblue", "white", "gold3"),
+                               border_color = NA,
                                legend_scale = c(-1.5, 1.5),
                                legend_breaks_num = 5,
                                legend_breaks_by = .5,
@@ -140,7 +142,7 @@ expressionHeatmap2 <- function(expr_list,
 
   ## Plot heatmap
   hm <- ggplot(expr.m, aes(Condition, Geneid) ) +
-    geom_tile(aes(fill = Expr)) +
+    geom_tile(aes(fill = Expr), color = border_color) +
     force_panelsizes(rows = unit(hm_height, "mm"),
                      cols = unit(hm_width, "mm"))  +
     coord_fixed() +

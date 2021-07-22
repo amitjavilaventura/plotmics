@@ -39,6 +39,8 @@
 
 \item{hm_colors}{Character of length 3. Colors in the lower limit, midpoint (defined by 'legend_midpoint') and higher limit, respectively. Default: c("cornflowerblue", "white", "gold3").}
 
+\item{border_color}{Character of length 1 or NA. Color of the border of each cell in the heatmap. Default: NA.}
+
 \item{legend_scale}{Numerical of length 2 or NULL. If NULL, the color scale of the heatmap will take the minimum and the maximum values as limits. If numerical, the color scale will take the first as the lower limit and the second element as the higher limit. Default: c(-1.5, 1.5).}
 
 \item{legend_breaks_num}{Numerical of length 1. Only if 'legend_scale = NULL'. The number of breaks you want in the legend. Default: 5.}

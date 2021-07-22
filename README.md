@@ -49,5 +49,5 @@ If you use this package, please cite [this repository](https://github.com/amitja
   + Add possibility to scale (`scale()`) data by rows or columns in `expressionHeatmap()` and `expressionHeatmap2()`.
 
 * `v1.1.1`: 
-  + Add minor formatting options in `expressionHeatmap()` and `expressionHeatmap2()`, such as the possibility to remove the gene names, change sizes of texts and titles, etc.
+  + Add minor formatting options in `expressionHeatmap()` and `expressionHeatmap2()`, such as the possibility to remove the gene names, change sizes of texts and titles, change the color of the border of each cell, etc.
   + Add minor changes in `ggVennPeaks()` in order to make it easier to visualize more peaks sets.
