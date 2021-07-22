@@ -50,6 +50,15 @@ ggVennPeaks <- function(peak_list, peak_names = names(peak_list), percent = T,
   # Get Venn Counts and the peaks in each set
   x <- getVennCounts(peaks = peak_list, conds = peak_names)
 
+  # Set default colors in case the number of specified colors
+  #   does not match the number elements in 'peak_list'
+  if(length(in_fill) != length(peak_list)) {
+    if(length(peak_list) == 2){ in_fill <- c("blue", "gold3") }
+    else if(length(peak_list) == 3){ in_fill <- c("blue", "gold3", "pink") }
+    else if(length(peak_list) == 4){ in_fill <- c("blue", "gold3", "pink", "green") }
+    else if(length(peak_list) == 5){ in_fill <- c("blue", "gold3", "pink", "green", "orange") }
+  }
+
   # Transform the matrix of thee peaks in each set in ordeer to plot the Venn
   y <- x$matrix %>%
     as_tibble() %>%
@@ -68,6 +77,8 @@ ggVennPeaks <- function(peak_list, peak_names = names(peak_list), percent = T,
                          set_name_color = name_color, set_name_size = name_size,
                          text_color = text_color, text_size = label_size) +
     scale_y_discrete(expand = c(0,0.5))
+
+  if(length(peak_list) %in% 4:5) { venn <- venn + scale_x_discrete(expand = c(0,0.5))}
 
   if(!is.null(title)){
     venn <- venn + labs(title = title, subtitle = subtitle) +

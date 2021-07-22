@@ -24,7 +24,7 @@ library(purrr)
 peak_list <- list.files("../testdata", "peak", full.names = T, recursive = T) %>%
   purrr::set_names(c("PeakX", "PeakY"))  %>%
   purrr::map(~read.delim(.x))
-ggVennPeaks(peak_list)
+ggVennPeaks(peak_list = peak_list)
 ```
 
 

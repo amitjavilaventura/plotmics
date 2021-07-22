@@ -50,3 +50,4 @@ If you use this package, please cite [this repository](https://github.com/amitja
 
 * `v1.1.1`: 
   + Add minor formatting options in `expressionHeatmap()` and `expressionHeatmap2()`, such as the possibility to remove the gene names, change sizes of texts and titles, etc.
+  + Add minor changes in `ggVennPeaks()` in order to make it easier to visualize more peaks sets.
