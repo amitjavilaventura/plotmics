@@ -81,7 +81,7 @@ It uses the function idxstatsBam() from the Rsamtools R package. Run help(&quot;
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -169,20 +169,7 @@ It uses the function idxstatsBam() from the Rsamtools R package. Run help(&quot;
 It uses the function idxstatsBam() from the Rsamtools R package. Run help("idxstatsBam") for more information.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>chromReads</span><span class='op'>(</span>
-  <span class='va'>bamfile</span>,
-  bamindex <span class='op'>=</span> <span class='cn'>NULL</span>,
-  chr.filt <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Un"</span>, <span class='st'>"random"</span><span class='op'>)</span>,
-  main <span class='op'>=</span> <span class='cn'>NULL</span>,
-  main.size <span class='op'>=</span> <span class='fl'>13</span>,
-  subtitle <span class='op'>=</span> <span class='cn'>NULL</span>,
-  sub.size <span class='op'>=</span> <span class='fl'>11</span>,
-  xlab <span class='op'>=</span> <span class='st'>"Mapped reads"</span>,
-  ylab <span class='op'>=</span> <span class='st'>"Chromosome"</span>,
-  axis.size <span class='op'>=</span> <span class='fl'>9</span>,
-  percent.label <span class='op'>=</span> <span class='cn'>T</span>,
-  percent.size <span class='op'>=</span> <span class='fl'>3</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>chromReads</span><span class='op'>(</span><span class='va'>bamfile</span>, bamindex <span class='op'>=</span> <span class='cn'>NULL</span>, chr.filt <span class='op'>=</span> <span class='st'>""</span>, main <span class='op'>=</span> <span class='cn'>NULL</span>, main.size <span class='op'>=</span> <span class='fl'>13</span>, subtitle <span class='op'>=</span> <span class='cn'>NULL</span>, sub.size <span class='op'>=</span> <span class='fl'>11</span>, xlab <span class='op'>=</span> <span class='st'>"Mapped reads"</span>, ylab <span class='op'>=</span> <span class='st'>"Chromosome"</span>, axis.size <span class='op'>=</span> <span class='fl'>9</span>, percent.label <span class='op'>=</span> <span class='cn'>T</span>, percent.size <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -197,7 +184,7 @@ It uses the function idxstatsBam() from the Rsamtools R package. Run help("idxst
     </tr>
     <tr>
       <th>chr.filt</th>
-      <td><p>Character. Vector of undefined length with strings to filter chromosomes (i.e. "Un" would filter all chromosomes containing "Un" in their name). Default: c("Un", "random").</p></td>
+      <td><p>Character. Vector of undefined length with strings to filter chromosomes (i.e. "Un" would filter all chromosomes containing "Un" in their name). Default: c("Un", "random", "GL", "JH", "\*").</p></td>
     </tr>
     <tr>
       <th>main</th>

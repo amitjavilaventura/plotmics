@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -119,7 +119,7 @@
       <h1 data-toc-skip>barAnno()</h1>
                         <h4 class="author">Adrià Mitjavila Ventura</h4>
             
-            <h4 class="date">22 July, 2021</h4>
+            <h4 class="date">04 agosto, 2021</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/amitjavilaventura/plotmics/blob/master/vignettes/05-barAnno.Rmd"><code>vignettes/05-barAnno.Rmd</code></a></small>
       <div class="hidden name"><code>05-barAnno.Rmd</code></div>
@@ -168,9 +168,7 @@
 <code class="sourceCode R"><span class="co"># Load annotations for mouse mm10 genome</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">TxDb.Mmusculus.UCSC.mm10.knownGene</span><span class="op">)</span> </code></pre></div>
 <pre><code>## Loading required package: GenomicFeatures</code></pre>
-<pre><code>## Warning: package 'GenomicFeatures' was built under R version 4.0.4</code></pre>
 <pre><code>## Loading required package: BiocGenerics</code></pre>
-<pre><code>## Warning: package 'BiocGenerics' was built under R version 4.0.5</code></pre>
 <pre><code>## Loading required package: parallel</code></pre>
 <pre><code>## 
 ## Attaching package: 'BiocGenerics'</code></pre>
@@ -200,9 +198,9 @@
 <pre><code>## The following objects are masked from 'package:dplyr':
 ## 
 ##     first, rename</code></pre>
-<pre><code>## The following object is masked from 'package:base':
+<pre><code>## The following objects are masked from 'package:base':
 ## 
-##     expand.grid</code></pre>
+##     expand.grid, I, unname</code></pre>
 <pre><code>## Loading required package: IRanges</code></pre>
 <pre><code>## 
 ## Attaching package: 'IRanges'</code></pre>
@@ -213,7 +211,6 @@
 ## 
 ##     collapse, desc, slice</code></pre>
 <pre><code>## Loading required package: GenomeInfoDb</code></pre>
-<pre><code>## Warning: package 'GenomeInfoDb' was built under R version 4.0.5</code></pre>
 <pre><code>## Loading required package: GenomicRanges</code></pre>
 <pre><code>## Loading required package: AnnotationDbi</code></pre>
 <pre><code>## Loading required package: Biobase</code></pre>
@@ -227,10 +224,10 @@
 <pre><code>## The following object is masked from 'package:dplyr':
 ## 
 ##     select</code></pre>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">org.Mm.eg.db</span><span class="op">)</span></code></pre></div>
 <pre><code>## </code></pre>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Annotate peaks into csAnno object</span>
 <span class="va">peak_list_csAnno</span> <span class="op">&lt;-</span> <span class="va">peak_list</span> <span class="op">%&gt;%</span>
   <span class="co"># convert to granges</span>
@@ -240,10 +237,10 @@
                                        TxDb <span class="op">=</span> <span class="va">TxDb.Mmusculus.UCSC.mm10.knownGene</span>,
                                        annoDb <span class="op">=</span> <span class="st">"org.Mm.eg.db"</span>, level <span class="op">=</span> <span class="st">"transcript"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## </code></pre>
-<pre><code>## 'select()' returned 1:many mapping between keys and columns
-## 'select()' returned 1:many mapping between keys and columns</code></pre>
+<pre><code>## 'select()' returned 1:many mapping between keys and columns</code></pre>
+<pre><code>## 'select()' returned 1:1 mapping between keys and columns</code></pre>
 <p>Now that peaks are annotated in the different genomic regions and we have created a <em>csAnno</em> object for each set of peaks, we must retrieve the <code>anno</code> data frame inside each <em>csAnno</em> object. This is not really necessary, since the corresponding transformations are already done inside <code><a href="../reference/barAnno.html">barAnno()</a></code>, but it is recommendable in case we want to do more things with these data.</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">peak_list</span> <span class="op">&lt;-</span> <span class="va">peak_list_csAnno</span> <span class="op">%&gt;%</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="op">~</span><span class="fu">as_tibble</span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="default-run" class="section level2">
@@ -253,44 +250,44 @@
 <ul>
 <li>The list of data frames with the coordinates of the peaks and the annotated regions</li>
 </ul>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-5-1.png" width="384" style="display: block; margin: auto;"></p>
 <ul>
 <li>The list of <em>csAnno</em> objects that output from <code><a href="https://rdrr.io/pkg/ChIPseeker/man/annotatePeak.html">ChIPseeker::annotatePeak()</a></code>
 </li>
 </ul>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list_csAnno</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-6-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="plot-number-of-peaks" class="section level2">
 <h2 class="hasAnchor">
 <a href="#plot-number-of-peaks" class="anchor"></a>Plot number of peaks</h2>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, fill_position <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-7-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="genomic-annotations" class="section level2">
 <h2 class="hasAnchor">
 <a href="#genomic-annotations" class="anchor"></a>Genomic annotations</h2>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, anno_num <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="co"># default</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-8-1.png" width="384" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, anno_num <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-9-1.png" width="384" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, anno_num <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-10-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="change-names" class="section level2">
 <h2 class="hasAnchor">
 <a href="#change-names" class="anchor"></a>Change names</h2>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, anno_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Condition X"</span>, <span class="st">"Condition Y"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-11-1.png" width="384" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, 
         anno_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Condition X"</span>, <span class="st">"Condition Y"</span><span class="op">)</span>, 
         names_order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Condition Y"</span>, <span class="st">"Condition X"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -302,34 +299,34 @@
 <div id="change-bar-width" class="section level3">
 <h3 class="hasAnchor">
 <a href="#change-bar-width" class="anchor"></a>Change bar width</h3>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, width <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span> <span class="co"># default</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-13-1.png" width="384" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, width <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-14-1.png" width="384" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, width <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-15-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="divide-pannels" class="section level3">
 <h3 class="hasAnchor">
 <a href="#divide-pannels" class="anchor"></a>Divide pannels</h3>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, anno_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Cond1"</span>, <span class="st">"Cond1"</span><span class="op">)</span>, protein <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"protX"</span>, <span class="st">"protY"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-16-1.png" width="384" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, anno_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Cond1"</span>, <span class="st">"Cond1"</span><span class="op">)</span>, 
         protein <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"protX"</span>, <span class="st">"protY"</span><span class="op">)</span>, protein_order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"protY"</span>, <span class="st">"protX"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-17-1.png" width="384" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, anno_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Cond1"</span>, <span class="st">"Cond2"</span><span class="op">)</span>, protein <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"protX"</span>, <span class="st">"protY"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-18-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="set-labels" class="section level3">
 <h3 class="hasAnchor">
 <a href="#set-labels" class="anchor"></a>Set labels</h3>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, main <span class="op">=</span> <span class="st">"This is a title"</span>, subtitle <span class="op">=</span> <span class="st">"This is a subtitle"</span>,
         xlab <span class="op">=</span> <span class="st">"This is the X-axis label"</span>, ylab <span class="op">=</span> <span class="st">"This is the Y-axis label"</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-19-1.png" width="384" style="display: block; margin: auto;"></p>
@@ -337,23 +334,23 @@
 <div id="legend-position" class="section level3">
 <h3 class="hasAnchor">
 <a href="#legend-position" class="anchor"></a>Legend position</h3>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, legend_position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-20-1.png" width="384" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, legend_position <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-21-1.png" width="384" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, legend_position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-22-1.png" width="384" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, legend_position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-23-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="change-x-text-angle" class="section level3">
 <h3 class="hasAnchor">
 <a href="#change-x-text-angle" class="anchor"></a>Change X text angle</h3>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, xangle <span class="op">=</span> <span class="fl">60</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-24-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
@@ -361,28 +358,28 @@
 <h3 class="hasAnchor">
 <a href="#change-color-palette" class="anchor"></a>Change color palette</h3>
 <p>If the length of <code>color_palette</code> argument in <code><a href="../reference/barAnno.html">barAnno()</a></code> is 1 (e.g. <code>Set2</code>, the default), the function uses a predefined palette passed through <code>scale_fill_brewer()</code>. Available palettes can be found here: <a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="uri">https://ggplot2.tidyverse.org/reference/scale_brewer.html</a>. For example:</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, color_palette <span class="op">=</span> <span class="st">"Set1"</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-25-1.png" width="384" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, color_palette <span class="op">=</span> <span class="st">"Pastel2"</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-26-1.png" width="384" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, color_palette <span class="op">=</span> <span class="st">"Oranges"</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-27-1.png" width="384" style="display: block; margin: auto;"></p>
 <p>Nevertheless, if <code>color_palette</code> is a character vector of length greater than 1 and has valid color names (e.g. <code><a href="https://rdrr.io/r/base/c.html">c("blue", "gold3")</a></code>), the function takes these colors and passes them through <code>scale_fill_manual()</code> to fill the bars. If the number of annotated regions is greater than the default of 2 (i.e. <code>anno_num = 3</code> or <code>anno_num = "all"</code>), the number of colors passed through <code>color_palette</code> must be the same length.</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, color_palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"gold3"</span><span class="op">)</span>, anno_num <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-28-1.png" width="384" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, color_palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"gold3"</span>, <span class="st">"pink"</span><span class="op">)</span>, anno_num <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-29-1.png" width="384" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, anno_num <span class="op">=</span> <span class="st">"all"</span>, 
         color_palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"gold3"</span>, <span class="st">"pink"</span>, <span class="st">"darkgreen"</span>, <span class="st">"darkred"</span>, <span class="st">"orange"</span>, <span class="st">"purple"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-30-1.png" width="384" style="display: block; margin: auto;"></p>
 <p>The colors can be also generated through other functions, such as <code><a href="https://rdrr.io/r/grDevices/palettes.html">rainbow()</a></code> or <code>circlize::rand_col()</code>.</p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, anno_num <span class="op">=</span> <span class="st">"all"</span>, 
         color_palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">rainbow</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">7</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-31-1.png" width="384" style="display: block; margin: auto;"></p>

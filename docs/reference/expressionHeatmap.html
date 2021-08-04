@@ -81,7 +81,7 @@ and draws a heatmap using ggplot." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -169,7 +169,7 @@ and draws a heatmap using ggplot." />
 and draws a heatmap using ggplot.</p>
     </div>
 
-    <pre class="usage"><span class='va'>`expressionHeatmap(df, genes = c("TCF7", "TCF7L1", "TCF7L2", "LEF1"), clust_rows = T, clust_cols = F, show_dend_rows = F, show_dend_cols = F, dist_method = "euclidean", hclust_method = "ward.D", write_label = T, label_size = 4, label_color = "black", label_digits = 2, hm_height = length(genes)*10, hm_width = (ncol(df)-1)*10, hm_colors = c("cornflowerblue", "white", "gold3"), legend_scale = NULL, legend_breaks_num = 5, legend_midpoint = 0, legend_height = hm_height, legend_title = NULL, dend_cols_prop = .1, dend_rows_prop = .2, title = "", subtitle = "", caption = NULL, xlab = "", ylab = NULL, axis_text_size = 10, x_axis_angle = 90)`</span></pre>
+    <pre class="usage"><span class='fu'>expressionHeatmap</span><span class='op'>(</span><span class='va'>df</span>, <span class='va'>genes</span>, clust_rows <span class='op'>=</span> <span class='cn'>T</span>, clust_cols <span class='op'>=</span> <span class='cn'>F</span>, show_dend_rows <span class='op'>=</span> <span class='cn'>F</span>, show_dend_cols <span class='op'>=</span> <span class='cn'>F</span>, dist_method <span class='op'>=</span> <span class='st'>"euclidean"</span>, hclust_method <span class='op'>=</span> <span class='st'>"ward.D"</span>, write_label <span class='op'>=</span> <span class='cn'>T</span>, label_size <span class='op'>=</span> <span class='fl'>4</span>, label_color <span class='op'>=</span> <span class='st'>"black"</span>, label_digits <span class='op'>=</span> <span class='fl'>2</span>, hm_height <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>genes</span><span class='op'>)</span><span class='op'>*</span><span class='fl'>10</span>, hm_width <span class='op'>=</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>*</span><span class='fl'>10</span>, hm_colors <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"cornflowerblue"</span>, <span class='st'>"white"</span>, <span class='st'>"gold3"</span><span class='op'>)</span>, legend_scale <span class='op'>=</span> <span class='cn'>NULL</span>, legend_breaks_num <span class='op'>=</span> <span class='fl'>5</span>, legend_midpoint <span class='op'>=</span> <span class='fl'>0</span>, legend_height <span class='op'>=</span> <span class='va'>hm_height</span>, legend_title <span class='op'>=</span> <span class='cn'>NULL</span>, dend_cols_prop <span class='op'>=</span> <span class='fl'>.1</span>, dend_rows_prop <span class='op'>=</span> <span class='fl'>.2</span>, title <span class='op'>=</span> <span class='st'>""</span>, subtitle <span class='op'>=</span> <span class='st'>""</span>, caption <span class='op'>=</span> <span class='cn'>NULL</span>, xlab <span class='op'>=</span> <span class='st'>""</span>, ylab <span class='op'>=</span> <span class='cn'>NULL</span>, axis_text_size <span class='op'>=</span> <span class='fl'>10</span>, x_axis_angle <span class='op'>=</span> <span class='fl'>90</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -229,6 +229,10 @@ and draws a heatmap using ggplot.</p>
     <tr>
       <th>hm_colors</th>
       <td><p>Character of length 3. Colors in the lower limit, midpoint (defined by 'legend_midpoint') and higher limit, respectively. Default: c("cornflowerblue", "white", "gold3").</p></td>
+    </tr>
+    <tr>
+      <th>border_color</th>
+      <td><p>Character of length 1 or NA. Color of the border of each cell in the heatmap. Default: NA.</p></td>
     </tr>
     <tr>
       <th>legend_scale</th>

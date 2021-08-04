@@ -21,7 +21,7 @@ devtools::load_all("..")
 library(dplyr)
 library(purrr)
 tpm <- read.delim("../testdata/tpm.tsv")
-plotmics::expressionHeatmap(tpm)
+plotmics::expressionHeatmap(tpm, genes = "APC")
 ```
 
 

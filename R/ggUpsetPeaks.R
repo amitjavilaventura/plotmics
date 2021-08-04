@@ -4,7 +4,7 @@
 #' @author amitjavilaventura
 #'
 #' @usage
-#' `ggUpsetPeaks(peaks, conds = names(peaks), conds_order = cond, order_by_freq = T, num_size = 4, title = NULL, subtitle = NULL, caption = NULL)`
+#' ggUpsetPeaks(peaks, conds = names(peaks), conds_order = cond, order_by_freq = T, num_size = 4, title = NULL, subtitle = NULL, caption = NULL)
 #'
 #' @seealso plyranges
 #'

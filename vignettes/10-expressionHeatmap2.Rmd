@@ -23,7 +23,7 @@ library(purrr)
 degs_all <- list.files("../testdata", "diff", full.names = T, recursive = T) %>%
   purrr::map(~read.delim(.x)) %>%
   purrr::set_names(c("Cond1", "Cond2", "Cond3"))
-plotmics::expressionHeatmap2(degs_all)
+plotmics::expressionHeatmap2(degs_all, genes = "Apc")
 ```
 
 

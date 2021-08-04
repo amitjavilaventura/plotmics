@@ -4,27 +4,14 @@
 \alias{chromReads}
 \title{chromReads}
 \usage{
-chromReads(
-  bamfile,
-  bamindex = NULL,
-  chr.filt = c("Un", "random"),
-  main = NULL,
-  main.size = 13,
-  subtitle = NULL,
-  sub.size = 11,
-  xlab = "Mapped reads",
-  ylab = "Chromosome",
-  axis.size = 9,
-  percent.label = T,
-  percent.size = 3
-)
+chromReads(bamfile, bamindex = NULL, chr.filt = "", main = NULL, main.size = 13, subtitle = NULL, sub.size = 11, xlab = "Mapped reads", ylab = "Chromosome", axis.size = 9, percent.label = T, percent.size = 3)
 }
 \arguments{
 \item{bamfile}{Character of lenght 1. Path to the BAM file whose reads are to be mapped.}
 
 \item{bamindex}{Character of length 1 or NULL. Path to the index of the BAM file in 'bamfile'. If null, it will search a file with the same base name as the 'bamfile' and extension '.bam.bai'. Default: NULL}
 
-\item{chr.filt}{Character. Vector of undefined length with strings to filter chromosomes (i.e. "Un" would filter all chromosomes containing "Un" in their name). Default: c("Un", "random").}
+\item{chr.filt}{Character. Vector of undefined length with strings to filter chromosomes (i.e. "Un" would filter all chromosomes containing "Un" in their name). Default: c("Un", "random", "GL", "JH", "\\*").}
 
 \item{main}{Character of lenght 1. Title of the pie chart. Default: NULL.}
 
