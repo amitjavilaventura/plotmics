@@ -7,7 +7,7 @@
 volcanoPlot(df, xlim = c(-10,10), ylim = c(0,30), pval = 0.05, log2FC = 1.5, main = NULL, mainSize = 9, sub = NULL, subSize = 8, labelSize = 7, labelColor = c("darkgreen", "red"), labelPos = 0, xlab = "log2(FC)", ylab = "-log10(pval)", axisLabelSize = 7, axisTextSize = 7, pointColor = c("darkgreen", "gray", "red"), legendTitle = FALSE, legendPos = "bottom", degsLabel=F, degsLabelNum=5)
 }
 \arguments{
-\item{df}{Dataframe. Output from DESeq2 with an extra DEG column. Columns: Geneid, baseMean, log2FoldChange, lfcSE, pvalue, padj, DEG.}
+\item{df}{Dataframe. Output from DESeq2 converted to data frame. Columns: Geneid, baseMean, log2FoldChange, lfcSE, pvalue, padj, DEG (optional).}
 
 \item{xlim}{Numerical of length 2. The limits of the x axis where the log2FC is plotted. Default: c(-10,10).}
 

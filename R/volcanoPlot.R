@@ -14,7 +14,7 @@
 #' It also counts the number of up and downregulated genes and writes them in the plot.
 #' The points that are outside of the limits of the graph are drawn as triangles at the borders.
 #'
-#' @param df Dataframe. Output from DESeq2 with an extra DEG column. Columns: Geneid, baseMean, log2FoldChange, lfcSE, pvalue, padj, DEG.
+#' @param df Dataframe. Output from DESeq2 converted to data frame. Columns: Geneid, baseMean, log2FoldChange, lfcSE, pvalue, padj, DEG (optional).
 #' @param xlim Numerical of length 2. The limits of the x axis where the log2FC is plotted. Default: c(-10,10).
 #' @param ylim Numerical of length 2. The limits of the y axis where the -log10(adj_pval) is plotted.  Default: c(0,30).
 #' @param pval Numerical. p-value threshold used to call de DEGs. It is used to draw a dashed line in this value. Default: 0.05.
@@ -53,7 +53,7 @@ volcanoPlot <- function(df, xlim = c(-10,10), ylim = c(0,30),
   require(dplyr)
 
   # Check if inputs are OK
-  if(!is.data.frame(df) | !c('Geneid', 'padj', 'log2FoldChange', 'DEG') %in% colnames(df)){ stop("'df' must be a data frame with the columns 'Geneid', 'padj', 'log2FoldChange' and 'DEG'.") }
+  if(!is.data.frame(df) | !c('Geneid', 'padj', 'log2FoldChange') %in% colnames(df)){ stop("'df' must be a data frame with the columns 'Geneid', 'padj', 'log2FoldChange' and 'DEG'.") }
   else if(length(pointColor) != 3 | !is.character(pointColor)){ stop("'pointColor' must be a character vector of length 3 with valid color names or codes.") }
 
   df <- df %>% dplyr::mutate(DEG = if_else(log2FoldChange >= log2FC & padj <= pval, "Upregulated",
@@ -127,7 +127,7 @@ volcanoPlot <- function(df, xlim = c(-10,10), ylim = c(0,30),
                         drop = FALSE) +
 
     # Remove the legend for shape
-    guides(shape=FALSE) +
+    guides(shape="none") +
 
     # Format the axis values
     theme(axis.text = element_text(size = axisTextSize)) +

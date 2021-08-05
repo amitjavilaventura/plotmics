@@ -54,3 +54,4 @@ If you use this package, please cite [this repository](https://github.com/amitja
   
 * `v1.1.2`:
   + Change chromosome filtering method in `chromReads()`.
+  + Change `scale = FALSE` for `scale = "none"` in `volcanoPlot()`
