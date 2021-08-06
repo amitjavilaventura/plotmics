@@ -53,12 +53,18 @@ volcanoPlot <- function(df, xlim = c(-10,10), ylim = c(0,30),
   require(dplyr)
 
   # Check if inputs are OK
-  if(!is.data.frame(df) | !c('Geneid', 'padj', 'log2FoldChange') %in% colnames(df)){ stop("'df' must be a data frame with the columns 'Geneid', 'padj', 'log2FoldChange' and 'DEG'.") }
+  if(!is.data.frame(df)) { stop("'df' must be a data frame with the columns 'Geneid', 'padj', 'log2FoldChange'.") }
+  if(!'Geneid' %in% colnames(df)){ stop("'df' must be a data frame with the columns 'Geneid', 'padj', 'log2FoldChange'.") }
+  if(!'padj' %in% colnames(df)){ stop("'df' must be a data frame with the columns 'Geneid', 'padj', 'log2FoldChange'.") }
+  if(!'log2FoldChange' %in% colnames(df)){ stop("'df' must be a data frame with the columns 'Geneid', 'padj', 'log2FoldChange'.") }
   else if(length(pointColor) != 3 | !is.character(pointColor)){ stop("'pointColor' must be a character vector of length 3 with valid color names or codes.") }
 
-  df <- df %>% dplyr::mutate(DEG = if_else(log2FoldChange >= log2FC & padj <= pval, "Upregulated",
-                                     if_else(log2FoldChange <= -log2FC & padj <= pval, "Downregulated", "NS")))
+  # Format DEG column
+  df <- df %>% mutate(DEG = "NS")
+  df <- df %>% mutate(DEG = ifelse(padj < pval & log2FoldChange > log2FC, "Upregulated", DEG))
+  df <- df %>% mutate(DEG = ifelse(padj < pval & log2FoldChange < -log2FC, "Downregulated", DEG))
 
+  # Format data frame.
   df <- df %>%
 
     # Mutate the data frame to convert NA in padj to 1
