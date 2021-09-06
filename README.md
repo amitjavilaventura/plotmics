@@ -56,3 +56,6 @@ If you use this package, please cite [this repository](https://github.com/amitja
   + Change chromosome filtering method in `chromReads()`.
   + Allow dataframes without `DEG` column as input for `volcanoPlot()`.
   + Change `scale = FALSE` for `scale = "none"` in `volcanoPlot()`.
+  
+* `v1.1.3`:
+  + Fix error in labelling of `expressionHeatmap()` and `expressionHeatmap2()`.

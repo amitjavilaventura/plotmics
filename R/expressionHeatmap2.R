@@ -187,7 +187,7 @@ expressionHeatmap2 <- function(expr_list,
     # Order rows
     hm <- hm +
       scale_y_discrete(limits=expr.m$Geneid[hclust_rows$order],
-                       labels = expr.m$Geneid, position = ytext_pos,
+                       labels = expr.m$Geneid[hclust_rows$order], position = ytext_pos,
                        expand = c(0,0))
 
   } else { hm <- hm + scale_y_discrete(expand = c(0,0)) }
