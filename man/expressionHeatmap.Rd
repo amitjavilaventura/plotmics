@@ -4,9 +4,11 @@
 \alias{expressionHeatmap}
 \title{expressionHeatmap}
 \usage{
-expressionHeatmap(df, genes, clust_rows = T, clust_cols = F, show_dend_rows = F, show_dend_cols = F, dist_method = "euclidean", hclust_method = "ward.D", write_label = T, label_size = 4, label_color = "black", label_digits = 2, hm_height = length(genes)*10, hm_width = (ncol(df)-1)*10, hm_colors = c("cornflowerblue", "white", "gold3"), legend_scale = NULL, legend_breaks_num = 5, legend_midpoint = 0, legend_height = hm_height, legend_title = NULL, dend_cols_prop = .1, dend_rows_prop = .2, title = "", subtitle = "", caption = NULL, xlab = "", ylab = NULL, axis_text_size = 10, x_axis_angle = 90)
+expressionHeatmap(expr_df, genes, clust_rows = T, clust_cols = F, show_dend_rows = F, show_dend_cols = F, dist_method = "euclidean", hclust_method = "ward.D", write_label = T, label_size = 4, label_color = "black", label_digits = 2, hm_height = length(genes)*10, hm_width = (ncol(df)-1)*10, hm_colors = c("cornflowerblue", "white", "gold3"), legend_scale = NULL, legend_breaks_num = 5, legend_midpoint = 0, legend_height = hm_height, legend_title = NULL, dend_cols_prop = .1, dend_rows_prop = .2, title = "", subtitle = "", caption = NULL, xlab = "", ylab = NULL, axis_text_size = 10, x_axis_angle = 90)
 }
 \arguments{
+\item{expr_df}{Dataframe with a 'Geneid' column and several columns with numerical expression data for different samples, such as TPMs or Log2FC.}
+
 \item{genes}{Character. Names of the genes to be plotted. They must present in the column 'Geneid' of 'df'.}
 
 \item{clust_rows}{Logical of length 1. Whether to cluster the rows (TRUE) or not (FALSE) using \code{hclust}. Default: T.}
@@ -34,6 +36,8 @@ expressionHeatmap(df, genes, clust_rows = T, clust_cols = F, show_dend_rows = F,
 \item{hm_width}{Numerical of length 1. Width of the heatmap in mm. Default: (ncol(df)-1)*10.}
 
 \item{hm_colors}{Character of length 3. Colors in the lower limit, midpoint (defined by 'legend_midpoint') and higher limit, respectively. Default: c("cornflowerblue", "white", "gold3").}
+
+\item{na_color}{Charachter of length 1. Color for the NA values. Default: "gray".}
 
 \item{border_color}{Character of length 1 or NA. Color of the border of each cell in the heatmap. Default: NA.}
 
@@ -76,8 +80,6 @@ expressionHeatmap(df, genes, clust_rows = T, clust_cols = F, show_dend_rows = F,
 \item{title_hjust}{Numerical of length 1. Horizontal justification for the title and the subtitle. Default: 0.}
 
 \item{scale}{Character of length 1 or NULL. One of c("rows", "cols"). If "rows", it scales data by row; if "cols", it scales data by columns; if NULL (the default), it does not scale the data. Default: NULL.}
-
-\item{df}{Dataframe with a 'Geneid' column and several columns with numerical expression data for different samples, such as TPMs or Log2FC.}
 }
 \description{
 Function that takes a data frame with a Geneid column and several columns for expression data (e.g. TPMs, Log2FC...)

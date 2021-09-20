@@ -59,3 +59,6 @@ If you use this package, please cite [this repository](https://github.com/amitja
   
 * `v1.1.3`:
   + Fix error in labelling of `expressionHeatmap()` and `expressionHeatmap2()`.
+  
+* `v1.1.4`:
+  + Add possibility to color the NA values in `expressionHeatmap()` and `expressionHeatmap2()`.

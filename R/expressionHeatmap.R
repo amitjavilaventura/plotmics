@@ -11,9 +11,9 @@
 #' @seealso `stats::hclust`
 #' @seealso `stats::dist`
 #'
-#' @usage expressionHeatmap(df, genes, clust_rows = T, clust_cols = F, show_dend_rows = F, show_dend_cols = F, dist_method = "euclidean", hclust_method = "ward.D", write_label = T, label_size = 4, label_color = "black", label_digits = 2, hm_height = length(genes)*10, hm_width = (ncol(df)-1)*10, hm_colors = c("cornflowerblue", "white", "gold3"), legend_scale = NULL, legend_breaks_num = 5, legend_midpoint = 0, legend_height = hm_height, legend_title = NULL, dend_cols_prop = .1, dend_rows_prop = .2, title = "", subtitle = "", caption = NULL, xlab = "", ylab = NULL, axis_text_size = 10, x_axis_angle = 90)
+#' @usage expressionHeatmap(expr_df, genes, clust_rows = T, clust_cols = F, show_dend_rows = F, show_dend_cols = F, dist_method = "euclidean", hclust_method = "ward.D", write_label = T, label_size = 4, label_color = "black", label_digits = 2, hm_height = length(genes)*10, hm_width = (ncol(df)-1)*10, hm_colors = c("cornflowerblue", "white", "gold3"), legend_scale = NULL, legend_breaks_num = 5, legend_midpoint = 0, legend_height = hm_height, legend_title = NULL, dend_cols_prop = .1, dend_rows_prop = .2, title = "", subtitle = "", caption = NULL, xlab = "", ylab = NULL, axis_text_size = 10, x_axis_angle = 90)
 #'
-#' @param df Dataframe with a 'Geneid' column and several columns with numerical expression data for different samples, such as TPMs or Log2FC.
+#' @param expr_df Dataframe with a 'Geneid' column and several columns with numerical expression data for different samples, such as TPMs or Log2FC.
 #' @param genes Character. Names of the genes to be plotted. They must present in the column 'Geneid' of 'df'.
 #' @param clust_rows Logical of length 1. Whether to cluster the rows (TRUE) or not (FALSE) using `hclust`. Default: T.
 #' @param clust_cols Logical of length 1. Whether to cluster the columns (TRUE) or not (FALSE) using `hclust`. Default: F.
@@ -28,6 +28,7 @@
 #' @param hm_height Numerical of length 1. Height of the heatmap in mm. Default: length(genes)*10.
 #' @param hm_width Numerical of length 1. Width of the heatmap in mm. Default: (ncol(df)-1)*10.
 #' @param hm_colors Character of length 3. Colors in the lower limit, midpoint (defined by 'legend_midpoint') and higher limit, respectively. Default: c("cornflowerblue", "white", "gold3").
+#' @param na_color Charachter of length 1. Color for the NA values. Default: "gray".
 #' @param border_color Character of length 1 or NA. Color of the border of each cell in the heatmap. Default: NA.
 #' @param legend_scale Numerical of length 2 or NULL. If NULL, the color scale of the heatmap will take the minimum and the maximum values as limits. If numerical, the color scale will take the first as the lower limit and the second element as the higher limit. Default: NULL.
 #' @param legend_breaks_num Numerical of length 1. Only 'legend_scale' is NULL. The number of breaks you want in the legend. Default: 5.
@@ -67,6 +68,7 @@ expressionHeatmap <- function(expr_df,
                               hm_height = length(genes)*10,
                               hm_width = (ncol(expr_df)-1)*10,
                               hm_colors = c("cornflowerblue", "white", "gold3"),
+                              na_color = "gray",
                               border_color = NA,
                               legend_scale = NULL,
                               legend_breaks_num = 5,
@@ -111,6 +113,8 @@ expressionHeatmap <- function(expr_df,
     dplyr::relocate(Geneid) %>%
     dplyr::filter(Geneid %in% genes)
 
+
+
   ## Scale
   if(!is.null(scale)){
     if("rows" %in% scale) { expr[,2:length(expr)] <- expr[,2:length(expr)] %>% t() %>% scale() %>% t() }
@@ -141,7 +145,7 @@ expressionHeatmap <- function(expr_df,
                             cols = unit(hm_width, "mm")) + # force width of the heatmap
     coord_fixed() +  # fix the coordinates
     scale_fill_gradient2(limits = c(lower, higher), midpoint = midpoint, # setup the legend
-                         breaks = breaks,
+                         breaks = breaks, na.value = na_color,
                          oob = scales::squish, ## to put out of bound values into scale
                          low = hm_colors[1], high = hm_colors[3], mid = hm_colors[2],
                          guide = guide_colorbar(title = legend_title,

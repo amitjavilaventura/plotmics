@@ -199,6 +199,19 @@ expressionHeatmap(mean_tpm, genes = c("TP53", "JUN", "ATF2", "YAP1"),
                   hm_colors = c("blue", "gray", "red"))
 ```
 
+The NA values are also colored with `na_color`, which is "Gray" by default.
+
+```{r}
+mean_tpm %>% 
+  dplyr::mutate(Cond1 = ifelse(Geneid == "TP53", NA, Cond1)) %>%
+
+  expressionHeatmap(., genes = c("TP53", "JUN", "ATF2", "YAP1"), na_color = "black",
+                    legend_scale = c(0,200), legend_midpoint = 40, legend_breaks_by = 40, 
+                    hm_colors = c("blue", "white", "red"))
+
+```
+
+
 ### Title, subtitle and caption
 
 ```{r}

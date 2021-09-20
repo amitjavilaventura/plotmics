@@ -39,6 +39,8 @@ expressionHeatmap2(expr_list, expr_names = names(expr_list), genes, clust_rows =
 
 \item{hm_colors}{Character of length 3. Colors in the lower limit, midpoint (defined by 'legend_midpoint') and higher limit, respectively. Default: c("cornflowerblue", "white", "gold3").}
 
+\item{na_color}{Charachter of length 1. Color for the NA values. Default: "Gray".}
+
 \item{border_color}{Character of length 1 or NA. Color of the border of each cell in the heatmap. Default: NA.}
 
 \item{legend_scale}{Numerical of length 2 or NULL. If NULL, the color scale of the heatmap will take the minimum and the maximum values as limits. If numerical, the color scale will take the first as the lower limit and the second element as the higher limit. Default: c(-1.5, 1.5).}
