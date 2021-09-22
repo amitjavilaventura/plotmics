@@ -33,7 +33,7 @@ devtools::install_github("amitjavilaventura/plotmics")
 
 ## Contributors
 
-This package has been developed by [Adrià Mitjavila Ventura](https://amitjavilaventura.github.io), with some contributions from [dfernandezperez](https://github.com/dfernandezperez)
+This package has been developed by [Adrià Mitjavila Ventura](https://amitjavilaventura.github.io), with some contributions from [dfernandezperez](https://github.com/dfernandezperez).
 
 If you want to contribute to this package, make a post in the issues section in this repository or fork this repository adding your code and do a pull request.
 
@@ -43,7 +43,10 @@ If you use this package, please cite [this repository](https://github.com/amitja
 
 ## Updates
 
-* `v1.0.0`: first version.
+* `v1.0.0`: 
+
+  + First version.
+
 * `v1.1.0`: 
   + Rescale `ggVennPeaks()` output to remove blank space around the Venn diagram.
   + Add possibility to scale (`scale()`) data by rows or columns in `expressionHeatmap()` and `expressionHeatmap2()`.
@@ -62,3 +65,4 @@ If you use this package, please cite [this repository](https://github.com/amitja
   
 * `v1.1.4`:
   + Add possibility to color the NA values in `expressionHeatmap()` and `expressionHeatmap2()`.
+  + Change title format in `barDEGs()`

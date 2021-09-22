@@ -107,7 +107,9 @@ barDEGs <- function(deg_list, deg_names = names(deg_list),
     theme(axis.title = element_blank(),
           legend.title = element_blank(),
           axis.line = element_blank(),
-          axis.ticks = element_blank())
+          axis.ticks = element_blank(),
+          plot.title = element_text(hjust = .5),
+          plot.subtitle = element_text(hjust = .5, face = "italic"))
 
   if(!xaxis){ updown_bar <- updown_bar + theme(axis.text.x = element_blank()) }
   if(!yaxis){ updown_bar <- updown_bar + theme(axis.text.y = element_blank()) }
