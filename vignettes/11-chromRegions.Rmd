@@ -17,15 +17,18 @@ vignette: >
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = F, error = F, message = F,
-                      fig.align = "center", fig.width = 4, fig.height = 4)
+                      fig.align = "center", fig.width = 6, fig.height = 4)
 
 devtools::load_all("..")
 library(dplyr)
 
 chrom_sizes = "../testdata/mm10.chrom.sizes"
-regions      = "../testdata/mm10.regions.tsv"
-regions2     = "../testdata/mm10.regions2.tsv"
-plotmics::chromRegions(chrom_sizes = chrom_sizes, regions = regions)
+regions_list <- list("Regions1" = "../testdata/mm10.regions.tsv",
+                     "Regions2" = "../testdata/mm10.regions2.tsv",
+                     "Regions3" = "../testdata/mm10.regions3.tsv")
+
+
+plotmics::chromRegions(chrom_sizes = chrom_sizes, regions_list = regions_list)
 ```
 
 
@@ -38,18 +41,24 @@ library(plotmics)
 
 # Run `chromRegions()`
 
-`chromRegions()` takes a file with the sizes of the chromosomes and draws a `ggplot2`-based bar plot. Then takes regions in a BED-like format to draw them into each chromosome. The inputs `chrom.sizes` and `regions` can be supplied as path to the file where the information is stored or a data frame.
+`chromRegions()` takes a file with the sizes of the chromosomes and draws a `ggplot2`-based bar plot. Then takes a list of regions in a BED-like format to draw them into each chromosome. The inputs `chrom.sizes` and `regions` can be supplied as a list of character with path to the file where the information is stored or a list of data frame.
 
 ## Required input
+
+The `crhom_sizes` input is:
 
 ```{r}
 chrom_sizes = "../testdata/mm10.chrom.sizes"
 chrom_sizes %>% read.delim(header = F) %>% head()
 ```
 
+The `regions_list` is a list of characters or dataframes. It can have as many elements as wanted and it has the following structure:
+
 ```{r}
-regions = "../testdata/mm10.regions.tsv"
-regions %>% read.delim(header = F) %>% head()
+regions_list <- list("Regions1" = "../testdata/mm10.regions.tsv",
+                     "Regions2" = "../testdata/mm10.regions2.tsv",
+                     "Regions3" = "../testdata/mm10.regions3.tsv")
+regions_list[[1]] %>% read.delim(header = F) %>% head()
 ```
 
 ## Default run
@@ -57,32 +66,24 @@ regions %>% read.delim(header = F) %>% head()
 The default run requires only the `chrom_sizes` and the `regions` arguments, either as a path to a file or a data frame.
 
 ```{r}
-chromRegions(chrom_sizes = "../testdata/mm10.chrom.sizes", regions = "../testdata/mm10.regions.tsv")
+chromRegions(chrom_sizes = "../testdata/mm10.chrom.sizes", regions_list = regions_list)
 ```
 
 ```{r}
+# Read the data
 chrom_sizes = "../testdata/mm10.chrom.sizes"%>% read.delim(header = F)
-regions = "../testdata/mm10.regions.tsv" %>% read.delim(header = F)
+regions = regions_list %>% purrr::map(~read.delim(.x, header = F))
 
-chromRegions(chrom_sizes = chrom_sizes, regions = regions)
+chromRegions(chrom_sizes = chrom_sizes, regions_list = regions)
 ```
 
-## Second set of regions
-
-A second set of regions can be included in the plot. In that case, the default coloring by strand will be removed and the coloring will be done based on the region set.
-
-```{r}
-chromRegions(chrom_sizes = "../testdata/mm10.chrom.sizes", 
-             regions     = "../testdata/mm10.regions.tsv",
-             regions2    = "../testdata/mm10.regions2.tsv")
-```
 
 ## Chromosome order
 
 ```{r}
-chromRegions(chrom_sizes = "../testdata/mm10.chrom.sizes", 
-             regions     = "../testdata/mm10.regions.tsv",
-             chr_order   = c(1,3,4,2,5,6,7,9,8,19,11,10,12,13,15,14,16,17,18,"X","Y","M", "MT") )
+chromRegions(chrom_sizes  = "../testdata/mm10.chrom.sizes", 
+             regions_list = regions_list,
+             chr_order    = c(1,3,4,2,5,6,7,9,8,19,11,10,12,13,15,14,16,17,18,"X","Y","M", "MT") )
 ```
 
 ## Exclude chromosomes
@@ -92,17 +93,17 @@ Very often, the genome assemblies of a lot of species have chromosomes/scaffolds
 An example that excludes all the chromosomes that contain a dot in the name:
 
 ```{r}
-chromRegions(chrom_sizes = "../testdata/mm10.chrom.sizes", 
-             regions     = "../testdata/mm10.regions.tsv",
-             chr_exclude = c("\\."))
+chromRegions(chrom_sizes  = "../testdata/mm10.chrom.sizes", 
+             regions_list = regions_list,
+             chr_exclude  = c("\\."))
 ```
 
 Here you have an example that does not remove any chromosome.
 
 ```{r}
-chromRegions(chrom_sizes = "../testdata/mm10.chrom.sizes", 
-             regions     = "../testdata/mm10.regions.tsv",
-             chr_exclude = c(" "))
+chromRegions(chrom_sizes  = "../testdata/mm10.chrom.sizes", 
+             regions_list = regions_list,
+             chr_exclude  = c(" "))
 ```
 Note that, since we are converting the chromosome names to an ordered factor with `chr_order`, the chromosome names that do not appear in `chr_order` will be groupped and plotted into a `NA` category.
 
@@ -114,7 +115,7 @@ Note that, since we are converting the chromosome names to an ordered factor wit
 
 ```{r}
 chromRegions(chrom_sizes  = "../testdata/mm10.chrom.sizes", 
-             regions      = "../testdata/mm10.regions.tsv",
+             regions_list = regions_list,
              coord_flip   = T)
 ```
 
@@ -124,48 +125,39 @@ By default, `chromRegions()` draws a line/rectangle and a point in the middle of
 
 ```{r}
 chromRegions(chrom_sizes  = "../testdata/mm10.chrom.sizes", 
-             regions      = "../testdata/mm10.regions.tsv",
+             regions_list = regions_list,
              draw_points  = F)
 ```
 
 ### Color
 
-By default, the regions are colored by strand, if the strand column has "+" and "-" as values. This coloring is controlled with `strand_color`, which must be a character vector with two colors.
+By default, the regions are colored by region (i.e. each element in `regions_list`). This can be controlled with the `colors` argument, which accepts a character vector with valid color names and the same length as `regions_list` 
 
 ```{r}
 chromRegions(chrom_sizes  = "../testdata/mm10.chrom.sizes", 
-             regions      = "../testdata/mm10.regions.tsv",
-             strand_color = c("Black", "Yellow"))
+             regions_list = regions_list,
+             colors       = c("Black", "Yellow", "Green"))
 ```
 If you don't want to color by strand, just turn `strand_color` to NULL. In this case, the color of the region will be defined by `regions_colors`, which must be a character vector with two colors. In case that only one region is supplied (`regions` argument), only the first color will be used, but if a second set of regions is suppplied (`regions2` argument), both values will be used.
 
 ```{r}
 chromRegions(chrom_sizes   = "../testdata/mm10.chrom.sizes", 
-             regions       = "../testdata/mm10.regions.tsv",
-             strand_color  = NULL,
-             regions_color = c("Gold3", "Darkgreen"))
+             regions_list = regions_list,
+             colors        = c("Darkgreen", "Darkred"),
+             col_by_strand = TRUE)
 ```
 
-If we supply a second set of regions:
+Now, imagine that we have regions that do not have a defined strand (e.g. most ChIP-seq peaks). In this case, the `col_by_strand` is internally converted to FALSE and the regions are colored by region set (i.e. elements in `regions_list`). Look at this example with only one region set whose strand values are converted to ".".
 
 ```{r}
-chromRegions(chrom_sizes   = "../testdata/mm10.chrom.sizes", 
-             regions       = "../testdata/mm10.regions.tsv",
-             regions2      = "../testdata/mm10.regions2.tsv",
-             strand_color  = NULL,
-             regions_color = c("Gold3", "Darkgreen"))
-```
-Now, imagine that we have regions that do not have a defined strand (e.g. most ChIP-seq peaks). In this case, the `strand_color` is internally converted to NULL and the `regions_colors` argument is used to color the regions.
-
-```{r}
-# Read and format regions file
-regions_no_strand <- read.delim("../testdata/mm10.regions.tsv", header = F) %>% dplyr::mutate(V6 = ".")
+# Read and format regions file to have strand as "."
+regions_no_strand <- list("Regions1" = read.delim("../testdata/mm10.regions.tsv", header = F) %>% dplyr::mutate(V6 = "."))
 
 # Draw the plot
 chromRegions(chrom_sizes   = "../testdata/mm10.chrom.sizes", 
-             regions       = regions_no_strand,
-             strand_color  = c("Black", "Red"),
-             regions_color = c("Gold3", "Darkgreen"))
+             regions_list  = regions_no_strand,
+             col_by_strand = T,
+             colors        = c("Gold3", "Darkgreen"))
 ```
 
 ### Titles
@@ -174,7 +166,7 @@ Title and subtitle can be supplied through the arguments `title` and `subtitle`,
 
 ```{r}
 chromRegions(chrom_sizes   = "../testdata/mm10.chrom.sizes", 
-             regions       = "../testdata/mm10.regions.tsv",
+             regions_list  = regions_list,
              title         = "This is a title", 
              subtitle      = "This is a subtitle")
 ```
@@ -183,7 +175,7 @@ Also, the labels of the axes can be set or removed through the `xlab` and `ylab`
 
 ```{r}
 chromRegions(chrom_sizes   = "../testdata/mm10.chrom.sizes", 
-             regions       = "../testdata/mm10.regions.tsv",
+             regions_list  = regions_list,
              xlab          = NULL, 
              ylab          = NULL)
 ```
@@ -193,7 +185,7 @@ Here there is an example with any character:
 
 ```{r}
 chromRegions(chrom_sizes   = "../testdata/mm10.chrom.sizes", 
-             regions       = "../testdata/mm10.regions.tsv",
+             regions_list  = regions_list,
              caption       = "This is a caption")
 ```
 
@@ -201,16 +193,7 @@ On the other hand, if `caption` is set to TRUE, the caption will show the number
 
 ```{r}
 chromRegions(chrom_sizes   = "../testdata/mm10.chrom.sizes", 
-             regions       = "../testdata/mm10.regions.tsv",
-             caption       = TRUE)
-```
-
-And, if `caption` is set to true, when two `regions2` is also supplied, the number of regions in each region set will be written in the caption.
-
-```{r}
-chromRegions(chrom_sizes   = "../testdata/mm10.chrom.sizes", 
-             regions       = "../testdata/mm10.regions.tsv",
-             regions2      = "../testdata/mm10.regions2.tsv",
+             regions_list  = regions_list,
              caption       = TRUE)
 ```
 
@@ -220,12 +203,12 @@ The position of the legend is, by default, the bottom of the plot. This can be c
 
 ```{r}
 chromRegions(chrom_sizes   = "../testdata/mm10.chrom.sizes", 
-             regions       = "../testdata/mm10.regions.tsv",
+             regions_list  = regions_list,
              legend        = "right")
 ```
 ```{r}
 chromRegions(chrom_sizes   = "../testdata/mm10.chrom.sizes", 
-             regions       = "../testdata/mm10.regions.tsv",
+             regions_list  = regions_list,
              legend        = "none")
 ```
 

@@ -69,3 +69,6 @@ If you use this package, please cite [this repository](https://github.com/amitja
   
 * `v2.0.0`:
   + Add new function `chromRegions()`.
+  
+* `v2.1.0`:
+  + Modify `chromRegions()` to take a list of regions as input.
