@@ -13,7 +13,7 @@
 #' @param bamfile Character of lenght 1. Path to the BAM file whose reads are to be mapped.
 #' @param bamindex Character of length 1 or NULL. Path to the index of the BAM file in 'bamfile'. If null, it will search a file with the same base name as the 'bamfile' and extension '.bam.bai'. Default: NULL
 #' @param chr.filt Character. Vector of undefined length with strings to filter chromosomes (i.e. "Un" would filter all chromosomes containing "Un" in their name). Default: c("Un", "random", "GL", "JH", "\\*").
-#' @param main Character of lenght 1. Title of the pie chart. Default: NULL.
+#' @param main Character of lenght 1. Title of the plot. Default: NULL.
 #' @param main.size Numeric of length 1. Font size of the title. It works only if main is not NULL. Default: 13.
 #' @param subtitle Character of lenght 1. Subtitle of the bar plot. It works only if main is not NULL. Default: NULL.
 #' @param sub.size Numeric of length 1. Font size of the subtitle. It works only if main is not NULL. Default: 11.

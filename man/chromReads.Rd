@@ -13,7 +13,7 @@ chromReads(bamfile, bamindex = NULL, chr.filt = "", main = NULL, main.size = 13,
 
 \item{chr.filt}{Character. Vector of undefined length with strings to filter chromosomes (i.e. "Un" would filter all chromosomes containing "Un" in their name). Default: c("Un", "random", "GL", "JH", "\\*").}
 
-\item{main}{Character of lenght 1. Title of the pie chart. Default: NULL.}
+\item{main}{Character of lenght 1. Title of the plot. Default: NULL.}
 
 \item{main.size}{Numeric of length 1. Font size of the title. It works only if main is not NULL. Default: 13.}
 

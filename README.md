@@ -66,3 +66,6 @@ If you use this package, please cite [this repository](https://github.com/amitja
 * `v1.1.4`:
   + Add possibility to color the NA values in `expressionHeatmap()` and `expressionHeatmap2()`.
   + Change title format in `barDEGs()`
+  
+* `v2.0.0`:
+  + Add new function `chromRegions()`.
