@@ -152,6 +152,8 @@
 <code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code>: function that takes a data frame of expression data (including <em>Geneid</em>) and plots a heatmap of the selected genes. It can be any expression data, but it is better for expression values, counts, normalized counts in which the frist column is the <em>Geneid</em> and the other columns are each of the samples that are to be plotted.</li>
 <li>
 <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>: function that takes a list of data frames with the columns <em>Geneid</em> and <em>log2FoldChange</em> (it can be another type data, such as FPKMs, but its easier to maintain the name of <em>log2FoldChange</em> since it is how it output from <code>DESeq2</code>) and plots a heatmap with the selected genes. It is better for <em>log2FoldChange</em> heatmaps in which each element in the list is a data frame that outputs from <code>DESeq2</code>.</li>
+<li>
+<code><a href="reference/chromRegions.html">chromRegions()</a></code>: function that takes the chromosome size information and a list of regions (e.g. BED files) to draw the positions of that regions in the genome.</li>
 </ul>
 </div>
 <div id="install-plotmics" class="section level2">

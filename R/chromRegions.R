@@ -7,7 +7,7 @@
 #' @description
 #' Function that draws the chromosomes and the position of the desired regions.
 #'
-#' @usage chromRegions(chrom_sizes, regions, chr_exclude = c("Un", "Random", "JH", "GL", "\\."), chr_order = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,"X","Y","M","MT"), col_by_strand = FALSE, regions_names = names(regions_list), regions_colors = sample(x = colors(), size = length(regions_list), replace = F), title = NULL, subtitle = NULL, caption = NULL, xlab = "Position (bp)", ylab = "Chromosome", legend = "right", draw_points = TRUE, coord_flip = TRUE)
+#' @usage chromRegions(chrom_sizes, regions_list, regions_names = names(regions_list), regions_order = names(regions_list), chr_exclude = c("Un", "Random", "JH", "GL", "\\."), chr_order = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,"X","Y","M","MT"), col_by_strand = FALSE, regions_names = names(regions_list), regions_colors = sample(x = colors(), size = length(regions_list), replace = F), title = NULL, subtitle = NULL, caption = NULL, xlab = "Position (bp)", ylab = "Chromosome", legend = "right", draw_points = TRUE, coord_flip = TRUE)
 #'
 #' @param chrom_sizes Character of lenght 1 or dataframe. Path to the chrom.sizes file or data frame with the names of the chromosomes and their sizes. The file must not contain column names.
 #' @param regions_list (Named) List of character vectors or dataframes. List with paths to BED/TSV files or dataframes with chromosome names, start, end, region id, length and strand. Strand must be "+", "-" or ".".
@@ -15,7 +15,8 @@
 #' @param chr_order Character. Chromosome names written in the order to be plotted. The names must matchthe chromosome names in chrom_sizes and regions. Default: c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,"X","Y","M","MT")
 #' @param col_by_strand Logical of length 1. If TRUE, it colors the drawn regions by their strandness. If strand fieald contains any "." (i.e. ChiP-seq data), it is internally turned to FALSE. Default = FALSE.
 #' @param regions_names Character of length equal to regions_list. Names of the input regions. Default: names(regions_list).
-#' @param regions_colors Character of length 2 or of length equal to regions_list. Colors of the input regions. If col_by_strand is FALSE, the length must be equal to the input regions, if col_by_strand is TRUE, the length must be 2. Default: sample(x = colors(), size = length(regions_list), replace = F).
+#' @param regions_order Character of length equal to regions_list. Names of the input regions in the desired order. Default: names(regions_list).
+#' @param colors Character of length 2 or of length equal to regions_list. Colors of the input regions. If col_by_strand is FALSE, the length must be equal to the input regions, if col_by_strand is TRUE, the length must be 2. Default: sample(x = colors(), size = length(regions_list), replace = F).
 #' @param title Character of length 1 or NULL. Title of the plot. Default: NULL
 #' @param subtitle Charachter of length 1 or NULL. Subtitle of the plot. Default: NULL.
 #' @param caption Character of length 1, TRUE or NULL. Caption to be written in the bottom-right corner. If TRUE, it will write the number of regions in the input; if charachter, it will write the written caption. Default: NULL.
@@ -31,6 +32,7 @@
 chromRegions <- function(chrom_sizes,
                          regions_list,
                          regions_names   = names(regions_list),
+                         regions_order   = names(regions_list),
                          colors          = c("Black", "Red", "Blue"),
                          col_by_strand   = FALSE,
                          chr_exclude     = c("Un", "Random", "JH", "GL", "\\."),
@@ -101,8 +103,12 @@ chromRegions <- function(chrom_sizes,
 
 
   # Filter chromsizes and regions ------
-  chrom_filt <- chromsizes %>% dplyr::filter(!stringr::str_detect(seqnames, pattern = paste(chr_exclude, collapse = "|"))) %>% dplyr::mutate(seqnames = factor(seqnames, levels = chr_order))
-  regions_filt <- regions %>% dplyr::filter(!stringr::str_detect(seqnames, pattern = paste(chr_exclude, collapse = "|"))) %>% dplyr::mutate(seqnames = factor(seqnames, levels = chr_order))
+  chrom_filt <- chromsizes %>% dplyr::filter(!stringr::str_detect(seqnames, pattern = paste(chr_exclude, collapse = "|"))) %>%
+    dplyr::mutate(seqnames = factor(seqnames, levels = chr_order))
+  regions_filt <- regions %>% dplyr::filter(!stringr::str_detect(seqnames, pattern = paste(chr_exclude, collapse = "|"))) %>%
+    dplyr::mutate(seqnames = factor(seqnames, levels = chr_order),
+                  region = factor(region, levels = regions_order))
+
 
   # Make plot -----
   # Initialize chromosomes

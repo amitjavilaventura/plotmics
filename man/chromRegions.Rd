@@ -4,7 +4,7 @@
 \alias{chromRegions}
 \title{chromRegions}
 \usage{
-chromRegions(chrom_sizes, regions, chr_exclude = c("Un", "Random", "JH", "GL", "\\."), chr_order = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,"X","Y","M","MT"), col_by_strand = FALSE, regions_names = names(regions_list), regions_colors = sample(x = colors(), size = length(regions_list), replace = F), title = NULL, subtitle = NULL, caption = NULL, xlab = "Position (bp)", ylab = "Chromosome", legend = "right", draw_points = TRUE, coord_flip = TRUE)
+chromRegions(chrom_sizes, regions_list, regions_names = names(regions_list), regions_order = names(regions_list), chr_exclude = c("Un", "Random", "JH", "GL", "\\."), chr_order = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,"X","Y","M","MT"), col_by_strand = FALSE, regions_names = names(regions_list), regions_colors = sample(x = colors(), size = length(regions_list), replace = F), title = NULL, subtitle = NULL, caption = NULL, xlab = "Position (bp)", ylab = "Chromosome", legend = "right", draw_points = TRUE, coord_flip = TRUE)
 }
 \arguments{
 \item{chrom_sizes}{Character of lenght 1 or dataframe. Path to the chrom.sizes file or data frame with the names of the chromosomes and their sizes. The file must not contain column names.}
@@ -12,6 +12,10 @@ chromRegions(chrom_sizes, regions, chr_exclude = c("Un", "Random", "JH", "GL", "
 \item{regions_list}{(Named) List of character vectors or dataframes. List with paths to BED/TSV files or dataframes with chromosome names, start, end, region id, length and strand. Strand must be "+", "-" or ".".}
 
 \item{regions_names}{Character of length equal to regions_list. Names of the input regions. Default: names(regions_list).}
+
+\item{regions_order}{Character of length equal to regions_list. Names of the input regions in the desired order. Default: names(regions_list).}
+
+\item{colors}{Character of length 2 or of length equal to regions_list. Colors of the input regions. If col_by_strand is FALSE, the length must be equal to the input regions, if col_by_strand is TRUE, the length must be 2. Default: sample(x = colors(), size = length(regions_list), replace = F).}
 
 \item{col_by_strand}{Logical of length 1. If TRUE, it colors the drawn regions by their strandness. If strand fieald contains any "." (i.e. ChiP-seq data), it is internally turned to FALSE. Default = FALSE.}
 
@@ -34,8 +38,6 @@ chromRegions(chrom_sizes, regions, chr_exclude = c("Un", "Random", "JH", "GL", "
 \item{draw_points}{Logical of lenght 1. If TRUE, draws points in each of the drawn regions. Default: TRUE}
 
 \item{coord_flip}{Logical of lenght 1. If TRUE, change the position of the axes (Y axis is position and X is chromosome). Default: FALSE}
-
-\item{regions_colors}{Character of length 2 or of length equal to regions_list. Colors of the input regions. If col_by_strand is FALSE, the length must be equal to the input regions, if col_by_strand is TRUE, the length must be 2. Default: sample(x = colors(), size = length(regions_list), replace = F).}
 }
 \description{
 Function that draws the chromosomes and the position of the desired regions.
