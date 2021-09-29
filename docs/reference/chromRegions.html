@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0</span>
       </span>
     </div>
 
@@ -103,7 +103,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/00-install.html">Install plotmics</a>
+      <a href="../articles/00-install_and_sessioninfo.html">Install plotmics + Session info</a>
     </li>
     <li>
       <a href="../articles/01-chromReads.html">chromReads()</a>
@@ -137,6 +137,9 @@
     </li>
     <li>
       <a href="../articles/11-chromRegions.html">chromRegions()</a>
+    </li>
+    <li>
+      <a href="../articles/12-circleRegions.html">chromRegions()</a>
     </li>
   </ul>
 </li>
@@ -196,8 +199,8 @@
       <td><p>Character of length 2 or of length equal to regions_list. Colors of the input regions. If col_by_strand is FALSE, the length must be equal to the input regions, if col_by_strand is TRUE, the length must be 2. Default: sample(x = colors(), size = length(regions_list), replace = F).</p></td>
     </tr>
     <tr>
-      <th>col_by_strand</th>
-      <td><p>Logical of length 1. If TRUE, it colors the drawn regions by their strandness. If strand fieald contains any "." (i.e. ChiP-seq data), it is internally turned to FALSE. Default = FALSE.</p></td>
+      <th>color_by</th>
+      <td><p>Character of length 1. One of 'region', 'strand' or 'extra'. If 'region', colours by the regions in 'regions_list'. If 'strand', colours by strand. If 'extra' colours by the grouping provided field in 'extra_info' (if provided).</p></td>
     </tr>
     <tr>
       <th>chr_exclude</th>
@@ -221,7 +224,7 @@
     </tr>
     <tr>
       <th>ylab</th>
-      <td><p>Character of length 1. Title of the X axis. Default: "Position (bp)"</p></td>
+      <td><p>Character of length 1. Title of the X axis. Default: ""</p></td>
     </tr>
     <tr>
       <th>xlab</th>
@@ -238,6 +241,14 @@
     <tr>
       <th>coord_flip</th>
       <td><p>Logical of lenght 1. If TRUE, change the position of the axes (Y axis is position and X is chromosome). Default: FALSE</p></td>
+    </tr>
+    <tr>
+      <th>extra_info</th>
+      <td><p>NULL or (named) list of length equal to 'regions_list', and with the same order. List of path to files or list of data.frames with two columns containing the id column of the regions contained in each set of 'regions_list' and a column with extra (discrete) information. Default: NULL.</p></td>
+    </tr>
+    <tr>
+      <th>size_y_text</th>
+      <td><p>NULL or numeric of length 1. If NULL, do not draw the text on the Y axis (position in bp). If numeric, the size of the text in the Y axis. Default: NULL</p></td>
     </tr>
     </table>
 

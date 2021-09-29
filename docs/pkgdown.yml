@@ -2,7 +2,7 @@ pandoc: '2.12'
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
-  00-install: 00-install.html
+  00-install_and_sessioninfo: 00-install_and_sessioninfo.html
   01-chromReads: 01-chromReads.html
   02-barDEGs: 02-barDEGs.html
   03-volcanoPlot: 03-volcanoPlot.html
@@ -14,5 +14,6 @@ articles:
   09-expressionHeatmap: 09-expressionHeatmap.html
   10-expressionHeatmap2: 10-expressionHeatmap2.html
   11-chromRegions: 11-chromRegions.html
-last_built: 2021-09-24T10:54Z
+  12-circleRegions: 12-circleRegions.html
+last_built: 2021-09-29T15:51Z
 

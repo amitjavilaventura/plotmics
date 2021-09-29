@@ -138,16 +138,16 @@ chromRegions(chrom_sizes  = "../testdata/mm10.chrom.sizes",
              regions_list = regions_list,
              colors       = c("Black", "Yellow", "Green"))
 ```
-If you don't want to color by strand, just turn `strand_color` to NULL. In this case, the color of the region will be defined by `regions_colors`, which must be a character vector with two colors. In case that only one region is supplied (`regions` argument), only the first color will be used, but if a second set of regions is suppplied (`regions2` argument), both values will be used.
+If you want to color by strand, just turn `color_by` to `"strand"`.
 
 ```{r}
 chromRegions(chrom_sizes   = "../testdata/mm10.chrom.sizes", 
-             regions_list = regions_list,
+             regions_list  = regions_list,
              colors        = c("Darkgreen", "Darkred"),
-             col_by_strand = TRUE)
+             color_by      = "strand")
 ```
 
-Now, imagine that we have regions that do not have a defined strand (e.g. most ChIP-seq peaks). In this case, the `col_by_strand` is internally converted to FALSE and the regions are colored by region set (i.e. elements in `regions_list`). Look at this example with only one region set whose strand values are converted to ".".
+Now, imagine that we have regions that do not have a defined strand (e.g. most ChIP-seq peaks). In this case, the `color_by` is internally converted to `"region"` and the regions are colored by region set (i.e. elements in `regions_list`). Look at this example with only one region set whose strand values are converted to ".".
 
 ```{r}
 # Read and format regions file to have strand as "."
@@ -156,7 +156,7 @@ regions_no_strand <- list("Regions1" = read.delim("../testdata/mm10.regions.tsv"
 # Draw the plot
 chromRegions(chrom_sizes   = "../testdata/mm10.chrom.sizes", 
              regions_list  = regions_no_strand,
-             col_by_strand = T,
+             color_by      = "strand",
              colors        = c("Gold3", "Darkgreen"))
 ```
 
@@ -171,13 +171,13 @@ chromRegions(chrom_sizes   = "../testdata/mm10.chrom.sizes",
              subtitle      = "This is a subtitle")
 ```
 
-Also, the labels of the axes can be set or removed through the `xlab` and `ylab` arguments. By default, the X axis label is set to "Chromosome" and the Y axis is set to "Position (bp)", but they can be removed setting the corresponding arguments to NULL or changed to any value.
+Also, the labels of the axes can be set or removed through the `xlab` and `ylab` arguments. By default, the X axis label is set to "Chromosome" and the Y axis is set to "", but they can be removed setting the corresponding arguments to NULL or changed to any value.
 
 ```{r}
 chromRegions(chrom_sizes   = "../testdata/mm10.chrom.sizes", 
              regions_list  = regions_list,
-             xlab          = NULL, 
-             ylab          = NULL)
+             xlab          = NULL,
+             ylab          = "Position in the chromosome")
 ```
 Finally, a caption can be included in the bottom-right corner by setting the `caption` argument. By default, `caption` is set to NULL and it can be set to TRUE or any character. If `caption` is set to a character, whatever is written will be placed in the bottom-right corner. Instead, if it is set to TRUE, what will be written will be the number of regions in the input region sets.
 
@@ -211,6 +211,16 @@ chromRegions(chrom_sizes   = "../testdata/mm10.chrom.sizes",
              regions_list  = regions_list,
              legend        = "none")
 ```
+### Y axis
+
+By default, the Y axis is not plotted, which means that the `size_y_text` is set to `NULL`. However, it can be plotted by setting the `size_y_text` argument to a number which will be used as size of the text in the Y axis.
+
+```{r}
+chromRegions(chrom_sizes   = "../testdata/mm10.chrom.sizes", 
+             regions_list  = regions_list,
+             size_y_text   = 10)
+```
+
 
 ### Further costumization
 

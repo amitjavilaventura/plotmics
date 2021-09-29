@@ -1,5 +1,5 @@
 ---
-title: "Install plotmics"
+title: "Install plotmics + Session info"
 author: "Adrià Mitjavila Ventura"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
@@ -10,14 +10,21 @@ output:
     self_contained: yes
     mode: selfcontained
 vignette: >
-  %\VignetteIndexEntry{chromReads()}
+  %\VignetteIndexEntry{Install + Session info}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 4, fig.height = 4)
-devtools::load_all("..")
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 4, fig.height = 4, 
+                      warning = FALSE, error = FALSE, message = FALSE)
+
+## Required packages
+packages <- c("plyr", "dplyr", "tidyr", "stringr", "purrr", "magrittr", "reshape2", 
+              "plyranges", "ChIPpeakAnno", "pkgcond", "Rsamtools", "UpSetR", "gridExtra", "grid",
+              "ggplot2", "ggpubr", "ggrepel", "ggh4x", "ggdendro",  "ggforestplot")
+
+for (i in packages) { library(i, character.only = T) }
 ```
 
 # Install `plotmics`
@@ -34,3 +41,10 @@ if(!require(plotmics)){ devtools::install_github("amitjavilaventura/plotmics") }
 # load plotmics
 library(plotmics)
 ```
+
+# Session info
+
+```{r}
+sessionInfo()
+```
+

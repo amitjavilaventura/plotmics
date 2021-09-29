@@ -17,7 +17,7 @@ chromRegions(chrom_sizes, regions_list, regions_names = names(regions_list), reg
 
 \item{colors}{Character of length 2 or of length equal to regions_list. Colors of the input regions. If col_by_strand is FALSE, the length must be equal to the input regions, if col_by_strand is TRUE, the length must be 2. Default: sample(x = colors(), size = length(regions_list), replace = F).}
 
-\item{col_by_strand}{Logical of length 1. If TRUE, it colors the drawn regions by their strandness. If strand fieald contains any "." (i.e. ChiP-seq data), it is internally turned to FALSE. Default = FALSE.}
+\item{color_by}{Character of length 1. One of 'region', 'strand' or 'extra'. If 'region', colours by the regions in 'regions_list'. If 'strand', colours by strand. If 'extra' colours by the grouping provided field in 'extra_info' (if provided).}
 
 \item{chr_exclude}{Character. Regular expressions to match the chromosomes names to exclude . Default: c("Un", "Random", "JH", "GL", "\\.").}
 
@@ -29,7 +29,7 @@ chromRegions(chrom_sizes, regions_list, regions_names = names(regions_list), reg
 
 \item{caption}{Character of length 1, TRUE or NULL. Caption to be written in the bottom-right corner. If TRUE, it will write the number of regions in the input; if charachter, it will write the written caption. Default: NULL.}
 
-\item{ylab}{Character of length 1. Title of the X axis. Default: "Position (bp)"}
+\item{ylab}{Character of length 1. Title of the X axis. Default: ""}
 
 \item{xlab}{Character of lenght 1. Title of the Y axis. Default: "Chromosome".}
 
@@ -38,6 +38,10 @@ chromRegions(chrom_sizes, regions_list, regions_names = names(regions_list), reg
 \item{draw_points}{Logical of lenght 1. If TRUE, draws points in each of the drawn regions. Default: TRUE}
 
 \item{coord_flip}{Logical of lenght 1. If TRUE, change the position of the axes (Y axis is position and X is chromosome). Default: FALSE}
+
+\item{extra_info}{NULL or (named) list of length equal to 'regions_list', and with the same order. List of path to files or list of data.frames with two columns containing the id column of the regions contained in each set of 'regions_list' and a column with extra (discrete) information. Default: NULL.}
+
+\item{size_y_text}{NULL or numeric of length 1. If NULL, do not draw the text on the Y axis (position in bp). If numeric, the size of the text in the Y axis. Default: NULL}
 }
 \description{
 Function that draws the chromosomes and the position of the desired regions.

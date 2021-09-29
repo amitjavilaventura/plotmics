@@ -1,0 +1,260 @@
+---
+title: "chromRegions()"
+author: "Adrià Mitjavila Ventura"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    self_contained: yes
+    mode: selfcontained
+vignette: >
+  %\VignetteIndexEntry{chromRegions()}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, error = F, message = F,
+                      fig.align = "center", fig.width = 6, fig.height = 4)
+
+devtools::load_all("..")
+library(dplyr)
+
+chromsizes_sets <- list("Regions1" = "../testdata/mm10.chrom.sizes",
+                        "Regions2" = "../testdata/mm10.chrom.sizes",
+                        "Regions3" = "../testdata/mm10.chrom.sizes")
+regions_sets <- list("Regions1" = "../testdata/mm10.regions.tsv",
+                     "Regions2" = "../testdata/mm10.regions2.tsv",
+                     "Regions3" = "../testdata/mm10.regions3.tsv")
+
+
+plotmics::circleRegions(chromsizes_sets = chromsizes_sets, regions_sets = regions_sets)
+```
+
+
+# Load `plotmics`
+
+```{r results=FALSE}
+# load plotmics
+library(plotmics)
+```
+
+# Run `chromRegions()`
+
+`chromRegions()` takes a file with the sizes of the chromosomes and draws a `ggplot2`-based bar plot. Then takes a list of regions in a BED-like format to draw them into each chromosome. The inputs `chrom.sizes` and `regions` can be supplied as a list of character with path to the file where the information is stored or a list of data frame.
+
+## Required input
+
+The `crhom_sizes` input is:
+
+```{r}
+chromsizes_sets <- list("Regions1" = "../testdata/mm10.chrom.sizes",
+                        "Regions2" = "../testdata/mm10.chrom.sizes",
+                        "Regions3" = "../testdata/mm10.chrom.sizes")
+chromsizes_sets[[1]] %>% read.delim(header = F) %>% head()
+```
+
+The `regions_sets` is a list of characters or dataframes. It can have as many elements as wanted and it has the following structure:
+
+```{r}
+regions_sets <- list("Regions1" = "../testdata/mm10.regions.tsv",
+                     "Regions2" = "../testdata/mm10.regions2.tsv",
+                     "Regions3" = "../testdata/mm10.regions3.tsv")
+regions_sets[[1]] %>% read.delim(header = F) %>% head()
+```
+
+## Default run
+
+The default run requires only the `chromsizes_sets` and the `regions_sets` arguments, either as a lists of paths to a file or a list of data frames. Both, the `chromsizes_sets` and the `regions_sets` arguments, must have the same length and the same order, ii.e. if the regions are from different species, the chromosome sizes must be from the corresponding species in the same order. 
+
+If you provide a list with 1 element, only one circle will be drawn. If the list contains three elements, three circles will be drawn.
+
+Here we have a list of 1 element as input.
+
+```{r}
+circleRegions(chromsizes_sets = chromsizes_sets[1], regions_sets = regions_sets[1], color_by = "region")
+```
+
+And here, a list of three elements as input:
+
+```{r}
+circleRegions(chromsizes_sets = chromsizes_sets, regions_sets = regions_sets)
+```
+
+Also from a list of data frames:
+
+```{r}
+# Read the data
+chromsizes = chromsizes_sets %>% purrr::map(~read.delim(.x, header = F))
+regions = regions_sets %>% purrr::map(~read.delim(.x, header = F))
+
+circleRegions(chromsizes_sets = chromsizes, regions_sets = regions)
+```
+
+## Exclude chromosomes
+
+Very often, the genome assemblies of a lot of species have chromosomes/scaffolds with strange names, which are not nice to plot. These can be excluded using the `chr_exlude` argument with a vector of regular expressions that match the chromosomes to exclude. By default `chr_exclude` removes the most usuall *strange* chromosomes, but if you want to remove more chromosomes or don't want to remove any, you can change the `chr_exclude` argument. 
+
+An example that excludes all the chromosomes that contain a dot in the name:
+
+```{r}
+circleRegions(chromsizes_sets = chromsizes_sets, regions_sets = regions_sets, color_by = "region", chr_exclude = "\\.")
+```
+
+Here you have an example that does not remove any chromosome.
+
+```{r}
+circleRegions(chromsizes_sets = chromsizes_sets, regions_sets = regions_sets, chr_exclude = " ")
+```
+Make sure to exclude all the non desired chromosomes to avoid the strange effect seen in the previous plot.
+
+## Paired regions
+
+Imagine we have, for each element `regions_set`, regions that are paired (i.e. have the same id (4th column) in different elements) and we want to connect them. We can do this by setting the `paired` argument to `TRUE`, which will cause the function to draw a line connecting the paired regions. The color of the line can be controlled with `paired_color`, which is `"Blue"` by default..
+
+```{r}
+# Read the data
+chromsizes = chromsizes_sets %>% purrr::map(~read.delim(.x, header = F))
+regions = regions_sets %>% purrr::map(~read.delim(.x, header = F))
+
+# Subset one of the regions and enter it as element of regions_sets
+regions[[2]] <- regions[[1]][sample(1:100, 20, replace = F),]
+regions[[3]] <- regions[[1]][sample(1:100, 20, replace = F),]
+
+circleRegions(chromsizes_sets = chromsizes, 
+              regions_sets = regions,
+              paired = T, paired_color = "Darkblue")
+```
+
+## Customization
+
+### Draw the points
+
+By default, `circleRegions()` draws a line/rectangle and a point in the middle of each region. To avoid drawing the points, the argument `draw_points` can be set to FALSE.
+
+```{r}
+circleRegions(chromsizes_sets = chromsizes_sets, regions_sets = regions_sets, draw_points = F)
+```
+
+### Chromosome labels
+
+By default, if all the elements in `chromsizes_sets` are equal, `circleRegions()` only draws the labels of the chromosomes in the outer side of the most external circle. However, if they are not equal (i.e. different file names or different information in the dataframe (only between first and second elements)), they are plotted in all the circles. The color of the labels can be controlled with `chr_label`, which is `"Black"` by default.
+
+```{r}
+chromsizes_sets2 <- list("Regions1" = "../testdata/mm10.chrom.sizes",
+                         "Regions2" = "../testdata/mm10.chrom.sizes2")
+
+circleRegions(chromsizes_sets = chromsizes_sets2, regions_sets = regions_sets[1:2], chr_label = "Red")
+```
+
+### Chromosome lines
+
+By default, `circleRegions()` does not plot any lines to separate the chromosomes. This can be reversed by setting `chr_line` to `TRUE`.
+
+```{r}
+circleRegions(chromsizes_sets = chromsizes_sets, regions_sets = regions_sets, chr_line = T)
+```
+
+### Color
+
+By default, the regions are colored by region (i.e. each element in `regions_sets`). This can be controlled with the `colors` argument, which accepts a character vector with valid color names and the same length as `regions_sets` 
+
+```{r}
+circleRegions(chromsizes_sets = chromsizes_sets, regions_sets = regions_sets, color_by = "region")
+```
+
+If you want to color by strand, just turn `color_by` to `"strand"`. 
+
+```{r}
+circleRegions(chromsizes_sets = chromsizes_sets, regions_sets = regions_sets, color_by = "strand")
+```
+
+Now, imagine that we have regions that do not have a defined strand (e.g. most ChIP-seq peaks). In this case, the `col_by_strand` is internally converted to FALSE and the regions are colored by region set (i.e. elements in `regions_sets`). Look at this example with only one region set whose strand values are converted to ".".
+
+```{r}
+# Read and format regions file to have strand as "."
+regions_no_strand <- read.delim("../testdata/mm10.regions.tsv", header = F) %>% dplyr::mutate(V6 = ".")
+
+# Draw the plot
+circleRegions(chromsizes_sets = chromsizes_sets, 
+              regions_sets = list(regions_no_strand, regions_no_strand, regions_no_strand), 
+              sets_names   = c(paste("Regions", 1:3)), # set colnames because they are mandatory.
+              color_by = "strand")
+
+```
+
+If `extra_info` is added, `color_by` can be set to `"extra"`, which will cause `circleRegions` to be coloured by the added information. `extra_info` must be a list of files or data frames with the id of the regions in `region_sets` (4th column) and an extra column with the (discrete) information you want to use to colour the regions.
+
+This is how a file/data frame within `extra_info` should look like.
+
+```{r}
+# Read and format regions files
+extra <- purrr::map(regions_sets, read.delim, header = FALSE) %>% 
+  purrr::set_names(nm = c("extra1", "2extra", "3")) %>% # this is to set the names of the extra info, which will be used as "extra" column
+  purrr::map(~dplyr::select(.x, "id" = V4)) %>%
+  purrr::imap(~dplyr::mutate(.x, extra = .y))
+
+head(extra[[1]])
+```
+
+And this is how the plot looks like.
+
+```{r}
+# Draw the plot
+circleRegions(chromsizes_sets = chromsizes_sets[1:3], 
+              regions_sets = regions_sets, 
+              sets_names   = c(paste("Regions", 1:3)), # set colnames because they are mandatory.
+              extra_info = extra,
+              color_by = "extra")
+```
+
+
+### Titles
+
+Title and subtitle can be supplied through the arguments `title` and `subtitle`, respectively. By default, they are set to NULL, but can accept a character of length 1.
+
+```{r}
+circleRegions(chromsizes_sets = chromsizes_sets, 
+              regions_sets    = regions_sets, 
+              title           = "This is a title", 
+              subtitle        = "This is a subtitle")
+```
+
+Finally, a caption can be included in the bottom-right corner by setting the `caption` argument. By default, `caption` is set to NULL and it can be set to TRUE or any character. If `caption` is set to a character, whatever is written will be placed in the bottom-right corner. Instead, if it is set to TRUE, what will be written will be the number of regions in the input region sets.
+
+Here there is an example with any character:
+
+```{r}
+circleRegions(chromsizes_sets = chromsizes_sets, 
+              regions_sets    = regions_sets, 
+              caption         = "This is a caption")
+```
+
+On the other hand, if `caption` is set to TRUE, the caption will show the number of regions in the input regions set (`regions_sets`).
+
+```{r}
+circleRegions(chromsizes_sets = chromsizes_sets, 
+              regions_sets    = regions_sets, 
+              caption         = TRUE)
+```
+
+### Legend 
+
+The position of the legend is, by default, the bottom of the plot. This can be changed by changing the `legend` argument to one of "bottom", "right", "top", "left" or "none" (no legend). The `legend` argument is passed through `ggpubr::theme_pubr()`.
+
+```{r}
+circleRegions(chromsizes_sets = chromsizes_sets, 
+              regions_sets    = regions_sets, 
+              legend          = "top")
+```
+```{r}
+circleRegions(chromsizes_sets = chromsizes_sets, 
+              regions_sets    = regions_sets, 
+              legend          = "none")
+```
+
+### Further costumization
+
+Since `chromRegions()` outputs a `ggplot2`-based bar plot, it can be further customized like any other `ggplot2`-based plot.
