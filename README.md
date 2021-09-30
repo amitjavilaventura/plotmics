@@ -1,6 +1,6 @@
 # `plotmics`  <img src="logo.png" align="right" alt="" width="350" />
 
-Visualize omics and sequencing data in R.
+_pl**O**t**MICS**_: Visualization of omics and sequencing data in R.
 
 ## Information
 
@@ -73,19 +73,20 @@ The version history of `plotmics` is shown below:
   + Add possibility to color the NA values in `expressionHeatmap()` and `expressionHeatmap2()`.
   + Change title format in `barDEGs()`
   
-* `v2.0.0`:
+* `v2.0.0` *(2021-09-22)*:
   + Add new function `chromRegions()`.
   
-* `v2.1.0`:
-  + Modify `chromRegions()` to take a list of regions as input.
+* `v2.1.0` *(2021-09-26)*:
+  + Allow `chromRegions()` to take a list of regions as input.
   + Allow `chromRegions()` to order the region sets.
   
-* `v3.0.0`:
+* `v3.0.0` *(2021-09-28)*:
   + Add new function `circleRegions()`.
   + Allow `chromRegions()` to color by different parameters.
   + Allow `chromRegions()` to add extra info.
   + Allow `chromRegions()` to remove or change size of text in the Y axis.
   
-* `v3.0.1`:
+* `v3.0.1` *(2021-09-30)*:
   + Fix a minor bug about plotting the chromosome labels in `circleRegions()`.
   + Fix a minor bug in `ggVennPeaks()` that caused a intersection with one region more than expected.
+  + Remove `pkgcond` from required packages of `getVennCounts()`.

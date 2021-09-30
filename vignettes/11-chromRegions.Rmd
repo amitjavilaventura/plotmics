@@ -1,7 +1,6 @@
 ---
 title: "chromRegions()"
 author: "Adrià Mitjavila Ventura"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   html_document:
     toc: true
@@ -31,6 +30,9 @@ regions_list <- list("Regions1" = "../testdata/mm10.regions.tsv",
 plotmics::chromRegions(chrom_sizes = chrom_sizes, regions_list = regions_list)
 ```
 
+Last updated: `r Sys.Date()`
+
+***
 
 # Load `plotmics`
 

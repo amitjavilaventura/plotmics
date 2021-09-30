@@ -1,7 +1,6 @@
 ---
 title: "chromReads()"
 author: "Adrià Mitjavila Ventura"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   html_document:
     toc: true
@@ -16,9 +15,14 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 4, fig.height = 4)
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 4, fig.height = 4, 
+                      warning = FALSE, error = FALSE, message = FALSE)
 devtools::load_all("..")
 ```
+
+Last updated: `r Sys.Date()`
+
+***
 
 # Load `plotmics`
 

@@ -1,7 +1,6 @@
 ---
 title: "Install plotmics + Session info"
 author: "Adrià Mitjavila Ventura"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   html_document:
     toc: true
@@ -26,6 +25,10 @@ packages <- c("plyr", "dplyr", "tidyr", "stringr", "purrr", "magrittr", "reshape
 
 for (i in packages) { library(i, character.only = T) }
 ```
+
+Last updated: `r Sys.Date()`
+
+***
 
 # Install `plotmics`
 

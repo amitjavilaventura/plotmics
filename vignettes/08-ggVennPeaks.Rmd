@@ -1,7 +1,6 @@
 ---
 title: "ggVennPeaks()"
 author: "Adrià Mitjavila Ventura"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   html_document:
     toc: true
@@ -16,7 +15,8 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 4, fig.height = 4)
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 4, fig.height = 4, 
+                      warning = FALSE, error = FALSE, message = FALSE)
 devtools::load_all("..")
 library(dplyr)
 library(purrr)
@@ -27,6 +27,9 @@ peak_list <- list.files("../testdata", "peak", full.names = T, recursive = T) %>
 ggVennPeaks(peak_list = peak_list)
 ```
 
+Last updated: `r Sys.Date()`
+
+***
 
 # Load `plotmics`
 

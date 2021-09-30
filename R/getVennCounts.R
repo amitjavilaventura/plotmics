@@ -20,12 +20,12 @@
 
 getVennCounts <- function(peaks, conds = names(peaks), conds_order = conds, plot = F){
 
-  require(pkgcond)
-  require(purrr) %>% suppress_messages() %>% suppress_warnings()
-  require(dplyr) %>% suppress_messages() %>% suppress_warnings()
-  require(plyranges) %>% suppress_messages() %>% suppress_warnings()
-  require(magrittr) %>% suppress_messages() %>% suppress_warnings()
-  require(ChIPpeakAnno) %>% suppress_messages() %>% suppress_warnings()
+  # Load required packages
+  suppressPackageStartupMessages(require(dplyr, quietly = T))
+  suppressPackageStartupMessages(require(purrr, quietly = T))
+  suppressPackageStartupMessages(require(plyranges, quietly = T))
+  suppressPackageStartupMessages(require(magrittr, quietly = T))
+  suppressPackageStartupMessages(require(ChIPpeakAnno, quietly = T))
 
   if(!is.list(peaks)){ stop("'peaks' must be a (named) list of dataframes with the columns 'seqnames', 'start' and 'end'.") }
   else if(is.null(conds)){ stop("'conds' must a not-NULL character vector with the conditions of the data frames in 'peaks.") }

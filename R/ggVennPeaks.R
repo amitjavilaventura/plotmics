@@ -27,7 +27,6 @@
 #' @param title Character of length 1. Title of the plot. Can be NULL. Default: ""
 #' @param subtitle Character of length 1. Title of the plot. Can be NULL. Default: ""
 #'
-#'
 #' @export
 
 ggVennPeaks <- function(peak_list, peak_names = names(peak_list), percent = T,
