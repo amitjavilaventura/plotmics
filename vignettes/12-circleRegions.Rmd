@@ -102,14 +102,6 @@ An example that excludes all the chromosomes that contain a dot in the name:
 ```{r}
 circleRegions(chromsizes_sets = chromsizes_sets, regions_sets = regions_sets, color_by = "region", chr_exclude = "\\.")
 ```
-
-Here you have an example that does not remove any chromosome.
-
-```{r}
-circleRegions(chromsizes_sets = chromsizes_sets, regions_sets = regions_sets, chr_exclude = " ")
-```
-Make sure to exclude all the non desired chromosomes to avoid the strange effect seen in the previous plot.
-
 ## Paired regions
 
 Imagine we have, for each element `regions_set`, regions that are paired (i.e. have the same id (4th column) in different elements) and we want to connect them. We can do this by setting the `paired` argument to `TRUE`, which will cause the function to draw a line connecting the paired regions. The color of the line can be controlled with `paired_color`, which is `"Blue"` by default..

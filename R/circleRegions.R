@@ -232,9 +232,13 @@ circleRegions <- function(chromsizes_sets,
     dplyr::mutate(region = factor(region, levels = sets_names))
 
 
-  if(length(chromsizes_sets)>1 & identical(chromsizes_sets[1], chromsizes_sets[2])){
-    regions_chrom_filt <- regions_chrom %>%
-      dplyr::mutate(seqnames = if_else(region == sets_names[1], seqnames, NULL))
+  if(length(chromsizes_sets)>1){
+    if(identical(chromsizes_sets[[1]], chromsizes_sets[[2]])){
+      regions_chrom_filt <- regions_chrom %>%
+        dplyr::mutate(seqnames = if_else(region == sets_names[1], seqnames, NULL))
+    } else{
+      regions_chrom_filt <- regions_chrom
+    }
   } else {
     regions_chrom_filt <- regions_chrom
   }

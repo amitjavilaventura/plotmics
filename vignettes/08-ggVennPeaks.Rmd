@@ -61,7 +61,7 @@ peak_list[[1]][1:5, 1:7]
 `getVennCounts()` calls `ChIPpeakAnno::makeVennDiagram()`, retrieves the Venn counts (number of overlaps between different sets of peaks) and builds a matrix of the peaks present in each set.
 
 ```{r eval=FALSE}
-venn_counts <- getVennCounts(peak_list)
+venn_counts <- getVennCounts(peaks = peak_list)
 ```
 
 ```{r eval=FALSE}

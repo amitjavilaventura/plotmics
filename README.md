@@ -43,7 +43,11 @@ If you want to contribute to this package, make a post in the issues section in 
 
 If you use this package, please cite [this repository](https://github.com/amitjavilaventura/plotmics) and give it a star.
 
-## Updates
+## Versions
+
+`plotmics` versions have the structure of `1.2.3`. The first number (*major*) implies the addition of a function and/or major changes in the packages; the second number (*minor*) implies the addition of new features to a function and possible corrections; the third number (*micro*) implies the correction of minor bugs. til now:
+
+The version history of `plotmics` is shown below:
 
 * `v1.0.0`: 
 
@@ -81,3 +85,7 @@ If you use this package, please cite [this repository](https://github.com/amitja
   + Allow `chromRegions()` to color by different parameters.
   + Allow `chromRegions()` to add extra info.
   + Allow `chromRegions()` to remove or change size of text in the Y axis.
+  
+* `v3.0.1`:
+  + Fix a minor bug about plotting the chromosome labels in `circleRegions()`.
+  + Fix a minor bug in `ggVennPeaks()` that caused a intersection with one region more than expected.

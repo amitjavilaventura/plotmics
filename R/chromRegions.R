@@ -7,8 +7,6 @@
 #' @description
 #' Function that draws the chromosomes and the position of the desired regions.
 #'
-#' @usage chromRegions(chrom_sizes, regions_list, regions_names = names(regions_list), regions_order = names(regions_list), chr_exclude = c("Un", "Random", "JH", "GL", "\\."), chr_order = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,"X","Y","M","MT"), col_by_strand = FALSE, regions_names = names(regions_list), regions_colors = sample(x = colors(), size = length(regions_list), replace = F), title = NULL, subtitle = NULL, caption = NULL, xlab = "Position (bp)", ylab = "Chromosome", legend = "right", draw_points = TRUE, coord_flip = TRUE)
-#'
 #' @param chrom_sizes Character of lenght 1 or dataframe. Path to the chrom.sizes file or data frame with the names of the chromosomes and their sizes. The file must not contain column names.
 #' @param regions_list (Named) List of character vectors or dataframes. List with paths to BED/TSV files or dataframes with chromosome names, start, end, region id, length and strand. Strand must be "+", "-" or ".".
 #' @param chr_exclude Character. Regular expressions to match the chromosomes names to exclude . Default: c("Un", "Random", "JH", "GL", "\\.").

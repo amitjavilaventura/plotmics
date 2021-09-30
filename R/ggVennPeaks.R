@@ -45,7 +45,7 @@ ggVennPeaks <- function(peak_list, peak_names = names(peak_list), percent = T,
 
   # Check that inputs are OK
   if(!is.list(peak_list)){ stop("'peak_list' must be a (named) list of dataframes with the columns 'seqnames', 'start' and 'end'.") }
-  else if(length(peak_list) != length(peak_names)){ stop("'peak_names' must be a character vector with the same length as 'peak_list'.") }
+  if(length(peak_list) != length(peak_names)){ stop("'peak_names' must be a character vector with the same length as 'peak_list'.") }
 
   # Get Venn Counts and the peaks in each set
   x <- getVennCounts(peaks = peak_list, conds = peak_names)
@@ -59,7 +59,7 @@ ggVennPeaks <- function(peak_list, peak_names = names(peak_list), percent = T,
     else if(length(peak_list) == 5){ in_fill <- c("blue", "gold3", "pink", "green", "orange") }
   }
 
-  # Transform the matrix of thee peaks in each set in ordeer to plot the Venn
+  # Transform the matrix of the peaks in each set in order to plot the Venn
   y <- x$matrix %>%
     as_tibble() %>%
     magrittr::set_colnames(c("Peak", paste("cond", 1:length(peak_list), sep = ""))) %>%
@@ -68,7 +68,8 @@ ggVennPeaks <- function(peak_list, peak_names = names(peak_list), percent = T,
     dplyr::select(-Peak) %>%
     dplyr::as_tibble() %>%
     as.list() %>%
-    purrr::set_names(peak_names)
+    purrr::set_names(peak_names) %>%
+    purrr::map(~na.omit(.x))
 
   # Draw the Venn diagram with ggvenn
   venn <- ggvenn::ggvenn(data = y, show_percentage = percent,
