@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Visualize Omics And Seequencing Data In R • plotmics</title>
+<title>plOtMICS: Visualization of Omics And Sequencing Data In R • plotmics</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Visualize Omics And Seequencing Data In R">
+<script src="pkgdown.js"></script><meta property="og:title" content="plOtMICS: Visualization of Omics And Sequencing Data In R">
 <meta property="og:description" content="The goal of this package is to provide simple functions to visualize several types of omics and sequencing data.">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -125,7 +125,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#plotmics-" class="anchor"></a><code>plotmics</code> <img src="logo.png" align="right" alt="" width="350">
 </h1></div>
-<p>Visualize omics and sequencing data in R.</p>
+<p><em>pl<strong>O</strong>t<strong>MICS</strong></em>: Visualization of omics and sequencing data in R.</p>
 <div id="information" class="section level2">
 <h2 class="hasAnchor">
 <a href="#information" class="anchor"></a>Information</h2>
@@ -232,20 +232,20 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 </ul>
 </li>
 <li>
-<p><code>v2.0.0</code>:</p>
+<p><code>v2.0.0</code> <em>(2021-09-22)</em>:</p>
 <ul>
 <li>Add new function <code><a href="reference/chromRegions.html">chromRegions()</a></code>.</li>
 </ul>
 </li>
 <li>
-<p><code>v2.1.0</code>:</p>
+<p><code>v2.1.0</code> <em>(2021-09-26)</em>:</p>
 <ul>
-<li>Modify <code><a href="reference/chromRegions.html">chromRegions()</a></code> to take a list of regions as input.</li>
+<li>Allow <code><a href="reference/chromRegions.html">chromRegions()</a></code> to take a list of regions as input.</li>
 <li>Allow <code><a href="reference/chromRegions.html">chromRegions()</a></code> to order the region sets.</li>
 </ul>
 </li>
 <li>
-<p><code>v3.0.0</code>:</p>
+<p><code>v3.0.0</code> <em>(2021-09-28)</em>:</p>
 <ul>
 <li>Add new function <code><a href="reference/circleRegions.html">circleRegions()</a></code>.</li>
 <li>Allow <code><a href="reference/chromRegions.html">chromRegions()</a></code> to color by different parameters.</li>
@@ -254,10 +254,11 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 </ul>
 </li>
 <li>
-<p><code>v3.0.1</code>:</p>
+<p><code>v3.0.1</code> <em>(2021-09-30)</em>:</p>
 <ul>
 <li>Fix a minor bug about plotting the chromosome labels in <code><a href="reference/circleRegions.html">circleRegions()</a></code>.</li>
 <li>Fix a minor bug in <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code> that caused a intersection with one region more than expected.</li>
+<li>Remove <code>pkgcond</code> from required packages of <code><a href="reference/getVennCounts.html">getVennCounts()</a></code>.</li>
 </ul>
 </li>
 </ul>

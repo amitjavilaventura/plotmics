@@ -15,6 +15,7 @@
 #' @param conds_order Character of the same length as 'conds'. Same values as in 'conds' but with the desired order of priority. Default: 'conds'.
 #' @param plot Logical of lenght 1. Whether to draw the the 'makeVennDiagram()' plot or not. Default: FALSE
 #'
+#'
 #' @export
 
 
