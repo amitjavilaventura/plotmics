@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.0</span>
       </span>
     </div>
 
@@ -125,7 +125,6 @@
       <h1 data-toc-skip>ggVennPeaks()</h1>
                         <h4 class="author">Adrià Mitjavila Ventura</h4>
             
-            <h4 class="date">30 septiembre, 2021</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/amitjavilaventura/plotmics/blob/master/vignettes/08-ggVennPeaks.Rmd"><code>vignettes/08-ggVennPeaks.Rmd</code></a></small>
       <div class="hidden name"><code>08-ggVennPeaks.Rmd</code></div>
@@ -134,6 +133,8 @@
 
     
     
+<p>Last updated: 2021-10-04</p>
+<hr>
 <div id="load-plotmics" class="section level1">
 <h1 class="hasAnchor">
 <a href="#load-plotmics" class="anchor"></a>Load <code>plotmics</code>
@@ -166,15 +167,20 @@
 ## 3    chr13 20147802 20148111   310      *  peak_696            Intron
 ## 4     chr4 56639205 56639610   406      * peak_1896 Distal Intergenic
 ## 5    chr18 61614281 61614892   612      * peak_1373 Distal Intergenic</code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">peak_list</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">10</span><span class="op">:</span><span class="fl">30</span>,<span class="op">]</span><span class="op">$</span><span class="va">strand</span> <span class="op">=</span> <span class="st">"+"</span>
+<span class="va">peak_list</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">50</span><span class="op">:</span><span class="fl">80</span>,<span class="op">]</span><span class="op">$</span><span class="va">strand</span> <span class="op">=</span> <span class="st">"-"</span>
+<span class="va">peak_list</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">10</span><span class="op">:</span><span class="fl">30</span>,<span class="op">]</span><span class="op">$</span><span class="va">strand</span> <span class="op">=</span> <span class="st">"+"</span>
+<span class="va">peak_list</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">50</span><span class="op">:</span><span class="fl">80</span>,<span class="op">]</span><span class="op">$</span><span class="va">strand</span> <span class="op">=</span> <span class="st">"-"</span></code></pre></div>
 </div>
 <div id="getvenncounts" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getvenncounts" class="anchor"></a><code>getVennCounts()</code>
 </h2>
 <p><code><a href="../reference/getVennCounts.html">getVennCounts()</a></code> calls <code><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/makeVennDiagram.html">ChIPpeakAnno::makeVennDiagram()</a></code>, retrieves the Venn counts (number of overlaps between different sets of peaks) and builds a matrix of the peaks present in each set.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">venn_counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getVennCounts.html">getVennCounts</a></span><span class="op">(</span>peaks <span class="op">=</span> <span class="va">peak_list</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">venn_counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getVennCounts.html">getVennCounts</a></span><span class="op">(</span>peaks <span class="op">=</span> <span class="va">peak_list</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">venn_counts</span><span class="op">$</span><span class="va">vennCounts</span>
 <span class="co">#      PeakX PeakY Counts</span>
 <span class="co"># [1,]     0     0      0</span>
@@ -183,7 +189,7 @@
 <span class="co"># [4,]     1     1     23</span>
 <span class="co"># attr(,"class")</span>
 <span class="co"># [1] "VennCounts"</span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">venn_counts</span><span class="op">$</span><span class="va">matrix</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="op">]</span>
 <span class="co"># peak    PeakX   PeakY</span>
 <span class="co"># peak1   0       1</span>
@@ -196,11 +202,8 @@
 <div id="default-run" class="section level2">
 <h2 class="hasAnchor">
 <a href="#default-run" class="anchor"></a>Default run</h2>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span><span class="op">)</span></code></pre></div>
-<pre><code>## Using Peak as id variables</code></pre>
-<pre><code>## Scale for 'y' is already present. Adding another scale for 'y', which will
-## replace the existing scale.</code></pre>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-6-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="customize-plot" class="section level2">
@@ -209,88 +212,56 @@
 <div id="set-names" class="section level3">
 <h3 class="hasAnchor">
 <a href="#set-names" class="anchor"></a>Set names</h3>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, peak_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Condition 1"</span>, <span class="st">"Condition 2"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## Using Peak as id variables</code></pre>
-<pre><code>## Scale for 'y' is already present. Adding another scale for 'y', which will
-## replace the existing scale.</code></pre>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-7-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="title-and-subtitle" class="section level3">
 <h3 class="hasAnchor">
 <a href="#title-and-subtitle" class="anchor"></a>Title and subtitle</h3>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, peak_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Condition 1"</span>, <span class="st">"Condition 2"</span><span class="op">)</span>, 
             title <span class="op">=</span> <span class="st">"This is a title"</span>, subtitle <span class="op">=</span> <span class="st">"This is a subtitle"</span><span class="op">)</span></code></pre></div>
-<pre><code>## Using Peak as id variables</code></pre>
-<pre><code>## Scale for 'y' is already present. Adding another scale for 'y', which will
-## replace the existing scale.</code></pre>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-8-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="remove-percentage" class="section level3">
 <h3 class="hasAnchor">
 <a href="#remove-percentage" class="anchor"></a>Remove percentage</h3>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, percent <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></code></pre></div>
-<pre><code>## Using Peak as id variables</code></pre>
-<pre><code>## Warning in sprintf("%d", n, 100 * n/sum(n)): one argument not used by format
-## '%d'</code></pre>
-<pre><code>## Scale for 'y' is already present. Adding another scale for 'y', which will
-## replace the existing scale.</code></pre>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-9-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="set-colors" class="section level3">
 <h3 class="hasAnchor">
 <a href="#set-colors" class="anchor"></a>Set colors</h3>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, in_fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Green"</span>, <span class="st">"Darkred"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## Using Peak as id variables</code></pre>
-<pre><code>## Scale for 'y' is already present. Adding another scale for 'y', which will
-## replace the existing scale.</code></pre>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-10-1.png" width="384" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, in_fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Green"</span>, <span class="st">"Darkred"</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">.2</span><span class="op">)</span></code></pre></div>
-<pre><code>## Using Peak as id variables</code></pre>
-<pre><code>## Scale for 'y' is already present. Adding another scale for 'y', which will
-## replace the existing scale.</code></pre>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-11-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="other-colors" class="section level3">
 <h3 class="hasAnchor">
 <a href="#other-colors" class="anchor"></a>Other colors</h3>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, out_color <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></code></pre></div>
-<pre><code>## Using Peak as id variables</code></pre>
-<pre><code>## Scale for 'y' is already present. Adding another scale for 'y', which will
-## replace the existing scale.</code></pre>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-12-1.png" width="384" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, text_color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
-<pre><code>## Using Peak as id variables</code></pre>
-<pre><code>## Scale for 'y' is already present. Adding another scale for 'y', which will
-## replace the existing scale.</code></pre>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-13-1.png" width="384" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, name_color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## Using Peak as id variables</code></pre>
-<pre><code>## Scale for 'y' is already present. Adding another scale for 'y', which will
-## replace the existing scale.</code></pre>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-14-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="text-sizes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#text-sizes" class="anchor"></a>Text sizes</h3>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, label_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
-<pre><code>## Using Peak as id variables</code></pre>
-<pre><code>## Scale for 'y' is already present. Adding another scale for 'y', which will
-## replace the existing scale.</code></pre>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-15-1.png" width="384" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, name_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
-<pre><code>## Using Peak as id variables</code></pre>
-<pre><code>## Scale for 'y' is already present. Adding another scale for 'y', which will
-## replace the existing scale.</code></pre>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-16-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="further-costumization" class="section level3">
