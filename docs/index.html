@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.0</span>
       </span>
     </div>
 
@@ -199,14 +199,16 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 <p><code>v1.1.0</code>:</p>
 <ul>
 <li>Rescale <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code> output to remove blank space around the Venn diagram.</li>
-<li>Add possibility to scale (<code><a href="https://rdrr.io/r/base/scale.html">scale()</a></code>) data by rows or columns in <code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>.</li>
+<li>Add possibility to scale (<code><a href="https://rdrr.io/r/base/scale.html">scale()</a></code>) data by rows or columns in <code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>. <br>
+</li>
 </ul>
 </li>
 <li>
 <p><code>v1.1.1</code>:</p>
 <ul>
 <li>Add minor formatting options in <code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>, such as the possibility to remove the gene names, change sizes of texts and titles, change the color of the border of each cell, etc.</li>
-<li>Add minor changes in <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code> in order to make it easier to visualize more peaks sets.</li>
+<li>Add minor changes in <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code> in order to make it easier to visualize more peaks sets. <br>
+</li>
 </ul>
 </li>
 <li>
@@ -214,34 +216,38 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 <ul>
 <li>Change chromosome filtering method in <code><a href="reference/chromReads.html">chromReads()</a></code>.</li>
 <li>Allow dataframes without <code>DEG</code> column as input for <code><a href="reference/volcanoPlot.html">volcanoPlot()</a></code>.</li>
-<li>Change <code>scale = FALSE</code> for <code>scale = "none"</code> in <code><a href="reference/volcanoPlot.html">volcanoPlot()</a></code>.</li>
+<li>Change <code>scale = FALSE</code> for <code>scale = "none"</code> in <code><a href="reference/volcanoPlot.html">volcanoPlot()</a></code>. <br>
+</li>
 </ul>
 </li>
 <li>
 <p><code>v1.1.3</code>:</p>
 <ul>
-<li>Fix error in labelling of <code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>.</li>
+<li>Fix error in labelling of <code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>. <br>
+</li>
 </ul>
 </li>
 <li>
 <p><code>v1.1.4</code>:</p>
 <ul>
 <li>Add possibility to color the NA values in <code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>.</li>
-<li>Change title format in <code><a href="reference/barDEGs.html">barDEGs()</a></code>
+<li>Change title format in <code><a href="reference/barDEGs.html">barDEGs()</a></code>. <br>
 </li>
 </ul>
 </li>
 <li>
 <p><code>v2.0.0</code> <em>(2021-09-22)</em>:</p>
 <ul>
-<li>Add new function <code><a href="reference/chromRegions.html">chromRegions()</a></code>.</li>
+<li>Add new function <code><a href="reference/chromRegions.html">chromRegions()</a></code>. <br>
+</li>
 </ul>
 </li>
 <li>
 <p><code>v2.1.0</code> <em>(2021-09-26)</em>:</p>
 <ul>
 <li>Allow <code><a href="reference/chromRegions.html">chromRegions()</a></code> to take a list of regions as input.</li>
-<li>Allow <code><a href="reference/chromRegions.html">chromRegions()</a></code> to order the region sets.</li>
+<li>Allow <code><a href="reference/chromRegions.html">chromRegions()</a></code> to order the region sets. <br>
+</li>
 </ul>
 </li>
 <li>
@@ -250,7 +256,8 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 <li>Add new function <code><a href="reference/circleRegions.html">circleRegions()</a></code>.</li>
 <li>Allow <code><a href="reference/chromRegions.html">chromRegions()</a></code> to color by different parameters.</li>
 <li>Allow <code><a href="reference/chromRegions.html">chromRegions()</a></code> to add extra info.</li>
-<li>Allow <code><a href="reference/chromRegions.html">chromRegions()</a></code> to remove or change size of text in the Y axis.</li>
+<li>Allow <code><a href="reference/chromRegions.html">chromRegions()</a></code> to remove or change size of text in the Y axis. <br>
+</li>
 </ul>
 </li>
 <li>
@@ -258,7 +265,15 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 <ul>
 <li>Fix a minor bug about plotting the chromosome labels in <code><a href="reference/circleRegions.html">circleRegions()</a></code>.</li>
 <li>Fix a minor bug in <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code> that caused a intersection with one region more than expected.</li>
-<li>Remove <code>pkgcond</code> from required packages of <code><a href="reference/getVennCounts.html">getVennCounts()</a></code>.</li>
+<li>Remove <code>pkgcond</code> from required packages of <code><a href="reference/getVennCounts.html">getVennCounts()</a></code>. <br>
+</li>
+</ul>
+</li>
+<li>
+<p><code>v3.1.0</code> <em>(2021-10-04)</em>:</p>
+<ul>
+<li>Allow <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code> and <code><a href="reference/getVennCounts.html">getVennCounts()</a></code> to consider strand information through <code><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/makeVennDiagram.html">ChIPpeakAnno::makeVennDiagram(..., ignore.strand = !stranded)</a></code>. <br>
+</li>
 </ul>
 </li>
 </ul>

@@ -16,7 +16,7 @@
 #' @param peak_list List of dataframes with the genomic coordinates of the regions to overlap. Dataframes must contain the columns seqnames, start, end.
 #' @param peak_names Character with the same length as the 'peaks' list. The names that are given to the diferente objects in the 'peaks' list. Default: 'names(peaks)'
 #' @param percent Logical of length 1. Whether to show the percentage corresponding to each part of the intersection. Default = T.
-#'  Character of the same length as 'conds'. Same values as in 'conds' but with the desired order of priority. Default: 'conds'.
+#' @param stranded Logical of length 1. If TRUE, it considers the strand information to do the overlaps. Default = FALSE.
 #' @param in_fill Character of length equal to 'peak_list'. Colors of each set in 'peak_list'. Default: c("blue", "gold3").
 #' @param alpha Numeric of length 1. Transparency of the the Venn circles. Default: 0.4
 #' @param out_color Character of length 1 or equal to 'peak_list'. Color of the circles outer lines. Default: "black"
@@ -29,10 +29,19 @@
 #'
 #' @export
 
-ggVennPeaks <- function(peak_list, peak_names = names(peak_list), percent = T,
-                        in_fill = c("blue", "gold3"), alpha = .4,
-                        out_color = "black", name_color = "black", text_color = "black",
-                        name_size = 5, label_size = 3, title = "", subtitle = ""){
+ggVennPeaks <- function(peak_list,
+                        peak_names = names(peak_list),
+                        percent = TRUE,
+                        stranded = FALSE,
+                        in_fill = c("blue", "gold3"),
+                        alpha = .4,
+                        out_color = "black",
+                        name_color = "black",
+                        text_color = "black",
+                        name_size = 5,
+                        label_size = 3,
+                        title = "",
+                        subtitle = ""){
 
   # Load requireed packages
   require(ggvenn)
@@ -43,11 +52,16 @@ ggVennPeaks <- function(peak_list, peak_names = names(peak_list), percent = T,
   require(tidyr)
 
   # Check that inputs are OK
-  if(!is.list(peak_list)){ stop("'peak_list' must be a (named) list of dataframes with the columns 'seqnames', 'start' and 'end'.") }
+  if(!is.list(peak_list)){ stop("'peak_list' must be a (named) list of dataframes with, at least, the columns 'seqnames', 'start' and 'end'.") }
   if(length(peak_list) != length(peak_names)){ stop("'peak_names' must be a character vector with the same length as 'peak_list'.") }
+  if(stranded){
+    if(!"strand" %in% colnames(bind_rows(peak_list))){ stop("If 'stranded' is TRUE, a 'strand' column must be present in all the elements from peak list.") }
+    else { peak_list <- peak_list %>% purrr::map(~dplyr::mutate(.x, strand = if_else(strand == ".", "*", strand))) }
+  }
 
   # Get Venn Counts and the peaks in each set
-  x <- getVennCounts(peaks = peak_list, conds = peak_names)
+  x <- getVennCounts(peaks = peak_list, conds = peak_names, stranded = stranded)
+
 
   # Set default colors in case the number of specified colors
   #   does not match the number elements in 'peak_list'

@@ -4,7 +4,13 @@
 \alias{getVennCounts}
 \title{getVennCounts}
 \usage{
-getVennCounts(peaks, conds = names(peaks), conds_order = conds, plot = F)
+getVennCounts(
+  peaks,
+  conds = names(peaks),
+  conds_order = conds,
+  stranded = FALSE,
+  plot = FALSE
+)
 }
 \arguments{
 \item{peaks}{List of dataframes with the genomic coordinates of the regions to overlap. Dataframes must contain the columns seqnames, start, end.}
@@ -12,6 +18,8 @@ getVennCounts(peaks, conds = names(peaks), conds_order = conds, plot = F)
 \item{conds}{Character with the same length as the 'peaks' list. The names that are given to the diferente objects in the 'peaks' list. Default: 'names(peaks)'}
 
 \item{conds_order}{Character of the same length as 'conds'. Same values as in 'conds' but with the desired order of priority. Default: 'conds'.}
+
+\item{stranded}{Logical of length 1. If TRUE, it considers the strand information to do the overlaps. Default = FALSE.}
 
 \item{plot}{Logical of lenght 1. Whether to draw the the 'makeVennDiagram()' plot or not. Default: FALSE}
 }

@@ -11,8 +11,9 @@ ggVennPeaks(peak_list, peak_names = names(peak_list), percent = T, fill = c("blu
 
 \item{peak_names}{Character with the same length as the 'peaks' list. The names that are given to the diferente objects in the 'peaks' list. Default: 'names(peaks)'}
 
-\item{percent}{Logical of length 1. Whether to show the percentage corresponding to each part of the intersection. Default = T.
-Character of the same length as 'conds'. Same values as in 'conds' but with the desired order of priority. Default: 'conds'.}
+\item{percent}{Logical of length 1. Whether to show the percentage corresponding to each part of the intersection. Default = T.}
+
+\item{stranded}{Logical of length 1. If TRUE, it considers the strand information to do the overlaps. Default = FALSE.}
 
 \item{in_fill}{Character of length equal to 'peak_list'. Colors of each set in 'peak_list'. Default: c("blue", "gold3").}
 

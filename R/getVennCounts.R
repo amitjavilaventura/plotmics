@@ -13,13 +13,18 @@
 #' @param peaks List of dataframes with the genomic coordinates of the regions to overlap. Dataframes must contain the columns seqnames, start, end.
 #' @param conds Character with the same length as the 'peaks' list. The names that are given to the diferente objects in the 'peaks' list. Default: 'names(peaks)'
 #' @param conds_order Character of the same length as 'conds'. Same values as in 'conds' but with the desired order of priority. Default: 'conds'.
+#' @param stranded Logical of length 1. If TRUE, it considers the strand information to do the overlaps. Default = FALSE.
 #' @param plot Logical of lenght 1. Whether to draw the the 'makeVennDiagram()' plot or not. Default: FALSE
 #'
 #'
 #' @export
 
 
-getVennCounts <- function(peaks, conds = names(peaks), conds_order = conds, plot = F){
+getVennCounts <- function(peaks,
+                          conds = names(peaks),
+                          conds_order = conds,
+                          stranded = FALSE,
+                          plot = FALSE){
 
   # Load required packages
   (require(dplyr, quietly = T))
@@ -34,11 +39,12 @@ getVennCounts <- function(peaks, conds = names(peaks), conds_order = conds, plot
 
   len <- length(peaks)
 
+
   peaks <- peaks %>% purrr::set_names(nm = conds)
 
   overlaps <- suppressMessages(peaks %>%
     purrr::map(~plyranges::as_granges(.x)) %>%
-    makeVennDiagram(Peaks = ., NameOfPeaks = conds, plot = plot))
+    makeVennDiagram(Peaks = ., NameOfPeaks = conds, plot = plot, ignore.strand = !stranded))
 
   overlaps <- overlaps$vennCounts
 

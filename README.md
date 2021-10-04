@@ -55,38 +55,41 @@ The version history of `plotmics` is shown below:
 
 * `v1.1.0`: 
   + Rescale `ggVennPeaks()` output to remove blank space around the Venn diagram.
-  + Add possibility to scale (`scale()`) data by rows or columns in `expressionHeatmap()` and `expressionHeatmap2()`.
+  + Add possibility to scale (`scale()`) data by rows or columns in `expressionHeatmap()` and `expressionHeatmap2()`. <br>
 
 * `v1.1.1`: 
   + Add minor formatting options in `expressionHeatmap()` and `expressionHeatmap2()`, such as the possibility to remove the gene names, change sizes of texts and titles, change the color of the border of each cell, etc.
-  + Add minor changes in `ggVennPeaks()` in order to make it easier to visualize more peaks sets.
+  + Add minor changes in `ggVennPeaks()` in order to make it easier to visualize more peaks sets.  <br>
   
 * `v1.1.2`:
   + Change chromosome filtering method in `chromReads()`.
   + Allow dataframes without `DEG` column as input for `volcanoPlot()`.
-  + Change `scale = FALSE` for `scale = "none"` in `volcanoPlot()`.
+  + Change `scale = FALSE` for `scale = "none"` in `volcanoPlot()`. <br>
   
 * `v1.1.3`:
-  + Fix error in labelling of `expressionHeatmap()` and `expressionHeatmap2()`.
+  + Fix error in labelling of `expressionHeatmap()` and `expressionHeatmap2()`. <br>
   
 * `v1.1.4`:
   + Add possibility to color the NA values in `expressionHeatmap()` and `expressionHeatmap2()`.
-  + Change title format in `barDEGs()`
+  + Change title format in `barDEGs()`.  <br>
   
 * `v2.0.0` *(2021-09-22)*:
-  + Add new function `chromRegions()`.
+  + Add new function `chromRegions()`. <br>
   
 * `v2.1.0` *(2021-09-26)*:
   + Allow `chromRegions()` to take a list of regions as input.
-  + Allow `chromRegions()` to order the region sets.
+  + Allow `chromRegions()` to order the region sets. <br>
   
 * `v3.0.0` *(2021-09-28)*:
   + Add new function `circleRegions()`.
   + Allow `chromRegions()` to color by different parameters.
   + Allow `chromRegions()` to add extra info.
-  + Allow `chromRegions()` to remove or change size of text in the Y axis.
+  + Allow `chromRegions()` to remove or change size of text in the Y axis. <br>
   
 * `v3.0.1` *(2021-09-30)*:
   + Fix a minor bug about plotting the chromosome labels in `circleRegions()`.
   + Fix a minor bug in `ggVennPeaks()` that caused a intersection with one region more than expected.
-  + Remove `pkgcond` from required packages of `getVennCounts()`.
+  + Remove `pkgcond` from required packages of `getVennCounts()`. <br>
+
+* `v3.1.0` *(2021-10-04)*:
+  + Allow `ggVennPeaks()` and `getVennCounts()` to consider strand information through `ChIPpeakAnno::makeVennDiagram(..., ignore.strand = !stranded)`. <br>
