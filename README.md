@@ -92,4 +92,4 @@ The version history of `plotmics` is shown below:
   + Remove `pkgcond` from required packages of `getVennCounts()`. <br>
 
 * `v3.1.0` *(2021-10-04)*:
-  + Allow `ggVennPeaks()` and `getVennCounts()` to consider strand information through `ChIPpeakAnno::makeVennDiagram(..., ignore.strand = !stranded)`. <br>
+  + Allow `ggVennPeaks()` and `getVennCounts()` to consider strand information. <br>

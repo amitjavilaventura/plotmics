@@ -57,6 +57,11 @@ peak_list <- list.files("../testdata", "peak", full.names = T, recursive = T) %>
   purrr::map(~read.delim(.x))
 
 peak_list[[1]][1:5, 1:7]
+peak_list[[1]][10:30,]$strand = "+"
+peak_list[[1]][50:80,]$strand = "-"
+peak_list[[2]][10:30,]$strand = "+"
+peak_list[[2]][50:80,]$strand = "-"
+
 ```
 
 ## `getVennCounts()`

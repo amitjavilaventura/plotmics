@@ -39,15 +39,46 @@ getVennCounts <- function(peaks,
 
   len <- length(peaks)
 
-
   peaks <- peaks %>% purrr::set_names(nm = conds)
 
-  overlaps <- suppressMessages(peaks %>%
-    purrr::map(~plyranges::as_granges(.x)) %>%
-    makeVennDiagram(Peaks = ., NameOfPeaks = conds, plot = plot, ignore.strand = !stranded))
+  if(!stranded){
 
-  overlaps <- overlaps$vennCounts
+    overlaps <- suppressMessages(peaks %>%
+                                   purrr::map(~plyranges::as_granges(.x)) %>%
+                                   makeVennDiagram(Peaks = ., NameOfPeaks = conds, plot = plot, ignore.strand = !stranded))
 
+    overlaps <- overlaps$vennCounts
+
+  } else {
+
+    # Separate peaks by strand
+    peaks_plus     <- peaks %>% purrr::map(~dplyr::filter(.x, strand == "+"))
+    peaks_minus    <- peaks %>% purrr::map(~dplyr::filter(.x, strand == "-"))
+    peaks_nostrand <- peaks %>% purrr::map(~dplyr::filter(.x, strand %in% c(".", "*"))) %>% purrr::map(~dplyr::mutate(.x, strand = "*"))
+
+    # Overlap peaks by strand
+    overlaps_plus     <- suppressMessages(peaks_plus %>% purrr::map(~plyranges::as_granges(.x)) %>%
+                                        makeVennDiagram(Peaks = ., NameOfPeaks = conds, plot = plot))
+
+    overlaps_minus    <- suppressMessages(peaks_minus %>% purrr::map(~plyranges::as_granges(.x)) %>%
+                                        makeVennDiagram(Peaks = ., NameOfPeaks = conds, plot = plot))
+
+    overlaps_nostrand <- suppressMessages(peaks_nostrand %>% purrr::map(~plyranges::as_granges(.x)) %>%
+                                        makeVennDiagram(Peaks = ., NameOfPeaks = conds, plot = plot))
+
+    overlaps_plus     <- overlaps_plus$vennCounts
+    overlaps_minus    <- overlaps_minus$vennCounts
+    overlaps_nostrand <- overlaps_nostrand$vennCounts
+
+    overlaps <- overlaps_plus
+    for (i in 1:nrow(overlaps)){
+
+      overlaps[i,ncol(overlaps)] <- sum(overlaps_plus[i,ncol(overlaps)], overlaps_minus[i,ncol(overlaps)], overlaps_nostrand[i,ncol(overlaps)])
+
+    }
+  }
+
+  # Create matrix of overlapping peaks
   matrix <- matrix(data = rep(0, len), ncol = len, byrow=T) %>% set_colnames(conds)
   for(row in 1:nrow(overlaps)){
 
@@ -68,5 +99,7 @@ getVennCounts <- function(peaks,
     dplyr::select(peak, everything(), -rowSum)
 
   return(list("matrix" = x, "vennCounts" = overlaps))
+
+
 
 }
