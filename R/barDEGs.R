@@ -51,8 +51,9 @@ barDEGs <- function(deg_list, deg_names = names(deg_list),
 
 
   # Mutate deg_list to be able to change the log2FC and pvalue thresholds for defining the DEGs
-  deg_list <- deg_list %>% purrr::map(~dplyr::mutate(.x, DEG = if_else(log2FoldChange >= log2FC & padj <= pval, "Upregulated",
-                                                                       if_else(log2FoldChange <= -log2FC & padj <= pval, "Downregulated", "NS"))))
+  deg_list <- deg_list %>% purrr::map(~dplyr::mutate(.x, DEG = "NS"))
+  deg_list <- deg_list %>% purrr::map(~dplyr::mutate(.x, DEG = if_else(log2FoldChange > log2FC & padj < pval, "Upregulated", DEG)))
+  deg_list <- deg_list %>% purrr::map(~dplyr::mutate(.x, DEG = if_else(log2FoldChange < -log2FC & padj < pval, "Downregulated", DEG)))
 
   # Named list of DEGs
   deg_numbers <- deg_list %>%

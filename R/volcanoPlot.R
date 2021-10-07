@@ -42,7 +42,7 @@
 volcanoPlot <- function(df, xlim = c(-10,10), ylim = c(0,30),
                         pval = 0.05, log2FC = 1,
                         main = NULL, mainSize = 9, sub = NULL, subSize = 8,
-                        labelSize = 7, labelColor = c("darkgreen", "red"), labelPos = 0,
+                        labelSize = 5, labelColor = c("darkgreen", "red"), labelPos = 0,
                         xlab = bquote(~Log[2]~ "FC"), ylab = (bquote(~-Log[10]~italic(P))),
                         axisLabelSize = 10, axisTextSize = 9,
                         pointColor = c("darkgreen", "gray", "red"), legendTitle = FALSE, legendPos = "bottom",
@@ -94,17 +94,19 @@ volcanoPlot <- function(df, xlim = c(-10,10), ylim = c(0,30),
     dplyr::mutate(log2FoldChange = ifelse(test = log2FoldChange > xlim[2], yes = xlim[2], no = log2FoldChange)) %>%
     dplyr::mutate(log2FoldChange = ifelse(test = log2FoldChange < xlim[1], yes = xlim[1], no = log2FoldChange))
 
+  # Count number of differentially expressed genes and join to the DE data frame
+  deg_number <- data.frame(DEG    = c("Upregulated", "Downregulated",  NA),
+                           number = c(sum(df$DEG == "Upregulated"),sum(df$DEG == "Downregulated"), NA),
+                           xpos   = c(xlim[2], xlim[1], 0))
 
-  p <- ggplot(data = na.omit(df), aes(x=log2FoldChange, y=-log10(padj), colour=DEG, shape=shape)) +
-    geom_point(alpha=0.7, size=1.7)
+  df <- df %>% dplyr::left_join(deg_number, by = "DEG") %>%
+    dplyr::group_by(number) %>% dplyr::mutate(row = row_number()) %>% dplyr::ungroup() %>%
+    dplyr::mutate(number = ifelse(row != 1, NA, number))
 
-
-  # Annotate the number of up and downregulated DEGs
-  p <- p +
-    annotate("text", label = sum(df$DEG == "Upregulated"), color = labelColor[2], y = labelPos, x = xlim[2],
-             vjust=0.3,hjust="inward", size = labelSize) +
-    annotate("text", label = sum(df$DEG == "Downregulated"), color = labelColor[1], y = labelPos, x = xlim[1],
-             vjust=0.3,hjust="inward", size = labelSize)
+  # Initialize ggplot with points and number of DEGs
+  p <- ggplot(data = df, aes(x=log2FoldChange, y=-log10(padj), colour=DEG, shape=shape)) +
+    geom_point(alpha=0.7, size=1.7) +
+    geom_text(data = na.omit(df), aes(label = number, y = ylim[1], x = xpos), size = labelSize, show.legend = F)
 
   # Basic formatting
   p <- p +

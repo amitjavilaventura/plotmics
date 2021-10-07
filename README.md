@@ -4,7 +4,7 @@ _pl**O**t**MICS**_: Visualization of omics and sequencing data in R.
 
 ## Information
 
-The goal of this package is to provide simple functions to visualize several omics and sequencing data:
+_pl**O**t**MICS**_ is an R package to visualize omics and sequencing data in R using simple but useful functions:
 
 * `chromReads()`: draws a `ggplot2`-based horizontal barplot with the number and the percentage of reads mapped to each chromosome.
 * `barDEGs()`: draws a `ggplot2`-based horizontal barplot with the upregulated and downregulated genes coming from DESeq2.
@@ -19,7 +19,7 @@ The goal of this package is to provide simple functions to visualize several omi
 * `expressionHeatmap()`: function that takes a data frame of expression data (including *Geneid*) and plots a heatmap of the selected genes. It can be any expression data, but it is better for expression values, counts, normalized counts in which the frist column is the *Geneid* and the other columns are each of the samples that are to be plotted.
 * `expressionHeatmap2()`: function that takes a list of data frames with the columns *Geneid* and *log2FoldChange* (it can be another type data, such as FPKMs, but its easier to maintain the name of *log2FoldChange* since it is how it output from `DESeq2`) and plots a heatmap with the selected genes. It is better for *log2FoldChange* heatmaps in which each element in the list is a data frame that outputs from `DESeq2`.
 * `chromRegions()`: function that takes the chromosome size information and a list of regions (e.g. BED files) to draw the positions of that regions in the genome.
-* `circleRegions()`: function that takes a list of chromosome size information and a list of regions (e.g. BED files) to draw the positions of that regions in the genome, Simillar to `chromRegions()`, but in a circular plot, allowing different assemblies, pairing regions, etc. 
+* `circleRegions()`: function that takes a list of chromosome size information and a list of regions (e.g. BED files) to draw the positions of that regions in the genome. Similar to `chromRegions()`, but in a circular plot, allowing different assemblies, pairing regions, etc. 
 
 ## Install `plotmics` 
 
@@ -45,51 +45,76 @@ If you use this package, please cite [this repository](https://github.com/amitja
 
 ## Versions
 
-`plotmics` versions have the structure of `1.2.3`. The first number (*major*) implies the addition of a function and/or major changes in the packages; the second number (*minor*) implies the addition of new features to a function and possible corrections; the third number (*micro*) implies the correction of minor bugs. til now:
+`plotmics` versions have the structure of `1.2.3`. The first number (`1`, *major*) implies the addition of a function and/or major changes in the packages; the second number (`2`,*minor*) implies the addition of new features to a function and possible corrections; the third number (`3`, *micro*) implies the correction of minor bugs or addition of minor features.
 
 The version history of `plotmics` is shown below:
 
 * `v1.0.0`: 
 
-  + First version.
+  + First version. 
+  
+<br>
 
 * `v1.1.0`: 
   + Rescale `ggVennPeaks()` output to remove blank space around the Venn diagram.
-  + Add possibility to scale (`scale()`) data by rows or columns in `expressionHeatmap()` and `expressionHeatmap2()`. <br>
+  + Add possibility to scale (`scale()`) data by rows or columns in `expressionHeatmap()` and `expressionHeatmap2()`. 
+  
+<br>
 
 * `v1.1.1`: 
   + Add minor formatting options in `expressionHeatmap()` and `expressionHeatmap2()`, such as the possibility to remove the gene names, change sizes of texts and titles, change the color of the border of each cell, etc.
-  + Add minor changes in `ggVennPeaks()` in order to make it easier to visualize more peaks sets.  <br>
+  + Add minor changes in `ggVennPeaks()` in order to make it easier to visualize more peaks sets.  
+  
+<br>
   
 * `v1.1.2`:
   + Change chromosome filtering method in `chromReads()`.
   + Allow dataframes without `DEG` column as input for `volcanoPlot()`.
-  + Change `scale = FALSE` for `scale = "none"` in `volcanoPlot()`. <br>
+  + Change `scale = FALSE` for `scale = "none"` in `volcanoPlot()`. 
+  
+<br>
   
 * `v1.1.3`:
-  + Fix error in labelling of `expressionHeatmap()` and `expressionHeatmap2()`. <br>
+  + Fix error in labelling of `expressionHeatmap()` and `expressionHeatmap2()`.
+  
+<br>
   
 * `v1.1.4`:
   + Add possibility to color the NA values in `expressionHeatmap()` and `expressionHeatmap2()`.
-  + Change title format in `barDEGs()`.  <br>
+  + Change title format in `barDEGs()`. 
+  
+<br>
   
 * `v2.0.0` *(2021-09-22)*:
-  + Add new function `chromRegions()`. <br>
+  + Add new function `chromRegions()`. 
+  
+<br>
   
 * `v2.1.0` *(2021-09-26)*:
   + Allow `chromRegions()` to take a list of regions as input.
-  + Allow `chromRegions()` to order the region sets. <br>
+  + Allow `chromRegions()` to order the region sets.
+  
+<br>
   
 * `v3.0.0` *(2021-09-28)*:
   + Add new function `circleRegions()`.
   + Allow `chromRegions()` to color by different parameters.
   + Allow `chromRegions()` to add extra info.
-  + Allow `chromRegions()` to remove or change size of text in the Y axis. <br>
+  + Allow `chromRegions()` to remove or change size of text in the Y axis.
+  
+<br>
   
 * `v3.0.1` *(2021-09-30)*:
   + Fix a minor bug about plotting the chromosome labels in `circleRegions()`.
   + Fix a minor bug in `ggVennPeaks()` that caused a intersection with one region more than expected.
-  + Remove `pkgcond` from required packages of `getVennCounts()`. <br>
+  + Remove `pkgcond` from required packages of `getVennCounts()`.
+  
+<br>
 
 * `v3.1.0` *(2021-10-04)*:
-  + Allow `ggVennPeaks()` and `getVennCounts()` to consider strand information. <br>
+  + Allow `ggVennPeaks()` and `getVennCounts()` to consider strand information.
+  
+* `v3.1.1` *(2021-10-07)*:
+  + Change minor options in `barDEGs()` and `volcanoPlot()` to consider strand information.
+  
+<br>

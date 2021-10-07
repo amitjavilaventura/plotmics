@@ -1,5 +1,5 @@
 ---
-title: "chromRegions()"
+title: "circleRegions()"
 author: "Adrià Mitjavila Ventura"
 output:
   html_document:
@@ -9,7 +9,7 @@ output:
     self_contained: yes
     mode: selfcontained
 vignette: >
-  %\VignetteIndexEntry{chromRegions()}
+  %\VignetteIndexEntry{circleRegions()}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -43,7 +43,7 @@ Last updated: `r Sys.Date()`
 library(plotmics)
 ```
 
-# Run `chromRegions()`
+# Run `circleRegions()`
 
 `chromRegions()` takes a file with the sizes of the chromosomes and draws a `ggplot2`-based bar plot. Then takes a list of regions in a BED-like format to draw them into each chromosome. The inputs `chrom.sizes` and `regions` can be supplied as a list of character with path to the file where the information is stored or a list of data frame.
 

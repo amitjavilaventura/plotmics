@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>chromRegions() • plotmics</title>
+<title>circleRegions() • plotmics</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="chromRegions()">
+<script src="../pkgdown.js"></script><meta property="og:title" content="circleRegions()">
 <meta property="og:description" content="plotmics">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -97,7 +97,7 @@
       <a href="../articles/11-chromRegions.html">chromRegions()</a>
     </li>
     <li>
-      <a href="../articles/12-circleRegions.html">chromRegions()</a>
+      <a href="../articles/12-circleRegions.html">circleRegions()</a>
     </li>
   </ul>
 </li>
@@ -122,7 +122,7 @@
       </header><script src="12-circleRegions_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>chromRegions()</h1>
+      <h1 data-toc-skip>circleRegions()</h1>
                         <h4 class="author">Adrià Mitjavila Ventura</h4>
             
       
@@ -133,7 +133,7 @@
 
     
     
-<p>Last updated: 2021-10-04</p>
+<p>Last updated: 2021-10-07</p>
 <hr>
 <div id="load-plotmics" class="section level1">
 <h1 class="hasAnchor">
@@ -143,9 +143,9 @@
 <code class="sourceCode R"><span class="co"># load plotmics</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://amitjavilaventura.github.io/plotmics/index.html">plotmics</a></span><span class="op">)</span></code></pre></div>
 </div>
-<div id="run-chromregions" class="section level1">
+<div id="run-circleregions" class="section level1">
 <h1 class="hasAnchor">
-<a href="#run-chromregions" class="anchor"></a>Run <code>chromRegions()</code>
+<a href="#run-circleregions" class="anchor"></a>Run <code>circleRegions()</code>
 </h1>
 <p><code><a href="../reference/chromRegions.html">chromRegions()</a></code> takes a file with the sizes of the chromosomes and draws a <code>ggplot2</code>-based bar plot. Then takes a list of regions in a BED-like format to draw them into each chromosome. The inputs <code>chrom.sizes</code> and <code>regions</code> can be supplied as a list of character with path to the file where the information is stored or a list of data frame.</p>
 <div id="required-input" class="section level2">

@@ -97,7 +97,7 @@
       <a href="articles/11-chromRegions.html">chromRegions()</a>
     </li>
     <li>
-      <a href="articles/12-circleRegions.html">chromRegions()</a>
+      <a href="articles/12-circleRegions.html">circleRegions()</a>
     </li>
   </ul>
 </li>
@@ -129,7 +129,7 @@
 <div id="information" class="section level2">
 <h2 class="hasAnchor">
 <a href="#information" class="anchor"></a>Information</h2>
-<p>The goal of this package is to provide simple functions to visualize several omics and sequencing data:</p>
+<p><em>pl<strong>O</strong>t<strong>MICS</strong></em> is an R package to visualize omics and sequencing data in R using simple but useful functions:</p>
 <ul>
 <li>
 <code><a href="reference/chromReads.html">chromReads()</a></code>: draws a <code>ggplot2</code>-based horizontal barplot with the number and the percentage of reads mapped to each chromosome.</li>
@@ -158,7 +158,7 @@
 <li>
 <code><a href="reference/chromRegions.html">chromRegions()</a></code>: function that takes the chromosome size information and a list of regions (e.g. BED files) to draw the positions of that regions in the genome.</li>
 <li>
-<code><a href="reference/circleRegions.html">circleRegions()</a></code>: function that takes a list of chromosome size information and a list of regions (e.g. BED files) to draw the positions of that regions in the genome, Simillar to <code><a href="reference/chromRegions.html">chromRegions()</a></code>, but in a circular plot, allowing different assemblies, pairing regions, etc.</li>
+<code><a href="reference/circleRegions.html">circleRegions()</a></code>: function that takes a list of chromosome size information and a list of regions (e.g. BED files) to draw the positions of that regions in the genome. Similar to <code><a href="reference/chromRegions.html">chromRegions()</a></code>, but in a circular plot, allowing different assemblies, pairing regions, etc.</li>
 </ul>
 </div>
 <div id="install-plotmics" class="section level2">
@@ -186,7 +186,7 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 <div id="versions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#versions" class="anchor"></a>Versions</h2>
-<p><code>plotmics</code> versions have the structure of <code>1.2.3</code>. The first number (<em>major</em>) implies the addition of a function and/or major changes in the packages; the second number (<em>minor</em>) implies the addition of new features to a function and possible corrections; the third number (<em>micro</em>) implies the correction of minor bugs. til now:</p>
+<p><code>plotmics</code> versions have the structure of <code>1.2.3</code>. The first number (<code>1</code>, <em>major</em>) implies the addition of a function and/or major changes in the packages; the second number (<code>2</code>,<em>minor</em>) implies the addition of new features to a function and possible corrections; the third number (<code>3</code>, <em>micro</em>) implies the correction of minor bugs or addition of minor features.</p>
 <p>The version history of <code>plotmics</code> is shown below:</p>
 <ul>
 <li>
@@ -195,88 +195,115 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 <li>First version.</li>
 </ul>
 </li>
+</ul>
+<p><br></p>
+<ul>
 <li>
-<p><code>v1.1.0</code>:</p>
+<code>v1.1.0</code>:
 <ul>
 <li>Rescale <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code> output to remove blank space around the Venn diagram.</li>
-<li>Add possibility to scale (<code><a href="https://rdrr.io/r/base/scale.html">scale()</a></code>) data by rows or columns in <code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>. <br>
-</li>
+<li>Add possibility to scale (<code><a href="https://rdrr.io/r/base/scale.html">scale()</a></code>) data by rows or columns in <code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>.</li>
 </ul>
 </li>
+</ul>
+<p><br></p>
+<ul>
 <li>
-<p><code>v1.1.1</code>:</p>
+<code>v1.1.1</code>:
 <ul>
 <li>Add minor formatting options in <code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>, such as the possibility to remove the gene names, change sizes of texts and titles, change the color of the border of each cell, etc.</li>
-<li>Add minor changes in <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code> in order to make it easier to visualize more peaks sets. <br>
-</li>
+<li>Add minor changes in <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code> in order to make it easier to visualize more peaks sets.</li>
 </ul>
 </li>
+</ul>
+<p><br></p>
+<ul>
 <li>
-<p><code>v1.1.2</code>:</p>
+<code>v1.1.2</code>:
 <ul>
 <li>Change chromosome filtering method in <code><a href="reference/chromReads.html">chromReads()</a></code>.</li>
 <li>Allow dataframes without <code>DEG</code> column as input for <code><a href="reference/volcanoPlot.html">volcanoPlot()</a></code>.</li>
-<li>Change <code>scale = FALSE</code> for <code>scale = "none"</code> in <code><a href="reference/volcanoPlot.html">volcanoPlot()</a></code>. <br>
-</li>
+<li>Change <code>scale = FALSE</code> for <code>scale = "none"</code> in <code><a href="reference/volcanoPlot.html">volcanoPlot()</a></code>.</li>
 </ul>
 </li>
-<li>
-<p><code>v1.1.3</code>:</p>
+</ul>
+<p><br></p>
 <ul>
-<li>Fix error in labelling of <code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>. <br>
-</li>
+<li>
+<code>v1.1.3</code>:
+<ul>
+<li>Fix error in labelling of <code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>.</li>
 </ul>
 </li>
+</ul>
+<p><br></p>
+<ul>
 <li>
-<p><code>v1.1.4</code>:</p>
+<code>v1.1.4</code>:
 <ul>
 <li>Add possibility to color the NA values in <code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>.</li>
-<li>Change title format in <code><a href="reference/barDEGs.html">barDEGs()</a></code>. <br>
-</li>
+<li>Change title format in <code><a href="reference/barDEGs.html">barDEGs()</a></code>.</li>
 </ul>
 </li>
-<li>
-<p><code>v2.0.0</code> <em>(2021-09-22)</em>:</p>
+</ul>
+<p><br></p>
 <ul>
-<li>Add new function <code><a href="reference/chromRegions.html">chromRegions()</a></code>. <br>
-</li>
+<li>
+<code>v2.0.0</code> <em>(2021-09-22)</em>:
+<ul>
+<li>Add new function <code><a href="reference/chromRegions.html">chromRegions()</a></code>.</li>
 </ul>
 </li>
+</ul>
+<p><br></p>
+<ul>
 <li>
-<p><code>v2.1.0</code> <em>(2021-09-26)</em>:</p>
+<code>v2.1.0</code> <em>(2021-09-26)</em>:
 <ul>
 <li>Allow <code><a href="reference/chromRegions.html">chromRegions()</a></code> to take a list of regions as input.</li>
-<li>Allow <code><a href="reference/chromRegions.html">chromRegions()</a></code> to order the region sets. <br>
-</li>
+<li>Allow <code><a href="reference/chromRegions.html">chromRegions()</a></code> to order the region sets.</li>
 </ul>
 </li>
+</ul>
+<p><br></p>
+<ul>
 <li>
-<p><code>v3.0.0</code> <em>(2021-09-28)</em>:</p>
+<code>v3.0.0</code> <em>(2021-09-28)</em>:
 <ul>
 <li>Add new function <code><a href="reference/circleRegions.html">circleRegions()</a></code>.</li>
 <li>Allow <code><a href="reference/chromRegions.html">chromRegions()</a></code> to color by different parameters.</li>
 <li>Allow <code><a href="reference/chromRegions.html">chromRegions()</a></code> to add extra info.</li>
-<li>Allow <code><a href="reference/chromRegions.html">chromRegions()</a></code> to remove or change size of text in the Y axis. <br>
-</li>
+<li>Allow <code><a href="reference/chromRegions.html">chromRegions()</a></code> to remove or change size of text in the Y axis.</li>
 </ul>
 </li>
+</ul>
+<p><br></p>
+<ul>
 <li>
-<p><code>v3.0.1</code> <em>(2021-09-30)</em>:</p>
+<code>v3.0.1</code> <em>(2021-09-30)</em>:
 <ul>
 <li>Fix a minor bug about plotting the chromosome labels in <code><a href="reference/circleRegions.html">circleRegions()</a></code>.</li>
 <li>Fix a minor bug in <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code> that caused a intersection with one region more than expected.</li>
-<li>Remove <code>pkgcond</code> from required packages of <code><a href="reference/getVennCounts.html">getVennCounts()</a></code>. <br>
+<li>Remove <code>pkgcond</code> from required packages of <code><a href="reference/getVennCounts.html">getVennCounts()</a></code>.</li>
+</ul>
 </li>
+</ul>
+<p><br></p>
+<ul>
+<li>
+<code>v3.1.0</code> <em>(2021-10-04)</em>:
+<ul>
+<li>Allow <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code> and <code><a href="reference/getVennCounts.html">getVennCounts()</a></code> to consider strand information.</li>
 </ul>
 </li>
 <li>
-<p><code>v3.1.0</code> <em>(2021-10-04)</em>:</p>
+<code>v3.1.1</code> <em>(2021-10-07)</em>:
 <ul>
-<li>Allow <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code> and <code><a href="reference/getVennCounts.html">getVennCounts()</a></code> to consider strand information. <br>
-</li>
+<li>Change minor options in <code><a href="reference/barDEGs.html">barDEGs()</a></code> and <code><a href="reference/volcanoPlot.html">volcanoPlot()</a></code> to consider strand information.</li>
 </ul>
 </li>
 </ul>
+<p><br></p>
 </div>
 </div>
   </div>
