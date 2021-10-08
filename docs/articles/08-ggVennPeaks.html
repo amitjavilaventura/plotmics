@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.1</span>
       </span>
     </div>
 
@@ -133,7 +133,7 @@
 
     
     
-<p>Last updated: 2021-10-07</p>
+<p>Last updated: 2021-10-08</p>
 <hr>
 <div id="load-plotmics" class="section level1">
 <h1 class="hasAnchor">
@@ -198,6 +198,20 @@
 <span class="co"># peak4   0       1</span>
 <span class="co"># peak5   0       1</span></code></pre></div>
 <p><code><a href="../reference/ggVennPeaks.html">ggVennPeaks()</a></code> calls the function <code><a href="../reference/getVennCounts.html">getVennCounts()</a></code> and builds the Venn diagram using the peak matrix and the <code>ggvenn</code> package.</p>
+<div id="unexpected-intersections" class="section level3">
+<h3 class="hasAnchor">
+<a href="#unexpected-intersections" class="anchor"></a>Unexpected intersections</h3>
+<p>As mentioned, <code><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/makeVennDiagram.html">ChIPpeakAnno::makeVennDiagram()</a></code> is called inside <code><a href="../reference/getVennCounts.html">getVennCounts()</a></code>. This function may have a unexpected outputs when considering the number of overlaps to build the intersection between different sets of regions. Considering the following example:</p>
+<ul>
+<li>We have two sets of regions named A and B: A has 4 regions, 3 of which overlap with regions in B; and B has 6 regions, 5 of which overlap with regions in A.</li>
+<li>In the case we consider the 5 regions from B that overlap with regions in A, the size of the resulting intersection (5) would be greater than the total size of A (4).</li>
+<li>To prevent that, the number of overlaps considered to build the intersection is the lowest possible. In our case, this is 2.</li>
+<li>Hence, with <code>ggVennCounts()</code> we would get 1 unique region from A, one unique region from B and 2 intersections. The sum of any of them is not the total size of A or B.</li>
+</ul>
+<center>
+<img src="../testdata/intersection.png">
+</center>
+</div>
 </div>
 <div id="default-run" class="section level2">
 <h2 class="hasAnchor">

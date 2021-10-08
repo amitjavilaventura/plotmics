@@ -53,6 +53,7 @@ peak_list <- list.files("../testdata", "peak", full.names = T, recursive = T) %>
 
 peak_list[[1]][1:5, 1:7]
 ```
+
 ## `getVennCounts()`
 
 `getVennCounts()` calls `ChIPpeakAnno::makeVennDiagram()`, retrieves the Venn counts (number of overlaps between different sets of peaks) and builds a matrix of the peaks present in each set.
@@ -83,6 +84,19 @@ venn_counts$matrix[1:5,]
 ```
 
 `upsetPeaks()` calls the function `getVennCounts()` and builds the UpSet plot of the peaks using the Venn counts.
+
+### Unexpected intersections
+
+As mentioned, `ChIPpeakAnno::makeVennDiagram()` is called inside `getVennCounts()`. This function may have a unexpected outputs when considering the number of overlaps to build the intersection between different sets of regions. Considering the following example:
+
+* We have two sets of regions named A and B: A has 4 regions, 3 of which overlap with regions in B; and B has 6 regions, 5 of which overlap with regions in A.
+* In the case we consider the 5 regions from B that overlap with regions in A, the size of the resulting intersection (5) would be greater than the total size of A (4).
+* To prevent that, the number of overlaps considered to build the intersection is the lowest possible. In our case, this is 2.
+* Hence, with `ggVennCounts()` we would get 1 unique region from A, one unique region from B and 2 intersections. The sum of any of them is not the total size of A or B.
+
+<center>
+![](../testdata/intersection.png)
+</center>
 
 
 ## Default run
