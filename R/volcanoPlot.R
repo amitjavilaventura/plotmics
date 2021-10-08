@@ -106,7 +106,7 @@ volcanoPlot <- function(df, xlim = c(-10,10), ylim = c(0,30),
   # Initialize ggplot with points and number of DEGs
   p <- ggplot(data = df, aes(x=log2FoldChange, y=-log10(padj), colour=DEG, shape=shape)) +
     geom_point(alpha=0.7, size=1.7) +
-    geom_text(data = na.omit(df), aes(label = number, y = ylim[1], x = xpos), size = labelSize, show.legend = F)
+    geom_text(data = na.omit(df), aes(label = number, y = ylim[1], x = xpos*0.9), size = labelSize, show.legend = F)
 
   # Basic formatting
   p <- p +
