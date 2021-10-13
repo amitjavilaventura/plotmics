@@ -81,7 +81,7 @@ draws an horizontal barplot with the up (right) and downregulated (left) genes."
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.2</span>
       </span>
     </div>
 
@@ -188,7 +188,10 @@ draws an horizontal barplot with the up (right) and downregulated (left) genes.<
   num_size <span class='op'>=</span> <span class='fl'>3</span>,
   name_size <span class='op'>=</span> <span class='fl'>3</span>,
   log2FC <span class='op'>=</span> <span class='fl'>1</span>,
-  pval <span class='op'>=</span> <span class='fl'>0.05</span>
+  pval <span class='op'>=</span> <span class='fl'>0.05</span>,
+  total <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  title <span class='op'>=</span> <span class='cn'>NULL</span>,
+  subtitle <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -245,6 +248,18 @@ draws an horizontal barplot with the up (right) and downregulated (left) genes.<
     <tr>
       <th>pval</th>
       <td><p>Numeric of length 1. Threshold for the adjusted p-value to define a gene as differentially expressed. Default: 0.05.</p></td>
+    </tr>
+    <tr>
+      <th>total</th>
+      <td><p>Logical of length 1. If TRUE, it counts the total number of features in each elements of deg_list and writes them in the caption. Default: FALSE.</p></td>
+    </tr>
+    <tr>
+      <th>title</th>
+      <td><p>Charachter of length 1 or NULL. Title of the plot. Default: NULL.</p></td>
+    </tr>
+    <tr>
+      <th>subtitle</th>
+      <td><p>Charachter of lenght 1 or NULL. Subtitle of the plot. Default: NULL.</p></td>
     </tr>
     </table>
 
