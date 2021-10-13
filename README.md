@@ -115,6 +115,9 @@ The version history of `plotmics` is shown below:
   + Allow `ggVennPeaks()` and `getVennCounts()` to consider strand information.
   
 * `v3.1.1` *(2021-10-07)*:
-  + Change minor options in `barDEGs()` and `volcanoPlot()` to consider strand information.
+  + Change minor features in `barDEGs()` and `volcanoPlot()`.
+  
+* `v3.1.2` *(2021-10-12)*:
+  + Change minor features in `circleRegions()` to exclude the chromosomes before looking if the chromosome names in regions are also in the chrom.sizes files.
   
 <br>

@@ -58,10 +58,18 @@ circleRegions <- function(chromsizes_sets,
   require(ggpubr)
 
   # Check that inputs are OK and read data --------------------------------------------------------
+
+  ## Chromosomes to exclude
+  if(!class(chr_exclude) == "character") { stop("'chr_exclude' must be a character vector with regular expressions that match the chromosomes to exclude") }
+
+  ## Order of the chromosomes
+  if(!class(chr_order) == "character") { stop("'chr_order' must be a character vector with the names of the chromosomes in the desired order") }
+
+
   ## Colors to factor
   colors <- factor(colors, levels = colors)
 
-  ##
+  ## Length of regions and chromsizes sets must be equal
   if(length(regions_sets) != length(chromsizes_sets)){
     stop( "'regions_sets' and 'chromsizes_sets' must be lists with the same length.
           They should have the desired regions to plot and the chromosome size information of the corresponding assembly, respectively." )
@@ -127,9 +135,6 @@ circleRegions <- function(chromsizes_sets,
     stop("'regions_sets' must be a list with paths to regions files or data frames with the positions of the regions")
   }
 
-  ## Seqnames in regions = seqnames in chrom sizes
-  if(!all(regions$seqnames %in% chromsizes$seqnames)) { stop("The chromosome names in 'regions' must be equal to the chromosome names in 'chrom_sizes'") }
-
   ## Check color_by
   if(tolower(color_by) %in% c("regions", "region")){ color_by <- "region" }
   else if(tolower(color_by) %in% c("strands", "strand")){ color_by <- "strand" }
@@ -175,11 +180,6 @@ circleRegions <- function(chromsizes_sets,
   }
 
 
-  ## Chromosomes to exclude
-  if(!class(chr_exclude) == "character") { stop("'chr_exclude' must be a character vector with regular expressions that match the chromosomes to exclude") }
-
-  ## Order of the chromosomes
-  if(!class(chr_order) == "character") { stop("'chr_order' must be a character vector with the names of the chromosomes in the desired order") }
 
   # Filter and format chromsizes and regions ------------------------------------------------------
   chrom_filt <- chromsizes %>%
@@ -209,6 +209,9 @@ circleRegions <- function(chromsizes_sets,
     regions_filt <- dplyr::left_join(regions_filt, extrainfo, by = c("id", "region")) %>%
       dplyr::mutate(extra = factor(extra))
   }
+
+  ## Seqnames in regions = seqnames in chrom sizes
+  if(!all(regions_filt$seqnames %in% chrom_filt$seqnames)) { stop("The chromosome names in 'regions' must be equal to the chromosome names in 'chrom_sizes'") }
 
 
   # Left join of chrom_filt and regions_filt -----
