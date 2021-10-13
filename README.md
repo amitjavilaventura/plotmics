@@ -116,8 +116,10 @@ The version history of `plotmics` is shown below:
   
 * `v3.1.1` *(2021-10-07)*:
   + Change minor features in `barDEGs()` and `volcanoPlot()`.
-  
+  + Change minor features in `circleRegions()` to exclude the chromosomes before looking if the chromosome names in regions are also in the chrom.sizes files.
+
 * `v3.1.2` *(2021-10-12)*:
   + Change minor features in `circleRegions()` to exclude the chromosomes before looking if the chromosome names in regions are also in the chrom.sizes files.
+  + Fix error in `circleRegions()` to allow different assemblies.
   
 <br>

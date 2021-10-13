@@ -211,7 +211,7 @@ circleRegions <- function(chromsizes_sets,
   }
 
   ## Seqnames in regions = seqnames in chrom sizes
-  if(!all(regions_filt$seqnames %in% chrom_filt$seqnames)) { stop("The chromosome names in 'regions' must be equal to the chromosome names in 'chrom_sizes'") }
+  if(!all(regions_filt$seqnames %in% chrom_filt$seqnames)) { stop("The chromosome names in 'regions' must be equal to the chromosome names in 'chrom_sizes' (after filtering chromosomes)") }
 
 
   # Left join of chrom_filt and regions_filt -----
@@ -234,21 +234,30 @@ circleRegions <- function(chromsizes_sets,
     dplyr::arrange(seqnames) %>%
     dplyr::mutate(region = factor(region, levels = sets_names))
 
+  regions_chrom2 <- regions_chrom %>% dplyr::mutate(start = start/total_size,
+                                                    end = end/total_size,
+                                                    length = length/total_size,
+                                                    size = size/total_size,
+                                                    size2 = size2/total_size,
+                                                    cum_size = cum_size/total_size,
+                                                    prev_size = prev_size/total_size,
+                                                    prev_size2 = prev_size2/total_size,
+                                                    total_size = total_size/total_size)
 
   if(length(chromsizes_sets)>1){
     if(identical(chromsizes_sets[[1]], chromsizes_sets[[2]])){
-      regions_chrom_filt <- regions_chrom %>%
+      regions_chrom_filt <- regions_chrom2 %>%
         dplyr::mutate(seqnames = if_else(region == sets_names[1], seqnames, NULL))
     } else{
-      regions_chrom_filt <- regions_chrom
+      regions_chrom_filt <- regions_chrom2
     }
   } else {
-    regions_chrom_filt <- regions_chrom
+    regions_chrom_filt <- regions_chrom2
   }
 
   # DRAW PLOT -------------------------------------------------------------------------------------
   # Initialize plot
-  g <- ggplot(data = regions_chrom) +
+  g <- ggplot(data = regions_chrom2) +
     # Draw chromosomes and labels
     geom_col(aes(x = 11-group*2, y = size, group = seqnames), color = "black", fill = NA, width = .5, na.rm = T, position = "stack") +
     geom_text(data = regions_chrom_filt, aes(x = 11-group*2+1, y = size, label = seqnames, group = seqnames),
@@ -256,18 +265,18 @@ circleRegions <- function(chromsizes_sets,
 
   # Draw line to separate chromosomes
   if(chr_line){
-    g <- g + geom_hline(data = regions_chrom %>% dplyr::filter(region == sets_names[1]), aes(yintercept = total_size-cum_size+size2), linetype = 2, size = 0.1, na.rm = T)
+    g <- g + geom_hline(data = regions_chrom2 %>% dplyr::filter(region == sets_names[1]), aes(yintercept = total_size-cum_size+size2), linetype = 2, size = 0.1, na.rm = T)
   }
   # Draw segments and points for each region
-  g <- g + geom_segment(data = regions_chrom, aes(x = 11-group*2-.25, xend = 11-group*2+.25, y = total_size-cum_size+size2-start,
+  g <- g + geom_segment(data = regions_chrom2, aes(x = 11-group*2-.25, xend = 11-group*2+.25, y = total_size-cum_size+size2-start,
                                                   yend = total_size-cum_size+size2-end, color = .data[[color_by]]), na.rm = T)
   # Draw points for each region
-  if(draw_points){ g <- g + geom_point(data = regions_chrom, aes(x = 11-group*2, y = total_size-cum_size+size2-start-length/2, color = .data[[color_by]], group = id), size = .4, na.rm = T) }
-  else{  g <- g + geom_point(data = regions_chrom, aes(x = 11-group*2, y = total_size-cum_size+size2-start-length/2, group = id), size = .4, na.rm = T, color = NA) }
+  if(draw_points){ g <- g + geom_point(data = regions_chrom2, aes(x = 11-group*2, y = total_size-cum_size+size2-start-length/2, color = .data[[color_by]], group = id), size = .4, na.rm = T) }
+  else{  g <- g + geom_point(data = regions_chrom2, aes(x = 11-group*2, y = total_size-cum_size+size2-start-length/2, group = id), size = .4, na.rm = T, color = NA) }
 
   # Draw paired lines
   if(paired){
-    g <- g + geom_line(aes(x = 11-group*2, y = total_size-cum_size+size2-start-length/2, group = id), size = .2, color = paired_color)
+    g <- g + geom_line(data = regions_chrom2, aes(x = 11-group*2, y = total_size-cum_size+size2-start-length/2, group = id), size = .2, color = paired_color)
   }
 
   # Change colors and remove NAs from legend
