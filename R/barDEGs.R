@@ -23,15 +23,28 @@
 #' @param name_size Numeric of length 1. Size of the names of the contrasts  written next to the bars. Default: 3.
 #' @param log2FC Numeric of length 1. Threshold for the log2FoldChange to define a gene as differentially expressed. Default: 1.
 #' @param pval Numeric of length 1. Threshold for the adjusted p-value to define a gene as differentially expressed. Default: 0.05.
+#' @param total Logical of length 1. If TRUE, it counts the total number of features in each elements of deg_list and writes them in the caption. Default: FALSE.
+#' @param title Charachter of length 1 or NULL. Title of the plot. Default: NULL.
+#' @param subtitle Charachter of lenght 1 or NULL. Subtitle of the plot. Default: NULL.
 #'
 #' @export
 
-barDEGs <- function(deg_list, deg_names = names(deg_list),
-                    name_pos = "min", xlim = NULL, position_num = 10,
-                    xaxis = F, yaxis = F,
-                    colors = c("green", "red"), alpha = 0.5,
-                    num_size = 3, name_size = 3,
-                    log2FC = 1, pval = 0.05){
+barDEGs <- function(deg_list,
+                    deg_names = names(deg_list),
+                    name_pos = "min",
+                    xlim = NULL,
+                    position_num = 10,
+                    xaxis = F,
+                    yaxis = F,
+                    colors = c("green", "red"),
+                    alpha = 0.5,
+                    num_size = 3,
+                    name_size = 3,
+                    log2FC = 1,
+                    pval = 0.05,
+                    total = FALSE,
+                    title = NULL,
+                    subtitle = NULL){
 
   # Load packages
   require(dplyr)
@@ -49,11 +62,21 @@ barDEGs <- function(deg_list, deg_names = names(deg_list),
   else if(!is.character(colors) | length(colors) != 2){ stop("'colors' must be a character vector of length 2 with valid color names/codes.") }
   else if(!is.numeric(alpha) | alpha < 0 | alpha > 1){ stop("'alpha' must be a numeric vector of length 1 with a value between 0 and 1")}
 
-
   # Mutate deg_list to be able to change the log2FC and pvalue thresholds for defining the DEGs
   deg_list <- deg_list %>% purrr::map(~dplyr::mutate(.x, DEG = "NS"))
   deg_list <- deg_list %>% purrr::map(~dplyr::mutate(.x, DEG = if_else(log2FoldChange > log2FC & padj < pval, "Upregulated", DEG)))
   deg_list <- deg_list %>% purrr::map(~dplyr::mutate(.x, DEG = if_else(log2FoldChange < -log2FC & padj < pval, "Downregulated", DEG)))
+
+  # Count total elements in the list
+  total_counts <- deg_list %>%
+    # Add names to each element in the list
+    purrr::set_names(deg_names) %>%
+    # Add a contrast variable using the name of each element in the list
+    purrr::imap(~dplyr::mutate(.x, contrast = .y)) %>%
+    # Concatenate the dataframes
+    dplyr::bind_rows() %>%
+    # Count the number of genes in each df
+    dplyr::count(contrast, name = "total_counts")
 
   # Named list of DEGs
   deg_numbers <- deg_list %>%
@@ -65,14 +88,16 @@ barDEGs <- function(deg_list, deg_names = names(deg_list),
     # Add a contrast variable using the name of each element in the list
     purrr::imap(~dplyr::mutate(.x, contrast = .y)) %>%
     # Bind all dataframes in one
-    bind_rows() %>%
+    dplyr::bind_rows() %>%
     # Change the number of downregulated genes to negative
-    mutate(number = if_else(DEG == "Downregulated", -n, n)) %>%
+    dplyr::mutate(number = if_else(DEG == "Downregulated", -n, n)) %>%
     # Add a variable for the position of the number of DEGs and the hjust
-    mutate(pos_num   = if_else(DEG == "Downregulated", -position_num, position_num)) %>%
-    mutate(hjust_num = if_else(DEG == "Downregulated", 1, 0)) %>%
+    dplyr::mutate(pos_num   = if_else(DEG == "Downregulated", -position_num, position_num)) %>%
+    dplyr::mutate(hjust_num = if_else(DEG == "Downregulated", 1, 0)) %>%
     # Add a variable for the position of the name of the contrast
-    mutate(contrast_pos = if_else(DEG == "Downregulated", number-position_num, number+position_num))
+    dplyr::mutate(contrast_pos = if_else(DEG == "Downregulated", number-position_num, number+position_num)) %>%
+    # Join with total number of elements
+    dplyr::left_join(total_counts, by = "contrast")
 
   # Set at which site will the contrast name be written
   if(name_pos == "min"){
@@ -110,13 +135,26 @@ barDEGs <- function(deg_list, deg_names = names(deg_list),
           axis.line = element_blank(),
           axis.ticks = element_blank(),
           plot.title = element_text(hjust = .5),
-          plot.subtitle = element_text(hjust = .5, face = "italic"))
+          plot.subtitle = element_text(hjust = .5, face = "italic"),
+          plot.caption = element_text(hjust = 1))
+
+  # Add total number of elements
+  if(total){
+    # If all elements in degs_list have the same number of regions/genes, write the number only one time.
+    # If else, write the number of genes in each element
+    if(length(unique(total_counts$total_counts)) == 1) { updown_bar <- updown_bar + labs(caption = paste("N = ", unique(total_counts$total_counts))) }
+    else { updown_bar + labs(caption = paste(total_counts$contrast, total_counts$total_counts, sep = " = ", collapse = "; ")) }
+  }
 
   if(!xaxis){ updown_bar <- updown_bar + theme(axis.text.x = element_blank()) }
   if(!yaxis){ updown_bar <- updown_bar + theme(axis.text.y = element_blank()) }
 
   # Change limits of xaxis
-  if(!is.null(xlim)){updown_bar <- updown_bar + coord_cartesian(xlim = c(xlim[1], xlim[2]))}
+  if(!is.null(xlim)){ updown_bar <- updown_bar + coord_cartesian(xlim = c(xlim[1], xlim[2])) }
+
+  # If title == NULL, turn subtitle to NULL, else write title and subtitle
+  if(is.null(title)){ subtitle <- NULL }
+  else {  updown_bar <- updown_bar + labs(title = title, subtitle = subtitle) }
 
   # Return plot
   return(updown_bar)

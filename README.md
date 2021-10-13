@@ -114,12 +114,17 @@ The version history of `plotmics` is shown below:
 * `v3.1.0` *(2021-10-04)*:
   + Allow `ggVennPeaks()` and `getVennCounts()` to consider strand information.
   
+<br>
+  
 * `v3.1.1` *(2021-10-07)*:
   + Change minor features in `barDEGs()` and `volcanoPlot()`.
   + Change minor features in `circleRegions()` to exclude the chromosomes before looking if the chromosome names in regions are also in the chrom.sizes files.
+  
+<br>
 
 * `v3.1.2` *(2021-10-12)*:
   + Change minor features in `circleRegions()` to exclude the chromosomes before looking if the chromosome names in regions are also in the chrom.sizes files.
   + Fix error in `circleRegions()` to allow different assemblies.
+  + Add the possibility to add title and subtitle, and also to count the number of genes in each input contrast in `barDEGs()`.
   
 <br>

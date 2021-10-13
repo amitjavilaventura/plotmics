@@ -17,7 +17,10 @@ barDEGs(
   num_size = 3,
   name_size = 3,
   log2FC = 1,
-  pval = 0.05
+  pval = 0.05,
+  total = FALSE,
+  title = NULL,
+  subtitle = NULL
 )
 }
 \arguments{
@@ -46,6 +49,12 @@ barDEGs(
 \item{log2FC}{Numeric of length 1. Threshold for the log2FoldChange to define a gene as differentially expressed. Default: 1.}
 
 \item{pval}{Numeric of length 1. Threshold for the adjusted p-value to define a gene as differentially expressed. Default: 0.05.}
+
+\item{total}{Logical of length 1. If TRUE, it counts the total number of features in each elements of deg_list and writes them in the caption. Default: FALSE.}
+
+\item{title}{Charachter of length 1 or NULL. Title of the plot. Default: NULL.}
+
+\item{subtitle}{Charachter of lenght 1 or NULL. Subtitle of the plot. Default: NULL.}
 }
 \value{
 A ggplot2-based barplot with the upregulated and downregulated genes in each contrast.

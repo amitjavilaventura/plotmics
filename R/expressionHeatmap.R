@@ -164,7 +164,7 @@ expressionHeatmap <- function(expr_df,
           axis.title = element_text(face = "bold", size = axis_title_size),
           axis.ticks.y = element_blank(),
           axis.text  = element_text(size = axis_text_size),
-          axis.text.x = element_text(angle = 90, hjust = .5, vjust = .5),
+          axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5),
           panel.border = element_rect(size = 1.1)) +
     xlab(xlab) + ylab(ylab)
 

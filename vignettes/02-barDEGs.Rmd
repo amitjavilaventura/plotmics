@@ -15,7 +15,8 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 4, fig.height = 4)
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 4, fig.height = 4, 
+                      error = FALSE, message = FALSE, warning = FALSE)
 devtools::load_all("..")
 library(dplyr)
 library(purrr)
@@ -47,9 +48,6 @@ deg_list[[1]] %>% head()
 
 ## Minimum  run
 
-```{r include=FALSE}
-barDEGs(deg_list = deg_list)
-```
 
 ```{r include=T}
 barDEGs(deg_list = deg_list)
@@ -59,6 +57,15 @@ barDEGs(deg_list = deg_list)
 
 ```{r}
 barDEGs(deg_list = deg_list, pval = 0.1, log2FC = 1)
+```
+
+
+## Count genes
+
+`barDEGs()` has the possibility to count the number of regions/genes in each element of the list and writting them to the caption by setting `total = TRUE`. In case all elements in `deg_list` have the same number of genes, the caption will be *N = <number_of_regions>*, otherwise it will be *<contrast1> = <number_of_regions1>; <contrast2> = <number_of_regions2>; ...*.
+
+```{r include=T}
+barDEGs(deg_list = deg_list, total = T)
 ```
 
 ## Customize plot
@@ -101,8 +108,13 @@ barDEGs(deg_list = deg_list, xaxis = T)
 barDEGs(deg_list = deg_list, xlim = c(-1000, 1000))
 ```
 
+### Titles
 
+`barDEGs()` has the possibility to add title and subtitle directly without adding any other layer. To add them, use the arguments `title` and `subtitle`.
 
+```{r}
+barDEGs(deg_list = deg_list, title = "This is a title", subtitle = "this is a subtilte")
+```
 
 
 ### Further costumization

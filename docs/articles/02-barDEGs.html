@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.2</span>
       </span>
     </div>
 
@@ -170,13 +170,21 @@
 <a href="#minimum-run" class="anchor"></a>Minimum run</h2>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barDEGs.html">barDEGs</a></span><span class="op">(</span>deg_list <span class="op">=</span> <span class="va">deg_list</span><span class="op">)</span></code></pre></div>
-<p><img src="02-barDEGs_files/figure-html/unnamed-chunk-4-1.png" width="384" style="display: block; margin: auto;"></p>
+<p><img src="02-barDEGs_files/figure-html/unnamed-chunk-3-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="change-thresholds" class="section level2">
 <h2 class="hasAnchor">
 <a href="#change-thresholds" class="anchor"></a>Change thresholds</h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barDEGs.html">barDEGs</a></span><span class="op">(</span>deg_list <span class="op">=</span> <span class="va">deg_list</span>, pval <span class="op">=</span> <span class="fl">0.1</span>, log2FC <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<p><img src="02-barDEGs_files/figure-html/unnamed-chunk-4-1.png" width="384" style="display: block; margin: auto;"></p>
+</div>
+<div id="count-genes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#count-genes" class="anchor"></a>Count genes</h2>
+<p><code><a href="../reference/barDEGs.html">barDEGs()</a></code> has the possibility to count the number of regions/genes in each element of the list and writting them to the caption by setting <code>total = TRUE</code>. In case all elements in <code>deg_list</code> have the same number of genes, the caption will be <em>N = <number_of_regions></number_of_regions></em>, otherwise it will be <em><contrast1> = <number_of_regions1>; <contrast2> = <number_of_regions2>; …</number_of_regions2></contrast2></number_of_regions1></contrast1></em>.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/barDEGs.html">barDEGs</a></span><span class="op">(</span>deg_list <span class="op">=</span> <span class="va">deg_list</span>, total <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <p><img src="02-barDEGs_files/figure-html/unnamed-chunk-5-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="customize-plot" class="section level2">
@@ -185,43 +193,51 @@
 <div id="names-of-conditions" class="section level3">
 <h3 class="hasAnchor">
 <a href="#names-of-conditions" class="anchor"></a>Names of conditions</h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barDEGs.html">barDEGs</a></span><span class="op">(</span>deg_list <span class="op">=</span> <span class="va">deg_list</span>, deg_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Condition 1"</span>, <span class="st">"Condition 2"</span>, <span class="st">"Condition 3"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="02-barDEGs_files/figure-html/unnamed-chunk-6-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="position-of-condition-labels" class="section level3">
 <h3 class="hasAnchor">
 <a href="#position-of-condition-labels" class="anchor"></a>Position of condition labels</h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barDEGs.html">barDEGs</a></span><span class="op">(</span>deg_list <span class="op">=</span> <span class="va">deg_list</span>, name_pos <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></code></pre></div>
 <p><img src="02-barDEGs_files/figure-html/unnamed-chunk-7-1.png" width="384" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barDEGs.html">barDEGs</a></span><span class="op">(</span>deg_list <span class="op">=</span> <span class="va">deg_list</span>, name_pos <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></code></pre></div>
 <p><img src="02-barDEGs_files/figure-html/unnamed-chunk-8-1.png" width="384" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barDEGs.html">barDEGs</a></span><span class="op">(</span>deg_list <span class="op">=</span> <span class="va">deg_list</span>, name_pos <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></code></pre></div>
 <p><img src="02-barDEGs_files/figure-html/unnamed-chunk-9-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="labels-in-y-axis" class="section level3">
 <h3 class="hasAnchor">
 <a href="#labels-in-y-axis" class="anchor"></a>Labels in Y-axis</h3>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barDEGs.html">barDEGs</a></span><span class="op">(</span>deg_list <span class="op">=</span> <span class="va">deg_list</span>, name_pos <span class="op">=</span> <span class="st">"none"</span>, yaxis <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <p><img src="02-barDEGs_files/figure-html/unnamed-chunk-10-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="degs-in-x-axis" class="section level3">
 <h3 class="hasAnchor">
 <a href="#degs-in-x-axis" class="anchor"></a>DEGs in X-axis</h3>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barDEGs.html">barDEGs</a></span><span class="op">(</span>deg_list <span class="op">=</span> <span class="va">deg_list</span>, xaxis <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <p><img src="02-barDEGs_files/figure-html/unnamed-chunk-11-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="x-axis-limits" class="section level3">
 <h3 class="hasAnchor">
 <a href="#x-axis-limits" class="anchor"></a>X axis limits</h3>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barDEGs.html">barDEGs</a></span><span class="op">(</span>deg_list <span class="op">=</span> <span class="va">deg_list</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1000</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="02-barDEGs_files/figure-html/unnamed-chunk-12-1.png" width="384" style="display: block; margin: auto;"></p>
+</div>
+<div id="titles" class="section level3">
+<h3 class="hasAnchor">
+<a href="#titles" class="anchor"></a>Titles</h3>
+<p><code><a href="../reference/barDEGs.html">barDEGs()</a></code> has the possibility to add title and subtitle directly without adding any other layer. To add them, use the arguments <code>title</code> and <code>subtitle</code>.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/barDEGs.html">barDEGs</a></span><span class="op">(</span>deg_list <span class="op">=</span> <span class="va">deg_list</span>, title <span class="op">=</span> <span class="st">"This is a title"</span>, subtitle <span class="op">=</span> <span class="st">"this is a subtilte"</span><span class="op">)</span></code></pre></div>
+<p><img src="02-barDEGs_files/figure-html/unnamed-chunk-13-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div id="further-costumization" class="section level3">
 <h3 class="hasAnchor">

@@ -276,7 +276,7 @@ circleRegions <- function(chromsizes_sets,
 
   # Draw paired lines
   if(paired){
-    g <- g + geom_line(data = regions_chrom2, aes(x = 11-group*2, y = total_size-cum_size+size2-start-length/2, group = id), size = .2, color = paired_color)
+    g <- g + geom_line(data = regions_chrom2, aes(x = 11-group*2, y = total_size-cum_size+size2-start-length/2, group = id), size = .2, color = paired_color, alpha = .7)
   }
 
   # Change colors and remove NAs from legend
