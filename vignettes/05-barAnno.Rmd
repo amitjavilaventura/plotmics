@@ -15,7 +15,8 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 4, fig.height = 4)
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 4, fig.height = 4, 
+                      error = FALSE, warning = FALSE, message = FALSE)
 devtools::load_all("..")
 library(dplyr)
 library(purrr)
@@ -56,7 +57,7 @@ peak_list <- list.files("../testdata", "peak", full.names = T, recursive = T) %>
 peak_list[[1]][1:5,]
 ```
 
-Then, can use `ChIPseeker::annotatePeak()` to annotate the peaks into genomic regions.
+Then, we can use `ChIPseeker::annotatePeak()` to annotate the peaks into genomic regions.
 
 ```{r results='hide'}
 # Load annotations for mouse mm10 genome
@@ -115,6 +116,7 @@ barAnno(anno_list = peak_list, anno_num = 3)
 barAnno(anno_list = peak_list, anno_num = "all")
 ```
 
+
 ## Change names
 
 ```{r}
@@ -126,6 +128,39 @@ barAnno(anno_list = peak_list, anno_names = c("Condition X", "Condition Y"))
 barAnno(anno_list = peak_list, 
         anno_names = c("Condition X", "Condition Y"), 
         names_order = c("Condition Y", "Condition X"))
+```
+
+We can only set all the peak sets with the same name and they will be counted as one set.
+
+```{r}
+barAnno(anno_list = peak_list, anno_names = c("Condition X", "Condition X"))
+```
+## Write counts
+
+We can write the number and percentage of observations in each annotation by specifying `count_label = T`. The angle and the size of these labels can be controlled through `counts_angle` and `counts_size`. Here there are some examples:
+
+* Writing the labels:
+
+```{r}
+barAnno(anno_list = peak_list, counts_label = T)
+```
+
+* Writing the labels with more annotations and controlling the angle:
+
+```{r}
+barAnno(anno_list = peak_list, anno_num = 3, counts_label = T, counts_angle = 0)
+```
+
+* Labels within different pannels
+
+```{r}
+barAnno(anno_list = peak_list, anno_names = c("cond1", "cond1"), protein = c("protX", "protY"), counts_label = T)
+```
+
+* Controlling the size
+
+```{r}
+barAnno(anno_list = peak_list, counts_label = T, counts_size = 5)
 ```
 
 ## Customize plot

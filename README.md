@@ -126,5 +126,6 @@ The version history of `plotmics` is shown below:
   + Change minor features in `circleRegions()` to exclude the chromosomes before looking if the chromosome names in regions are also in the chrom.sizes files.
   + Fix error in `circleRegions()` to allow different assemblies.
   + Add the possibility to add title and subtitle, and also to count the number of genes in each input contrast in `barDEGs()`.
+  + Add the possibility to add percentage/counts in `barAnno()`.
   
 <br>

@@ -194,7 +194,10 @@ As a ggplot2-based function, it allows to add more layers to format the plot.</p
   anno_num <span class='op'>=</span> <span class='fl'>2</span>,
   fill_position <span class='op'>=</span> <span class='cn'>T</span>,
   xangle <span class='op'>=</span> <span class='fl'>20</span>,
-  width <span class='op'>=</span> <span class='fl'>0.6</span>
+  width <span class='op'>=</span> <span class='fl'>0.6</span>,
+  counts_label <span class='op'>=</span> <span class='cn'>F</span>,
+  counts_angle <span class='op'>=</span> <span class='fl'>90</span>,
+  counts_size <span class='op'>=</span> <span class='fl'>3</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -214,7 +217,7 @@ As a ggplot2-based function, it allows to add more layers to format the plot.</p
     </tr>
     <tr>
       <th>protein</th>
-      <td><p>Character vector of the same length as 'anno_list' with the protein chipped in each dataframe of anno_list. This names will be passed through <code>facet_wrap()</code>. Only works if facet is set to TRUE. Default: NULL.</p></td>
+      <td><p>NULL or haracter vector of the same length as 'anno_list' with the protein chipped in each dataframe of anno_list. If not NULL, these names will be passed through <code>facet_wrap()</code>. Default: NULL.</p></td>
     </tr>
     <tr>
       <th>protein_order</th>
@@ -255,6 +258,18 @@ As a ggplot2-based function, it allows to add more layers to format the plot.</p
     <tr>
       <th>width</th>
       <td><p>Numerical of length 1. Width of the bar in relative units. Default: 0.6</p></td>
+    </tr>
+    <tr>
+      <th>counts_label</th>
+      <td><p>Logical of length 1. Whether to write the number and percentage of observations in each annotation. Default: FALSE.</p></td>
+    </tr>
+    <tr>
+      <th>counts_angle</th>
+      <td><p>Numerical of length 1. Angle of the number and percentage labels. Default: 90</p></td>
+    </tr>
+    <tr>
+      <th>counts_size</th>
+      <td><p>Numerical of length 1. Size of the number and percentage labels. Default: 3</p></td>
     </tr>
     <tr>
       <th>palette</th>

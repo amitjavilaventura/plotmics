@@ -19,7 +19,10 @@ barAnno(
   anno_num = 2,
   fill_position = T,
   xangle = 20,
-  width = 0.6
+  width = 0.6,
+  counts_label = F,
+  counts_angle = 90,
+  counts_size = 3
 )
 }
 \arguments{
@@ -29,7 +32,7 @@ barAnno(
 
 \item{names_order}{Character vector with the same entries as 'names' with the order wanted to plot the data. Defaults to: unique(names).}
 
-\item{protein}{Character vector of the same length as 'anno_list' with the protein chipped in each dataframe of anno_list. This names will be passed through \code{facet_wrap()}. Only works if facet is set to TRUE. Default: NULL.}
+\item{protein}{NULL or haracter vector of the same length as 'anno_list' with the protein chipped in each dataframe of anno_list. If not NULL, these names will be passed through \code{facet_wrap()}. Default: NULL.}
 
 \item{protein_order}{Character vector with the same entries as 'protein' with the order wanted to plot the data. Defaults to: unique(protein).}
 
@@ -50,6 +53,12 @@ barAnno(
 \item{xangle}{Numerical of length 1. Angle of the text in the X axis. Default: 20.}
 
 \item{width}{Numerical of length 1. Width of the bar in relative units. Default: 0.6}
+
+\item{counts_label}{Logical of length 1. Whether to write the number and percentage of observations in each annotation. Default: FALSE.}
+
+\item{counts_angle}{Numerical of length 1. Angle of the number and percentage labels. Default: 90}
+
+\item{counts_size}{Numerical of length 1. Size of the number and percentage labels. Default: 3}
 
 \item{palette}{Character of lenght 1. Color palette used to color the bars through the function \code{scale_fill_brewer()}. Default: "Set1".}
 }
