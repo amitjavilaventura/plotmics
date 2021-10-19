@@ -11,7 +11,7 @@ _pl**O**t**MICS**_ is an R package to visualize omics and sequencing data in R u
 * `volcanoPlot()`: draws a `ggplot2`-based volcano plot with the DE data coming out from DESeq2.
 * `DEcompare()`: draws a `ggplot2`-based scatter plot comparing the Log2FCs of two different contrasts.
 * `barAnno()`: takes a list of modified outputs from `ChIPseeker::annotatePeak()`, computes the proportion of peaks in distal or promoter regions and draws a `ggplot2`-based barplot with the correseponding proportion for each sample.
-* `getVennCounts()`: helper function that calls `ChIPpeakAnno::makeVennDiagram()` to intersect different sets of peaks and returns the Venn counts and a list of the peaks present in each set of peaks.
+* `getVennCounts()`: helper function that calls `ChIPpeakAnno::makeVennDiagram()` to intersect different sets of peaks and returns the Venn counts and a list of the peaks present in each set of peaks. Note that the intersection of peaks may have a smaller number than expected to prevent the intersection being bigger than one of the sets.
 * `upsetPeaks()`: calls `getVennCounts()` and draws an UpSet plot using the Venn counts and the `UpSetR` package.
 * `ggUpsetPeaks()`: calls `getVennCounts()` and draws a `ggplot2`-based UpSet plot using the Venn counts.
 * `ggVennPeaks()`: calls `getVennCounts()` and draws a Venn diagram using the package `ggvenn`.
@@ -47,7 +47,7 @@ If you use this package, please cite [this repository](https://github.com/amitja
 
 `plotmics` versions have the structure of `1.2.3`. The first number (`1`, *major*) implies the addition of a function and/or major changes in the packages; the second number (`2`,*minor*) implies the addition of new features to a function and possible corrections; the third number (`3`, *micro*) implies the correction of minor bugs or addition of minor features.
 
-The version history of `plotmics` is shown below:
+`plotmics` version history is shown below:
 
 * `v1.0.0`: 
 
@@ -56,32 +56,32 @@ The version history of `plotmics` is shown below:
 <br>
 
 * `v1.1.0`: 
-  + Rescale `ggVennPeaks()` output to remove blank space around the Venn diagram.
-  + Add possibility to scale (`scale()`) data by rows or columns in `expressionHeatmap()` and `expressionHeatmap2()`. 
+  + `ggVennPeaks()`: Rescale output to remove blank space around the Venn diagram.
+  + `expressionHeatmap()` and `expressionHeatmap2()`: Add possibility to scale (`scale()`) data by rows or columns. 
   
 <br>
 
 * `v1.1.1`: 
-  + Add minor formatting options in `expressionHeatmap()` and `expressionHeatmap2()`, such as the possibility to remove the gene names, change sizes of texts and titles, change the color of the border of each cell, etc.
-  + Add minor changes in `ggVennPeaks()` in order to make it easier to visualize more peaks sets.  
+  + `expressionHeatmap()` and `expressionHeatmap2()`: Add minor formatting options (remove the gene names, change sizes of texts and titles, change the color of the cell border, etc).
+  + `ggVennPeaks()`: Add minor changes in order to make it easier to visualize more peaks sets.  
   
 <br>
   
 * `v1.1.2`:
-  + Change chromosome filtering method in `chromReads()`.
-  + Allow dataframes without `DEG` column as input for `volcanoPlot()`.
-  + Change `scale = FALSE` for `scale = "none"` in `volcanoPlot()`. 
+  + `chromReads()`: Change chromosome filtering method.
+  + `volcanoPlot()`: Allow dataframes without `DEG` column as input.
+  + `volcanoPlot()`: Change `scale = FALSE` for `scale = "none"`. 
   
 <br>
   
 * `v1.1.3`:
-  + Fix error in labelling of `expressionHeatmap()` and `expressionHeatmap2()`.
+  + `expressionHeatmap()` and `expressionHeatmap2()`: Fix error in labelling.
   
 <br>
   
 * `v1.1.4`:
-  + Add possibility to color the NA values in `expressionHeatmap()` and `expressionHeatmap2()`.
-  + Change title format in `barDEGs()`. 
+  + `expressionHeatmap()` and `expressionHeatmap2()`: Add possibility to color the NA values.
+  + `barDEGs()`: Change title format in. 
   
 <br>
   
@@ -91,41 +91,41 @@ The version history of `plotmics` is shown below:
 <br>
   
 * `v2.1.0` *(2021-09-26)*:
-  + Allow `chromRegions()` to take a list of regions as input.
-  + Allow `chromRegions()` to order the region sets.
+  + `chromRegions()`: Allow to take a list of regions as input.
+  + `chromRegions()`: Allow to order the region sets.
   
 <br>
   
 * `v3.0.0` *(2021-09-28)*:
   + Add new function `circleRegions()`.
-  + Allow `chromRegions()` to color by different parameters.
-  + Allow `chromRegions()` to add extra info.
-  + Allow `chromRegions()` to remove or change size of text in the Y axis.
+  + `chromRegions()`: Allow to color by different parameters.
+  + `chromRegions()`: Allow to add extra info.
+  + `chromRegions()`: Allow to remove or change size of text in the Y axis.
   
 <br>
   
 * `v3.0.1` *(2021-09-30)*:
-  + Fix a minor bug about plotting the chromosome labels in `circleRegions()`.
-  + Fix a minor bug in `ggVennPeaks()` that caused a intersection with one region more than expected.
-  + Remove `pkgcond` from required packages of `getVennCounts()`.
+  + `circleRegions()`: Fix a minor bug about plotting the chromosome labels.
+  + `ggVennPeaks()`: Fix a minor bug that caused an intersection with one region more than expected.
+  + `getVennCounts()`: Remove `pkgcond` from required packages.
   
 <br>
 
 * `v3.1.0` *(2021-10-04)*:
-  + Allow `ggVennPeaks()` and `getVennCounts()` to consider strand information.
+  + `ggVennPeaks()`and `getVennCounts()`: Allow to consider strand information.
   
 <br>
   
 * `v3.1.1` *(2021-10-07)*:
-  + Change minor features in `barDEGs()` and `volcanoPlot()`.
-  + Change minor features in `circleRegions()` to exclude the chromosomes before looking if the chromosome names in regions are also in the chrom.sizes files.
+  + `barDEGs()` and `volcanoPlot()`: Change minor features.
+  + `circleRegions()`: Exclude the chromosomes before looking if the chromosome names in regions are also in the chrom.sizes files.
   
 <br>
 
 * `v3.1.2` *(2021-10-12)*:
-  + Change minor features in `circleRegions()` to exclude the chromosomes before looking if the chromosome names in regions are also in the chrom.sizes files.
-  + Fix error in `circleRegions()` to allow different assemblies.
-  + Add the possibility to add title and subtitle, and also to count the number of genes in each input contrast in `barDEGs()`.
-  + Add the possibility to add percentage/counts in `barAnno()`.
+  + `circleRegions()`: Write the chromosome labels after drawing all the lines and points, so the labels won't be under many layers.
+  + `circleRegions()`: Fix error to allow different assemblies.
+  + `barDEGs()`: Add the possibility to add title and subtitle, and also to count the number of genes in each input contrast.
+  + `barAnno()`: Add the possibility to add percentage/counts.
   
 <br>

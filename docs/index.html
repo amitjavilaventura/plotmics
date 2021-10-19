@@ -142,7 +142,7 @@
 <li>
 <code><a href="reference/barAnno.html">barAnno()</a></code>: takes a list of modified outputs from <code><a href="https://rdrr.io/pkg/ChIPseeker/man/annotatePeak.html">ChIPseeker::annotatePeak()</a></code>, computes the proportion of peaks in distal or promoter regions and draws a <code>ggplot2</code>-based barplot with the correseponding proportion for each sample.</li>
 <li>
-<code><a href="reference/getVennCounts.html">getVennCounts()</a></code>: helper function that calls <code><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/makeVennDiagram.html">ChIPpeakAnno::makeVennDiagram()</a></code> to intersect different sets of peaks and returns the Venn counts and a list of the peaks present in each set of peaks.</li>
+<code><a href="reference/getVennCounts.html">getVennCounts()</a></code>: helper function that calls <code><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/makeVennDiagram.html">ChIPpeakAnno::makeVennDiagram()</a></code> to intersect different sets of peaks and returns the Venn counts and a list of the peaks present in each set of peaks. Note that the intersection of peaks may have a smaller number than expected to prevent the intersection being bigger than one of the sets.</li>
 <li>
 <code><a href="reference/upsetPeaks.html">upsetPeaks()</a></code>: calls <code><a href="reference/getVennCounts.html">getVennCounts()</a></code> and draws an UpSet plot using the Venn counts and the <code>UpSetR</code> package.</li>
 <li>
@@ -187,7 +187,7 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 <h2 class="hasAnchor">
 <a href="#versions" class="anchor"></a>Versions</h2>
 <p><code>plotmics</code> versions have the structure of <code>1.2.3</code>. The first number (<code>1</code>, <em>major</em>) implies the addition of a function and/or major changes in the packages; the second number (<code>2</code>,<em>minor</em>) implies the addition of new features to a function and possible corrections; the third number (<code>3</code>, <em>micro</em>) implies the correction of minor bugs or addition of minor features.</p>
-<p>The version history of <code>plotmics</code> is shown below:</p>
+<p><code>plotmics</code> version history is shown below:</p>
 <ul>
 <li>
 <p><code>v1.0.0</code>:</p>
@@ -201,8 +201,10 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 <li>
 <code>v1.1.0</code>:
 <ul>
-<li>Rescale <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code> output to remove blank space around the Venn diagram.</li>
-<li>Add possibility to scale (<code><a href="https://rdrr.io/r/base/scale.html">scale()</a></code>) data by rows or columns in <code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>.</li>
+<li>
+<code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code>: Rescale output to remove blank space around the Venn diagram.</li>
+<li>
+<code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>: Add possibility to scale (<code><a href="https://rdrr.io/r/base/scale.html">scale()</a></code>) data by rows or columns.</li>
 </ul>
 </li>
 </ul>
@@ -211,8 +213,10 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 <li>
 <code>v1.1.1</code>:
 <ul>
-<li>Add minor formatting options in <code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>, such as the possibility to remove the gene names, change sizes of texts and titles, change the color of the border of each cell, etc.</li>
-<li>Add minor changes in <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code> in order to make it easier to visualize more peaks sets.</li>
+<li>
+<code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>: Add minor formatting options (remove the gene names, change sizes of texts and titles, change the color of the cell border, etc).</li>
+<li>
+<code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code>: Add minor changes in order to make it easier to visualize more peaks sets.</li>
 </ul>
 </li>
 </ul>
@@ -221,9 +225,12 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 <li>
 <code>v1.1.2</code>:
 <ul>
-<li>Change chromosome filtering method in <code><a href="reference/chromReads.html">chromReads()</a></code>.</li>
-<li>Allow dataframes without <code>DEG</code> column as input for <code><a href="reference/volcanoPlot.html">volcanoPlot()</a></code>.</li>
-<li>Change <code>scale = FALSE</code> for <code>scale = "none"</code> in <code><a href="reference/volcanoPlot.html">volcanoPlot()</a></code>.</li>
+<li>
+<code><a href="reference/chromReads.html">chromReads()</a></code>: Change chromosome filtering method.</li>
+<li>
+<code><a href="reference/volcanoPlot.html">volcanoPlot()</a></code>: Allow dataframes without <code>DEG</code> column as input.</li>
+<li>
+<code><a href="reference/volcanoPlot.html">volcanoPlot()</a></code>: Change <code>scale = FALSE</code> for <code>scale = "none"</code>.</li>
 </ul>
 </li>
 </ul>
@@ -232,7 +239,8 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 <li>
 <code>v1.1.3</code>:
 <ul>
-<li>Fix error in labelling of <code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>.</li>
+<li>
+<code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>: Fix error in labelling.</li>
 </ul>
 </li>
 </ul>
@@ -241,8 +249,10 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 <li>
 <code>v1.1.4</code>:
 <ul>
-<li>Add possibility to color the NA values in <code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>.</li>
-<li>Change title format in <code><a href="reference/barDEGs.html">barDEGs()</a></code>.</li>
+<li>
+<code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>: Add possibility to color the NA values.</li>
+<li>
+<code><a href="reference/barDEGs.html">barDEGs()</a></code>: Change title format in.</li>
 </ul>
 </li>
 </ul>
@@ -260,8 +270,10 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 <li>
 <code>v2.1.0</code> <em>(2021-09-26)</em>:
 <ul>
-<li>Allow <code><a href="reference/chromRegions.html">chromRegions()</a></code> to take a list of regions as input.</li>
-<li>Allow <code><a href="reference/chromRegions.html">chromRegions()</a></code> to order the region sets.</li>
+<li>
+<code><a href="reference/chromRegions.html">chromRegions()</a></code>: Allow to take a list of regions as input.</li>
+<li>
+<code><a href="reference/chromRegions.html">chromRegions()</a></code>: Allow to order the region sets.</li>
 </ul>
 </li>
 </ul>
@@ -271,9 +283,12 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 <code>v3.0.0</code> <em>(2021-09-28)</em>:
 <ul>
 <li>Add new function <code><a href="reference/circleRegions.html">circleRegions()</a></code>.</li>
-<li>Allow <code><a href="reference/chromRegions.html">chromRegions()</a></code> to color by different parameters.</li>
-<li>Allow <code><a href="reference/chromRegions.html">chromRegions()</a></code> to add extra info.</li>
-<li>Allow <code><a href="reference/chromRegions.html">chromRegions()</a></code> to remove or change size of text in the Y axis.</li>
+<li>
+<code><a href="reference/chromRegions.html">chromRegions()</a></code>: Allow to color by different parameters.</li>
+<li>
+<code><a href="reference/chromRegions.html">chromRegions()</a></code>: Allow to add extra info.</li>
+<li>
+<code><a href="reference/chromRegions.html">chromRegions()</a></code>: Allow to remove or change size of text in the Y axis.</li>
 </ul>
 </li>
 </ul>
@@ -282,9 +297,12 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 <li>
 <code>v3.0.1</code> <em>(2021-09-30)</em>:
 <ul>
-<li>Fix a minor bug about plotting the chromosome labels in <code><a href="reference/circleRegions.html">circleRegions()</a></code>.</li>
-<li>Fix a minor bug in <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code> that caused a intersection with one region more than expected.</li>
-<li>Remove <code>pkgcond</code> from required packages of <code><a href="reference/getVennCounts.html">getVennCounts()</a></code>.</li>
+<li>
+<code><a href="reference/circleRegions.html">circleRegions()</a></code>: Fix a minor bug about plotting the chromosome labels.</li>
+<li>
+<code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code>: Fix a minor bug that caused an intersection with one region more than expected.</li>
+<li>
+<code><a href="reference/getVennCounts.html">getVennCounts()</a></code>: Remove <code>pkgcond</code> from required packages.</li>
 </ul>
 </li>
 </ul>
@@ -293,7 +311,8 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 <li>
 <code>v3.1.0</code> <em>(2021-10-04)</em>:
 <ul>
-<li>Allow <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code> and <code><a href="reference/getVennCounts.html">getVennCounts()</a></code> to consider strand information.</li>
+<li>
+<code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code>and <code><a href="reference/getVennCounts.html">getVennCounts()</a></code>: Allow to consider strand information.</li>
 </ul>
 </li>
 </ul>
@@ -302,8 +321,10 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 <li>
 <code>v3.1.1</code> <em>(2021-10-07)</em>:
 <ul>
-<li>Change minor features in <code><a href="reference/barDEGs.html">barDEGs()</a></code> and <code><a href="reference/volcanoPlot.html">volcanoPlot()</a></code>.</li>
-<li>Change minor features in <code><a href="reference/circleRegions.html">circleRegions()</a></code> to exclude the chromosomes before looking if the chromosome names in regions are also in the chrom.sizes files.</li>
+<li>
+<code><a href="reference/barDEGs.html">barDEGs()</a></code> and <code><a href="reference/volcanoPlot.html">volcanoPlot()</a></code>: Change minor features.</li>
+<li>
+<code><a href="reference/circleRegions.html">circleRegions()</a></code>: Exclude the chromosomes before looking if the chromosome names in regions are also in the chrom.sizes files.</li>
 </ul>
 </li>
 </ul>
@@ -312,10 +333,14 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 <li>
 <code>v3.1.2</code> <em>(2021-10-12)</em>:
 <ul>
-<li>Change minor features in <code><a href="reference/circleRegions.html">circleRegions()</a></code> to exclude the chromosomes before looking if the chromosome names in regions are also in the chrom.sizes files.</li>
-<li>Fix error in <code><a href="reference/circleRegions.html">circleRegions()</a></code> to allow different assemblies.</li>
-<li>Add the possibility to add title and subtitle, and also to count the number of genes in each input contrast in <code><a href="reference/barDEGs.html">barDEGs()</a></code>.</li>
-<li>Add the possibility to add percentage/counts in <code><a href="reference/barAnno.html">barAnno()</a></code>.</li>
+<li>
+<code><a href="reference/circleRegions.html">circleRegions()</a></code>: Write the chromosome labels after drawing all the lines and points, so the labels won’t be under many layers.</li>
+<li>
+<code><a href="reference/circleRegions.html">circleRegions()</a></code>: Fix error to allow different assemblies.</li>
+<li>
+<code><a href="reference/barDEGs.html">barDEGs()</a></code>: Add the possibility to add title and subtitle, and also to count the number of genes in each input contrast.</li>
+<li>
+<code><a href="reference/barAnno.html">barAnno()</a></code>: Add the possibility to add percentage/counts.</li>
 </ul>
 </li>
 </ul>

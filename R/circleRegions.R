@@ -258,10 +258,8 @@ circleRegions <- function(chromsizes_sets,
   # DRAW PLOT -------------------------------------------------------------------------------------
   # Initialize plot
   g <- ggplot(data = regions_chrom2) +
-    # Draw chromosomes and labels
-    geom_col(aes(x = 11-group*2, y = size, group = seqnames), color = "black", fill = NA, width = .5, na.rm = T, position = "stack") +
-    geom_text(data = regions_chrom_filt, aes(x = 11-group*2+1, y = size, label = seqnames, group = seqnames),
-              position = position_stack(vjust = .5), show.legend = F,  na.rm = T, size = 2.5, hjust = .5, color = chr_label, alpha = 0.8)
+    # Draw chromosomes
+    geom_col(aes(x = 11-group*2, y = size, group = seqnames), color = "black", fill = NA, width = .5, na.rm = T, position = "stack")
 
   # Draw line to separate chromosomes
   if(chr_line){
@@ -278,6 +276,10 @@ circleRegions <- function(chromsizes_sets,
   if(paired){
     g <- g + geom_line(data = regions_chrom2, aes(x = 11-group*2, y = total_size-cum_size+size2-start-length/2, group = id), size = .2, color = paired_color, alpha = .7)
   }
+
+  # Write chromosome labels
+  g <- g  + geom_text(data = regions_chrom_filt, aes(x = 11-group*2+1, y = size, label = seqnames, group = seqnames),
+                      position = position_stack(vjust = .5), show.legend = F,  na.rm = T, size = 2.5, hjust = .5, color = chr_label, alpha = 0.8)
 
   # Change colors and remove NAs from legend
   g <- g + scale_color_manual(values = colors, na.translate = F)
