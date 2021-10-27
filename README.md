@@ -86,7 +86,7 @@ If you use this package, please cite [this repository](https://github.com/amitja
 <br>
   
 * `v2.0.0` *(2021-09-22)*:
-  + Add new function `chromRegions()`. 
+  + Add new function: `chromRegions()`. 
   
 <br>
   
@@ -97,7 +97,7 @@ If you use this package, please cite [this repository](https://github.com/amitja
 <br>
   
 * `v3.0.0` *(2021-09-28)*:
-  + Add new function `circleRegions()`.
+  + Add new function: `circleRegions()`.
   + `chromRegions()`: Allow to color by different parameters.
   + `chromRegions()`: Allow to add extra info.
   + `chromRegions()`: Allow to remove or change size of text in the Y axis.
@@ -125,7 +125,12 @@ If you use this package, please cite [this repository](https://github.com/amitja
 * `v3.1.2` *(2021-10-12)*:
   + `circleRegions()`: Write the chromosome labels after drawing all the lines and points, so the labels won't be under many layers.
   + `circleRegions()`: Fix error to allow different assemblies.
-  + `barDEGs()`: Add the possibility to add title and subtitle, and also to count the number of genes in each input contrast.
+  + `barDEGs()`: Add the possibility to add title and subtitle, and also to count the total number of genes in each contrast.
   + `barAnno()`: Add the possibility to add percentage/counts.
   
 <br>
+
+* `v4.0.0` *(2021-10-27)*:
+  + Add new function: `expressionCor()`.
+
+
