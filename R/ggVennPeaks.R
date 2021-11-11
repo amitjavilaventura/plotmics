@@ -131,8 +131,8 @@ ggVennPeaks <- function(peak_list,
 
     # Annotate true numbers
     venn <- venn +
-      annotate("text", 0, 0.3, label = as.character(num1), color = colorspace::darken(in_fill[1], amount = .5), fontface = "bold") +
-      annotate("text", 0, -0.3, label = as.character(num2), color = colorspace::darken(in_fill[2], amount = .5), fontface = "bold")
+      annotate("text", 0, 0.3, label = as.character(num1), color = colorspace::darken(in_fill[1], amount = .5), fontface = "bold", size = label_size*0.8) +
+      annotate("text", 0, -0.3, label = as.character(num2), color = colorspace::darken(in_fill[2], amount = .5), fontface = "bold", size = label_size*0.8)
   }
 
 
