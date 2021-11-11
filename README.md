@@ -132,5 +132,5 @@ If you use this package, please cite [this repository](https://github.com/amitja
 
 * `v4.0.0` *(2021-10-27)*:
   + Add new function: `expressionCor()`.
-
+  + `ggVennPeaks()`: Add option to annotate the number of true overlaps for each set of peaks.
 

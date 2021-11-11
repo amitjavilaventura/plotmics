@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0</span>
       </span>
     </div>
 
@@ -133,7 +133,7 @@
 
     
     
-<p>Last updated: 2021-10-19</p>
+<p>Last updated: 2021-11-11</p>
 <hr>
 <div id="load-plotmics" class="section level1">
 <h1 class="hasAnchor">
@@ -206,7 +206,7 @@
 <div id="other-clustering-methods" class="section level3">
 <h3 class="hasAnchor">
 <a href="#other-clustering-methods" class="anchor"></a>Other clustering methods</h3>
-<p>By default, the distance calculation method is <em>euclidean</em> and the clustering is <em>ward.D</em>: <code><a href="https://rdrr.io/r/stats/hclust.html">hclust(dist(data, method = "euclidean"), method = "ward.D")</a></code>. If another method has to be used, the <code>dist_method</code> and <code>hclust_method</code> arguments should be set to the corresponding value, passed through the functions <code><a href="https://rdrr.io/r/stats/dist.html">dist()</a></code> and <code><a href="https://rdrr.io/r/stats/hclust.html">hclust()</a></code>, respectively.</p>
+<p>By default, the distance calculation method is <em>euclidean</em> and the clustering is <em>ward.D</em>: <code>hclust(dist(data, method = "euclidean"), method = "ward.D")</code>. If another method has to be used, the <code>dist_method</code> and <code>hclust_method</code> arguments should be set to the corresponding value, passed through the functions <code><a href="https://rdrr.io/r/stats/dist.html">dist()</a></code> and <code><a href="https://rdrr.io/r/stats/hclust.html">hclust()</a></code>, respectively.</p>
 <p>Available values for <code>dist_method</code> can be found in the <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/dist"><code>dist()</code> function documentation</a> and available values for <code>hclust_method</code> can be found in the <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/hclust"><code>hclust()</code> function documnetation</a>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap2.html">expressionHeatmap2</a></span><span class="op">(</span><span class="va">degs_all</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Lef1"</span>, <span class="st">"Jun"</span>, <span class="st">"Car4"</span>, <span class="st">"Yap1"</span><span class="op">)</span>,
@@ -239,7 +239,7 @@
 <div id="scaling" class="section level2">
 <h2 class="hasAnchor">
 <a href="#scaling" class="anchor"></a>Scaling</h2>
-<p><code><a href="../reference/expressionHeatmap2.html">expressionHeatmap2()</a></code> allows the scaling of the data by rows and columns by calling the function <code><a href="https://rdrr.io/r/base/scale.html">scale()</a></code>. To do so, the <code>scale</code> argument must be set to either <code>"rows"</code> -to scale by rows- or <code>"cols"</code> -to scale by columns-. It can also be both <code><a href="https://rdrr.io/r/base/c.html">c("rows", "cols")</a></code>.</p>
+<p><code><a href="../reference/expressionHeatmap2.html">expressionHeatmap2()</a></code> allows the scaling of the data by rows and columns by calling the function <code><a href="https://rdrr.io/r/base/scale.html">scale()</a></code>. To do so, the <code>scale</code> argument must be set to either <code>"rows"</code> -to scale by rows- or <code>"cols"</code> -to scale by columns-. It can also be both <code>c("rows", "cols")</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap2.html">expressionHeatmap2</a></span><span class="op">(</span><span class="va">degs_all</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Lef1"</span>, <span class="st">"Jun"</span>, <span class="st">"Car4"</span>, <span class="st">"Yap1"</span><span class="op">)</span>, scale <span class="op">=</span> <span class="st">"rows"</span><span class="op">)</span></code></pre></div>
 <p><img src="10-expressionHeatmap2_files/figure-html/unnamed-chunk-8-1.png" width="384" style="display: block; margin: auto;"></p>
@@ -251,7 +251,7 @@
 <h2 class="hasAnchor">
 <a href="#legend-scale" class="anchor"></a>Legend scale</h2>
 <p>To change the legend scale, the arguments <code>legend_scale</code>, <code>legend_breaks_num</code>, <code>legend_breaks_by</code> and <code>legend_midpoint</code> can be used.</p>
-<p>By default, <code>legend_scale</code> is set to <code><a href="https://rdrr.io/r/base/c.html">c(-1.5,1.5)</a></code>. To set a custom scale, the <code>legend_scale</code> argument must be set to a numerical vector of length 2 (e.g. <code><a href="https://rdrr.io/r/base/c.html">c(-2,5)</a></code>). In such case, the argument <code>legend_breaks_by</code> will be used to define the distance between the breaks in the legend and the <code>legend_midpoint</code> argument will be set to the midpoint of the legend (passed through <code>scale_fill_gradient2(midpoint = legend_midpoint)</code>).</p>
+<p>By default, <code>legend_scale</code> is set to <code>c(-1.5,1.5)</code>. To set a custom scale, the <code>legend_scale</code> argument must be set to a numerical vector of length 2 (e.g. <code>c(-2,5)</code>). In such case, the argument <code>legend_breaks_by</code> will be used to define the distance between the breaks in the legend and the <code>legend_midpoint</code> argument will be set to the midpoint of the legend (passed through <code>scale_fill_gradient2(midpoint = legend_midpoint)</code>).</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap2.html">expressionHeatmap2</a></span><span class="op">(</span><span class="va">degs_all</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Lef1"</span>, <span class="st">"Jun"</span>, <span class="st">"Car4"</span>, <span class="st">"Yap1"</span><span class="op">)</span>, 
                    legend_scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>, legend_breaks_by <span class="op">=</span> <span class="fl">1</span>, legend_midpoint <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>

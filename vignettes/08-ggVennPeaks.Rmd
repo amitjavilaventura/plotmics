@@ -57,8 +57,11 @@ peak_list <- list.files("../testdata", "peak", full.names = T, recursive = T) %>
   purrr::map(~read.delim(.x))
 
 peak_list[[1]][1:5, 1:7]
+
+# Change strand value of some regions 
 peak_list[[1]][10:30,]$strand = "+"
 peak_list[[1]][50:80,]$strand = "-"
+peak_list[[1]][90:100,]$strand = "."
 peak_list[[2]][10:30,]$strand = "+"
 peak_list[[2]][50:80,]$strand = "-"
 
@@ -113,6 +116,15 @@ As mentioned, `ChIPpeakAnno::makeVennDiagram()` is called inside `getVennCounts(
 ```{r}
 ggVennPeaks(peak_list)
 ```
+
+## True overlaps
+
+By default, the intersection of two sets of peaks is smaller than expected by looking at one of the sets. Setting `true_overlaps = TRUE` will write the number of overlapping regions for each set of peaks (only when two sets are intersected)
+
+```{r}
+ggVennPeaks(peak_list, true_overlaps = T)
+```
+
 
 ## Customize plot
 

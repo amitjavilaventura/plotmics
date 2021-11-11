@@ -125,6 +125,7 @@ expressionHeatmap <- function(expr_df,
   expr.m <- expr %>%
     reshape2::melt(value.name = "Expr", variable.name = "Condition")
 
+
   # Get the legend breaks.
   if(is.null(legend_scale)){
     lower    <- min(expr.m$Expr)

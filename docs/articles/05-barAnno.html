@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0</span>
       </span>
     </div>
 
@@ -339,7 +339,7 @@
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, color_palette <span class="op">=</span> <span class="st">"Oranges"</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-32-1.png" width="384" style="display: block; margin: auto;"></p>
-<p>Nevertheless, if <code>color_palette</code> is a character vector of length greater than 1 and has valid color names (e.g. <code><a href="https://rdrr.io/r/base/c.html">c("blue", "gold3")</a></code>), the function takes these colors and passes them through <code>scale_fill_manual()</code> to fill the bars. If the number of annotated regions is greater than the default of 2 (i.e. <code>anno_num = 3</code> or <code>anno_num = "all"</code>), the number of colors passed through <code>color_palette</code> must be the same length.</p>
+<p>Nevertheless, if <code>color_palette</code> is a character vector of length greater than 1 and has valid color names (e.g. <code>c("blue", "gold3")</code>), the function takes these colors and passes them through <code>scale_fill_manual()</code> to fill the bars. If the number of annotated regions is greater than the default of 2 (i.e. <code>anno_num = 3</code> or <code>anno_num = "all"</code>), the number of colors passed through <code>color_palette</code> must be the same length.</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/barAnno.html">barAnno</a></span><span class="op">(</span>anno_list <span class="op">=</span> <span class="va">peak_list</span>, color_palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"gold3"</span><span class="op">)</span>, anno_num <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <p><img src="05-barAnno_files/figure-html/unnamed-chunk-33-1.png" width="384" style="display: block; margin: auto;"></p>

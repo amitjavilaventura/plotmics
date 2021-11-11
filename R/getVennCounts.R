@@ -39,8 +39,13 @@ getVennCounts <- function(peaks,
 
   len <- length(peaks)
 
+  # Change strand values to accepted values (e.g. . to *)
+  peaks <- peaks %>% purrr::map(~dplyr::mutate(.x, strand = if_else(strand %in% c(".", "*", "\\.", "\\*"), "*", strand)))
+
+  # Set names of the elements in the list
   peaks <- peaks %>% purrr::set_names(nm = conds)
 
+  # If stranded, separate...
   if(!stranded){
 
     overlaps <- suppressMessages(peaks %>%
@@ -54,7 +59,7 @@ getVennCounts <- function(peaks,
     # Separate peaks by strand
     peaks_plus     <- peaks %>% purrr::map(~dplyr::filter(.x, strand == "+"))
     peaks_minus    <- peaks %>% purrr::map(~dplyr::filter(.x, strand == "-"))
-    peaks_nostrand <- peaks %>% purrr::map(~dplyr::filter(.x, strand %in% c(".", "*"))) %>% purrr::map(~dplyr::mutate(.x, strand = "*"))
+    peaks_nostrand <- peaks %>% purrr::map(~dplyr::filter(.x, strand %in% c(".", "*", "\\.", "\\*"))) %>% purrr::map(~dplyr::mutate(.x, strand = "*"))
 
     # Overlap peaks by strand
     overlaps_plus     <- suppressMessages(peaks_plus %>% purrr::map(~plyranges::as_granges(.x)) %>%
@@ -103,3 +108,4 @@ getVennCounts <- function(peaks,
 
 
 }
+

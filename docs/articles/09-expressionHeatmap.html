@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0</span>
       </span>
     </div>
 
@@ -133,7 +133,7 @@
 
     
     
-<p>Last updated: 2021-10-19</p>
+<p>Last updated: 2021-11-11</p>
 <hr>
 <div id="load-plotmics" class="section level1">
 <h1 class="hasAnchor">
@@ -188,7 +188,7 @@
 <div id="other-methods" class="section level3">
 <h3 class="hasAnchor">
 <a href="#other-methods" class="anchor"></a>Other methods</h3>
-<p>By default, the distance calculation method is <em>euclidean</em> and the clustering is <em>ward.D</em>: <code><a href="https://rdrr.io/r/stats/hclust.html">hclust(dist(data, method = "euclidean"), method = "ward.D")</a></code>. If another method has to be used, the <code>dist_method</code> and <code>hclust_method</code> arguments should be set to the corresponding value, passed through the functions <code><a href="https://rdrr.io/r/stats/dist.html">dist()</a></code> and <code><a href="https://rdrr.io/r/stats/hclust.html">hclust()</a></code>, respectively.</p>
+<p>By default, the distance calculation method is <em>euclidean</em> and the clustering is <em>ward.D</em>: <code>hclust(dist(data, method = "euclidean"), method = "ward.D")</code>. If another method has to be used, the <code>dist_method</code> and <code>hclust_method</code> arguments should be set to the corresponding value, passed through the functions <code><a href="https://rdrr.io/r/stats/dist.html">dist()</a></code> and <code><a href="https://rdrr.io/r/stats/hclust.html">hclust()</a></code>, respectively.</p>
 <p>Available values for <code>dist_method</code> can be found in the <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/dist"><code>dist()</code> function documentation</a> and available values for <code>hclust_method</code> can be found in the <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/hclust"><code>hclust()</code> function documnetation</a>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>,
@@ -218,7 +218,7 @@
 <div id="scaling" class="section level2">
 <h2 class="hasAnchor">
 <a href="#scaling" class="anchor"></a>Scaling</h2>
-<p><code><a href="../reference/expressionHeatmap.html">expressionHeatmap()</a></code> allows the scaling of the data by rows and columns by calling the function <code><a href="https://rdrr.io/r/base/scale.html">scale()</a></code>. To do so, the <code>scale</code> argument must be set to either <code>"rows"</code> -to scale by rows- or <code>"cols"</code> -to scale by columns-. It can also be both <code><a href="https://rdrr.io/r/base/c.html">c("rows", "cols")</a></code>.</p>
+<p><code><a href="../reference/expressionHeatmap.html">expressionHeatmap()</a></code> allows the scaling of the data by rows and columns by calling the function <code><a href="https://rdrr.io/r/base/scale.html">scale()</a></code>. To do so, the <code>scale</code> argument must be set to either <code>"rows"</code> -to scale by rows- or <code>"cols"</code> -to scale by columns-. It can also be both <code>c("rows", "cols")</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>, scale <span class="op">=</span> <span class="st">"rows"</span><span class="op">)</span></code></pre></div>
 <p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-8-1.png" width="384" style="display: block; margin: auto;"></p>
@@ -240,7 +240,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>, 
                   legend_scale <span class="op">=</span> <span class="cn">NULL</span>, legend_breaks_num <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></code></pre></div>
 <p><img src="09-expressionHeatmap_files/figure-html/unnamed-chunk-11-1.png" width="384" style="display: block; margin: auto;"></p>
-<p>To set a custom scale, the <code>legend_scale</code> argument must be set to a numerical vector of length 2 (e.g. <code><a href="https://rdrr.io/r/base/c.html">c(0,200)</a></code>). In such case, the argument <code>legend_breaks_by</code> will be used instead of <code>legend_breaks_num</code> to define the distance between the breaks in the legend and the <code>legend_midpoint</code> argument will be set to the midpoint of the legend (passed through <code>scale_fill_gradient(midpoint = legend_midpoint)</code>).</p>
+<p>To set a custom scale, the <code>legend_scale</code> argument must be set to a numerical vector of length 2 (e.g. <code>c(0,200)</code>). In such case, the argument <code>legend_breaks_by</code> will be used instead of <code>legend_breaks_num</code> to define the distance between the breaks in the legend and the <code>legend_midpoint</code> argument will be set to the midpoint of the legend (passed through <code>scale_fill_gradient(midpoint = legend_midpoint)</code>).</p>
 <p>By default, these values are set to <code>legend_breaks_by = .5</code> and <code>legend_midpoint = 0</code>, but it is recommended to change them.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/expressionHeatmap.html">expressionHeatmap</a></span><span class="op">(</span><span class="va">mean_tpm</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"JUN"</span>, <span class="st">"ATF2"</span>, <span class="st">"YAP1"</span><span class="op">)</span>, 

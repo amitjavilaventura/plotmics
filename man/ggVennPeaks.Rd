@@ -15,6 +15,8 @@ ggVennPeaks(peak_list, peak_names = names(peak_list), percent = T, fill = c("blu
 
 \item{stranded}{Logical of length 1. If TRUE, it considers the strand information to do the overlaps. Default = FALSE.}
 
+\item{true_overlaps}{Logical of length 1. Only if peak_list has length 2. If TRUE, it counts the overlapping regions from each set using plyranges. If TRUE, stranded and percent are set to FALSE. Default: FALSE}
+
 \item{in_fill}{Character of length equal to 'peak_list'. Colors of each set in 'peak_list'. Default: c("blue", "gold3").}
 
 \item{alpha}{Numeric of length 1. Transparency of the the Venn circles. Default: 0.4}

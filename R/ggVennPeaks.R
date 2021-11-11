@@ -17,6 +17,7 @@
 #' @param peak_names Character with the same length as the 'peaks' list. The names that are given to the diferente objects in the 'peaks' list. Default: 'names(peaks)'
 #' @param percent Logical of length 1. Whether to show the percentage corresponding to each part of the intersection. Default = T.
 #' @param stranded Logical of length 1. If TRUE, it considers the strand information to do the overlaps. Default = FALSE.
+#' @param true_overlaps Logical of length 1. Only if peak_list has length 2. If TRUE, it counts the overlapping regions from each set using plyranges. If TRUE, stranded and percent are set to FALSE. Default: FALSE
 #' @param in_fill Character of length equal to 'peak_list'. Colors of each set in 'peak_list'. Default: c("blue", "gold3").
 #' @param alpha Numeric of length 1. Transparency of the the Venn circles. Default: 0.4
 #' @param out_color Character of length 1 or equal to 'peak_list'. Color of the circles outer lines. Default: "black"
@@ -33,6 +34,7 @@ ggVennPeaks <- function(peak_list,
                         peak_names = names(peak_list),
                         percent = TRUE,
                         stranded = FALSE,
+                        true_overlaps = FALSE,
                         in_fill = c("blue", "gold3"),
                         alpha = .4,
                         out_color = "black",
@@ -56,8 +58,16 @@ ggVennPeaks <- function(peak_list,
   if(length(peak_list) != length(peak_names)){ stop("'peak_names' must be a character vector with the same length as 'peak_list'.") }
   if(stranded){
     if(!"strand" %in% colnames(bind_rows(peak_list))){ stop("If 'stranded' is TRUE, a 'strand' column must be present in all the elements from peak list.") }
-    else { peak_list <- peak_list %>% purrr::map(~dplyr::mutate(.x, strand = if_else(strand == ".", "*", strand))) }
+    else { peak_list <- peak_list %>% purrr::map(~dplyr::mutate(.x, strand = if_else(strand %in% c("\\.", "\\*", ".", "*"), "*", strand))) }
   }
+
+  # Check true number of overlaps for each region; convert stranded and percent to FALSE
+  if(true_overlaps & length(peak_list)==2) { stranded <- FALSE; percent  <- FALSE }
+
+  # Change strand values to accepted values (e.g. . to *)
+  peak_list <- peak_list %>% purrr::map(~dplyr::mutate(.x, strand = if_else(strand %in% c(".", "*", "\\.", "\\*"), "*", strand)))
+
+
 
   # Get Venn Counts and the peaks in each set
   x <- getVennCounts(peaks = peak_list, conds = peak_names, stranded = stranded)
@@ -99,6 +109,32 @@ ggVennPeaks <- function(peak_list,
       theme(plot.title = element_text(face = "bold", hjust = .5),
             plot.subtitle = element_text(face = "italic", hjust = .5))
   }
+
+  # Add number or true overlaps for each set of regions
+  if(true_overlaps & length(peak_list)==2) {
+
+    # Load required packages
+    suppressPackageStartupMessages(require(plyranges))
+    suppressPackageStartupMessages(require(colorspace))
+
+    # Peaks as GRanges
+    peaks1 <- peak_list[[1]] %>% plyranges::as_granges()
+    peaks2 <- peak_list[[2]] %>% plyranges::as_granges()
+
+    # Find overlapping regions for each set
+    overlaps1 <- plyranges::filter_by_overlaps(peaks1, peaks2)
+    overlaps2 <- plyranges::filter_by_overlaps(peaks2, peaks1)
+
+    # Count the numbers
+    num1 <- length(overlaps1)
+    num2 <- length(overlaps2)
+
+    # Annotate true numbers
+    venn <- venn +
+      annotate("text", 0, 0.3, label = as.character(num1), color = colorspace::darken(in_fill[1], amount = .5), fontface = "bold") +
+      annotate("text", 0, -0.3, label = as.character(num2), color = colorspace::darken(in_fill[2], amount = .5), fontface = "bold")
+  }
+
 
   # Return the Venn diagram.
   return(venn)

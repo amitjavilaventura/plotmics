@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0</span>
       </span>
     </div>
 
@@ -133,7 +133,7 @@
 
     
     
-<p>Last updated: 2021-10-19</p>
+<p>Last updated: 2021-11-11</p>
 <hr>
 <div id="load-plotmics" class="section level1">
 <h1 class="hasAnchor">
@@ -215,8 +215,8 @@
 <span class="va">regions</span> <span class="op">=</span> <span class="va">regions_sets</span> <span class="op">%&gt;%</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span><span class="va">.x</span>, header <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Subset one of the regions and enter it as element of regions_sets</span>
-<span class="va">regions</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">regions</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="fl">20</span>, replace <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>,<span class="op">]</span>
-<span class="va">regions</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">regions</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="fl">20</span>, replace <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>,<span class="op">]</span>
+<span class="va">regions</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">regions</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="fl">20</span>, replace <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>,<span class="op">]</span>
+<span class="va">regions</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">regions</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="fl">20</span>, replace <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>,<span class="op">]</span>
 
 <span class="fu"><a href="../reference/circleRegions.html">circleRegions</a></span><span class="op">(</span>chromsizes_sets <span class="op">=</span> <span class="va">chromsizes</span>, 
               regions_sets <span class="op">=</span> <span class="va">regions</span>,

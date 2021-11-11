@@ -81,7 +81,7 @@ peak intersections using the ggvenn package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0</span>
       </span>
     </div>
 
@@ -195,6 +195,10 @@ peak intersections using the <code>ggvenn</code> package.</p>
     <tr>
       <th>stranded</th>
       <td><p>Logical of length 1. If TRUE, it considers the strand information to do the overlaps. Default = FALSE.</p></td>
+    </tr>
+    <tr>
+      <th>true_overlaps</th>
+      <td><p>Logical of length 1. Only if peak_list has length 2. If TRUE, it counts the overlapping regions from each set using plyranges. If TRUE, stranded and percent are set to FALSE. Default: FALSE</p></td>
     </tr>
     <tr>
       <th>in_fill</th>
