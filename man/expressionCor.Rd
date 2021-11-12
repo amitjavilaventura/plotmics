@@ -19,13 +19,10 @@ expressionCor(
   plot_caption = NULL,
   cell_border = "Black",
   legend_pos = "right",
-  legend_long = plot_size,
-  legend_wide = 8,
+  legend_size = c(8, plot_size),
   legend_limits = c(-1, 1),
   legend_breaks_by = 0.5,
-  legend_title = paste(stringr::str_to_sentence(corr_method), "cprrelation", sep = " "),
-  legend_title_pos = "right",
-  legend_title_angle = 270,
+  legend_title = paste(stringr::str_to_sentence(corr_method), "correlation", sep = " "),
   legend_title_size = 10,
   coeffs_color = "Black",
   coeffs_size = 4,
@@ -68,19 +65,13 @@ expressionCor(
 
 \item{legend_pos}{Charachter of length 1. Position of the legend, to be passed through \code{ggpubr::theme_pubr()}. Default: "right".}
 
-\item{legend_long}{Numerical of length 1. The length of the bar legend (height is legend is vertical, width if its horizontal) Default: plot_size.}
-
-\item{legend_wide}{Numerical of length 2. The length of the bar legend (width is legend is vertical, height if its horizontal) Default: 8.}
+\item{legend_size}{Numerical of length 2. Size of the legend. The first element is the width and the second is the height of the legend bar. Default: c(8,plot_size)}
 
 \item{legend_limits}{Numerical of length 2. Lower and upper limits of the correlation scale. Default: c(-1,1).}
 
 \item{legend_breaks_by}{Numerical of length 1. Size of the breaks in the legend. Default: 0.5.}
 
 \item{legend_title}{Character of length 1 or NULL. Title of the legend. Default: \code{paste(stringr::str_to_sentence(corr_method), "correlation", sep = " ")}.}
-
-\item{legend_title_pos}{Character of length 1. Position of the legend title in respect to the legend. One of "right", "top", "bottom", "left". Default: "right".}
-
-\item{legend_title_angle}{Numerical of length 1. Angle of the legend title. Default: 270.}
 
 \item{legend_title_size}{Numerical of length 1. Size of the legend title. Default: 10.}
 

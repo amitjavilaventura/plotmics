@@ -22,13 +22,10 @@
 #' @param plot_caption Character of length 1 or NULL. Caption of the plot. Defalut: NULL.
 #' @param cell_border Charachter of length 1, NULL or NA. Color of the cell border. Default: "Black".
 #' @param legend_pos Charachter of length 1. Position of the legend, to be passed through `ggpubr::theme_pubr()`. Default: "right".
-#' @param legend_long Numerical of length 1. The length of the bar legend (height is legend is vertical, width if its horizontal) Default: plot_size.
-#' @param legend_wide Numerical of length 2. The length of the bar legend (width is legend is vertical, height if its horizontal) Default: 8.
+#' @param legend_size Numerical of length 2. Size of the legend. The first element is the width and the second is the height of the legend bar. Default: c(8,plot_size)
 #' @param legend_limits Numerical of length 2. Lower and upper limits of the correlation scale. Default: c(-1,1).
 #' @param legend_breaks_by Numerical of length 1. Size of the breaks in the legend. Default: 0.5.
 #' @param legend_title Character of length 1 or NULL. Title of the legend. Default: `paste(stringr::str_to_sentence(corr_method), "correlation", sep = " ")`.
-#' @param legend_title_pos  Character of length 1. Position of the legend title in respect to the legend. One of "right", "top", "bottom", "left". Default: "right".
-#' @param legend_title_angle Numerical of length 1. Angle of the legend title. Default: 270.
 #' @param legend_title_size Numerical of length 1. Size of the legend title. Default: 10.
 #' @param coeffs_color Character of length 1 or NULL. Color of the correlation coeficients to be plotted. If NULL, no correlation coefficients are plotted. Default: "Black".
 #' @param coeffs_size Numerical of length 1. Size of the correlation coefficients. Default: 4.
@@ -40,6 +37,7 @@
 #' @param caption_size Numerical of length 1. Size of the plot caption. Default: 6.
 #' @param axis_text_size Numerical of length 1. Size of the text in the axes. Default: 7.
 #' @param axis_text_color Character of length 1. Color of the text in the axes. Default: "Black".
+
 #'
 #' @export
 
@@ -57,13 +55,10 @@ expressionCor <- function(df,
                           plot_caption       = NULL,
                           cell_border        = "Black",
                           legend_pos         = "right",
-                          legend_long        = plot_size,
-                          legend_wide        = 8,
+                          legend_size        = c(8,plot_size),
                           legend_limits      = c(-1,1),
                           legend_breaks_by   = 0.5,
-                          legend_title       = paste(stringr::str_to_sentence(corr_method), "cprrelation", sep = " "),
-                          legend_title_pos   = "right",
-                          legend_title_angle = 270,
+                          legend_title       = paste(stringr::str_to_sentence(corr_method), "correlation", sep = " "),
                           legend_title_size  = 10,
                           coeffs_color       = "Black",
                           coeffs_size        = 4,
@@ -113,8 +108,10 @@ expressionCor <- function(df,
   g <- g + theme_pubr(border = plot_border, legend = legend_pos)
 
   # Setup the legend
-  if(legend_pos %in% c("right", "left")) { legend_height <- legend_long; legend_width <- legend_wide }
-  else if(legend_pos %in% c("top", "bottom")) { legend_height <- legend_wide; legend_width <- legend_long }
+  if(legend_pos %in% c("right")) { legend_height <- legend_size[2]; legend_width <- legend_size[1]; legend_title_angle = 270; legend_title_pos = "right" }
+  else if(legend_pos %in% c("left")) { legend_height <- legend_size[2]; legend_width <- legend_size[1]; legend_title_angle = 90; legend_title_pos = "left" }
+  else if(legend_pos %in% c("bottom")) { legend_size <- rev(legend_size); legend_height <- legend_size[2]; legend_width <- legend_size[1]; legend_title_angle = 0; legend_title_pos = "bottom" }
+  else if(legend_pos %in% c("top")) { legend_size <- rev(legend_size); legend_height <- legend_size[2]; legend_width <- legend_size[1]; legend_title_angle = 0; legend_title_pos = "top" }
 
   # Format the legend
   g <- g + scale_fill_gradient2(limits = legend_limits, midpoint = median(legend_limits),
