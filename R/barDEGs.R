@@ -26,6 +26,7 @@
 #' @param total Logical of length 1. If TRUE, it counts the total number of features in each elements of deg_list and writes them in the caption. Default: FALSE.
 #' @param title Charachter of length 1 or NULL. Title of the plot. Default: NULL.
 #' @param subtitle Charachter of lenght 1 or NULL. Subtitle of the plot. Default: NULL.
+#' @param prop_test Logical of length 1. Whether to do a `prop.test()` to check whether the proportions of up and downregulated genes are significantly different from the expected proportions of 0.5. Default: FALSE.
 #'
 #' @export
 
@@ -44,7 +45,8 @@ barDEGs <- function(deg_list,
                     pval = 0.05,
                     total = FALSE,
                     title = NULL,
-                    subtitle = NULL){
+                    subtitle = NULL,
+                    prop_test = FALSE){
 
   # Load packages
   require(dplyr)
@@ -99,21 +101,45 @@ barDEGs <- function(deg_list,
     # Join with total number of elements
     dplyr::left_join(total_counts, by = "contrast")
 
-  # Set at which site will the contrast name be written
+  # Do prop.test()
+  if(prop_test){
+
+    # Set name position to left
+    name_pos <- "left"
+
+    # Start the prop.test
+    deg_numbers <- deg_numbers %>%
+      # Group by contrast
+      dplyr::group_by(contrast) %>%
+      # Compute the total number of DEGs
+      # Compute the proportion of up and downregulated genes (not really necessary)
+      # Add the expected proportions (0.5)
+      # Do prop.test() for each contrast and add the p-value to the dataframe
+      # Since the p-value is the same between up and downregulated genes, add only the p-value for the up.
+      dplyr::mutate(sum_de = sum(n),
+                    prop_de = n/sum_de,
+                    expected_prop = 0.5,
+                    p = prop.test(n,sum_de,p=expected_prop)$p.value,
+                    p = ifelse(number < 0, NA, p),
+                    p = ifelse(!is.na(p), paste("p:", signif(p,2)), NA)) %>%
+      dplyr::ungroup()
+  }
+
+  # Set at which site will the contrast name be written (if prop_test = T, this is always set to left)
   if(name_pos == "min"){
     deg_numbers <- deg_numbers %>%
-      group_by(contrast) %>%
-      mutate(contrast_name = if_else(n == min(n), contrast, NULL)) %>%
-      ungroup()
+      dplyr::group_by(contrast) %>%
+      dplyr::mutate(contrast_name = if_else(n == min(n), contrast, NULL)) %>%
+      dplyr::ungroup()
   } else if(name_pos == "left"){
     deg_numbers <- deg_numbers %>%
-      mutate(contrast_name = if_else(n == -number, contrast, NULL))
+      dplyr::mutate(contrast_name = if_else(n == -number, contrast, NULL))
   } else if(name_pos == "right"){
     deg_numbers <- deg_numbers %>%
-      mutate(contrast_name = if_else(n == number, contrast, NULL))
+      dplyr::mutate(contrast_name = if_else(n == number, contrast, NULL))
   } else if(name_pos == "none"){
     deg_numbers <- deg_numbers %>%
-      mutate(contrast_name = "")
+      dplyr::mutate(contrast_name = "")
   }
 
   # Do the plot
@@ -123,7 +149,7 @@ barDEGs <- function(deg_list,
     # Add the number of DEGs to each bar
     geom_text(mapping = aes(label = n, x = pos_num, hjust = hjust_num), size = num_size, na.rm = TRUE) +
     # Add the name of the contrast
-    geom_text(mapping = aes(label = contrast_name, x = contrast_pos, hjust = hjust_num), size = name_size, na.rm = TRUE)  +
+    geom_text(mapping = aes(label = contrast_name, x = contrast_pos, hjust = hjust_num), size = name_size, na.rm = TRUE, fontface = "bold")  +
     # Change default colors
     scale_fill_manual(values = c(colors[1], colors[2])) +
     # Add vertical line at 0
@@ -155,6 +181,9 @@ barDEGs <- function(deg_list,
   # If title == NULL, turn subtitle to NULL, else write title and subtitle
   if(is.null(title)){ subtitle <- NULL }
   else {  updown_bar <- updown_bar + labs(title = title, subtitle = subtitle) }
+
+  # Add p-val from prop.test
+  if(prop_test){ updown_bar <- updown_bar + geom_text(aes(label=p, x = number+pos_num), hjust = 0, size = name_size, fontface = "italic", na.rm = T) }
 
   # Return plot
   return(updown_bar)

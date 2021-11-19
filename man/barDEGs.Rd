@@ -20,7 +20,8 @@ barDEGs(
   pval = 0.05,
   total = FALSE,
   title = NULL,
-  subtitle = NULL
+  subtitle = NULL,
+  prop_test = FALSE
 )
 }
 \arguments{
@@ -55,6 +56,8 @@ barDEGs(
 \item{title}{Charachter of length 1 or NULL. Title of the plot. Default: NULL.}
 
 \item{subtitle}{Charachter of lenght 1 or NULL. Subtitle of the plot. Default: NULL.}
+
+\item{prop_test}{Logical of length 1. Whether to do a \code{prop.test()} to check whether the proportions of up and downregulated genes are significantly different from the expected proportions of 0.5. Default: FALSE.}
 }
 \value{
 A ggplot2-based barplot with the upregulated and downregulated genes in each contrast.

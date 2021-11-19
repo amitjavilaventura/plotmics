@@ -191,7 +191,8 @@ draws an horizontal barplot with the up (right) and downregulated (left) genes.<
   pval <span class='op'>=</span> <span class='fl'>0.05</span>,
   total <span class='op'>=</span> <span class='cn'>FALSE</span>,
   title <span class='op'>=</span> <span class='cn'>NULL</span>,
-  subtitle <span class='op'>=</span> <span class='cn'>NULL</span>
+  subtitle <span class='op'>=</span> <span class='cn'>NULL</span>,
+  prop_test <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -260,6 +261,10 @@ draws an horizontal barplot with the up (right) and downregulated (left) genes.<
     <tr>
       <th>subtitle</th>
       <td><p>Charachter of lenght 1 or NULL. Subtitle of the plot. Default: NULL.</p></td>
+    </tr>
+    <tr>
+      <th>prop_test</th>
+      <td><p>Logical of length 1. Whether to do a <code><a href='https://rdrr.io/r/stats/prop.test.html'>prop.test()</a></code> to check whether the proportions of up and downregulated genes are significantly different from the expected proportions of 0.5. Default: FALSE.</p></td>
     </tr>
     </table>
 

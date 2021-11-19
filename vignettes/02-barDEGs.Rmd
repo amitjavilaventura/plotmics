@@ -15,7 +15,7 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 4, fig.height = 4, 
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 6, fig.height = 3, 
                       error = FALSE, message = FALSE, warning = FALSE)
 devtools::load_all("..")
 library(dplyr)
@@ -33,7 +33,7 @@ library(plotmics)
 
 `barDEGs()` draws an `ggplot2`-based horizontal barplot with the nubmer of upregulated and downregulated genes coming out from a DESeq analysis.
 
-## Required
+## Required inputs
 
 As input, `barDEGs` takes a named list of data frames with the columns `log2FoldChange`, `padj` and `DEG`. The `DEG` column must have the values *Upregulated*, *Downregulated* and *NS*.
 
@@ -60,12 +60,47 @@ barDEGs(deg_list = deg_list, pval = 0.1, log2FC = 1)
 ```
 
 
-## Count genes
+## Count total
 
 `barDEGs()` has the possibility to count the number of regions/genes in each element of the list and writting them to the caption by setting `total = TRUE`. In case all elements in `deg_list` have the same number of genes, the caption will be *N = <number_of_regions>*, otherwise it will be *<contrast1> = <number_of_regions1>; <contrast2> = <number_of_regions2>; ...*.
 
 ```{r include=T}
 barDEGs(deg_list = deg_list, total = T)
+```
+
+## Compute p-value
+
+Since `v4.0.0` it is possible to do a proportion test (`prop.test()`) to compute a p-value and look whether the proportion of up and downregulated genes is significantly different from a 0.5. 
+
+To compute the p-value from the `prop.test()`, it is necessary to set `prop_test = T`. 
+
+
+
+If `prop_test` is set to `TRUE`, the name of the contrast will be written to the left of the bars and the p-value will be written to the right.
+
+```{r}
+plot <- barDEGs(deg_list = deg_list, prop_test = T, xlim = c(-430,670))
+plot
+```
+
+Briefly, `barDEGs()` takes the number of up and down regulated genes, the total number of differentially expressed genes and the expected proportions, which are 0.5. Inside `barDEGs()`, the `prop.test()` function is the following one:
+
+```{r}
+# Example of prop.test with one contrast (e.g. cond1)
+data <- plot$data %>% dplyr::filter(contrast == "cond1")
+
+# number of up and downregulated genes
+up   <- data %>% dplyr::filter(DEG == "Upregulated") %>% dplyr::pull(n) 
+down <- data %>% dplyr::filter(DEG == "Downregulated") %>% dplyr::pull(n) 
+
+# number of differentially expressed genes
+de = up+down
+
+# do prop.test()
+prop_test = prop.test(x = c(up,down), n = c(de,de), p = c(0.5,0.5))
+
+# p-value
+prop_test$p.value
 ```
 
 ## Customize plot
