@@ -36,17 +36,33 @@
 #' @param degsLabel Logical or character. If TRUE, the number genes (defined in 'degsLabelNum') with highest log2FC in absolute are labelled. If character, it has to contain the names of the genes that are wanted to appear in the plot. Default: FALSE.
 #' @param degsLabelNum Numerical. Number of most expressed genes to label in the plot. The double of this number will be labelled (once for DEGs with lowest p-value and once for the DEGs with highest log2fFC in absolute value). Default: 5.
 #' @param degsLabelSize Numerical. Size of the labels of the DEGs Default: 3.
+#' @param gridLines Logical of length 1. Whether to draw the panel grid major lines or not. Default: TRUE
 #'
 #' @export
 
-volcanoPlot <- function(df, xlim = c(-10,10), ylim = c(0,30),
-                        pval = 0.05, log2FC = 1,
-                        main = NULL, mainSize = 9, sub = NULL, subSize = 8,
-                        labelSize = 5, labelColor = c("darkgreen", "red"), labelPos = 0,
-                        xlab = bquote(~Log[2]~ "FC"), ylab = (bquote(~-Log[10]~italic(P))),
-                        axisLabelSize = 10, axisTextSize = 9,
-                        pointColor = c("darkgreen", "gray", "red"), legendTitle = FALSE, legendPos = "bottom",
-                        degsLabel = F , degsLabelNum=5, degsLabelSize = 3) {
+volcanoPlot <- function(df,
+                        xlim = c(-10,10),
+                        ylim = c(0,30),
+                        pval = 0.05,
+                        log2FC = 1,
+                        main = NULL,
+                        mainSize = 9,
+                        sub = NULL,
+                        subSize = 8,
+                        labelSize = 5,
+                        labelColor = c("darkgreen", "red"),
+                        labelPos = 0,
+                        xlab = bquote(~Log[2]~ "FC"),
+                        ylab = (bquote(~-Log[10]~italic(P))),
+                        axisLabelSize = 10,
+                        axisTextSize = 9,
+                        pointColor = c("darkgreen", "gray", "red"),
+                        legendTitle = FALSE,
+                        legendPos = "bottom",
+                        degsLabel = FALSE,
+                        degsLabelNum=5,
+                        degsLabelSize = 3,
+                        gridLines = TRUE) {
 
   # Load packages
   require(ggplot2)
@@ -108,6 +124,7 @@ volcanoPlot <- function(df, xlim = c(-10,10), ylim = c(0,30),
     geom_point(alpha=0.7, size=1.7) +
     geom_text(data = na.omit(df), aes(label = number, y = ylim[1], x = xpos*0.9), size = labelSize, show.legend = F)
 
+
   # Basic formatting
   p <- p +
 
@@ -143,6 +160,11 @@ volcanoPlot <- function(df, xlim = c(-10,10), ylim = c(0,30),
     # Decide the position of the legend (default: "bottom")
     theme(legend.position = legendPos)
 
+  # Add grid.lines. Default: added
+  if(gridLines){
+    p <- p + theme(panel.grid.major = element_line(size = 0.15, colour = "gray60", linetype = "dashed"))
+  }
+
   # Decide if legend title is writen or not. Default: not writen.
   if(!legendTitle){
     p <- p + theme(legend.title = element_blank())
@@ -150,46 +172,31 @@ volcanoPlot <- function(df, xlim = c(-10,10), ylim = c(0,30),
 
   # Write names of the most DE genes in terms of lowest adjusted p-value
   if(is.logical(degsLabel)){
-
     #("'degsLabel' is logical. If TRUE, the most significant DEGs will be printed on thee plot.")
-
     if(degsLabel){
-
       # Load ggrepel
       require(ggrepel)
-
       # Organaize and retrieve lowest p-value genes
       degs <- df %>%
-
         # Filter non significant genes
         dplyr::filter(DEG!="NS") %>%
-
         # Arrange by ascendent order of padjusted
         dplyr::arrange(padj)
-
       # Create a dataframe with the labels of the DEGs with highest abs(log2FC).
       degs <- head(na.omit(degs), degsLabelNum) %>% as.data.frame()
-
       # Put labels in the plot
       p <- p + geom_text_repel(data = degs, mapping = aes(x = log2FoldChange, y = -log10(padj), label = Geneid), size = degsLabelSize, color = "Black")
     }
-
   } else if(is.character(degsLabel)){
-
     #("'degsLabel' is character, so the written genes will be printed on the plot")
-
     # Load ggrepel
     require(ggrepel)
-
     # Organaize and retrieve lowest p-value genes
     degs <- df %>%
-
       # Filter for only the genes that are wanted
       dplyr::filter(Geneid %in% degsLabel)
-
     # Put labels in the plot
     p <- p + geom_text_repel(data = degs, mapping = aes(x = log2FoldChange, y = -log10(padj), label = Geneid), size = degsLabelSize, color = "Black")
-
   }
 
   # Draw the graph.

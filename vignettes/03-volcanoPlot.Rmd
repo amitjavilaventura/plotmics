@@ -47,7 +47,7 @@ deg_list[[1]] %>% head()
 
 ## Minimum  run
 
-```{r include=FALSE}
+```{r include=FALSE, message=FALSE, warning=FALSE}
 volcanoPlot(df = deg_list[[1]])
 ```
 
@@ -67,6 +67,12 @@ volcanoPlot(df = deg_list[[1]], log2FC = 4, pval = 0.001)
 
 ```{r}
 volcanoPlot(df = deg_list[[1]], xlim = c(-5,5), ylim = c(0,10))
+```
+
+### Draw grid lines
+
+```{r}
+volcanoPlot(df = deg_list[[1]], gridLines = T)
 ```
 
 ### Specify titles

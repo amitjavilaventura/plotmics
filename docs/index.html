@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0</span>
       </span>
     </div>
 
@@ -159,6 +159,10 @@
 <code><a href="reference/chromRegions.html">chromRegions()</a></code>: function that takes the chromosome size information and a list of regions (e.g. BED files) to draw the positions of that regions in the genome.</li>
 <li>
 <code><a href="reference/circleRegions.html">circleRegions()</a></code>: function that takes a list of chromosome size information and a list of regions (e.g. BED files) to draw the positions of that regions in the genome. Similar to <code><a href="reference/chromRegions.html">chromRegions()</a></code>, but in a circular plot, allowing different assemblies, pairing regions, etc.</li>
+<li>
+<code><a href="reference/expressionCor.html">expressionCor()</a></code>: function that computes the correlation of expression values between samples.</li>
+<li>
+<code><a href="reference/compareCounts.html">compareCounts()</a></code>: function that draws a scatter plot of gene expression values between 2 samples.</li>
 </ul>
 </div>
 <div id="install-plotmics" class="section level2">
@@ -357,6 +361,18 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 </ul>
 </li>
 </ul>
+<p><br></p>
+<ul>
+<li>
+<code>v5.0.0</code> <em>(2021-11-29)</em>:
+<ul>
+<li>Add new function: <code><a href="reference/compareCounts.html">compareCounts()</a></code>.</li>
+<li>
+<code><a href="reference/volcanoPlot.html">volcanoPlot()</a></code>: Add the possibility to draw grid lines.</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
 </div>
 </div>
   </div>

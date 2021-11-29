@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>barAnno — barAnno • plotmics</title>
+<title>compareCounts() — compareCounts • plotmics</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,11 +46,8 @@
 
 
 
-<meta property="og:title" content="barAnno — barAnno" />
-<meta property="og:description" content="Function for ChIP-seq and ATAC-seq.
-It must be used after the function annotatePeak() from the R package ChIPseeker. @seealso `annotatePeak`
-It takes a list of annotation objects that come as output of annotatePeak() and changes the features to &quot;Promoter&quot;, &quot;Distal&quot; and &quot;Gene body&quot; (or to &quot;Promoter&quot; and &quot;Distal&quot;). Finally it plots a bargraph with the distribution of all the proportions
-As a ggplot2-based function, it allows to add more layers to format the plot." />
+<meta property="og:title" content="compareCounts() — compareCounts" />
+<meta property="og:description" content="Draws a scatter plot of gene counts from two samples." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -167,119 +164,73 @@ As a ggplot2-based function, it allows to add more layers to format the plot." /
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>barAnno</h1>
-    <small class="dont-index">Source: <a href='https://github.com/amitjavilaventura/plotmics/blob/master/R/barAnno.R'><code>R/barAnno.R</code></a></small>
-    <div class="hidden name"><code>barAnno.Rd</code></div>
+    <h1>compareCounts()</h1>
+    <small class="dont-index">Source: <a href='https://github.com/amitjavilaventura/plotmics/blob/master/R/compareCounts.R'><code>R/compareCounts.R</code></a></small>
+    <div class="hidden name"><code>compareCounts.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Function for ChIP-seq and ATAC-seq.
-It must be used after the function annotatePeak() from the R package ChIPseeker. @seealso <code>`annotatePeak`</code>
-It takes a list of annotation objects that come as output of annotatePeak() and changes the features to "Promoter", "Distal" and "Gene body" (or to "Promoter" and "Distal"). Finally it plots a bargraph with the distribution of all the proportions
-As a ggplot2-based function, it allows to add more layers to format the plot.</p>
+    <p>Draws a scatter plot of gene counts from two samples.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>barAnno</span><span class='op'>(</span>
-  <span class='va'>anno_list</span>,
-  anno_names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>anno_list</span><span class='op'>)</span>,
-  names_order <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='va'>anno_names</span><span class='op'>)</span>,
-  protein <span class='op'>=</span> <span class='cn'>NULL</span>,
-  protein_order <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='va'>protein</span><span class='op'>)</span>,
-  main <span class='op'>=</span> <span class='cn'>NULL</span>,
+    <pre class="usage"><span class='fu'>compareCounts</span><span class='op'>(</span>
+  <span class='va'>df</span>,
+  cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>]</span>,
+  lims <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>[</span>, <span class='va'>cols</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span> <span class='op'>*</span> <span class='fl'>0.75</span><span class='op'>)</span><span class='op'>)</span>,
+  diag <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  title <span class='op'>=</span> <span class='cn'>NULL</span>,
   subtitle <span class='op'>=</span> <span class='cn'>NULL</span>,
-  ylab <span class='op'>=</span> <span class='cn'>NULL</span>,
-  xlab <span class='op'>=</span> <span class='cn'>NULL</span>,
-  color_palette <span class='op'>=</span> <span class='st'>"Set2"</span>,
-  legend_position <span class='op'>=</span> <span class='st'>"right"</span>,
-  anno_num <span class='op'>=</span> <span class='fl'>2</span>,
-  fill_position <span class='op'>=</span> <span class='cn'>T</span>,
-  xangle <span class='op'>=</span> <span class='fl'>20</span>,
-  width <span class='op'>=</span> <span class='fl'>0.6</span>,
-  counts_label <span class='op'>=</span> <span class='cn'>F</span>,
-  counts_angle <span class='op'>=</span> <span class='fl'>90</span>,
-  counts_size <span class='op'>=</span> <span class='fl'>3</span>
+  writeN <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  highlightGenes <span class='op'>=</span> <span class='cn'>NULL</span>,
+  writeGeneLabels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  geneLabelSize <span class='op'>=</span> <span class='fl'>3</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>anno_list</th>
-      <td><p>Named list of annotation objects that come from annotatePeak().</p></td>
+      <th>df</th>
+      <td><p>Dataframe with at least three columns: Geneid and one column for the counts of each sample.</p></td>
     </tr>
     <tr>
-      <th>anno_names</th>
-      <td><p>Charachter vector of the same length as 'anno_list'. Names that will be given to each of the objects in anno_list. Not that will be the names plotted in the bargraph</p></td>
+      <th>cols</th>
+      <td><p>Character of length 2. The names of the columns where the counts to be plotted are. Default: colnames(df)2:3.</p></td>
     </tr>
     <tr>
-      <th>names_order</th>
-      <td><p>Character vector with the same entries as 'names' with the order wanted to plot the data. Defaults to: unique(names).</p></td>
+      <th>lims</th>
+      <td><p>Numerical of length 2. Lower and upper limits of the axes. The same limits are used for both axes. Default: c(0,max(df[,cols1]*0.75)).</p></td>
     </tr>
     <tr>
-      <th>protein</th>
-      <td><p>NULL or haracter vector of the same length as 'anno_list' with the protein chipped in each dataframe of anno_list. If not NULL, these names will be passed through <code>facet_wrap()</code>. Default: NULL.</p></td>
+      <th>diag</th>
+      <td><p>Logical of length 1. Whether to draw a dashed line in the diagonal or not. Default: TRUE.</p></td>
     </tr>
     <tr>
-      <th>protein_order</th>
-      <td><p>Character vector with the same entries as 'protein' with the order wanted to plot the data. Defaults to: unique(protein).</p></td>
-    </tr>
-    <tr>
-      <th>main</th>
-      <td><p>Character of lenght 1. Title of the plot. Default: NULL.</p></td>
+      <th>title</th>
+      <td><p>Character of length 1. Title of the plot. Default: NULL.</p></td>
     </tr>
     <tr>
       <th>subtitle</th>
-      <td><p>Character of lenght 1. Subtitle of the plot. Default: NULL.</p></td>
+      <td><p>Character of length 1. Subtitle of the plot. Default: NULL</p></td>
     </tr>
     <tr>
-      <th>ylab</th>
-      <td><p>Character of lenght 1. Title of the Y axis. Default: NULL.</p></td>
+      <th>highlightGenes</th>
+      <td><p>Character of undefined length or NULL. The names of the genes (values of Geneid column) to highlight. Default: NULL.</p></td>
     </tr>
     <tr>
-      <th>xlab</th>
-      <td><p>Character of lenght 1. Title of the X axis. Default: NULL</p></td>
+      <th>writeGeneLabels</th>
+      <td><p>Logical of length 1. Whether to write the labels of the highlighted genes. Only if highlightGenes is not null. Default: TRUE.</p></td>
     </tr>
     <tr>
-      <th>legend_position</th>
-      <td><p>Character of lenght 1. Position of the legend. One of c("none", "bottom", "right", "left," "top"). Default: "right"</p></td>
+      <th>geneLabelSize</th>
+      <td><p>Numerical of length 1. Size of the gene label. Default: 3.</p></td>
     </tr>
     <tr>
-      <th>anno_num</th>
-      <td><p>Numerical or character of length 1. Number of annotations to plot, either 2 (Promoter/Distal), 3 (Promoter/Gene body/Distal) or 'all' (the annotatePeak() default). Default: 2.</p></td>
-    </tr>
-    <tr>
-      <th>fill_position</th>
-      <td><p>Logical. If TRUE (default), it the plotted bars will represent proportion of peaks in each feature. If FALSE, the bars will have the height of the total number of peaks with the correspondent feature color.</p></td>
-    </tr>
-    <tr>
-      <th>xangle</th>
-      <td><p>Numerical of length 1. Angle of the text in the X axis. Default: 20.</p></td>
-    </tr>
-    <tr>
-      <th>width</th>
-      <td><p>Numerical of length 1. Width of the bar in relative units. Default: 0.6</p></td>
-    </tr>
-    <tr>
-      <th>counts_label</th>
-      <td><p>Logical of length 1. Whether to write the number and percentage of observations in each annotation. Default: FALSE.</p></td>
-    </tr>
-    <tr>
-      <th>counts_angle</th>
-      <td><p>Numerical of length 1. Angle of the number and percentage labels. Default: 90</p></td>
-    </tr>
-    <tr>
-      <th>counts_size</th>
-      <td><p>Numerical of length 1. Size of the number and percentage labels. Default: 3</p></td>
-    </tr>
-    <tr>
-      <th>palette</th>
-      <td><p>Character of lenght 1. Color palette used to color the bars through the function <code>scale_fill_brewer()</code>. Default: "Set1".</p></td>
+      <th>writeN.</th>
+      <td><p>Logical of length 1. Whether to write the total number of genes in the top left corner of the plot. Default: TRUE.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/ChIPseeker/man/annotatePeak.html'>ChIPseeker::annotatePeak</a></code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>amitjavilaventura</p>

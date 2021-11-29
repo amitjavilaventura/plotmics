@@ -47,6 +47,8 @@ volcanoPlot(df, xlim = c(-10,10), ylim = c(0,30), pval = 0.05, log2FC = 1.5, mai
 
 \item{degsLabelSize}{Numerical. Size of the labels of the DEGs Default: 3.}
 
+\item{gridLines}{Logical of length 1. Whether to draw the panel grid major lines or not. Default: TRUE}
+
 \item{subSize.}{Numerical. The size of the subtitle. Default: 8.}
 
 \item{axisText_Size}{Numerical. Size of the text in the axis. Default: 7.}

@@ -20,6 +20,8 @@ _pl**O**t**MICS**_ is an R package to visualize omics and sequencing data in R u
 * `expressionHeatmap2()`: function that takes a list of data frames with the columns *Geneid* and *log2FoldChange* (it can be another type data, such as FPKMs, but its easier to maintain the name of *log2FoldChange* since it is how it output from `DESeq2`) and plots a heatmap with the selected genes. It is better for *log2FoldChange* heatmaps in which each element in the list is a data frame that outputs from `DESeq2`.
 * `chromRegions()`: function that takes the chromosome size information and a list of regions (e.g. BED files) to draw the positions of that regions in the genome.
 * `circleRegions()`: function that takes a list of chromosome size information and a list of regions (e.g. BED files) to draw the positions of that regions in the genome. Similar to `chromRegions()`, but in a circular plot, allowing different assemblies, pairing regions, etc. 
+* `expressionCor()`: function that computes the correlation of expression values between samples.
+* `compareCounts()`: function that draws a scatter plot of gene expression values between 2 samples.
 
 ## Install `plotmics` 
 
@@ -135,3 +137,10 @@ If you use this package, please cite [this repository](https://github.com/amitja
   + `ggVennPeaks()`: Add option to annotate the number of true overlaps for each set of peaks.
   + `barDEGs()`: Add the possibility to do a `prop.test()` and add the p-value to the plot.
 
+<br>
+  
+* `v5.0.0` *(2021-11-29)*:
+  + Add new function: `compareCounts()`.
+  + `volcanoPlot()`: Add the possibility to draw grid lines.
+
+<br>
