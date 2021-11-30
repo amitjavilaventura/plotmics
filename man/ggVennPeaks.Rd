@@ -4,7 +4,23 @@
 \alias{ggVennPeaks}
 \title{ggVennPeaks}
 \usage{
-ggVennPeaks(peak_list, peak_names = names(peak_list), percent = T, fill = c("blue", "gold3"), alpha = .4, color = "black", text_color = "black", name_size = 5, label_size = 3, title = "", subtitle = "")
+ggVennPeaks(
+  peak_list,
+  peak_names = names(peak_list),
+  percent = TRUE,
+  stranded = FALSE,
+  true_overlaps = FALSE,
+  in_fill = c("blue", "gold3"),
+  alpha = 0.4,
+  out_color = "black",
+  name_color = "black",
+  text_color = "black",
+  name_size = 5,
+  label_size = 3,
+  title = "",
+  subtitle = "",
+  return_peaks = FALSE
+)
 }
 \arguments{
 \item{peak_list}{List of dataframes with the genomic coordinates of the regions to overlap. Dataframes must contain the columns seqnames, start, end.}
@@ -19,21 +35,23 @@ ggVennPeaks(peak_list, peak_names = names(peak_list), percent = T, fill = c("blu
 
 \item{in_fill}{Character of length equal to 'peak_list'. Colors of each set in 'peak_list'. Default: c("blue", "gold3").}
 
-\item{alpha}{Numeric of length 1. Transparency of the the Venn circles. Default: 0.4}
+\item{alpha}{Numeric of length 1. Transparency of the the Venn circles. Default: 0.4.}
 
-\item{out_color}{Character of length 1 or equal to 'peak_list'. Color of the circles outer lines. Default: "black"}
+\item{out_color}{Character of length 1 or equal to 'peak_list'. Color of the circles outer lines. Default: "black".}
 
-\item{name_color}{Character of length 1 or equal to 'peak_list'. Color of the titles of each set of peaks. Default: "black"}
+\item{name_color}{Character of length 1 or equal to 'peak_list'. Color of the titles of each set of peaks. Default: "black".}
 
-\item{text_color}{Character of length 1. Color of the text inside the Venn circles (i.e. number of peaks and percentage in each intersection). Default: "black"}
+\item{text_color}{Character of length 1. Color of the text inside the Venn circles (i.e. number of peaks and percentage in each intersection). Default: "black".}
 
-\item{name_size}{Numeric of length 1. Size of the name of each peak set. Default: 5}
+\item{name_size}{Numeric of length 1. Size of the name of each peak set. Default: 5.}
 
-\item{label_size}{Numeric of length 1. Size of the text inside the Venn circles. Default: 3}
+\item{label_size}{Numeric of length 1. Size of the text inside the Venn circles. Default: 3.}
 
-\item{title}{Character of length 1. Title of the plot. Can be NULL. Default: ""}
+\item{title}{Character of length 1. Title of the plot. Can be NULL. Default: "".}
 
-\item{subtitle}{Character of length 1. Title of the plot. Can be NULL. Default: ""}
+\item{subtitle}{Character of length 1. Title of the plot. Can be NULL. Default: "".}
+
+\item{return_peaks}{Logical of length 1. Whether to return the peaks of each set overlapping with the other. Only if peak_list has length 2. If TRUE, it won't draw the plot. Default: FALSE.}
 }
 \description{
 Function that calls 'getVennCounts()' and draws a VennDiagram of

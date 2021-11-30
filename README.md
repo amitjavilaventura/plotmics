@@ -134,7 +134,7 @@ If you use this package, please cite [this repository](https://github.com/amitja
 
 * `v4.0.0` *(2021-10-27)*:
   + Add new function: `expressionCor()`.
-  + `ggVennPeaks()`: Add option to annotate the number of true overlaps for each set of peaks.
+  + `ggVennPeaks()`: Add the possibility to annotate the number of true overlaps for each set of peaks.
   + `barDEGs()`: Add the possibility to do a `prop.test()` and add the p-value to the plot.
 
 <br>
@@ -142,5 +142,6 @@ If you use this package, please cite [this repository](https://github.com/amitja
 * `v5.0.0` *(2021-11-29)*:
   + Add new function: `compareCounts()`.
   + `volcanoPlot()`: Add the possibility to draw grid lines.
-
+  + `ggVennPeaks()`: Add the possibility to return the lists of overlapping peaks.
+  
 <br>

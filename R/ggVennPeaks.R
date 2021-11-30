@@ -8,8 +8,6 @@
 #' Function that calls 'getVennCounts()' and draws a VennDiagram of
 #' peak intersections using the `ggvenn` package.
 #'
-#' @usage ggVennPeaks(peak_list, peak_names = names(peak_list), percent = T, fill = c("blue", "gold3"), alpha = .4, color = "black", text_color = "black", name_size = 5, label_size = 3, title = "", subtitle = "")
-#'
 #' @seealso `ggvenn::ggvenn`
 #' @seealso `ChIPseeker::makeVennDiagram`
 #'
@@ -19,14 +17,15 @@
 #' @param stranded Logical of length 1. If TRUE, it considers the strand information to do the overlaps. Default = FALSE.
 #' @param true_overlaps Logical of length 1. Only if peak_list has length 2. If TRUE, it counts the overlapping regions from each set using plyranges. If TRUE, stranded and percent are set to FALSE. Default: FALSE
 #' @param in_fill Character of length equal to 'peak_list'. Colors of each set in 'peak_list'. Default: c("blue", "gold3").
-#' @param alpha Numeric of length 1. Transparency of the the Venn circles. Default: 0.4
-#' @param out_color Character of length 1 or equal to 'peak_list'. Color of the circles outer lines. Default: "black"
-#' @param name_color Character of length 1 or equal to 'peak_list'. Color of the titles of each set of peaks. Default: "black"
-#' @param text_color Character of length 1. Color of the text inside the Venn circles (i.e. number of peaks and percentage in each intersection). Default: "black"
-#' @param name_size Numeric of length 1. Size of the name of each peak set. Default: 5
-#' @param label_size Numeric of length 1. Size of the text inside the Venn circles. Default: 3
-#' @param title Character of length 1. Title of the plot. Can be NULL. Default: ""
-#' @param subtitle Character of length 1. Title of the plot. Can be NULL. Default: ""
+#' @param alpha Numeric of length 1. Transparency of the the Venn circles. Default: 0.4.
+#' @param out_color Character of length 1 or equal to 'peak_list'. Color of the circles outer lines. Default: "black".
+#' @param name_color Character of length 1 or equal to 'peak_list'. Color of the titles of each set of peaks. Default: "black".
+#' @param text_color Character of length 1. Color of the text inside the Venn circles (i.e. number of peaks and percentage in each intersection). Default: "black".
+#' @param name_size Numeric of length 1. Size of the name of each peak set. Default: 5.
+#' @param label_size Numeric of length 1. Size of the text inside the Venn circles. Default: 3.
+#' @param title Character of length 1. Title of the plot. Can be NULL. Default: "".
+#' @param subtitle Character of length 1. Title of the plot. Can be NULL. Default: "".
+#' @param return_peaks Logical of length 1. Whether to return the peaks of each set overlapping with the other. Only if peak_list has length 2. If TRUE, it won't draw the plot. Default: FALSE.
 #'
 #' @export
 
@@ -43,15 +42,17 @@ ggVennPeaks <- function(peak_list,
                         name_size = 5,
                         label_size = 3,
                         title = "",
-                        subtitle = ""){
+                        subtitle = "",
+                        return_peaks = FALSE){
 
   # Load requireed packages
-  require(ggvenn)
-  require(dplyr)
-  require(reshape2)
-  require(magrittr)
-  require(purrr)
-  require(tidyr)
+  suppressPackageStartupMessages(require(ggvenn))
+  suppressPackageStartupMessages(require(dplyr))
+  suppressPackageStartupMessages(require(reshape2))
+  suppressPackageStartupMessages(require(magrittr))
+  suppressPackageStartupMessages(require(purrr))
+  suppressPackageStartupMessages(require(tidyr))
+  suppressPackageStartupMessages(require(plyranges))
 
   # Check that inputs are OK
   if(!is.list(peak_list)){ stop("'peak_list' must be a (named) list of dataframes with, at least, the columns 'seqnames', 'start' and 'end'.") }
@@ -66,8 +67,6 @@ ggVennPeaks <- function(peak_list,
 
   # Change strand values to accepted values (e.g. . to *)
   peak_list <- peak_list %>% purrr::map(~dplyr::mutate(.x, strand = if_else(strand %in% c(".", "*", "\\.", "\\*"), "*", strand)))
-
-
 
   # Get Venn Counts and the peaks in each set
   x <- getVennCounts(peaks = peak_list, conds = peak_names, stranded = stranded)
@@ -104,6 +103,11 @@ ggVennPeaks <- function(peak_list,
 
   if(length(peak_list) %in% 4:5) { venn <- venn + scale_x_discrete(expand = c(0,0.5))}
 
+  # Compute true number of overlaps and get overlapping peaks
+  peaks1 <- peak_list[[1]] %>% plyranges::as_granges();  peaks2 <- peak_list[[2]] %>% plyranges::as_granges()
+  overlaps1 <- plyranges::filter_by_overlaps(peaks1, peaks2); overlaps2 <- plyranges::filter_by_overlaps(peaks2, peaks1)
+
+  # Add titles
   if(!is.null(title)){
     venn <- venn + labs(title = title, subtitle = subtitle) +
       theme(plot.title = element_text(face = "bold", hjust = .5),
@@ -114,16 +118,7 @@ ggVennPeaks <- function(peak_list,
   if(true_overlaps & length(peak_list)==2) {
 
     # Load required packages
-    suppressPackageStartupMessages(require(plyranges))
     suppressPackageStartupMessages(require(colorspace))
-
-    # Peaks as GRanges
-    peaks1 <- peak_list[[1]] %>% plyranges::as_granges()
-    peaks2 <- peak_list[[2]] %>% plyranges::as_granges()
-
-    # Find overlapping regions for each set
-    overlaps1 <- plyranges::filter_by_overlaps(peaks1, peaks2)
-    overlaps2 <- plyranges::filter_by_overlaps(peaks2, peaks1)
 
     # Count the numbers
     num1 <- length(overlaps1)
@@ -135,6 +130,13 @@ ggVennPeaks <- function(peak_list,
       annotate("text", 0, -0.3, label = as.character(num2), color = colorspace::darken(in_fill[2], amount = .5), fontface = "bold", size = label_size*0.8)
   }
 
+  # If desired, return overlapping peaks
+  if(return_peaks & length(peak_list)==2){
+    # List of overlaps
+    overlaps <- list(overlaps1, overlaps2) %>% purrr::set_names(peak_names) %>% purrr::map(~as.data.frame(.x))
+    # Return overlapping peaks
+    return(overlaps)
+  }
 
   # Return the Venn diagram.
   return(venn)
