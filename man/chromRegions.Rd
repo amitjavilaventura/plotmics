@@ -23,7 +23,8 @@ chromRegions(
   draw_points = TRUE,
   coord_flip = FALSE,
   extra_info = NULL,
-  size_y_text = NULL
+  cyto_bands = NULL,
+  y_text_size = NULL
 )
 }
 \arguments{
@@ -60,6 +61,8 @@ chromRegions(
 \item{coord_flip}{Logical of lenght 1. If TRUE, change the position of the axes (Y axis is position and X is chromosome). Default: FALSE}
 
 \item{extra_info}{NULL or (named) list of length equal to 'regions_list', and with the same order. List of path to files or list of data.frames with two columns containing the id column of the regions contained in each set of 'regions_list' and a column with extra (discrete) information. Default: NULL.}
+
+\item{cyto_bands}{NULL, data.frame or character. Path to the file (character) or imported file (dataframe) of the positions of the cytogenetic bands. Default: NULL}
 
 \item{size_y_text}{NULL or numeric of length 1. If NULL, do not draw the text on the Y axis (position in bp). If numeric, the size of the text in the Y axis. Default: NULL}
 }

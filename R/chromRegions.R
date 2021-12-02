@@ -24,6 +24,7 @@
 #' @param draw_points Logical of lenght 1. If TRUE, draws points in each of the drawn regions. Default: TRUE
 #' @param coord_flip Logical of lenght 1. If TRUE, change the position of the axes (Y axis is position and X is chromosome). Default: FALSE
 #' @param extra_info NULL or (named) list of length equal to 'regions_list', and with the same order. List of path to files or list of data.frames with two columns containing the id column of the regions contained in each set of 'regions_list' and a column with extra (discrete) information. Default: NULL.
+#' @param cyto_bands NULL, data.frame or character. Path to the file (character) or imported file (dataframe) of the positions of the cytogenetic bands. Default: NULL
 #' @param size_y_text NULL or numeric of length 1. If NULL, do not draw the text on the Y axis (position in bp). If numeric, the size of the text in the Y axis. Default: NULL
 #'
 #' @export
@@ -46,7 +47,8 @@ chromRegions <- function(chrom_sizes,
                          draw_points     = TRUE,
                          coord_flip      = FALSE,
                          extra_info      = NULL,
-                         size_y_text     = NULL) {
+                         cyto_bands      = NULL,
+                         y_text_size     = NULL) {
 
   # Load packages -----
   require(dplyr)
@@ -55,6 +57,7 @@ chromRegions <- function(chrom_sizes,
   require(ggplot2)
   require(ggpubr)
   require(scales)
+  require(ggnewscale)
 
   # Check that inputs are OK and read data -----
   ## Chrom sizes
@@ -156,8 +159,28 @@ chromRegions <- function(chrom_sizes,
   }
 
   # Make plot -----
-  # Initialize chromosomes
-  g <- ggplot() + geom_col(data = chrom_filt, mapping = aes(y = end, x = seqnames), color = "black", fill = NA, width = 0.7)
+  # Initialize chromosomes with or without cytobands
+  if(!is.null(cyto_bands)){
+    if(is.character(cyto_bands)) { cyto_bands <- read.delim(cyto_bands, header = F) }
+    else if(is.data.frame(cyto_bands)) { cyto_bands <- cyto_bands }
+
+    cytobands <- cyto_bands %>%
+      magrittr::set_colnames(c("seqnames","start","end","name","gieStain")) %>%
+      dplyr::filter(stringr::str_detect(string = seqnames, pattern = paste(chr_exclude, collapse = "|"),negate = T)) %>%
+      dplyr::group_by(seqnames) %>%
+      dplyr::mutate(size = ifelse(end == max(end), sum(end-start), NA)) %>%
+      dplyr::ungroup() %>%
+      dplyr::mutate(seqnames = factor(seqnames, chr_order))
+
+    g <- ggplot() +
+      geom_col(data = cytobands, mapping = aes(y = end-start, x = seqnames, group = name, fill = gieStain), width = 0.65, show.legend = F) +
+      scale_fill_manual(values = c(NA, "Gray90", "Gray80", "Gray70", "Gray60"), na.value = NA) +
+      ggnewscale::new_scale_fill() +
+      geom_col(data = cytobands, mapping = aes(y = size, x = seqnames), color = "black", fill = NA, width = 0.7)
+
+  } else {
+    g <- ggplot() + geom_col(data = chrom_filt, mapping = aes(y = end, x = seqnames), color = "black", fill = NA, width = 0.7)
+  }
 
   # Draw regions
   # Draw lines
@@ -203,9 +226,11 @@ chromRegions <- function(chrom_sizes,
           legend.title = element_blank(), # remove legend title
           legend.key.size = unit(4, "mm"), #
           axis.ticks = element_blank(), axis.line = element_blank())
-  if(is.null(size_y_text)){
+
+  if(is.null(y_text_size)){
     g <- g + theme(axis.text.y = element_blank())
-  } else { g <- g + theme(axis.text.y = element_text(size = size_y_text)) }
+  } else { g <- g + theme(axis.text.y = element_text(size = y_text_size)) }
+
 
   # Flip coordinates
   if(coord_flip) { g <- g + coord_flip() }
@@ -213,3 +238,4 @@ chromRegions <- function(chrom_sizes,
   # Return plot
   return(g)
 }
+

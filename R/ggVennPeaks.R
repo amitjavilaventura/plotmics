@@ -68,6 +68,18 @@ ggVennPeaks <- function(peak_list,
   # Change strand values to accepted values (e.g. . to *)
   peak_list <- peak_list %>% purrr::map(~dplyr::mutate(.x, strand = if_else(strand %in% c(".", "*", "\\.", "\\*"), "*", strand)))
 
+  # Compute true number of overlaps and get overlapping peaks
+  peaks1 <- peak_list[[1]] %>% plyranges::as_granges();  peaks2 <- peak_list[[2]] %>% plyranges::as_granges()
+  overlaps1 <- plyranges::filter_by_overlaps(peaks1, peaks2); overlaps2 <- plyranges::filter_by_overlaps(peaks2, peaks1)
+
+    # If desired, return overlapping peaks
+  if(return_peaks & length(peak_list)==2){
+    # List of overlaps
+    overlaps <- list(overlaps1, overlaps2) %>% purrr::set_names(peak_names) %>% purrr::map(~as.data.frame(.x))
+    # Return overlapping peaks
+    return(overlaps)
+  }
+
   # Get Venn Counts and the peaks in each set
   x <- getVennCounts(peaks = peak_list, conds = peak_names, stranded = stranded)
 
@@ -103,9 +115,6 @@ ggVennPeaks <- function(peak_list,
 
   if(length(peak_list) %in% 4:5) { venn <- venn + scale_x_discrete(expand = c(0,0.5))}
 
-  # Compute true number of overlaps and get overlapping peaks
-  peaks1 <- peak_list[[1]] %>% plyranges::as_granges();  peaks2 <- peak_list[[2]] %>% plyranges::as_granges()
-  overlaps1 <- plyranges::filter_by_overlaps(peaks1, peaks2); overlaps2 <- plyranges::filter_by_overlaps(peaks2, peaks1)
 
   # Add titles
   if(!is.null(title)){
@@ -128,14 +137,6 @@ ggVennPeaks <- function(peak_list,
     venn <- venn +
       annotate("text", 0, 0.3, label = as.character(num1), color = colorspace::darken(in_fill[1], amount = .5), fontface = "bold", size = label_size*0.8) +
       annotate("text", 0, -0.3, label = as.character(num2), color = colorspace::darken(in_fill[2], amount = .5), fontface = "bold", size = label_size*0.8)
-  }
-
-  # If desired, return overlapping peaks
-  if(return_peaks & length(peak_list)==2){
-    # List of overlaps
-    overlaps <- list(overlaps1, overlaps2) %>% purrr::set_names(peak_names) %>% purrr::map(~as.data.frame(.x))
-    # Return overlapping peaks
-    return(overlaps)
   }
 
   # Return the Venn diagram.

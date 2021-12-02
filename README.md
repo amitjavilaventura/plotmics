@@ -145,3 +145,8 @@ If you use this package, please cite [this repository](https://github.com/amitja
   + `ggVennPeaks()`: Add the possibility to return the lists of overlapping peaks.
   
 <br>
+
+* `v5.0.0` *(2021-12-03)*:
+  + `chromRegions()`: Add the possibility to color the cytogenetic bands.
+  
+<br>

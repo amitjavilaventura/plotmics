@@ -22,6 +22,7 @@ devtools::load_all("..")
 library(dplyr)
 
 chrom_sizes = "../testdata/mm10.chrom.sizes"
+cyto_bands  = "../testdata/mm10.cytoBand.txt"
 regions_list <- list("Regions1" = "../testdata/mm10.regions.tsv",
                      "Regions2" = "../testdata/mm10.regions2.tsv",
                      "Regions3" = "../testdata/mm10.regions3.tsv")
