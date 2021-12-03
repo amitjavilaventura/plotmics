@@ -113,13 +113,25 @@ expressionHeatmap <- function(expr_df,
     dplyr::relocate(Geneid) %>%
     dplyr::filter(Geneid %in% genes)
 
+  # Look if there are extra columns
+  extra_cols <- expr %>% dplyr::select(!where(is.numeric), -Geneid) %>% ncol()
+  if(extra_cols>0){
+    # Separate extra columns from numeric values and Geneid
+    extra <- expr %>% dplyr::select(!where(is.numeric))
+    expr  <- expr %>% dplyr::select(Geneid, where(is.numeric))
+  }
 
+  # Don't allow extra cols if dendograms are shown
+  if(clust_cols | clust_rows) { extra_cols = 0}
 
   ## Scale
   if(!is.null(scale)){
     if("rows" %in% scale) { expr[,2:length(expr)] <- expr[,2:length(expr)] %>% t() %>% scale() %>% t() }
     if("cols" %in% scale) { expr[,2:length(expr)] <- expr[,2:length(expr)] %>% scale() }
   }
+
+  # Readd the extra cols
+  if(extra_cols > 0){ expr <- dplyr::inner_join(expr, extra, by = "Geneid") }
 
   ## Melt data frame
   expr.m <- expr %>%
@@ -178,7 +190,7 @@ expressionHeatmap <- function(expr_df,
   # Hierarchical clustering -----
   if(clust_rows){
     # Hierarchical clustering of rows alone
-    hclust_rows <- hclust( dist(expr[-1], method = dist_method), method = hclust_method )
+    hclust_rows <- hclust( dist(dplyr::select(expr, where(is.numeric)), method = dist_method), method = hclust_method )
 
     # Position of the Y axis
     if(show_dend_rows) { ytext_pos = "right" }
@@ -244,3 +256,4 @@ expressionHeatmap <- function(expr_df,
   return(heatmap)
 
 }
+
