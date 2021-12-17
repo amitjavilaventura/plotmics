@@ -149,5 +149,6 @@ If you use this package, please cite [this repository](https://github.com/amitja
 * `v5.1.0` *(2021-12-03)*:
   + `chromRegions()`: Add the possibility to color the cytogenetic bands.
   + `expressionHeatmap()`: Add the possibility to have more fields in the data frame so it will be possible to use facets and scale.
+  + `volcanoPlot()`: Fix plotting of `degLabels`.
   
 <br>

@@ -1,6 +1,6 @@
 Package: plotmics
 Title: plOtMICS: Visualization of Omics And Sequencing Data In R
-Version: 5.0.1
+Version: 5.1.1
 Author: Adria Mitjavila Ventura
 Maintainer: Adria Mitjavila Ventura <adria.mitjavila94@gmail.com>
 Description: The goal of this package is to provide simple functions to visualize several types of omics and sequencing data.

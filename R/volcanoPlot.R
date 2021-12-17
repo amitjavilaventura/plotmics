@@ -181,11 +181,12 @@ volcanoPlot <- function(df,
         # Filter non significant genes
         dplyr::filter(DEG!="NS") %>%
         # Arrange by ascendent order of padjusted
-        dplyr::arrange(padj)
-      # Create a dataframe with the labels of the DEGs with highest abs(log2FC).
-      degs <- head(na.omit(degs), degsLabelNum) %>% as.data.frame()
+        dplyr::arrange(abs(log2FoldChange)) %>%
+        # Create a dataframe with the labels of the DEGs with highest abs(log2FC).
+        dplyr::slice(1:degsLabelNum) %>% as.data.frame()
       # Put labels in the plot
-      p <- p + geom_text_repel(data = degs, mapping = aes(x = log2FoldChange, y = -log10(padj), label = Geneid), size = degsLabelSize, color = "Black")
+      p <- p + ggrepel::geom_text_repel(data = degs, size = degsLabelSize, color = "Black",
+                                        mapping = aes(x = log2FoldChange, y = -log10(padj), label = Geneid))
     }
   } else if(is.character(degsLabel)){
     #("'degsLabel' is character, so the written genes will be printed on the plot")
