@@ -41,7 +41,7 @@ volcanoPlot(df, xlim = c(-10,10), ylim = c(0,30), pval = 0.05, log2FC = 1.5, mai
 
 \item{legendPos}{Character. Position of the legend. One of: "bottom", "top", "right", "left", "none". Default: "bottom".}
 
-\item{degsLabel}{Logical or character. If TRUE, the number genes (defined in 'degsLabelNum') with highest log2FC in absolute are labelled. If character, it has to contain the names of the genes that are wanted to appear in the plot. Default: FALSE.}
+\item{degsLabel}{Logical or character. If TRUE, the number genes (defined in 'degsLabelNum') with highest log2FC in absolute value are labelled. If character, it has to contain the names of the genes that are wanted to appear in the plot. Default: FALSE.}
 
 \item{degsLabelNum}{Numerical. Number of most expressed genes to label in the plot. The double of this number will be labelled (once for DEGs with lowest p-value and once for the DEGs with highest log2fFC in absolute value). Default: 5.}
 

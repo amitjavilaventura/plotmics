@@ -33,7 +33,7 @@
 #' @param pointColor Character of length 3. Colors of the downregulated, notDE and upregulated points. Default: c("darkgreen", "gray", "red")
 #' @param legendTitle Logical. If FALSE, the title of the legend is not plotted. Default: FALSE.
 #' @param legendPos Character. Position of the legend. One of: "bottom", "top", "right", "left", "none". Default: "bottom".
-#' @param degsLabel Logical or character. If TRUE, the number genes (defined in 'degsLabelNum') with highest log2FC in absolute are labelled. If character, it has to contain the names of the genes that are wanted to appear in the plot. Default: FALSE.
+#' @param degsLabel Logical or character. If TRUE, the number genes (defined in 'degsLabelNum') with highest log2FC in absolute value are labelled. If character, it has to contain the names of the genes that are wanted to appear in the plot. Default: FALSE.
 #' @param degsLabelNum Numerical. Number of most expressed genes to label in the plot. The double of this number will be labelled (once for DEGs with lowest p-value and once for the DEGs with highest log2fFC in absolute value). Default: 5.
 #' @param degsLabelSize Numerical. Size of the labels of the DEGs Default: 3.
 #' @param gridLines Logical of length 1. Whether to draw the panel grid major lines or not. Default: TRUE
@@ -181,7 +181,7 @@ volcanoPlot <- function(df,
         # Filter non significant genes
         dplyr::filter(DEG!="NS") %>%
         # Arrange by ascendent order of padjusted
-        dplyr::arrange(abs(log2FoldChange)) %>%
+        dplyr::arrange(desc(abs(log2FoldChange))) %>%
         # Create a dataframe with the labels of the DEGs with highest abs(log2FC).
         dplyr::slice(1:degsLabelNum) %>% as.data.frame()
       # Put labels in the plot
