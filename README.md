@@ -152,3 +152,8 @@ If you use this package, please cite [this repository](https://github.com/amitja
   + `volcanoPlot()`: Fix plotting of `degLabels`.
   
 <br>
+
+* `v6.0.0` *(2022-02-11)*:
+  + Add new function: `ggVennBed()`
+  
+<br>

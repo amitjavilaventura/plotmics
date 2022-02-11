@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,18 +40,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -99,12 +95,15 @@
     <li>
       <a href="articles/12-circleRegions.html">circleRegions()</a>
     </li>
+    <li>
+      <a href="articles/13-ggVennBed.html">ggVenBed()</a>
+    </li>
   </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/amitjavilaventura/plotmics/">
+  <a href="https://github.com/amitjavilaventura/plotmics/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -121,14 +120,14 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="plotmics-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#plotmics-" class="anchor"></a><code>plotmics</code> <img src="logo.png" align="right" alt="" width="350">
+<div class="section level1">
+<div class="page-header"><h1 id="plotmics-">
+<code>plotmics</code> <img src="logo.png" align="right" alt="" width="350"><a class="anchor" aria-label="anchor" href="#plotmics-"></a>
 </h1></div>
 <p><em>pl<strong>O</strong>t<strong>MICS</strong></em>: Visualization of omics and sequencing data in R.</p>
-<div id="information" class="section level2">
-<h2 class="hasAnchor">
-<a href="#information" class="anchor"></a>Information</h2>
+<div class="section level2">
+<h2 id="information">Information<a class="anchor" aria-label="anchor" href="#information"></a>
+</h2>
 <p><em>pl<strong>O</strong>t<strong>MICS</strong></em> is an R package to visualize omics and sequencing data in R using simple but useful functions:</p>
 <ul>
 <li>
@@ -140,9 +139,9 @@
 <li>
 <code><a href="reference/DEcompare.html">DEcompare()</a></code>: draws a <code>ggplot2</code>-based scatter plot comparing the Log2FCs of two different contrasts.</li>
 <li>
-<code><a href="reference/barAnno.html">barAnno()</a></code>: takes a list of modified outputs from <code><a href="https://rdrr.io/pkg/ChIPseeker/man/annotatePeak.html">ChIPseeker::annotatePeak()</a></code>, computes the proportion of peaks in distal or promoter regions and draws a <code>ggplot2</code>-based barplot with the correseponding proportion for each sample.</li>
+<code><a href="reference/barAnno.html">barAnno()</a></code>: takes a list of modified outputs from <code><a href="https://rdrr.io/pkg/ChIPseeker/man/annotatePeak.html" class="external-link">ChIPseeker::annotatePeak()</a></code>, computes the proportion of peaks in distal or promoter regions and draws a <code>ggplot2</code>-based barplot with the correseponding proportion for each sample.</li>
 <li>
-<code><a href="reference/getVennCounts.html">getVennCounts()</a></code>: helper function that calls <code><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/makeVennDiagram.html">ChIPpeakAnno::makeVennDiagram()</a></code> to intersect different sets of peaks and returns the Venn counts and a list of the peaks present in each set of peaks. Note that the intersection of peaks may have a smaller number than expected to prevent the intersection being bigger than one of the sets.</li>
+<code><a href="reference/getVennCounts.html">getVennCounts()</a></code>: helper function that calls <code><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/makeVennDiagram.html" class="external-link">ChIPpeakAnno::makeVennDiagram()</a></code> to intersect different sets of peaks and returns the Venn counts and a list of the peaks present in each set of peaks. Note that the intersection of peaks may have a smaller number than expected to prevent the intersection being bigger than one of the sets.</li>
 <li>
 <code><a href="reference/upsetPeaks.html">upsetPeaks()</a></code>: calls <code><a href="reference/getVennCounts.html">getVennCounts()</a></code> and draws an UpSet plot using the Venn counts and the <code>UpSetR</code> package.</li>
 <li>
@@ -165,31 +164,31 @@
 <code><a href="reference/compareCounts.html">compareCounts()</a></code>: function that draws a scatter plot of gene expression values between 2 samples.</li>
 </ul>
 </div>
-<div id="install-plotmics" class="section level2">
-<h2 class="hasAnchor">
-<a href="#install-plotmics" class="anchor"></a>Install <code>plotmics</code>
+<div class="section level2">
+<h2 id="install-plotmics">Install <code>plotmics</code>
+<a class="anchor" aria-label="anchor" href="#install-plotmics"></a>
 </h2>
 <p>To install <code>plotmics</code> you have to run the following command in R:</p>
-<pre><code># if not installed, install the devtools package from CRAN 
-if(!require(devtools)) { install.packages("devtools") }
+<pre><code><span class="co"># if not installed, install the devtools package from CRAN </span>
+<span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span> <span class="op">}</span>
 
-# install plotmics from this Github repository 
-devtools::install_github("amitjavilaventura/plotmics")</code></pre>
+<span class="co"># install plotmics from this Github repository </span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"amitjavilaventura/plotmics"</span><span class="op">)</span></code></pre>
 </div>
-<div id="contributors" class="section level2">
-<h2 class="hasAnchor">
-<a href="#contributors" class="anchor"></a>Contributors</h2>
-<p>This package has been developed by <a href="https://amitjavilaventura.github.io">Adrià Mitjavila Ventura</a>, with some contributions from <a href="https://github.com/dfernandezperez">dfernandezperez</a>.</p>
+<div class="section level2">
+<h2 id="contributors">Contributors<a class="anchor" aria-label="anchor" href="#contributors"></a>
+</h2>
+<p>This package has been developed by <a href="https://amitjavilaventura.github.io" class="external-link">Adrià Mitjavila Ventura</a>, with some contributions from <a href="https://github.com/dfernandezperez" class="external-link">dfernandezperez</a>.</p>
 <p>If you want to contribute to this package, make a post in the issues section in this repository or fork this repository adding your code and do a pull request.</p>
 </div>
-<div id="cite" class="section level2">
-<h2 class="hasAnchor">
-<a href="#cite" class="anchor"></a>Cite</h2>
-<p>If you use this package, please cite <a href="https://github.com/amitjavilaventura/plotmics">this repository</a> and give it a star.</p>
+<div class="section level2">
+<h2 id="cite">Cite<a class="anchor" aria-label="anchor" href="#cite"></a>
+</h2>
+<p>If you use this package, please cite <a href="https://github.com/amitjavilaventura/plotmics" class="external-link">this repository</a> and give it a star.</p>
 </div>
-<div id="versions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#versions" class="anchor"></a>Versions</h2>
+<div class="section level2">
+<h2 id="versions">Versions<a class="anchor" aria-label="anchor" href="#versions"></a>
+</h2>
 <p><code>plotmics</code> versions have the structure of <code>1.2.3</code>. The first number (<code>1</code>, <em>major</em>) implies the addition of a function and/or major changes in the packages; the second number (<code>2</code>,<em>minor</em>) implies the addition of new features to a function and possible corrections; the third number (<code>3</code>, <em>micro</em>) implies the correction of minor bugs or addition of minor features.</p>
 <p><code>plotmics</code> version history is shown below:</p>
 <ul>
@@ -208,7 +207,7 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 <li>
 <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code>: Rescale output to remove blank space around the Venn diagram.</li>
 <li>
-<code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>: Add possibility to scale (<code><a href="https://rdrr.io/r/base/scale.html">scale()</a></code>) data by rows or columns.</li>
+<code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>: Add possibility to scale (<code><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale()</a></code>) data by rows or columns.</li>
 </ul>
 </li>
 </ul>
@@ -357,7 +356,7 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 <li>
 <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code>: Add the possibility to annotate the number of true overlaps for each set of peaks.</li>
 <li>
-<code><a href="reference/barDEGs.html">barDEGs()</a></code>: Add the possibility to do a <code><a href="https://rdrr.io/r/stats/prop.test.html">prop.test()</a></code> and add the p-value to the plot.</li>
+<code><a href="reference/barDEGs.html">barDEGs()</a></code>: Add the possibility to do a <code><a href="https://rdrr.io/r/stats/prop.test.html" class="external-link">prop.test()</a></code> and add the p-value to the plot.</li>
 </ul>
 </li>
 </ul>
@@ -375,41 +374,78 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 </li>
 </ul>
 <p><br></p>
+<ul>
+<li>
+<code>v5.1.0</code> <em>(2021-12-03)</em>:
+<ul>
+<li>
+<code><a href="reference/chromRegions.html">chromRegions()</a></code>: Add the possibility to color the cytogenetic bands.</li>
+<li>
+<code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code>: Add the possibility to have more fields in the data frame so it will be possible to use facets and scale.</li>
+<li>
+<code><a href="reference/volcanoPlot.html">volcanoPlot()</a></code>: Fix plotting of <code>degLabels</code>.</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li>
+<code>v6.0.0</code> <em>(2022-02-11)</em>:
+<ul>
+<li>Add new function: <code><a href="reference/ggVennBed.html">ggVennBed()</a></code>
+</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/amitjavilaventura/plotmics/">https://​github.com/​amitjavilaventura/​plotmics/​</a>
-</li>
+<li><a href="https://github.com/amitjavilaventura/plotmics/" class="external-link">Browse source code</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://opensource.org/licenses/mit-license.php">MIT</a></li>
+<li><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing plotmics</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Adria Mitjavila Ventura <br><small class="roles"> Maintainer </small>  </li>
 </ul>
 </div>
+
+
 
   </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Adria Mitjavila Ventura.</p>
+  <p></p>
+<p>Developed by Adria Mitjavila Ventura.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -417,6 +453,8 @@ devtools::install_github("amitjavilaventura/plotmics")</code></pre>
 
   
 
+
+  
 
   </body>
 </html>

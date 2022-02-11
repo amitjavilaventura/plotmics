@@ -22,6 +22,7 @@ library(dplyr)
 library(purrr)
 
 peak_list <- list.files("../testdata", "peak", full.names = T, recursive = T) %>%
+  purrr::discard(~stringr::str_detect(string = .x, pattern = "bed")) %>%
   purrr::set_names(c("PeakX", "PeakY"))  %>%
   purrr::map(~read.delim(.x))
 ggVennPeaks(peak_list = peak_list)
@@ -53,6 +54,7 @@ As input, `ggVennPeaks()` takes a named list of data frames with the columns `se
 ```{r}
 # read the peak annotation into a list
 peak_list <- list.files("../testdata", "peak", full.names = T, recursive = T) %>%
+  purrr::discard(~stringr::str_detect(string = .x, pattern = "bed")) %>%
   purrr::set_names(c("PeakX", "PeakY")) %>%
   purrr::map(~read.delim(.x))
 

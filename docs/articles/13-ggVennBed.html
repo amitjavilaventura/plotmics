@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>chromReads() • plotmics</title>
+<title>ggVenBed() • plotmics</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="chromReads()">
+<script src="../pkgdown.js"></script><meta property="og:title" content="ggVenBed()">
 <meta property="og:description" content="plotmics">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -121,12 +121,12 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>chromReads()</h1>
+      <h1 data-toc-skip>ggVenBed()</h1>
                         <h4 data-toc-skip class="author">Adrià Mitjavila Ventura</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/amitjavilaventura/plotmics/blob/HEAD/vignettes/01-chromReads.Rmd" class="external-link"><code>vignettes/01-chromReads.Rmd</code></a></small>
-      <div class="hidden name"><code>01-chromReads.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/amitjavilaventura/plotmics/blob/HEAD/vignettes/13-ggVennBed.Rmd" class="external-link"><code>vignettes/13-ggVennBed.Rmd</code></a></small>
+      <div class="hidden name"><code>13-ggVennBed.Rmd</code></div>
 
     </div>
 
@@ -142,57 +142,52 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://amitjavilaventura.github.io/plotmics/index.html" class="external-link">plotmics</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level1">
-<h1 id="run-chromreads">Run <code>chromReads()</code><a class="anchor" aria-label="anchor" href="#run-chromreads"></a>
+<h1 id="run-ggvennbed">Run <code>ggVennBed()</code><a class="anchor" aria-label="anchor" href="#run-ggvennbed"></a>
 </h1>
-<p><code><a href="../reference/chromReads.html">chromReads()</a></code> draws an <code>ggplot2</code>-based horizontal barplot with the number and percentage of reads mapped to each chromosome.</p>
-<p>It takes the path to a BAM file as an input. This BAM file must have a valid index.</p>
+<p><code><a href="../reference/ggVennBed.html">ggVennBed()</a></code> draws an Venn diagram plot with the intersections of two BED files (A and B). It counts the number of unique regions in A and B, as well as the regions from A intersecting with B and viceversa. It uses the function <code>ggvenn()</code> from the <code>ggvenn</code> package, and the function <code>bt.intersect()</code> from the <code>bedtoolsr</code> package.</p>
+<p>Look at the <a href="https://github.com/yanlinlin82/ggvenn" class="external-link"><code>ggvenn</code> package documentation</a>.</p>
+<p>Look at the <a href="https://github.com/PhanstielLab/bedtoolsr" class="external-link"><code>bedtoolsr</code> package documentation</a>.</p>
+<div class="section level2">
+<h2 id="required-input">Required input<a class="anchor" aria-label="anchor" href="#required-input"></a>
+</h2>
+<p>As input, <code><a href="../reference/ggVennBed.html">ggVennBed()</a></code> takes two data frames in BED format or the paths to two BED-like files.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/chromReads.html">chromReads</a></span><span class="op">(</span>bamfile <span class="op">=</span> <span class="st">"../testdata/sampleX.bam"</span><span class="op">)</span></code></pre></div>
-<p><img src="01-chromReads_files/figure-html/unnamed-chunk-3-1.png" width="384" style="display: block; margin: auto;"></p>
-<p>The bar shows the reads mapped into each chromosome and the number at the right is the percentage of the total reads (including the filtered chromosomes).</p>
+<code class="sourceCode R"><span class="co"># Example input. </span>
+<span class="va">regionsX_path</span> <span class="op">=</span> <span class="st">"../testdata/regionsX.bed"</span>
+<span class="va">regionsY_path</span> <span class="op">=</span> <span class="st">"../testdata/regionsY.bed"</span>
+
+<span class="va">regionsX</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.delim</a></span><span class="op">(</span><span class="va">regionsX_path</span>, header <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
+<span class="va">regionsY</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.delim</a></span><span class="op">(</span><span class="va">regionsY_path</span>, header <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">regionsX</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">##     V1       V2       V3      V4   V5 V6</span>
+<span class="co">## 1 chr1  4598409  4598766  peak_2  358  +</span>
+<span class="co">## 2 chr1  7498822  7499889  peak_5 1068  +</span>
+<span class="co">## 3 chr1  9780318  9780582  peak_8  265  +</span>
+<span class="co">## 4 chr1  9943458  9944059  peak_9  602  +</span>
+<span class="co">## 5 chr1 24107692 24108215 peak_18  524  +</span>
+<span class="co">## 6 chr1 37300732 37300976 peak_20  245  +</span></code></pre>
+</div>
 <div class="section level2">
-<h2 id="filter-chromosomes">Filter chromosomes<a class="anchor" aria-label="anchor" href="#filter-chromosomes"></a>
+<h2 id="default-run">Default run<a class="anchor" aria-label="anchor" href="#default-run"></a>
 </h2>
-<p>Using the parameter <code>chr.filt</code>, the undesired chromosomes can be filtered out.</p>
-<p>This parameter requires a character vector with part of the names of the chromosomes to be filtered. Let’s remove the <em>chr2L</em> and <em>chr2R</em> chromosomes:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/chromReads.html">chromReads</a></span><span class="op">(</span>bamfile <span class="op">=</span> <span class="st">"../testdata/sampleX.bam"</span>, chr.filt <span class="op">=</span> <span class="st">"chr2"</span><span class="op">)</span></code></pre></div>
-<p><img src="01-chromReads_files/figure-html/unnamed-chunk-4-1.png" width="384" style="display: block; margin: auto;"></p>
-<p>Now try removing the <em>chrX</em> and <em>chrY</em> chromosomes:</p>
+<p>You can run <code>ggVennBed</code> using the paths to two BED files:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/chromReads.html">chromReads</a></span><span class="op">(</span>bamfile <span class="op">=</span> <span class="st">"../testdata/sampleX.bam"</span>, chr.filt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"X"</span>, <span class="st">"Y"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="01-chromReads_files/figure-html/unnamed-chunk-5-1.png" width="384" style="display: block; margin: auto;"></p>
-<p>Note that the percentage of reads does not change, since it’s computed using all the reads from all the chromosomes.</p>
-</div>
-<div class="section level2">
-<h2 id="add-titles-etc">Add titles, etc<a class="anchor" aria-label="anchor" href="#add-titles-etc"></a>
-</h2>
-<p>Using the parameters <code>main</code>, <code>subtitle</code>, <code>xlab</code> and <code>ylab</code> you can customize the title, the subtitle the X-axis label and the Y-axis label, respectively.</p>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggVennBed.html">ggVennBed</a></span><span class="op">(</span>a <span class="op">=</span> <span class="va">regionsX_path</span>,  b <span class="op">=</span> <span class="va">regionsY_path</span><span class="op">)</span></code></pre></div>
+<p><img src="13-ggVennBed_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;"></p>
+<p>Or use two different data frames in BED-like format:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/chromReads.html">chromReads</a></span><span class="op">(</span>bamfile <span class="op">=</span> <span class="st">"../testdata/sampleX.bam"</span>, main <span class="op">=</span> <span class="st">"This is a title"</span>, 
-           subtitle <span class="op">=</span> <span class="st">"This is a subtitle"</span>, xlab <span class="op">=</span> <span class="st">"This the label of the X axis"</span>,
-           ylab <span class="op">=</span> <span class="st">"This is the label of the Y axis"</span><span class="op">)</span></code></pre></div>
-<p><img src="01-chromReads_files/figure-html/unnamed-chunk-6-1.png" width="384" style="display: block; margin: auto;"></p>
-<p>Moreover, you can customize the size of the previous mentioned labels, as well as the percentage label:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/chromReads.html">chromReads</a></span><span class="op">(</span>bamfile <span class="op">=</span> <span class="st">"../testdata/sampleX.bam"</span>, main <span class="op">=</span> <span class="st">"This is a title"</span>, 
-           subtitle <span class="op">=</span> <span class="st">"This is a subtitle"</span>, xlab <span class="op">=</span> <span class="st">"This the label of the X axis"</span>,
-           ylab <span class="op">=</span> <span class="st">"This is the label of the Y axis"</span>, 
-           main.size <span class="op">=</span> <span class="fl">16</span>, sub.size <span class="op">=</span> <span class="fl">10</span>, axis.size <span class="op">=</span> <span class="fl">14</span>, percent.size <span class="op">=</span> <span class="fl">9</span><span class="op">)</span></code></pre></div>
-<p><img src="01-chromReads_files/figure-html/unnamed-chunk-7-1.png" width="384" style="display: block; margin: auto;"></p>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggVennBed.html">ggVennBed</a></span><span class="op">(</span>a <span class="op">=</span> <span class="va">regionsX</span>,  b <span class="op">=</span> <span class="va">regionsY</span><span class="op">)</span></code></pre></div>
+<p><img src="13-ggVennBed_files/figure-html/unnamed-chunk-4-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
-<h2 id="remove-percentage-labels">Remove percentage labels<a class="anchor" aria-label="anchor" href="#remove-percentage-labels"></a>
+<h2 id="customize-plot">Customize plot<a class="anchor" aria-label="anchor" href="#customize-plot"></a>
 </h2>
-<p>By setting <code>percent.label</code> to FALSE, you can remove the percentage labels.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/chromReads.html">chromReads</a></span><span class="op">(</span>bamfile <span class="op">=</span> <span class="st">"../testdata/sampleX.bam"</span>, percent.label <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></code></pre></div>
-<p><img src="01-chromReads_files/figure-html/unnamed-chunk-8-1.png" width="384" style="display: block; margin: auto;"></p>
+<div class="section level3">
+<h3 id="further-costumization">Further costumization<a class="anchor" aria-label="anchor" href="#further-costumization"></a>
+</h3>
+<p>Since <code><a href="../reference/ggVennBed.html">ggVennBed()</a></code> outputs a <code>ggvenn</code>-based Venn diagram and <code>ggvenn</code> is based in <code>ggplot2</code>, it can be further customized with <code>scales</code>, <code>theme</code>, etc…</p>
 </div>
-<div class="section level2">
-<h2 id="further-customization">Further customization<a class="anchor" aria-label="anchor" href="#further-customization"></a>
-</h2>
-<p>Since <code>chromReads</code> outputs a <code>ggplot2</code>-based barplot, you can further customize it with <code>scales</code> or <code>theme</code>, etc.</p>
 </div>
 </div>
   </div>

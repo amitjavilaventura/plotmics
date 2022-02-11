@@ -1,0 +1,81 @@
+---
+title: "ggVenBed()"
+author: "Adrià Mitjavila Ventura"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    self_contained: yes
+    mode: selfcontained
+vignette: >
+  %\VignetteIndexEntry{ggVennPeaks()}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 4, fig.height = 4, 
+                      warning = FALSE, error = FALSE, message = FALSE)
+devtools::load_all("..")
+library(dplyr)
+library(purrr)
+
+peak_list <- list.files("../testdata", "regions", full.names = T, recursive = T) %>%
+  purrr::discard(~stringr::str_detect(string = .x, pattern = "tsv")) %>%
+  purrr::set_names(c("PeakX", "PeakY")) 
+```
+
+Last updated: `r Sys.Date()`
+
+***
+
+# Load `plotmics`
+
+```{r results=FALSE}
+# load plotmics
+library(plotmics)
+```
+
+# Run `ggVennBed()`
+
+`ggVennBed()` draws an Venn diagram plot with the intersections of two BED files (A and B). It counts the number of unique regions in A and B, as well as the regions from A intersecting with B and viceversa. It uses the function `ggvenn()` from the `ggvenn` package, and the function `bt.intersect()` from the `bedtoolsr` package.
+
+Look at the [`ggvenn` package documentation](https://github.com/yanlinlin82/ggvenn).
+
+Look at the [`bedtoolsr` package documentation](https://github.com/PhanstielLab/bedtoolsr).
+
+## Required input
+
+As input, `ggVennBed()` takes two data frames in BED format or the paths to two BED-like files.
+
+```{r}
+# Example input. 
+regionsX_path = "../testdata/regionsX.bed"
+regionsY_path = "../testdata/regionsY.bed"
+
+regionsX = read.delim(regionsX_path, header = F)
+regionsY = read.delim(regionsY_path, header = F)
+
+head(regionsX)
+```
+
+## Default run
+
+You can run `ggVennBed` using the paths to two BED files:
+
+```{r fig.height=7, fig.width=7}
+ggVennBed(a = regionsX_path,  b = regionsY_path)
+```
+
+Or use two different data frames in BED-like format:
+
+```{r}
+ggVennBed(a = regionsX,  b = regionsY)
+```
+
+## Customize plot
+
+### Further costumization
+
+Since `ggVennBed()` outputs a `ggvenn`-based Venn diagram and `ggvenn` is based in `ggplot2`, it can be further customized with `scales`, `theme`, etc...

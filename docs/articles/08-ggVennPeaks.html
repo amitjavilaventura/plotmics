@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,18 +40,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -99,12 +95,15 @@
     <li>
       <a href="../articles/12-circleRegions.html">circleRegions()</a>
     </li>
+    <li>
+      <a href="../articles/13-ggVennBed.html">ggVenBed()</a>
+    </li>
   </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/amitjavilaventura/plotmics/">
+  <a href="https://github.com/amitjavilaventura/plotmics/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -119,54 +118,53 @@
 
       
 
-      </header><script src="08-ggVennPeaks_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>ggVennPeaks()</h1>
-                        <h4 class="author">Adrià Mitjavila Ventura</h4>
+                        <h4 data-toc-skip class="author">Adrià Mitjavila Ventura</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/amitjavilaventura/plotmics/blob/master/vignettes/08-ggVennPeaks.Rmd"><code>vignettes/08-ggVennPeaks.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/amitjavilaventura/plotmics/blob/HEAD/vignettes/08-ggVennPeaks.Rmd" class="external-link"><code>vignettes/08-ggVennPeaks.Rmd</code></a></small>
       <div class="hidden name"><code>08-ggVennPeaks.Rmd</code></div>
 
     </div>
 
     
     
-<p>Last updated: 2021-11-29</p>
+<p>Last updated: 2022-02-11</p>
 <hr>
-<div id="load-plotmics" class="section level1">
-<h1 class="hasAnchor">
-<a href="#load-plotmics" class="anchor"></a>Load <code>plotmics</code>
+<div class="section level1">
+<h1 id="load-plotmics">Load <code>plotmics</code><a class="anchor" aria-label="anchor" href="#load-plotmics"></a>
 </h1>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load plotmics</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://amitjavilaventura.github.io/plotmics/index.html">plotmics</a></span><span class="op">)</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://amitjavilaventura.github.io/plotmics/index.html" class="external-link">plotmics</a></span><span class="op">)</span></code></pre></div>
 </div>
-<div id="run-ggvennpeaks" class="section level1">
-<h1 class="hasAnchor">
-<a href="#run-ggvennpeaks" class="anchor"></a>Run <code>ggVennPeaks()</code>
+<div class="section level1">
+<h1 id="run-ggvennpeaks">Run <code>ggVennPeaks()</code><a class="anchor" aria-label="anchor" href="#run-ggvennpeaks"></a>
 </h1>
-<p><code><a href="../reference/ggVennPeaks.html">ggVennPeaks()</a></code> draws an Venn diagram plot with the intersections between different sets of peaks using the function <code><a href="../reference/getVennCounts.html">getVennCounts()</a></code> (which calls <code><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/makeVennDiagram.html">ChIPpeakAnno::makeVennDiagram()</a></code>) and the <code>ggvenn</code> package.</p>
-<p>Look at the <a href="https://github.com/yanlinlin82/ggvenn"><code>ggvenn</code> package documentation</a>.</p>
-<p>Look at the <a href="https://www.rdocumentation.org/packages/ChIPpeakAnno/versions/3.6.5/topics/makeVennDiagram"><code>makeVennDiagram()</code> function documentation</a>.</p>
-<div id="required-input" class="section level2">
-<h2 class="hasAnchor">
-<a href="#required-input" class="anchor"></a>Required input</h2>
+<p><code><a href="../reference/ggVennPeaks.html">ggVennPeaks()</a></code> draws an Venn diagram plot with the intersections between different sets of peaks using the function <code><a href="../reference/getVennCounts.html">getVennCounts()</a></code> (which calls <code><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/makeVennDiagram.html" class="external-link">ChIPpeakAnno::makeVennDiagram()</a></code>) and the <code>ggvenn</code> package.</p>
+<p>Look at the <a href="https://github.com/yanlinlin82/ggvenn" class="external-link"><code>ggvenn</code> package documentation</a>.</p>
+<p>Look at the <a href="https://www.rdocumentation.org/packages/ChIPpeakAnno/versions/3.6.5/topics/makeVennDiagram" class="external-link"><code>makeVennDiagram()</code> function documentation</a>.</p>
+<div class="section level2">
+<h2 id="required-input">Required input<a class="anchor" aria-label="anchor" href="#required-input"></a>
+</h2>
 <p>As input, <code><a href="../reference/ggVennPeaks.html">ggVennPeaks()</a></code> takes a named list of data frames with the columns <code>seqnames</code>, <code>start</code> and <code>end</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read the peak annotation into a list</span>
-<span class="va">peak_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="st">"../testdata"</span>, <span class="st">"peak"</span>, full.names <span class="op">=</span> <span class="cn">T</span>, recursive <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PeakX"</span>, <span class="st">"PeakY"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span>
+<span class="va">peak_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="st">"../testdata"</span>, <span class="st">"peak"</span>, full.names <span class="op">=</span> <span class="cn">T</span>, recursive <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/keep.html" class="external-link">discard</a></span><span class="op">(</span><span class="op">~</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html" class="external-link">str_detect</a></span><span class="op">(</span>string <span class="op">=</span> <span class="va">.x</span>, pattern <span class="op">=</span> <span class="st">"bed"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html" class="external-link">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"PeakX"</span>, <span class="st">"PeakY"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.delim</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">peak_list</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span></code></pre></div>
-<pre><code>##   seqnames    start      end width strand    peakID        annotation
-## 1     chr7  3664442  3664743   302      * peak_2428          Promoter
-## 2     chr8 83199578 83200817  1240      * peak_2684            Intron
-## 3    chr13 20147802 20148111   310      *  peak_696            Intron
-## 4     chr4 56639205 56639610   406      * peak_1896 Distal Intergenic
-## 5    chr18 61614281 61614892   612      * peak_1373 Distal Intergenic</code></pre>
+<pre><code><span class="co">##   seqnames    start      end width strand    peakID        annotation</span>
+<span class="co">## 1     chr7  3664442  3664743   302      * peak_2428          Promoter</span>
+<span class="co">## 2     chr8 83199578 83200817  1240      * peak_2684            Intron</span>
+<span class="co">## 3    chr13 20147802 20148111   310      *  peak_696            Intron</span>
+<span class="co">## 4     chr4 56639205 56639610   406      * peak_1896 Distal Intergenic</span>
+<span class="co">## 5    chr18 61614281 61614892   612      * peak_1373 Distal Intergenic</span></code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Change strand value of some regions </span>
 <span class="va">peak_list</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">10</span><span class="op">:</span><span class="fl">30</span>,<span class="op">]</span><span class="op">$</span><span class="va">strand</span> <span class="op">=</span> <span class="st">"+"</span>
@@ -175,11 +173,11 @@
 <span class="va">peak_list</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">10</span><span class="op">:</span><span class="fl">30</span>,<span class="op">]</span><span class="op">$</span><span class="va">strand</span> <span class="op">=</span> <span class="st">"+"</span>
 <span class="va">peak_list</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">50</span><span class="op">:</span><span class="fl">80</span>,<span class="op">]</span><span class="op">$</span><span class="va">strand</span> <span class="op">=</span> <span class="st">"-"</span></code></pre></div>
 </div>
-<div id="getvenncounts" class="section level2">
-<h2 class="hasAnchor">
-<a href="#getvenncounts" class="anchor"></a><code>getVennCounts()</code>
+<div class="section level2">
+<h2 id="getvenncounts">
+<code>getVennCounts()</code><a class="anchor" aria-label="anchor" href="#getvenncounts"></a>
 </h2>
-<p><code><a href="../reference/getVennCounts.html">getVennCounts()</a></code> calls <code><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/makeVennDiagram.html">ChIPpeakAnno::makeVennDiagram()</a></code>, retrieves the Venn counts (number of overlaps between different sets of peaks) and builds a matrix of the peaks present in each set.</p>
+<p><code><a href="../reference/getVennCounts.html">getVennCounts()</a></code> calls <code><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/makeVennDiagram.html" class="external-link">ChIPpeakAnno::makeVennDiagram()</a></code>, retrieves the Venn counts (number of overlaps between different sets of peaks) and builds a matrix of the peaks present in each set.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">venn_counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getVennCounts.html">getVennCounts</a></span><span class="op">(</span>peaks <span class="op">=</span> <span class="va">peak_list</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -200,10 +198,10 @@
 <span class="co"># peak4   0       1</span>
 <span class="co"># peak5   0       1</span></code></pre></div>
 <p><code><a href="../reference/ggVennPeaks.html">ggVennPeaks()</a></code> calls the function <code><a href="../reference/getVennCounts.html">getVennCounts()</a></code> and builds the Venn diagram using the peak matrix and the <code>ggvenn</code> package.</p>
-<div id="unexpected-intersections" class="section level3">
-<h3 class="hasAnchor">
-<a href="#unexpected-intersections" class="anchor"></a>Unexpected intersections</h3>
-<p>As mentioned, <code><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/makeVennDiagram.html">ChIPpeakAnno::makeVennDiagram()</a></code> is called inside <code><a href="../reference/getVennCounts.html">getVennCounts()</a></code>. This function may have a unexpected outputs when considering the number of overlaps to build the intersection between different sets of regions. Considering the following example:</p>
+<div class="section level3">
+<h3 id="unexpected-intersections">Unexpected intersections<a class="anchor" aria-label="anchor" href="#unexpected-intersections"></a>
+</h3>
+<p>As mentioned, <code><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/makeVennDiagram.html" class="external-link">ChIPpeakAnno::makeVennDiagram()</a></code> is called inside <code><a href="../reference/getVennCounts.html">getVennCounts()</a></code>. This function may have a unexpected outputs when considering the number of overlaps to build the intersection between different sets of regions. Considering the following example:</p>
 <ul>
 <li>We have two sets of regions named A and B: A has 4 regions, 3 of which overlap with regions in B; and B has 6 regions, 5 of which overlap with regions in A.</li>
 <li>In the case we consider the 5 regions from B that overlap with regions in A, the size of the resulting intersection (5) would be greater than the total size of A (4).</li>
@@ -215,59 +213,59 @@
 </center>
 </div>
 </div>
-<div id="default-run" class="section level2">
-<h2 class="hasAnchor">
-<a href="#default-run" class="anchor"></a>Default run</h2>
+<div class="section level2">
+<h2 id="default-run">Default run<a class="anchor" aria-label="anchor" href="#default-run"></a>
+</h2>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span><span class="op">)</span></code></pre></div>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-6-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
-<div id="true-overlaps" class="section level2">
-<h2 class="hasAnchor">
-<a href="#true-overlaps" class="anchor"></a>True overlaps</h2>
+<div class="section level2">
+<h2 id="true-overlaps">True overlaps<a class="anchor" aria-label="anchor" href="#true-overlaps"></a>
+</h2>
 <p>By default, the intersection of two sets of peaks is smaller than expected by looking at one of the sets. Setting <code>true_overlaps = TRUE</code> will write the number of overlapping regions for each set of peaks (only when two sets are intersected)</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, true_overlaps <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-7-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
-<div id="customize-plot" class="section level2">
-<h2 class="hasAnchor">
-<a href="#customize-plot" class="anchor"></a>Customize plot</h2>
-<div id="set-names" class="section level3">
-<h3 class="hasAnchor">
-<a href="#set-names" class="anchor"></a>Set names</h3>
+<div class="section level2">
+<h2 id="customize-plot">Customize plot<a class="anchor" aria-label="anchor" href="#customize-plot"></a>
+</h2>
+<div class="section level3">
+<h3 id="set-names">Set names<a class="anchor" aria-label="anchor" href="#set-names"></a>
+</h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, peak_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Condition 1"</span>, <span class="st">"Condition 2"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, peak_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Condition 1"</span>, <span class="st">"Condition 2"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-8-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
-<div id="title-and-subtitle" class="section level3">
-<h3 class="hasAnchor">
-<a href="#title-and-subtitle" class="anchor"></a>Title and subtitle</h3>
+<div class="section level3">
+<h3 id="title-and-subtitle">Title and subtitle<a class="anchor" aria-label="anchor" href="#title-and-subtitle"></a>
+</h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, peak_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Condition 1"</span>, <span class="st">"Condition 2"</span><span class="op">)</span>, 
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, peak_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Condition 1"</span>, <span class="st">"Condition 2"</span><span class="op">)</span>, 
             title <span class="op">=</span> <span class="st">"This is a title"</span>, subtitle <span class="op">=</span> <span class="st">"This is a subtitle"</span><span class="op">)</span></code></pre></div>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-9-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
-<div id="remove-percentage" class="section level3">
-<h3 class="hasAnchor">
-<a href="#remove-percentage" class="anchor"></a>Remove percentage</h3>
+<div class="section level3">
+<h3 id="remove-percentage">Remove percentage<a class="anchor" aria-label="anchor" href="#remove-percentage"></a>
+</h3>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, percent <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></code></pre></div>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-10-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
-<div id="set-colors" class="section level3">
-<h3 class="hasAnchor">
-<a href="#set-colors" class="anchor"></a>Set colors</h3>
+<div class="section level3">
+<h3 id="set-colors">Set colors<a class="anchor" aria-label="anchor" href="#set-colors"></a>
+</h3>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, in_fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Green"</span>, <span class="st">"Darkred"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, in_fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Green"</span>, <span class="st">"Darkred"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-11-1.png" width="384" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, in_fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Green"</span>, <span class="st">"Darkred"</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">.2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, in_fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Green"</span>, <span class="st">"Darkred"</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">.2</span><span class="op">)</span></code></pre></div>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-12-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
-<div id="other-colors" class="section level3">
-<h3 class="hasAnchor">
-<a href="#other-colors" class="anchor"></a>Other colors</h3>
+<div class="section level3">
+<h3 id="other-colors">Other colors<a class="anchor" aria-label="anchor" href="#other-colors"></a>
+</h3>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, out_color <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></code></pre></div>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-13-1.png" width="384" style="display: block; margin: auto;"></p>
@@ -275,12 +273,12 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, text_color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-14-1.png" width="384" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, name_color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, name_color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-15-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
-<div id="text-sizes" class="section level3">
-<h3 class="hasAnchor">
-<a href="#text-sizes" class="anchor"></a>Text sizes</h3>
+<div class="section level3">
+<h3 id="text-sizes">Text sizes<a class="anchor" aria-label="anchor" href="#text-sizes"></a>
+</h3>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, label_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-16-1.png" width="384" style="display: block; margin: auto;"></p>
@@ -288,9 +286,9 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggVennPeaks.html">ggVennPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, name_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
 <p><img src="08-ggVennPeaks_files/figure-html/unnamed-chunk-17-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
-<div id="further-costumization" class="section level3">
-<h3 class="hasAnchor">
-<a href="#further-costumization" class="anchor"></a>Further costumization</h3>
+<div class="section level3">
+<h3 id="further-costumization">Further costumization<a class="anchor" aria-label="anchor" href="#further-costumization"></a>
+</h3>
 <p>Since <code><a href="../reference/ggVennPeaks.html">ggVennPeaks()</a></code> outputs a <code>ggvenn</code>-based Venn diagram and <code>ggvenn</code> is based in <code>ggplot2</code>, it can be further customized with <code>scales</code> or <code>theme</code>.</p>
 </div>
 </div>
@@ -308,11 +306,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Adria Mitjavila Ventura.</p>
+  <p></p>
+<p>Developed by Adria Mitjavila Ventura.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -320,6 +320,8 @@
 
   
 
+
+  
 
   </body>
 </html>
