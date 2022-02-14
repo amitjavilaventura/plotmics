@@ -216,12 +216,12 @@ chromRegions(chrom_sizes   = "../testdata/mm10.chrom.sizes",
 ```
 ### Y axis
 
-By default, the Y axis is not plotted, which means that the `size_y_text` is set to `NULL`. However, it can be plotted by setting the `size_y_text` argument to a number which will be used as size of the text in the Y axis.
+By default, the Y axis is not plotted, which means that the `y_text_size` is set to `NULL`. However, it can be plotted by setting the `size_y_text` argument to a number which will be used as size of the text in the Y axis.
 
 ```{r}
 chromRegions(chrom_sizes   = "../testdata/mm10.chrom.sizes", 
-             regions_list  = regions_list,
-             size_y_text   = 10)
+             regions_list  = regions_list, 
+             y_text_size   =  10)
 ```
 
 

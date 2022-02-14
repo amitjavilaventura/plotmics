@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,18 +40,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">5.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -99,12 +95,15 @@
     <li>
       <a href="../articles/12-circleRegions.html">circleRegions()</a>
     </li>
+    <li>
+      <a href="../articles/13-ggVennBed.html">ggVenBed()</a>
+    </li>
   </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/amitjavilaventura/plotmics/">
+  <a href="https://github.com/amitjavilaventura/plotmics/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -119,110 +118,108 @@
 
       
 
-      </header><script src="11-chromRegions_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>chromRegions()</h1>
-                        <h4 class="author">Adrià Mitjavila Ventura</h4>
+                        <h4 data-toc-skip class="author">Adrià Mitjavila Ventura</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/amitjavilaventura/plotmics/blob/master/vignettes/11-chromRegions.Rmd"><code>vignettes/11-chromRegions.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/amitjavilaventura/plotmics/blob/HEAD/vignettes/11-chromRegions.Rmd" class="external-link"><code>vignettes/11-chromRegions.Rmd</code></a></small>
       <div class="hidden name"><code>11-chromRegions.Rmd</code></div>
 
     </div>
 
     
     
-<p>Last updated: 2021-11-29</p>
+<p>Last updated: 2022-02-14</p>
 <hr>
-<div id="load-plotmics" class="section level1">
-<h1 class="hasAnchor">
-<a href="#load-plotmics" class="anchor"></a>Load <code>plotmics</code>
+<div class="section level1">
+<h1 id="load-plotmics">Load <code>plotmics</code><a class="anchor" aria-label="anchor" href="#load-plotmics"></a>
 </h1>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load plotmics</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://amitjavilaventura.github.io/plotmics/index.html">plotmics</a></span><span class="op">)</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://amitjavilaventura.github.io/plotmics/index.html" class="external-link">plotmics</a></span><span class="op">)</span></code></pre></div>
 </div>
-<div id="run-chromregions" class="section level1">
-<h1 class="hasAnchor">
-<a href="#run-chromregions" class="anchor"></a>Run <code>chromRegions()</code>
+<div class="section level1">
+<h1 id="run-chromregions">Run <code>chromRegions()</code><a class="anchor" aria-label="anchor" href="#run-chromregions"></a>
 </h1>
 <p><code><a href="../reference/chromRegions.html">chromRegions()</a></code> takes a file with the sizes of the chromosomes and draws a <code>ggplot2</code>-based bar plot. Then takes a list of regions in a BED-like format to draw them into each chromosome. The inputs <code>chrom.sizes</code> and <code>regions</code> can be supplied as a list of character with path to the file where the information is stored or a list of data frame.</p>
-<div id="required-input" class="section level2">
-<h2 class="hasAnchor">
-<a href="#required-input" class="anchor"></a>Required input</h2>
+<div class="section level2">
+<h2 id="required-input">Required input<a class="anchor" aria-label="anchor" href="#required-input"></a>
+</h2>
 <p>The <code>crhom_sizes</code> input is:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">chrom_sizes</span> <span class="op">=</span> <span class="st">"../testdata/mm10.chrom.sizes"</span>
-<span class="va">chrom_sizes</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span>header <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>##   V1        V2
-## 1  1 195471971
-## 2 10 130694993
-## 3 11 122082543
-## 4 12 120129022
-## 5 13 120421639
-## 6 14 124902244</code></pre>
+<span class="va">chrom_sizes</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.delim</a></span><span class="op">(</span>header <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">##   V1        V2</span>
+<span class="co">## 1  1 195471971</span>
+<span class="co">## 2 10 130694993</span>
+<span class="co">## 3 11 122082543</span>
+<span class="co">## 4 12 120129022</span>
+<span class="co">## 5 13 120421639</span>
+<span class="co">## 6 14 124902244</span></code></pre>
 <p>The <code>regions_list</code> is a list of characters or dataframes. It can have as many elements as wanted and it has the following structure:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">regions_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"Regions1"</span> <span class="op">=</span> <span class="st">"../testdata/mm10.regions.tsv"</span>,
+<code class="sourceCode R"><span class="va">regions_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Regions1"</span> <span class="op">=</span> <span class="st">"../testdata/mm10.regions.tsv"</span>,
                      <span class="st">"Regions2"</span> <span class="op">=</span> <span class="st">"../testdata/mm10.regions2.tsv"</span>,
                      <span class="st">"Regions3"</span> <span class="op">=</span> <span class="st">"../testdata/mm10.regions3.tsv"</span><span class="op">)</span>
-<span class="va">regions_list</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span>header <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>##   V1        V2        V3       V4    V5 V6
-## 1  1  57348975  57377520  region2 28545  -
-## 2  1  91403055  91406029  region4  2974  -
-## 3  1  92992344  92997067  region6  4723  -
-## 4  1 125174891 125177979 region10  3088  +
-## 5 10  18796805  18831930 region18 35125  -
-## 6 10  20310505  20312760 region19  2255  -</code></pre>
+<span class="va">regions_list</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.delim</a></span><span class="op">(</span>header <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">##   V1        V2        V3       V4    V5 V6</span>
+<span class="co">## 1  1  57348975  57377520  region2 28545  -</span>
+<span class="co">## 2  1  91403055  91406029  region4  2974  -</span>
+<span class="co">## 3  1  92992344  92997067  region6  4723  -</span>
+<span class="co">## 4  1 125174891 125177979 region10  3088  +</span>
+<span class="co">## 5 10  18796805  18831930 region18 35125  -</span>
+<span class="co">## 6 10  20310505  20312760 region19  2255  -</span></code></pre>
 </div>
-<div id="default-run" class="section level2">
-<h2 class="hasAnchor">
-<a href="#default-run" class="anchor"></a>Default run</h2>
+<div class="section level2">
+<h2 id="default-run">Default run<a class="anchor" aria-label="anchor" href="#default-run"></a>
+</h2>
 <p>The default run requires only the <code>chrom_sizes</code> and the <code>regions</code> arguments, either as a path to a file or a data frame.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/chromRegions.html">chromRegions</a></span><span class="op">(</span>chrom_sizes <span class="op">=</span> <span class="st">"../testdata/mm10.chrom.sizes"</span>, regions_list <span class="op">=</span> <span class="va">regions_list</span><span class="op">)</span></code></pre></div>
 <p><img src="11-chromRegions_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Read the data</span>
-<span class="va">chrom_sizes</span> <span class="op">=</span> <span class="st">"../testdata/mm10.chrom.sizes"</span><span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span>header <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
-<span class="va">regions</span> <span class="op">=</span> <span class="va">regions_list</span> <span class="op">%&gt;%</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span><span class="va">.x</span>, header <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op">)</span>
+<span class="va">chrom_sizes</span> <span class="op">=</span> <span class="st">"../testdata/mm10.chrom.sizes"</span><span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.delim</a></span><span class="op">(</span>header <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
+<span class="va">regions</span> <span class="op">=</span> <span class="va">regions_list</span> <span class="op">%&gt;%</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.delim</a></span><span class="op">(</span><span class="va">.x</span>, header <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/chromRegions.html">chromRegions</a></span><span class="op">(</span>chrom_sizes <span class="op">=</span> <span class="va">chrom_sizes</span>, regions_list <span class="op">=</span> <span class="va">regions</span><span class="op">)</span></code></pre></div>
 <p><img src="11-chromRegions_files/figure-html/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
-<div id="chromosome-order" class="section level2">
-<h2 class="hasAnchor">
-<a href="#chromosome-order" class="anchor"></a>Chromosome order</h2>
+<div class="section level2">
+<h2 id="chromosome-order">Chromosome order<a class="anchor" aria-label="anchor" href="#chromosome-order"></a>
+</h2>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/chromRegions.html">chromRegions</a></span><span class="op">(</span>chrom_sizes  <span class="op">=</span> <span class="st">"../testdata/mm10.chrom.sizes"</span>, 
              regions_list <span class="op">=</span> <span class="va">regions_list</span>,
-             chr_order    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">2</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">9</span>,<span class="fl">8</span>,<span class="fl">19</span>,<span class="fl">11</span>,<span class="fl">10</span>,<span class="fl">12</span>,<span class="fl">13</span>,<span class="fl">15</span>,<span class="fl">14</span>,<span class="fl">16</span>,<span class="fl">17</span>,<span class="fl">18</span>,<span class="st">"X"</span>,<span class="st">"Y"</span>,<span class="st">"M"</span>, <span class="st">"MT"</span><span class="op">)</span> <span class="op">)</span></code></pre></div>
+             chr_order    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">2</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">9</span>,<span class="fl">8</span>,<span class="fl">19</span>,<span class="fl">11</span>,<span class="fl">10</span>,<span class="fl">12</span>,<span class="fl">13</span>,<span class="fl">15</span>,<span class="fl">14</span>,<span class="fl">16</span>,<span class="fl">17</span>,<span class="fl">18</span>,<span class="st">"X"</span>,<span class="st">"Y"</span>,<span class="st">"M"</span>, <span class="st">"MT"</span><span class="op">)</span> <span class="op">)</span></code></pre></div>
 <p><img src="11-chromRegions_files/figure-html/unnamed-chunk-6-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
-<div id="exclude-chromosomes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#exclude-chromosomes" class="anchor"></a>Exclude chromosomes</h2>
+<div class="section level2">
+<h2 id="exclude-chromosomes">Exclude chromosomes<a class="anchor" aria-label="anchor" href="#exclude-chromosomes"></a>
+</h2>
 <p>Very often, the genome assemblies of a lot of species have chromosomes/scaffolds with strange names, which are not nice to plot. These can be excluded using the <code>chr_exlude</code> argument with a vector of regular expressions that match the chromosomes to exclude. By default <code>chr_exclude</code> removes the most usuall <em>strange</em> chromosomes, but if you want to remove more chromosomes or don’t want to remove any, you can change the <code>chr_exclude</code> argument.</p>
 <p>An example that excludes all the chromosomes that contain a dot in the name:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/chromRegions.html">chromRegions</a></span><span class="op">(</span>chrom_sizes  <span class="op">=</span> <span class="st">"../testdata/mm10.chrom.sizes"</span>, 
              regions_list <span class="op">=</span> <span class="va">regions_list</span>,
-             chr_exclude  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"\\."</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+             chr_exclude  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"\\."</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="11-chromRegions_files/figure-html/unnamed-chunk-7-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>Here you have an example that does not remove any chromosome.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/chromRegions.html">chromRegions</a></span><span class="op">(</span>chrom_sizes  <span class="op">=</span> <span class="st">"../testdata/mm10.chrom.sizes"</span>, 
              regions_list <span class="op">=</span> <span class="va">regions_list</span>,
-             chr_exclude  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">" "</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+             chr_exclude  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">" "</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="11-chromRegions_files/figure-html/unnamed-chunk-8-1.png" width="576" style="display: block; margin: auto;"> Note that, since we are converting the chromosome names to an ordered factor with <code>chr_order</code>, the chromosome names that do not appear in <code>chr_order</code> will be groupped and plotted into a <code>NA</code> category.</p>
 </div>
-<div id="customization" class="section level2">
-<h2 class="hasAnchor">
-<a href="#customization" class="anchor"></a>Customization</h2>
-<div id="flip-axes" class="section level3">
-<h3 class="hasAnchor">
-<a href="#flip-axes" class="anchor"></a>Flip axes</h3>
+<div class="section level2">
+<h2 id="customization">Customization<a class="anchor" aria-label="anchor" href="#customization"></a>
+</h2>
+<div class="section level3">
+<h3 id="flip-axes">Flip axes<a class="anchor" aria-label="anchor" href="#flip-axes"></a>
+</h3>
 <p><code><a href="../reference/chromRegions.html">chromRegions()</a></code> allows flipping the axes by setting the <code>coord_flip</code> argument to TRUE.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/chromRegions.html">chromRegions</a></span><span class="op">(</span>chrom_sizes  <span class="op">=</span> <span class="st">"../testdata/mm10.chrom.sizes"</span>, 
@@ -230,9 +227,9 @@
              coord_flip   <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <p><img src="11-chromRegions_files/figure-html/unnamed-chunk-9-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
-<div id="draw-the-points" class="section level3">
-<h3 class="hasAnchor">
-<a href="#draw-the-points" class="anchor"></a>Draw the points</h3>
+<div class="section level3">
+<h3 id="draw-the-points">Draw the points<a class="anchor" aria-label="anchor" href="#draw-the-points"></a>
+</h3>
 <p>By default, <code><a href="../reference/chromRegions.html">chromRegions()</a></code> draws a line/rectangle and a point in the middle of each region. To avoid drawing the points, the argument <code>draw_points</code> can be set to FALSE.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/chromRegions.html">chromRegions</a></span><span class="op">(</span>chrom_sizes  <span class="op">=</span> <span class="st">"../testdata/mm10.chrom.sizes"</span>, 
@@ -240,36 +237,36 @@
              draw_points  <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></code></pre></div>
 <p><img src="11-chromRegions_files/figure-html/unnamed-chunk-10-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
-<div id="color" class="section level3">
-<h3 class="hasAnchor">
-<a href="#color" class="anchor"></a>Color</h3>
+<div class="section level3">
+<h3 id="color">Color<a class="anchor" aria-label="anchor" href="#color"></a>
+</h3>
 <p>By default, the regions are colored by region (i.e. each element in <code>regions_list</code>). This can be controlled with the <code>colors</code> argument, which accepts a character vector with valid color names and the same length as <code>regions_list</code></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/chromRegions.html">chromRegions</a></span><span class="op">(</span>chrom_sizes  <span class="op">=</span> <span class="st">"../testdata/mm10.chrom.sizes"</span>, 
              regions_list <span class="op">=</span> <span class="va">regions_list</span>,
-             colors       <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Black"</span>, <span class="st">"Yellow"</span>, <span class="st">"Green"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+             colors       <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Black"</span>, <span class="st">"Yellow"</span>, <span class="st">"Green"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="11-chromRegions_files/figure-html/unnamed-chunk-11-1.png" width="576" style="display: block; margin: auto;"> If you want to color by strand, just turn <code>color_by</code> to <code>"strand"</code>.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/chromRegions.html">chromRegions</a></span><span class="op">(</span>chrom_sizes   <span class="op">=</span> <span class="st">"../testdata/mm10.chrom.sizes"</span>, 
              regions_list  <span class="op">=</span> <span class="va">regions_list</span>,
-             colors        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Darkgreen"</span>, <span class="st">"Darkred"</span><span class="op">)</span>,
+             colors        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Darkgreen"</span>, <span class="st">"Darkred"</span><span class="op">)</span>,
              color_by      <span class="op">=</span> <span class="st">"strand"</span><span class="op">)</span></code></pre></div>
 <p><img src="11-chromRegions_files/figure-html/unnamed-chunk-12-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>Now, imagine that we have regions that do not have a defined strand (e.g. most ChIP-seq peaks). In this case, the <code>color_by</code> is internally converted to <code>"region"</code> and the regions are colored by region set (i.e. elements in <code>regions_list</code>). Look at this example with only one region set whose strand values are converted to “.”.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Read and format regions file to have strand as "."</span>
-<span class="va">regions_no_strand</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"Regions1"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span><span class="st">"../testdata/mm10.regions.tsv"</span>, header <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>V6 <span class="op">=</span> <span class="st">"."</span><span class="op">)</span><span class="op">)</span>
+<span class="va">regions_no_strand</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Regions1"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.delim</a></span><span class="op">(</span><span class="st">"../testdata/mm10.regions.tsv"</span>, header <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>V6 <span class="op">=</span> <span class="st">"."</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Draw the plot</span>
 <span class="fu"><a href="../reference/chromRegions.html">chromRegions</a></span><span class="op">(</span>chrom_sizes   <span class="op">=</span> <span class="st">"../testdata/mm10.chrom.sizes"</span>, 
              regions_list  <span class="op">=</span> <span class="va">regions_no_strand</span>,
              color_by      <span class="op">=</span> <span class="st">"strand"</span>,
-             colors        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Gold3"</span>, <span class="st">"Darkgreen"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+             colors        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Gold3"</span>, <span class="st">"Darkgreen"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="11-chromRegions_files/figure-html/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
-<div id="titles" class="section level3">
-<h3 class="hasAnchor">
-<a href="#titles" class="anchor"></a>Titles</h3>
+<div class="section level3">
+<h3 id="titles">Titles<a class="anchor" aria-label="anchor" href="#titles"></a>
+</h3>
 <p>Title and subtitle can be supplied through the arguments <code>title</code> and <code>subtitle</code>, respectively. By default, they are set to NULL, but can accept a character of length 1.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/chromRegions.html">chromRegions</a></span><span class="op">(</span>chrom_sizes   <span class="op">=</span> <span class="st">"../testdata/mm10.chrom.sizes"</span>, 
@@ -297,10 +294,10 @@
              caption       <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="11-chromRegions_files/figure-html/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
-<div id="legend" class="section level3">
-<h3 class="hasAnchor">
-<a href="#legend" class="anchor"></a>Legend</h3>
-<p>The position of the legend is, by default, the bottom of the plot. This can be changed by changing the <code>legend</code> argument to one of “bottom”, “right”, “top”, “left” or “none” (no legend). The <code>legend</code> argument is passed through <code><a href="https://rpkgs.datanovia.com/ggpubr/reference/theme_pubr.html">ggpubr::theme_pubr()</a></code>.</p>
+<div class="section level3">
+<h3 id="legend">Legend<a class="anchor" aria-label="anchor" href="#legend"></a>
+</h3>
+<p>The position of the legend is, by default, the bottom of the plot. This can be changed by changing the <code>legend</code> argument to one of “bottom”, “right”, “top”, “left” or “none” (no legend). The <code>legend</code> argument is passed through <code><a href="https://rpkgs.datanovia.com/ggpubr/reference/theme_pubr.html" class="external-link">ggpubr::theme_pubr()</a></code>.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/chromRegions.html">chromRegions</a></span><span class="op">(</span>chrom_sizes   <span class="op">=</span> <span class="st">"../testdata/mm10.chrom.sizes"</span>, 
              regions_list  <span class="op">=</span> <span class="va">regions_list</span>,
@@ -311,16 +308,16 @@
              regions_list  <span class="op">=</span> <span class="va">regions_list</span>,
              legend        <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></code></pre></div>
 <p><img src="11-chromRegions_files/figure-html/unnamed-chunk-19-1.png" width="576" style="display: block; margin: auto;"> ### Y axis</p>
-<p>By default, the Y axis is not plotted, which means that the <code>size_y_text</code> is set to <code>NULL</code>. However, it can be plotted by setting the <code>size_y_text</code> argument to a number which will be used as size of the text in the Y axis.</p>
+<p>By default, the Y axis is not plotted, which means that the <code>y_text_size</code> is set to <code>NULL</code>. However, it can be plotted by setting the <code>size_y_text</code> argument to a number which will be used as size of the text in the Y axis.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/chromRegions.html">chromRegions</a></span><span class="op">(</span>chrom_sizes   <span class="op">=</span> <span class="st">"../testdata/mm10.chrom.sizes"</span>, 
-             regions_list  <span class="op">=</span> <span class="va">regions_list</span>,
-             size_y_text   <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
+             regions_list  <span class="op">=</span> <span class="va">regions_list</span>, 
+             y_text_size   <span class="op">=</span>  <span class="fl">10</span><span class="op">)</span></code></pre></div>
 <p><img src="11-chromRegions_files/figure-html/unnamed-chunk-20-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
-<div id="further-costumization" class="section level3">
-<h3 class="hasAnchor">
-<a href="#further-costumization" class="anchor"></a>Further costumization</h3>
+<div class="section level3">
+<h3 id="further-costumization">Further costumization<a class="anchor" aria-label="anchor" href="#further-costumization"></a>
+</h3>
 <p>Since <code><a href="../reference/chromRegions.html">chromRegions()</a></code> outputs a <code>ggplot2</code>-based bar plot, it can be further customized like any other <code>ggplot2</code>-based plot.</p>
 </div>
 </div>
@@ -338,11 +335,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Adria Mitjavila Ventura.</p>
+  <p></p>
+<p>Developed by Adria Mitjavila Ventura.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -350,6 +349,8 @@
 
   
 
+
+  
 
   </body>
 </html>
