@@ -96,7 +96,7 @@
       <a href="../articles/12-circleRegions.html">circleRegions()</a>
     </li>
     <li>
-      <a href="../articles/13-ggVennBed.html">ggVenBed()</a>
+      <a href="../articles/13-ggVennBed.html">ggVennBed()</a>
     </li>
   </ul>
 </li>
@@ -132,24 +132,24 @@
 
     
     
-<p>Last updated: 2022-02-14</p>
+<p>Last updated: 2022-02-23</p>
 <hr>
-<div class="section level1">
-<h1 id="load-plotmics">Load <code>plotmics</code><a class="anchor" aria-label="anchor" href="#load-plotmics"></a>
-</h1>
+<div class="section level2">
+<h2 id="load-plotmics">Load <code>plotmics</code><a class="anchor" aria-label="anchor" href="#load-plotmics"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load plotmics</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://amitjavilaventura.github.io/plotmics/index.html" class="external-link">plotmics</a></span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level1">
-<h1 id="run-ggupsetpeaks">Run <code>ggUpsetPeaks()</code><a class="anchor" aria-label="anchor" href="#run-ggupsetpeaks"></a>
-</h1>
+<div class="section level2">
+<h2 id="run-ggupsetpeaks">Run <code>ggUpsetPeaks()</code><a class="anchor" aria-label="anchor" href="#run-ggupsetpeaks"></a>
+</h2>
 <p><code><a href="../reference/ggUpsetPeaks.html">ggUpsetPeaks()</a></code> draws an UpSet plot with the intersections between different sets of peaks using the function <code><a href="../reference/getVennCounts.html">getVennCounts()</a></code> (which calls <code><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/makeVennDiagram.html" class="external-link">ChIPpeakAnno::makeVennDiagram()</a></code>), builds each part of the plot separatelly using <code>ggplot2</code> and puts all plots together using <code>patchwork</code>.</p>
 <p>Look at the <a href="https://patchwork.data-imaginist.com/" class="external-link"><code>patchwork</code> package documentation</a></p>
 <p>Look at the <a href="https://www.rdocumentation.org/packages/ChIPpeakAnno/versions/3.6.5/topics/makeVennDiagram" class="external-link"><code>makeVennDiagram()</code> function documentation</a></p>
-<div class="section level2">
-<h2 id="required-input">Required input<a class="anchor" aria-label="anchor" href="#required-input"></a>
-</h2>
+<div class="section level3">
+<h3 id="required-input">Required input<a class="anchor" aria-label="anchor" href="#required-input"></a>
+</h3>
 <p>As input, <code><a href="../reference/ggUpsetPeaks.html">ggUpsetPeaks()</a></code> takes a named list of data frames with the columns <code>seqnames</code>, <code>start</code> and <code>end</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read the peak annotation into a list</span>
@@ -166,10 +166,10 @@
 <span class="co">## 4     chr4 56639205 56639610   406      * peak_1896 Distal Intergenic</span>
 <span class="co">## 5    chr18 61614281 61614892   612      * peak_1373 Distal Intergenic</span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="getvenncounts">
+<div class="section level3">
+<h3 id="getvenncounts">
 <code>getVennCounts()</code><a class="anchor" aria-label="anchor" href="#getvenncounts"></a>
-</h2>
+</h3>
 <p><code><a href="../reference/getVennCounts.html">getVennCounts()</a></code> calls <code><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/makeVennDiagram.html" class="external-link">ChIPpeakAnno::makeVennDiagram()</a></code>, retrieves the Venn counts (number of overlaps between different sets of peaks) and builds a matrix of the peaks present in each set.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">venn_counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getVennCounts.html">getVennCounts</a></span><span class="op">(</span><span class="va">peak_list</span><span class="op">)</span></code></pre></div>
@@ -191,9 +191,9 @@
 <span class="co"># peak4   0       1</span>
 <span class="co"># peak5   0       1</span></code></pre></div>
 <p><code><a href="../reference/ggUpsetPeaks.html">ggUpsetPeaks()</a></code> calls the function <code><a href="../reference/getVennCounts.html">getVennCounts()</a></code> and builds the UpSet plot of the peaks using the Venn counts.</p>
-<div class="section level3">
-<h3 id="unexpected-intersections">Unexpected intersections<a class="anchor" aria-label="anchor" href="#unexpected-intersections"></a>
-</h3>
+<div class="section level4">
+<h4 id="unexpected-intersections">Unexpected intersections<a class="anchor" aria-label="anchor" href="#unexpected-intersections"></a>
+</h4>
 <p>As mentioned, <code><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/makeVennDiagram.html" class="external-link">ChIPpeakAnno::makeVennDiagram()</a></code> is called inside <code><a href="../reference/getVennCounts.html">getVennCounts()</a></code>. This function may have a unexpected outputs when considering the number of overlaps to build the intersection between different sets of regions. Considering the following example:</p>
 <ul>
 <li>We have two sets of regions named A and B: A has 4 regions, 3 of which overlap with regions in B; and B has 6 regions, 5 of which overlap with regions in A.</li>
@@ -206,50 +206,50 @@
 </center>
 </div>
 </div>
-<div class="section level2">
-<h2 id="default-run">Default run<a class="anchor" aria-label="anchor" href="#default-run"></a>
-</h2>
+<div class="section level3">
+<h3 id="default-run">Default run<a class="anchor" aria-label="anchor" href="#default-run"></a>
+</h3>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggUpsetPeaks.html">ggUpsetPeaks</a></span><span class="op">(</span><span class="va">peak_list</span><span class="op">)</span></code></pre></div>
 <p><img src="07-ggUpsetPeaks_files/figure-html/unnamed-chunk-6-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level2">
-<h2 id="customize-plot">Customize plot<a class="anchor" aria-label="anchor" href="#customize-plot"></a>
-</h2>
 <div class="section level3">
-<h3 id="condition-names">Condition names<a class="anchor" aria-label="anchor" href="#condition-names"></a>
+<h3 id="customize-plot">Customize plot<a class="anchor" aria-label="anchor" href="#customize-plot"></a>
 </h3>
+<div class="section level4">
+<h4 id="condition-names">Condition names<a class="anchor" aria-label="anchor" href="#condition-names"></a>
+</h4>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggUpsetPeaks.html">ggUpsetPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, conds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Condition_1"</span>, <span class="st">"Condition_2"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="07-ggUpsetPeaks_files/figure-html/unnamed-chunk-7-1.png" width="384" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#ggUpsetPeaks(peak_list, conds = c("Condition_1", "Condition_2"), conds_order = c("Condition_2", "Condition_1"))</span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="dont-sort-by-frequency">Don’t sort by frequency<a class="anchor" aria-label="anchor" href="#dont-sort-by-frequency"></a>
-</h3>
+<div class="section level4">
+<h4 id="dont-sort-by-frequency">Don’t sort by frequency<a class="anchor" aria-label="anchor" href="#dont-sort-by-frequency"></a>
+</h4>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggUpsetPeaks.html">ggUpsetPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, order_by_freq <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></code></pre></div>
 <p><img src="07-ggUpsetPeaks_files/figure-html/unnamed-chunk-9-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level3">
-<h3 id="size-label">Size label<a class="anchor" aria-label="anchor" href="#size-label"></a>
-</h3>
+<div class="section level4">
+<h4 id="size-label">Size label<a class="anchor" aria-label="anchor" href="#size-label"></a>
+</h4>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggUpsetPeaks.html">ggUpsetPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, num_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
 <p><img src="07-ggUpsetPeaks_files/figure-html/unnamed-chunk-10-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level3">
-<h3 id="set-titles">Set titles<a class="anchor" aria-label="anchor" href="#set-titles"></a>
-</h3>
+<div class="section level4">
+<h4 id="set-titles">Set titles<a class="anchor" aria-label="anchor" href="#set-titles"></a>
+</h4>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggUpsetPeaks.html">ggUpsetPeaks</a></span><span class="op">(</span><span class="va">peak_list</span>, title <span class="op">=</span> <span class="st">"This is a title"</span>, subtitle <span class="op">=</span> <span class="st">"This is a subtitle"</span>, 
              caption <span class="op">=</span> <span class="st">"This is a caption"</span>, <span class="op">)</span></code></pre></div>
 <p><img src="07-ggUpsetPeaks_files/figure-html/unnamed-chunk-11-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level3">
-<h3 id="further-costumization">Further costumization<a class="anchor" aria-label="anchor" href="#further-costumization"></a>
-</h3>
+<div class="section level4">
+<h4 id="further-costumization">Further costumization<a class="anchor" aria-label="anchor" href="#further-costumization"></a>
+</h4>
 <p>Since <code><a href="../reference/ggUpsetPeaks.html">ggUpsetPeaks()</a></code> outputs a <code>ggplot2</code>- and <code>patchwork</code>-based UpSet plot, it can be further customized with <code>scales</code> or <code>theme</code> and using the <code>patchwork</code> syntax.</p>
 </div>
 </div>
@@ -273,7 +273,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>

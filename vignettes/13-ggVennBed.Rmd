@@ -1,5 +1,5 @@
 ---
-title: "ggVenBed()"
+title: "ggVennBed()"
 author: "Adrià Mitjavila Ventura"
 output:
   html_document:
@@ -20,6 +20,7 @@ knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 4, fig.heig
 devtools::load_all("..")
 library(dplyr)
 library(purrr)
+library(patchwork)
 
 peak_list <- list.files("../testdata", "regions", full.names = T, recursive = T) %>%
   purrr::discard(~stringr::str_detect(string = .x, pattern = "tsv")) %>%
@@ -74,7 +75,33 @@ Or use two different data frames in BED-like format:
 ggVennBed(a = regionsX,  b = regionsY)
 ```
 
+## Specify strandedness
+
+By default, `ggVennBed()` intersects the regions with the same strandedness (`bedtools intersect -s -u -a regionA -b regionB`). To change this behaviour, change `stranded` to `FALSE` or `NULL`.
+
+```{r}
+ggVennBed(a = regionsX,  b = regionsY, stranded = TRUE) + ggtitle("Intersection with the same strandednes") +
+ggVennBed(a = regionsX,  b = regionsY, stranded = FALSE) + ggtitle("Intersection regardless the strand")
+```
+
 ## Customize plot
+
+```{r}
+ggVennBed(a = regionsX,  b = regionsY, title = "This is a title", title_size = 15, title_face = "bold")
+
+ggVennBed(a = regionsX,  b = regionsY, title = "This is a title", subtitle = "This is a subtitle")
+ggVennBed(a = regionsX,  b = regionsY, title = "This is a title", subtitle = "This is a subtitle", subtitle_size = 15, subtitle_face = "bold")
+
+ggVennBed(a = regionsX,  b = regionsY, color = c("red", "green"))
+ggVennBed(a = regionsX,  b = regionsY, color = c("red", "green"), alpha = 0.2)
+
+ggVennBed(a = regionsX,  b = regionsY, labsize = 10)
+
+ggVennBed(a = regionsX,  b = regionsY, setnames = c("RegionX", "RegionsY"))
+ggVennBed(a = regionsX,  b = regionsY, setnames = c("RegionX", "RegionsY"), namesize = 10)
+
+```
+
 
 ### Further costumization
 

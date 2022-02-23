@@ -17,6 +17,7 @@
 #' @param setnames Character of length 2. Names of the data sets of 'a' and 'b'. Default: c("A", "B").
 #' @param stranded Logical of length 1. If TRUE, the intersections are done regarding the strand. Default = TRUE.
 #' @param color Character of length 2. Color of the Venn circles and the labels indicating the number of regions. Default: c("blue", "gold3").
+#' @param alpha Numeric of length 1. Transparency of the circles. Default: 0.5.
 #' @param namesize Numeric of length 1. Size of the names of each set. Default: 7.
 #' @param labsize Numeric of length 1. Size of the labels indicating the number of unique and overlapping regions.
 #'
@@ -27,8 +28,16 @@ ggVennBed <- function(a,
                       setnames = c("A", "B"),
                       stranded = T,
                       color    = c("blue", "gold3"),
+                      alpha    = 0.5,
                       namesize = 7,
-                      labsize  = 5){
+                      labsize  = 5,
+                      title    = NULL,
+                      subtitle = NULL,
+                      title_size = 12,
+                      subtitle_size = 11,
+                      title_face = "plain",
+                      subtitle_face = "italic"
+                      ){
 
   # Load required packages
   suppressWarnings(require(dplyr, quietly = T, warn.conflicts = F))
@@ -67,7 +76,7 @@ ggVennBed <- function(a,
   # Create a pseudo data for the backbone of the Venn diagram
   data <- list(rep("A",2), rep("B",2)) %>% magrittr::set_names(setnames)
   # Draw the Venn diagram
-  venn <- ggvenn::ggvenn(data, show_percentage = F)
+  venn <- ggvenn::ggvenn(data, show_percentage = F, fill_color = color, fill_alpha = alpha, stroke_color = "black", set_name_size = namesize)
   # Remove labels from Venn diagram
   venn$layers[[4]] <- NULL
 
@@ -80,6 +89,11 @@ ggVennBed <- function(a,
     annotate("text", 0, 0.15, label = as.character(ab), color = colorspace::darken(color[1], amount = 0.5), fontface = "plain", size = labsize) +
     annotate("text", 0, -0.15, label = as.character(ba), color = colorspace::darken(color[2], amount = 0.5), fontface = "plain", size = labsize)
 
+  # Add title and subtitle
+  venn <- venn +
+    labs(title = title, subtitle = subtitle) +
+    theme(plot.title = element_text(hjust = .5, size = title_size, face = title_face),
+          plot.subtitle = element_text(hjust = .5, size = subtitle_size, face = subtitle_face))
   # Remove temporary files
   if(file.exists(tmpfile_a)) { file.remove(tmpfile_a) }
   if(file.exists(tmpfile_b)) { file.remove(tmpfile_b) }

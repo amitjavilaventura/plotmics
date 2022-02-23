@@ -10,8 +10,15 @@ ggVennBed(
   setnames = c("A", "B"),
   stranded = T,
   color = c("blue", "gold3"),
+  alpha = 0.5,
   namesize = 7,
-  labsize = 5
+  labsize = 5,
+  title = NULL,
+  subtitle = NULL,
+  title_size = 12,
+  subtitle_size = 11,
+  title_face = "plain",
+  subtitle_face = "italic"
 )
 }
 \arguments{
@@ -24,6 +31,8 @@ ggVennBed(
 \item{stranded}{Logical of length 1. If TRUE, the intersections are done regarding the strand. Default = TRUE.}
 
 \item{color}{Character of length 2. Color of the Venn circles and the labels indicating the number of regions. Default: c("blue", "gold3").}
+
+\item{alpha}{Numeric of length 1. Transparency of the circles. Default: 0.5.}
 
 \item{namesize}{Numeric of length 1. Size of the names of each set. Default: 7.}
 

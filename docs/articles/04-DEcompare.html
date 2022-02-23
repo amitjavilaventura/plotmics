@@ -96,7 +96,7 @@
       <a href="../articles/12-circleRegions.html">circleRegions()</a>
     </li>
     <li>
-      <a href="../articles/13-ggVennBed.html">ggVenBed()</a>
+      <a href="../articles/13-ggVennBed.html">ggVennBed()</a>
     </li>
   </ul>
 </li>
@@ -132,20 +132,20 @@
 
     
     
-<div class="section level1">
-<h1 id="load-plotmics">Load <code>plotmics</code><a class="anchor" aria-label="anchor" href="#load-plotmics"></a>
-</h1>
+<div class="section level2">
+<h2 id="load-plotmics">Load <code>plotmics</code><a class="anchor" aria-label="anchor" href="#load-plotmics"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load plotmics</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://amitjavilaventura.github.io/plotmics/index.html" class="external-link">plotmics</a></span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level1">
-<h1 id="run-decompare">Run <code>DEcompare()</code><a class="anchor" aria-label="anchor" href="#run-decompare"></a>
-</h1>
-<p><code><a href="../reference/DEcompare.html">DEcompare()</a></code> draws an <code>ggplot2</code>-based scatter plot comparing the <em>log2FC</em> of 2 different differential expression contrasts contrasts.</p>
 <div class="section level2">
-<h2 id="required">Required<a class="anchor" aria-label="anchor" href="#required"></a>
+<h2 id="run-decompare">Run <code>DEcompare()</code><a class="anchor" aria-label="anchor" href="#run-decompare"></a>
 </h2>
+<p><code><a href="../reference/DEcompare.html">DEcompare()</a></code> draws an <code>ggplot2</code>-based scatter plot comparing the <em>log2FC</em> of 2 different differential expression contrasts contrasts.</p>
+<div class="section level3">
+<h3 id="required">Required<a class="anchor" aria-label="anchor" href="#required"></a>
+</h3>
 <p>As input, <code><a href="../reference/DEcompare.html">DEcompare()</a></code> takes a list of 2 data frames with the columns <code>Geneid</code>, <code>padj</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read the dataframes into a list</span>
@@ -162,45 +162,45 @@
 <span class="co">## 5  Neat1  ENSMUSG00000092274.3          -2.25 2.097922e-22 Downregulated</span>
 <span class="co">## 6 Gsdmc3 ENSMUSG00000055827.13           2.51 9.601422e-20   Upregulated</span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="minimum-run">Minimum run<a class="anchor" aria-label="anchor" href="#minimum-run"></a>
-</h2>
+<div class="section level3">
+<h3 id="minimum-run">Minimum run<a class="anchor" aria-label="anchor" href="#minimum-run"></a>
+</h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/DEcompare.html">DEcompare</a></span><span class="op">(</span>deg_list <span class="op">=</span> <span class="va">deg_list</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Warning: Removed 7041 rows containing missing values (geom_point).</span></code></pre>
 <p><img src="04-DEcompare_files/figure-html/unnamed-chunk-4-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level2">
-<h2 id="change-thresholds">Change thresholds<a class="anchor" aria-label="anchor" href="#change-thresholds"></a>
-</h2>
+<div class="section level3">
+<h3 id="change-thresholds">Change thresholds<a class="anchor" aria-label="anchor" href="#change-thresholds"></a>
+</h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/DEcompare.html">DEcompare</a></span><span class="op">(</span>deg_list <span class="op">=</span> <span class="va">deg_list</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, threshold <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Warning: Removed 7041 rows containing missing values (geom_point).</span></code></pre>
 <p><img src="04-DEcompare_files/figure-html/unnamed-chunk-5-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level2">
-<h2 id="customize-plot">Customize plot<a class="anchor" aria-label="anchor" href="#customize-plot"></a>
-</h2>
 <div class="section level3">
-<h3 id="change-axis-limits">Change axis limits<a class="anchor" aria-label="anchor" href="#change-axis-limits"></a>
+<h3 id="customize-plot">Customize plot<a class="anchor" aria-label="anchor" href="#customize-plot"></a>
 </h3>
+<div class="section level4">
+<h4 id="change-axis-limits">Change axis limits<a class="anchor" aria-label="anchor" href="#change-axis-limits"></a>
+</h4>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/DEcompare.html">DEcompare</a></span><span class="op">(</span>deg_list <span class="op">=</span> <span class="va">deg_list</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>,<span class="fl">5</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">7</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Warning: Removed 7041 rows containing missing values (geom_point).</span></code></pre>
 <p><img src="04-DEcompare_files/figure-html/unnamed-chunk-6-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level3">
-<h3 id="specify-titles">Specify titles<a class="anchor" aria-label="anchor" href="#specify-titles"></a>
-</h3>
+<div class="section level4">
+<h4 id="specify-titles">Specify titles<a class="anchor" aria-label="anchor" href="#specify-titles"></a>
+</h4>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/DEcompare.html">DEcompare</a></span><span class="op">(</span>deg_list <span class="op">=</span> <span class="va">deg_list</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, main <span class="op">=</span> <span class="st">"This is a title"</span>, subtitle <span class="op">=</span> <span class="st">"This is a subtitle"</span>, 
             xlab <span class="op">=</span> <span class="st">"This is the X-axis label"</span>, ylab <span class="op">=</span> <span class="st">"This is the Y-axis label"</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Warning: Removed 7041 rows containing missing values (geom_point).</span></code></pre>
 <p><img src="04-DEcompare_files/figure-html/unnamed-chunk-7-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level3">
-<h3 id="change-corner-colors">Change corner colors<a class="anchor" aria-label="anchor" href="#change-corner-colors"></a>
-</h3>
+<div class="section level4">
+<h4 id="change-corner-colors">Change corner colors<a class="anchor" aria-label="anchor" href="#change-corner-colors"></a>
+</h4>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/DEcompare.html">DEcompare</a></span><span class="op">(</span>deg_list <span class="op">=</span> <span class="va">deg_list</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, color_corners <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Gray50"</span>, <span class="st">"Gray70"</span>, <span class="st">"Gray90"</span>, <span class="st">"White"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Warning: Removed 7041 rows containing missing values (geom_point).</span></code></pre>
@@ -218,9 +218,9 @@
 <pre><code><span class="co">## Warning: Removed 7041 rows containing missing values (geom_point).</span></code></pre>
 <p><img src="04-DEcompare_files/figure-html/unnamed-chunk-11-1.png" width="384" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level3">
-<h3 id="further-costumization">Further costumization<a class="anchor" aria-label="anchor" href="#further-costumization"></a>
-</h3>
+<div class="section level4">
+<h4 id="further-costumization">Further costumization<a class="anchor" aria-label="anchor" href="#further-costumization"></a>
+</h4>
 <p>Since <code><a href="../reference/DEcompare.html">DEcompare()</a></code> outputs a <code>ggplot2</code>-based scatter plot, it can be further customized with <code>scales</code> or <code>theme</code>, etc.</p>
 </div>
 </div>
@@ -244,7 +244,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>

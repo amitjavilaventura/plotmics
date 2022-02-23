@@ -96,7 +96,7 @@
       <a href="../articles/12-circleRegions.html">circleRegions()</a>
     </li>
     <li>
-      <a href="../articles/13-ggVennBed.html">ggVenBed()</a>
+      <a href="../articles/13-ggVennBed.html">ggVennBed()</a>
     </li>
   </ul>
 </li>
@@ -132,22 +132,22 @@
 
     
     
-<p>Last updated: 2022-02-14</p>
+<p>Last updated: 2022-02-23</p>
 <hr>
-<div class="section level1">
-<h1 id="load-plotmics">Load <code>plotmics</code><a class="anchor" aria-label="anchor" href="#load-plotmics"></a>
-</h1>
+<div class="section level2">
+<h2 id="load-plotmics">Load <code>plotmics</code><a class="anchor" aria-label="anchor" href="#load-plotmics"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load plotmics</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://amitjavilaventura.github.io/plotmics/index.html" class="external-link">plotmics</a></span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level1">
-<h1 id="run-circleregions">Run <code>circleRegions()</code><a class="anchor" aria-label="anchor" href="#run-circleregions"></a>
-</h1>
-<p><code><a href="../reference/chromRegions.html">chromRegions()</a></code> takes a file with the sizes of the chromosomes and draws a <code>ggplot2</code>-based bar plot. Then takes a list of regions in a BED-like format to draw them into each chromosome. The inputs <code>chrom.sizes</code> and <code>regions</code> can be supplied as a list of character with path to the file where the information is stored or a list of data frame.</p>
 <div class="section level2">
-<h2 id="required-input">Required input<a class="anchor" aria-label="anchor" href="#required-input"></a>
+<h2 id="run-circleregions">Run <code>circleRegions()</code><a class="anchor" aria-label="anchor" href="#run-circleregions"></a>
 </h2>
+<p><code><a href="../reference/chromRegions.html">chromRegions()</a></code> takes a file with the sizes of the chromosomes and draws a <code>ggplot2</code>-based bar plot. Then takes a list of regions in a BED-like format to draw them into each chromosome. The inputs <code>chrom.sizes</code> and <code>regions</code> can be supplied as a list of character with path to the file where the information is stored or a list of data frame.</p>
+<div class="section level3">
+<h3 id="required-input">Required input<a class="anchor" aria-label="anchor" href="#required-input"></a>
+</h3>
 <p>The <code>crhom_sizes</code> input is:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">chromsizes_sets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Regions1"</span> <span class="op">=</span> <span class="st">"../testdata/mm10.chrom.sizes"</span>,
@@ -175,9 +175,9 @@
 <span class="co">## 5 10  18796805  18831930 region18 35125  -</span>
 <span class="co">## 6 10  20310505  20312760 region19  2255  -</span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="default-run">Default run<a class="anchor" aria-label="anchor" href="#default-run"></a>
-</h2>
+<div class="section level3">
+<h3 id="default-run">Default run<a class="anchor" aria-label="anchor" href="#default-run"></a>
+</h3>
 <p>The default run requires only the <code>chromsizes_sets</code> and the <code>regions_sets</code> arguments, either as a lists of paths to a file or a list of data frames. Both, the <code>chromsizes_sets</code> and the <code>regions_sets</code> arguments, must have the same length and the same order, ii.e. if the regions are from different species, the chromosome sizes must be from the corresponding species in the same order.</p>
 <p>If you provide a list with 1 element, only one circle will be drawn. If the list contains three elements, three circles will be drawn.</p>
 <p>Here we have a list of 1 element as input.</p>
@@ -197,9 +197,9 @@
 <span class="fu"><a href="../reference/circleRegions.html">circleRegions</a></span><span class="op">(</span>chromsizes_sets <span class="op">=</span> <span class="va">chromsizes</span>, regions_sets <span class="op">=</span> <span class="va">regions</span><span class="op">)</span></code></pre></div>
 <p><img src="12-circleRegions_files/figure-html/unnamed-chunk-6-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level2">
-<h2 id="exclude-chromosomes">Exclude chromosomes<a class="anchor" aria-label="anchor" href="#exclude-chromosomes"></a>
-</h2>
+<div class="section level3">
+<h3 id="exclude-chromosomes">Exclude chromosomes<a class="anchor" aria-label="anchor" href="#exclude-chromosomes"></a>
+</h3>
 <p>Very often, the genome assemblies of a lot of species have chromosomes/scaffolds with strange names, which are not nice to plot. These can be excluded using the <code>chr_exlude</code> argument with a vector of regular expressions that match the chromosomes to exclude. By default <code>chr_exclude</code> removes the most usuall <em>strange</em> chromosomes, but if you want to remove more chromosomes or don’t want to remove any, you can change the <code>chr_exclude</code> argument.</p>
 <p>An example that excludes all the chromosomes that contain a dot in the name:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -220,20 +220,20 @@
               paired <span class="op">=</span> <span class="cn">T</span>, paired_color <span class="op">=</span> <span class="st">"Darkblue"</span><span class="op">)</span></code></pre></div>
 <p><img src="12-circleRegions_files/figure-html/unnamed-chunk-8-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level2">
-<h2 id="customization">Customization<a class="anchor" aria-label="anchor" href="#customization"></a>
-</h2>
 <div class="section level3">
-<h3 id="draw-the-points">Draw the points<a class="anchor" aria-label="anchor" href="#draw-the-points"></a>
+<h3 id="customization">Customization<a class="anchor" aria-label="anchor" href="#customization"></a>
 </h3>
+<div class="section level4">
+<h4 id="draw-the-points">Draw the points<a class="anchor" aria-label="anchor" href="#draw-the-points"></a>
+</h4>
 <p>By default, <code><a href="../reference/circleRegions.html">circleRegions()</a></code> draws a line/rectangle and a point in the middle of each region. To avoid drawing the points, the argument <code>draw_points</code> can be set to FALSE.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/circleRegions.html">circleRegions</a></span><span class="op">(</span>chromsizes_sets <span class="op">=</span> <span class="va">chromsizes_sets</span>, regions_sets <span class="op">=</span> <span class="va">regions_sets</span>, draw_points <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></code></pre></div>
 <p><img src="12-circleRegions_files/figure-html/unnamed-chunk-9-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level3">
-<h3 id="chromosome-labels">Chromosome labels<a class="anchor" aria-label="anchor" href="#chromosome-labels"></a>
-</h3>
+<div class="section level4">
+<h4 id="chromosome-labels">Chromosome labels<a class="anchor" aria-label="anchor" href="#chromosome-labels"></a>
+</h4>
 <p>By default, if all the elements in <code>chromsizes_sets</code> are equal, <code><a href="../reference/circleRegions.html">circleRegions()</a></code> only draws the labels of the chromosomes in the outer side of the most external circle. However, if they are not equal (i.e. different file names or different information in the dataframe (only between first and second elements)), they are plotted in all the circles. The color of the labels can be controlled with <code>chr_label</code>, which is <code>"Black"</code> by default.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">chromsizes_sets2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Regions1"</span> <span class="op">=</span> <span class="st">"../testdata/mm10.chrom.sizes"</span>,
@@ -242,17 +242,17 @@
 <span class="fu"><a href="../reference/circleRegions.html">circleRegions</a></span><span class="op">(</span>chromsizes_sets <span class="op">=</span> <span class="va">chromsizes_sets2</span>, regions_sets <span class="op">=</span> <span class="va">regions_sets</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, chr_label <span class="op">=</span> <span class="st">"Red"</span><span class="op">)</span></code></pre></div>
 <p><img src="12-circleRegions_files/figure-html/unnamed-chunk-10-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level3">
-<h3 id="chromosome-lines">Chromosome lines<a class="anchor" aria-label="anchor" href="#chromosome-lines"></a>
-</h3>
+<div class="section level4">
+<h4 id="chromosome-lines">Chromosome lines<a class="anchor" aria-label="anchor" href="#chromosome-lines"></a>
+</h4>
 <p>By default, <code><a href="../reference/circleRegions.html">circleRegions()</a></code> does not plot any lines to separate the chromosomes. This can be reversed by setting <code>chr_line</code> to <code>TRUE</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/circleRegions.html">circleRegions</a></span><span class="op">(</span>chromsizes_sets <span class="op">=</span> <span class="va">chromsizes_sets</span>, regions_sets <span class="op">=</span> <span class="va">regions_sets</span>, chr_line <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <p><img src="12-circleRegions_files/figure-html/unnamed-chunk-11-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level3">
-<h3 id="color">Color<a class="anchor" aria-label="anchor" href="#color"></a>
-</h3>
+<div class="section level4">
+<h4 id="color">Color<a class="anchor" aria-label="anchor" href="#color"></a>
+</h4>
 <p>By default, the regions are colored by region (i.e. each element in <code>regions_sets</code>). This can be controlled with the <code>colors</code> argument, which accepts a character vector with valid color names and the same length as <code>regions_sets</code></p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/circleRegions.html">circleRegions</a></span><span class="op">(</span>chromsizes_sets <span class="op">=</span> <span class="va">chromsizes_sets</span>, regions_sets <span class="op">=</span> <span class="va">regions_sets</span>, color_by <span class="op">=</span> <span class="st">"region"</span><span class="op">)</span></code></pre></div>
@@ -299,9 +299,9 @@
               color_by <span class="op">=</span> <span class="st">"extra"</span><span class="op">)</span></code></pre></div>
 <p><img src="12-circleRegions_files/figure-html/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level3">
-<h3 id="titles">Titles<a class="anchor" aria-label="anchor" href="#titles"></a>
-</h3>
+<div class="section level4">
+<h4 id="titles">Titles<a class="anchor" aria-label="anchor" href="#titles"></a>
+</h4>
 <p>Title and subtitle can be supplied through the arguments <code>title</code> and <code>subtitle</code>, respectively. By default, they are set to NULL, but can accept a character of length 1.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/circleRegions.html">circleRegions</a></span><span class="op">(</span>chromsizes_sets <span class="op">=</span> <span class="va">chromsizes_sets</span>, 
@@ -323,9 +323,9 @@
               caption         <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="12-circleRegions_files/figure-html/unnamed-chunk-19-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level3">
-<h3 id="legend">Legend<a class="anchor" aria-label="anchor" href="#legend"></a>
-</h3>
+<div class="section level4">
+<h4 id="legend">Legend<a class="anchor" aria-label="anchor" href="#legend"></a>
+</h4>
 <p>The position of the legend is, by default, the bottom of the plot. This can be changed by changing the <code>legend</code> argument to one of “bottom”, “right”, “top”, “left” or “none” (no legend). The <code>legend</code> argument is passed through <code><a href="https://rpkgs.datanovia.com/ggpubr/reference/theme_pubr.html" class="external-link">ggpubr::theme_pubr()</a></code>.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/circleRegions.html">circleRegions</a></span><span class="op">(</span>chromsizes_sets <span class="op">=</span> <span class="va">chromsizes_sets</span>, 
@@ -338,9 +338,9 @@
               legend          <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></code></pre></div>
 <p><img src="12-circleRegions_files/figure-html/unnamed-chunk-21-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level3">
-<h3 id="further-costumization">Further costumization<a class="anchor" aria-label="anchor" href="#further-costumization"></a>
-</h3>
+<div class="section level4">
+<h4 id="further-costumization">Further costumization<a class="anchor" aria-label="anchor" href="#further-costumization"></a>
+</h4>
 <p>Since <code><a href="../reference/chromRegions.html">chromRegions()</a></code> outputs a <code>ggplot2</code>-based bar plot, it can be further customized like any other <code>ggplot2</code>-based plot.</p>
 </div>
 </div>
@@ -364,7 +364,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>

@@ -73,7 +73,7 @@ the intersections of A with B and B with A."><meta property="og:image" content="
       <a href="../articles/12-circleRegions.html">circleRegions()</a>
     </li>
     <li>
-      <a href="../articles/13-ggVennBed.html">ggVenBed()</a>
+      <a href="../articles/13-ggVennBed.html">ggVennBed()</a>
     </li>
   </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
@@ -109,8 +109,15 @@ the intersections of A with B and B with A.</p>
   setnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span>,
   stranded <span class="op">=</span> <span class="cn">T</span>,
   color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"gold3"</span><span class="op">)</span>,
+  alpha <span class="op">=</span> <span class="fl">0.5</span>,
   namesize <span class="op">=</span> <span class="fl">7</span>,
-  labsize <span class="op">=</span> <span class="fl">5</span>
+  labsize <span class="op">=</span> <span class="fl">5</span>,
+  title <span class="op">=</span> <span class="cn">NULL</span>,
+  subtitle <span class="op">=</span> <span class="cn">NULL</span>,
+  title_size <span class="op">=</span> <span class="fl">12</span>,
+  subtitle_size <span class="op">=</span> <span class="fl">11</span>,
+  title_face <span class="op">=</span> <span class="st">"plain"</span>,
+  subtitle_face <span class="op">=</span> <span class="st">"italic"</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -126,6 +133,8 @@ the intersections of A with B and B with A.</p>
 <dd><p>Logical of length 1. If TRUE, the intersections are done regarding the strand. Default = TRUE.</p></dd>
 <dt>color</dt>
 <dd><p>Character of length 2. Color of the Venn circles and the labels indicating the number of regions. Default: c("blue", "gold3").</p></dd>
+<dt>alpha</dt>
+<dd><p>Numeric of length 1. Transparency of the circles. Default: 0.5.</p></dd>
 <dt>namesize</dt>
 <dd><p>Numeric of length 1. Size of the names of each set. Default: 7.</p></dd>
 <dt>labsize</dt>
@@ -153,7 +162,7 @@ the intersections of A with B and B with A.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>
