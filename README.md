@@ -22,6 +22,7 @@ _pl**O**t**MICS**_ is an R package to visualize omics and sequencing data in R u
 * `circleRegions()`: function that takes a list of chromosome size information and a list of regions (e.g. BED files) to draw the positions of that regions in the genome. Similar to `chromRegions()`, but in a circular plot, allowing different assemblies, pairing regions, etc. 
 * `expressionCor()`: function that computes the correlation of expression values between samples.
 * `compareCounts()`: function that draws a scatter plot of gene expression values between 2 samples.
+* `ggVennBed()`: draws a Venn diagram with the intersection of two BED files, obtained with `bedtoolsr::bt.intersect()`.
 
 ## Install `plotmics` 
 
@@ -155,5 +156,10 @@ If you use this package, please cite [this repository](https://github.com/amitja
 
 * `v6.0.0` *(2022-02-11)*:
   + Add new function: `ggVennBed()`
+  
+<br>
+
+* `v6.0.1` *(2022-03-09)*:
+  + `volcanoPlot()`: change how DEG labels are written and colored, from `geom_text()` to `annotate()`.
   
 <br>

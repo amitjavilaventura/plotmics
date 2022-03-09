@@ -119,11 +119,15 @@ volcanoPlot <- function(df,
     dplyr::group_by(number) %>% dplyr::mutate(row = row_number()) %>% dplyr::ungroup() %>%
     dplyr::mutate(number = ifelse(row != 1, NA, number))
 
-  # Initialize ggplot with points and number of DEGs
-  p <- ggplot(data = df, aes(x=log2FoldChange, y=-log10(padj), colour=DEG, shape=shape)) +
-    geom_point(alpha=0.7, size=1.7) +
-    geom_text(data = na.omit(df), aes(label = number, y = ylim[1], x = xpos*0.9), size = labelSize, show.legend = F)
+  updegs   <- deg_number %>% dplyr::filter(DEG == "Upregulated")
+  downdegs <- deg_number %>% dplyr::filter(DEG == "Downregulated")
 
+  # Initialize ggplot with points
+  p <- ggplot(data = df, aes(x=log2FoldChange, y=-log10(padj), color=DEG, shape=shape)) +
+    geom_point(alpha=0.7, size=1.7) +
+    # Add number of DEGs.
+    annotate(geom = "text", label = updegs$number[1], x = updegs$xpos[1]*0.9, y = ylim[1], color = labelColor[2], size = labelSize) +
+    annotate(geom = "text", label = downdegs$number[1], x = downdegs$xpos[1]*0.9, y = ylim[1], color = labelColor[1], size = labelSize)
 
   # Basic formatting
   p <- p +
