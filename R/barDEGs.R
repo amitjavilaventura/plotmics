@@ -21,8 +21,8 @@
 #' @param alpha Numeric of length 1. Alpha (transparency) value for the vars. Deefault: 0.5.
 #' @param num_size Numeric of length 1. Size of the number of DEGs written in the bars. Default: 3.
 #' @param name_size Numeric of length 1. Size of the names of the contrasts  written next to the bars. Default: 3.
-#' @param log2FC Numeric of length 1. Threshold for the log2FoldChange to define a gene as differentially expressed. Default: 1.
-#' @param pval Numeric of length 1. Threshold for the adjusted p-value to define a gene as differentially expressed. Default: 0.05.
+#' @param log2FC Numeric of length 1 or NULL. Threshold for the log2FoldChange to define a gene as differentially expressed. Default: 1.
+#' @param pval Numeric of length 1 or NULL. Threshold for the adjusted p-value to define a gene as differentially expressed. Default: 0.05.
 #' @param total Logical of length 1. If TRUE, it counts the total number of features in each elements of deg_list and writes them in the caption. Default: FALSE.
 #' @param title Charachter of length 1 or NULL. Title of the plot. Default: NULL.
 #' @param subtitle Charachter of lenght 1 or NULL. Subtitle of the plot. Default: NULL.
@@ -65,9 +65,12 @@ barDEGs <- function(deg_list,
   else if(!is.numeric(alpha) | alpha < 0 | alpha > 1){ stop("'alpha' must be a numeric vector of length 1 with a value between 0 and 1")}
 
   # Mutate deg_list to be able to change the log2FC and pvalue thresholds for defining the DEGs
-  deg_list <- deg_list %>% purrr::map(~dplyr::mutate(.x, DEG = "NS"))
-  deg_list <- deg_list %>% purrr::map(~dplyr::mutate(.x, DEG = if_else(log2FoldChange > log2FC & padj < pval, "Upregulated", DEG)))
-  deg_list <- deg_list %>% purrr::map(~dplyr::mutate(.x, DEG = if_else(log2FoldChange < -log2FC & padj < pval, "Downregulated", DEG)))
+  if(!is.null(log2FC) & !is.null(pval)){
+    deg_list <- deg_list %>% purrr::map(~dplyr::mutate(.x, DEG = "NS"))
+    deg_list <- deg_list %>% purrr::map(~dplyr::mutate(.x, DEG = if_else(log2FoldChange > log2FC & padj < pval, "Upregulated", DEG)))
+    deg_list <- deg_list %>% purrr::map(~dplyr::mutate(.x, DEG = if_else(log2FoldChange < -log2FC & padj < pval, "Downregulated", DEG)))
+  }
+
 
   # Count total elements in the list
   total_counts <- deg_list %>%

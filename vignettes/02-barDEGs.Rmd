@@ -48,17 +48,36 @@ deg_list[[1]] %>% head()
 
 ## Minimum  run
 
-
 ```{r include=T}
 barDEGs(deg_list = deg_list)
 ```
 
 ## Change thresholds
 
+By default, `barDEGs()` uses a `pval = 0.05` and `log2FC = 1`. If you want to set another thresholds to define the differentially expressed genes, you can change these parameters.
+
 ```{r}
 barDEGs(deg_list = deg_list, pval = 0.1, log2FC = 1)
 ```
 
+## Avoid thresholds
+
+If your data frames don't have a *log2FoldChange* or *padj* columns, or if you do not want to use those columns, you can turn both `log2FC` and `pval` to `NULL` and they won't be used to define the differentially expressed genes.
+
+Have in mind that, if you set `log2FC` and `pval` to `NULL`, your data frames must have a *DEG* column with the values *NS*, *Downregulated* and *Upregulated*.
+
+```{r include=T}
+# define a new list with different DEG values
+# also remove the columns log2FoldChange and padj
+deg_list_changed = deg_list %>% purrr::map(~dplyr::mutate(.x, DEG = ifelse(padj > 0.001, "NS", DEG)) %>% dplyr::select(-log2FoldChange, -padj))
+  
+# run barDEGs with log2FC and pval equal to NULL
+barDEGs(deg_list = deg_list_changed, log2FC = NULL, pval = NULL)
+```
+
+Note that the number of differentially expressed genes has been reduced because we reduced the p-value threshold.
+
+Also note that the data frames that were used lack the previously required columns *log2FoldChange* and *padj*.
 
 ## Count total
 

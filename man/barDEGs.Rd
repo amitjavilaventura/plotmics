@@ -47,9 +47,9 @@ barDEGs(
 
 \item{name_size}{Numeric of length 1. Size of the names of the contrasts  written next to the bars. Default: 3.}
 
-\item{log2FC}{Numeric of length 1. Threshold for the log2FoldChange to define a gene as differentially expressed. Default: 1.}
+\item{log2FC}{Numeric of length 1 or NULL. Threshold for the log2FoldChange to define a gene as differentially expressed. Default: 1.}
 
-\item{pval}{Numeric of length 1. Threshold for the adjusted p-value to define a gene as differentially expressed. Default: 0.05.}
+\item{pval}{Numeric of length 1 or NULL. Threshold for the adjusted p-value to define a gene as differentially expressed. Default: 0.05.}
 
 \item{total}{Logical of length 1. If TRUE, it counts the total number of features in each elements of deg_list and writes them in the caption. Default: FALSE.}
 

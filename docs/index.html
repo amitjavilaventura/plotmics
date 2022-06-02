@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.2</span>
       </span>
     </div>
 
@@ -50,7 +50,7 @@
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -139,9 +139,9 @@
 <li>
 <code><a href="reference/DEcompare.html">DEcompare()</a></code>: draws a <code>ggplot2</code>-based scatter plot comparing the Log2FCs of two different contrasts.</li>
 <li>
-<code><a href="reference/barAnno.html">barAnno()</a></code>: takes a list of modified outputs from <code><a href="https://rdrr.io/pkg/ChIPseeker/man/annotatePeak.html" class="external-link">ChIPseeker::annotatePeak()</a></code>, computes the proportion of peaks in distal or promoter regions and draws a <code>ggplot2</code>-based barplot with the correseponding proportion for each sample.</li>
+<code><a href="reference/barAnno.html">barAnno()</a></code>: takes a list of modified outputs from <code>ChIPseeker::annotatePeak()</code>, computes the proportion of peaks in distal or promoter regions and draws a <code>ggplot2</code>-based barplot with the correseponding proportion for each sample.</li>
 <li>
-<code><a href="reference/getVennCounts.html">getVennCounts()</a></code>: helper function that calls <code><a href="https://rdrr.io/pkg/ChIPpeakAnno/man/makeVennDiagram.html" class="external-link">ChIPpeakAnno::makeVennDiagram()</a></code> to intersect different sets of peaks and returns the Venn counts and a list of the peaks present in each set of peaks. Note that the intersection of peaks may have a smaller number than expected to prevent the intersection being bigger than one of the sets.</li>
+<code><a href="reference/getVennCounts.html">getVennCounts()</a></code>: helper function that calls <code>ChIPpeakAnno::makeVennDiagram()</code> to intersect different sets of peaks and returns the Venn counts and a list of the peaks present in each set of peaks. Note that the intersection of peaks may have a smaller number than expected to prevent the intersection being bigger than one of the sets.</li>
 <li>
 <code><a href="reference/upsetPeaks.html">upsetPeaks()</a></code>: calls <code><a href="reference/getVennCounts.html">getVennCounts()</a></code> and draws an UpSet plot using the Venn counts and the <code>UpSetR</code> package.</li>
 <li>
@@ -193,43 +193,31 @@
 </h2>
 <p><code>plotmics</code> versions have the structure of <code>1.2.3</code>. The first number (<code>1</code>, <em>major</em>) implies the addition of a function and/or major changes in the packages; the second number (<code>2</code>,<em>minor</em>) implies the addition of new features to a function and possible corrections; the third number (<code>3</code>, <em>micro</em>) implies the correction of minor bugs or addition of minor features.</p>
 <p><code>plotmics</code> version history is shown below:</p>
-<ul>
-<li>
+<ul><li>
 <p><code>v1.0.0</code>:</p>
-<ul>
-<li>First version.</li>
-</ul>
-</li>
-</ul>
+<ul><li>First version.</li></ul>
+</li></ul>
 <p><br></p>
-<ul>
-<li>
-<code>v1.1.0</code>:
-<ul>
+<ul><li>
+<code>v1.1.0</code>:<ul>
 <li>
 <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code>: Rescale output to remove blank space around the Venn diagram.</li>
 <li>
 <code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>: Add possibility to scale (<code><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale()</a></code>) data by rows or columns.</li>
 </ul>
-</li>
-</ul>
+</li></ul>
 <p><br></p>
-<ul>
-<li>
-<code>v1.1.1</code>:
-<ul>
+<ul><li>
+<code>v1.1.1</code>:<ul>
 <li>
 <code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>: Add minor formatting options (remove the gene names, change sizes of texts and titles, change the color of the cell border, etc).</li>
 <li>
 <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code>: Add minor changes in order to make it easier to visualize more peaks sets.</li>
 </ul>
-</li>
-</ul>
+</li></ul>
 <p><br></p>
-<ul>
-<li>
-<code>v1.1.2</code>:
-<ul>
+<ul><li>
+<code>v1.1.2</code>:<ul>
 <li>
 <code><a href="reference/chromReads.html">chromReads()</a></code>: Change chromosome filtering method.</li>
 <li>
@@ -237,56 +225,37 @@
 <li>
 <code><a href="reference/volcanoPlot.html">volcanoPlot()</a></code>: Change <code>scale = FALSE</code> for <code>scale = "none"</code>.</li>
 </ul>
-</li>
-</ul>
+</li></ul>
 <p><br></p>
-<ul>
-<li>
-<code>v1.1.3</code>:
-<ul>
-<li>
-<code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>: Fix error in labelling.</li>
-</ul>
-</li>
-</ul>
+<ul><li>
+<code>v1.1.3</code>:<ul><li>
+<code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>: Fix error in labelling.</li></ul>
+</li></ul>
 <p><br></p>
-<ul>
-<li>
-<code>v1.1.4</code>:
-<ul>
+<ul><li>
+<code>v1.1.4</code>:<ul>
 <li>
 <code><a href="reference/expressionHeatmap.html">expressionHeatmap()</a></code> and <code><a href="reference/expressionHeatmap2.html">expressionHeatmap2()</a></code>: Add possibility to color the NA values.</li>
 <li>
 <code><a href="reference/barDEGs.html">barDEGs()</a></code>: Change title format in.</li>
 </ul>
-</li>
-</ul>
+</li></ul>
 <p><br></p>
-<ul>
-<li>
-<code>v2.0.0</code> <em>(2021-09-22)</em>:
-<ul>
-<li>Add new function: <code><a href="reference/chromRegions.html">chromRegions()</a></code>.</li>
-</ul>
-</li>
-</ul>
+<ul><li>
+<code>v2.0.0</code> <em>(2021-09-22)</em>:<ul><li>Add new function: <code><a href="reference/chromRegions.html">chromRegions()</a></code>.</li></ul>
+</li></ul>
 <p><br></p>
-<ul>
-<li>
-<code>v2.1.0</code> <em>(2021-09-26)</em>:
-<ul>
+<ul><li>
+<code>v2.1.0</code> <em>(2021-09-26)</em>:<ul>
 <li>
 <code><a href="reference/chromRegions.html">chromRegions()</a></code>: Allow to take a list of regions as input.</li>
 <li>
 <code><a href="reference/chromRegions.html">chromRegions()</a></code>: Allow to order the region sets.</li>
 </ul>
-</li>
-</ul>
+</li></ul>
 <p><br></p>
-<ul>
-<li>
-<code>v3.0.0</code> <em>(2021-09-28)</em>:
-<ul>
+<ul><li>
+<code>v3.0.0</code> <em>(2021-09-28)</em>:<ul>
 <li>Add new function: <code><a href="reference/circleRegions.html">circleRegions()</a></code>.</li>
 <li>
 <code><a href="reference/chromRegions.html">chromRegions()</a></code>: Allow to color by different parameters.</li>
@@ -295,13 +264,10 @@
 <li>
 <code><a href="reference/chromRegions.html">chromRegions()</a></code>: Allow to remove or change size of text in the Y axis.</li>
 </ul>
-</li>
-</ul>
+</li></ul>
 <p><br></p>
-<ul>
-<li>
-<code>v3.0.1</code> <em>(2021-09-30)</em>:
-<ul>
+<ul><li>
+<code>v3.0.1</code> <em>(2021-09-30)</em>:<ul>
 <li>
 <code><a href="reference/circleRegions.html">circleRegions()</a></code>: Fix a minor bug about plotting the chromosome labels.</li>
 <li>
@@ -309,35 +275,24 @@
 <li>
 <code><a href="reference/getVennCounts.html">getVennCounts()</a></code>: Remove <code>pkgcond</code> from required packages.</li>
 </ul>
-</li>
-</ul>
+</li></ul>
 <p><br></p>
-<ul>
-<li>
-<code>v3.1.0</code> <em>(2021-10-04)</em>:
-<ul>
-<li>
-<code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code>and <code><a href="reference/getVennCounts.html">getVennCounts()</a></code>: Allow to consider strand information.</li>
-</ul>
-</li>
-</ul>
+<ul><li>
+<code>v3.1.0</code> <em>(2021-10-04)</em>:<ul><li>
+<code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code>and <code><a href="reference/getVennCounts.html">getVennCounts()</a></code>: Allow to consider strand information.</li></ul>
+</li></ul>
 <p><br></p>
-<ul>
-<li>
-<code>v3.1.1</code> <em>(2021-10-07)</em>:
-<ul>
+<ul><li>
+<code>v3.1.1</code> <em>(2021-10-07)</em>:<ul>
 <li>
 <code><a href="reference/barDEGs.html">barDEGs()</a></code> and <code><a href="reference/volcanoPlot.html">volcanoPlot()</a></code>: Change minor features.</li>
 <li>
 <code><a href="reference/circleRegions.html">circleRegions()</a></code>: Exclude the chromosomes before looking if the chromosome names in regions are also in the chrom.sizes files.</li>
 </ul>
-</li>
-</ul>
+</li></ul>
 <p><br></p>
-<ul>
-<li>
-<code>v3.1.2</code> <em>(2021-10-12)</em>:
-<ul>
+<ul><li>
+<code>v3.1.2</code> <em>(2021-10-12)</em>:<ul>
 <li>
 <code><a href="reference/circleRegions.html">circleRegions()</a></code>: Write the chromosome labels after drawing all the lines and points, so the labels won’t be under many layers.</li>
 <li>
@@ -347,39 +302,30 @@
 <li>
 <code><a href="reference/barAnno.html">barAnno()</a></code>: Add the possibility to add percentage/counts.</li>
 </ul>
-</li>
-</ul>
+</li></ul>
 <p><br></p>
-<ul>
-<li>
-<code>v4.0.0</code> <em>(2021-10-27)</em>:
-<ul>
+<ul><li>
+<code>v4.0.0</code> <em>(2021-10-27)</em>:<ul>
 <li>Add new function: <code><a href="reference/expressionCor.html">expressionCor()</a></code>.</li>
 <li>
 <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code>: Add the possibility to annotate the number of true overlaps for each set of peaks.</li>
 <li>
 <code><a href="reference/barDEGs.html">barDEGs()</a></code>: Add the possibility to do a <code><a href="https://rdrr.io/r/stats/prop.test.html" class="external-link">prop.test()</a></code> and add the p-value to the plot.</li>
 </ul>
-</li>
-</ul>
+</li></ul>
 <p><br></p>
-<ul>
-<li>
-<code>v5.0.0</code> <em>(2021-11-29)</em>:
-<ul>
+<ul><li>
+<code>v5.0.0</code> <em>(2021-11-29)</em>:<ul>
 <li>Add new function: <code><a href="reference/compareCounts.html">compareCounts()</a></code>.</li>
 <li>
 <code><a href="reference/volcanoPlot.html">volcanoPlot()</a></code>: Add the possibility to draw grid lines.</li>
 <li>
 <code><a href="reference/ggVennPeaks.html">ggVennPeaks()</a></code>: Add the possibility to return the lists of overlapping peaks.</li>
 </ul>
-</li>
-</ul>
+</li></ul>
 <p><br></p>
-<ul>
-<li>
-<code>v5.1.0</code> <em>(2021-12-03)</em>:
-<ul>
+<ul><li>
+<code>v5.1.0</code> <em>(2021-12-03)</em>:<ul>
 <li>
 <code><a href="reference/chromRegions.html">chromRegions()</a></code>: Add the possibility to color the cytogenetic bands.</li>
 <li>
@@ -387,26 +333,21 @@
 <li>
 <code><a href="reference/volcanoPlot.html">volcanoPlot()</a></code>: Fix plotting of <code>degLabels</code>.</li>
 </ul>
-</li>
-</ul>
+</li></ul>
+<p><br></p>
+<ul><li>
+<code>v6.0.0</code> <em>(2022-02-11)</em>:<ul><li>Add new function: <code><a href="reference/ggVennBed.html">ggVennBed()</a></code>
+</li></ul>
+</li></ul>
 <p><br></p>
 <ul>
 <li>
-<code>v6.0.0</code> <em>(2022-02-11)</em>:
-<ul>
-<li>Add new function: <code><a href="reference/ggVennBed.html">ggVennBed()</a></code>
+<code>v6.0.1</code> <em>(2022-03-09)</em>:<ul><li>
+<code><a href="reference/volcanoPlot.html">volcanoPlot()</a></code>: change how DEG labels are written and colored, from <code>geom_text()</code> to <code>annotate()</code>.</li></ul>
 </li>
-</ul>
-</li>
-</ul>
-<p><br></p>
-<ul>
 <li>
-<code>v6.0.1</code> <em>(2022-03-09)</em>:
-<ul>
-<li>
-<code><a href="reference/volcanoPlot.html">volcanoPlot()</a></code>: change how DEG labels are written and colored, from <code>geom_text()</code> to <code>annotate()</code>.</li>
-</ul>
+<code>v6.0.2</code> <em>(2022-06-02)</em>:<ul><li>
+<code><a href="reference/barDEGs.html">barDEGs()</a></code>: add the option to avoid using the columns <em>log2FoldChange</em> and <em>padj</em> to define the DEGs by turning the parameters <code>log2FC</code> and <code>pval</code> to <code>NULL</code>.</li></ul>
 </li>
 </ul>
 <p><br></p>
@@ -457,7 +398,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>

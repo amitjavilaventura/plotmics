@@ -18,7 +18,7 @@ draws an horizontal barplot with the up (right) and downregulated (left) genes."
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.2</span>
       </span>
     </div>
 
@@ -27,7 +27,7 @@ draws an horizontal barplot with the up (right) and downregulated (left) genes."
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -147,9 +147,9 @@ draws an horizontal barplot with the up (right) and downregulated (left) genes.<
 <dt>name_size</dt>
 <dd><p>Numeric of length 1. Size of the names of the contrasts  written next to the bars. Default: 3.</p></dd>
 <dt>log2FC</dt>
-<dd><p>Numeric of length 1. Threshold for the log2FoldChange to define a gene as differentially expressed. Default: 1.</p></dd>
+<dd><p>Numeric of length 1 or NULL. Threshold for the log2FoldChange to define a gene as differentially expressed. Default: 1.</p></dd>
 <dt>pval</dt>
-<dd><p>Numeric of length 1. Threshold for the adjusted p-value to define a gene as differentially expressed. Default: 0.05.</p></dd>
+<dd><p>Numeric of length 1 or NULL. Threshold for the adjusted p-value to define a gene as differentially expressed. Default: 0.05.</p></dd>
 <dt>total</dt>
 <dd><p>Logical of length 1. If TRUE, it counts the total number of features in each elements of deg_list and writes them in the caption. Default: FALSE.</p></dd>
 <dt>title</dt>
@@ -180,7 +180,7 @@ draws an horizontal barplot with the up (right) and downregulated (left) genes.<
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer></div>

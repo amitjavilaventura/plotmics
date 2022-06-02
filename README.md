@@ -161,5 +161,8 @@ If you use this package, please cite [this repository](https://github.com/amitja
 
 * `v6.0.1` *(2022-03-09)*:
   + `volcanoPlot()`: change how DEG labels are written and colored, from `geom_text()` to `annotate()`.
+
+* `v6.0.2` *(2022-06-02)*:
+  + `barDEGs()`: add the option to avoid using the columns *log2FoldChange* and *padj* to define the DEGs by turning the parameters `log2FC` and `pval` to `NULL`.
   
 <br>
