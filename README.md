@@ -55,49 +55,40 @@ If you use this package, please cite [this repository](https://github.com/amitja
 * `v1.0.0`: 
 
   + First version. 
-  
-<br>
 
 * `v1.1.0`: 
   + `ggVennPeaks()`: Rescale output to remove blank space around the Venn diagram.
   + `expressionHeatmap()` and `expressionHeatmap2()`: Add possibility to scale (`scale()`) data by rows or columns. 
   
-<br>
 
 * `v1.1.1`: 
   + `expressionHeatmap()` and `expressionHeatmap2()`: Add minor formatting options (remove the gene names, change sizes of texts and titles, change the color of the cell border, etc).
   + `ggVennPeaks()`: Add minor changes in order to make it easier to visualize more peaks sets.  
   
-<br>
   
 * `v1.1.2`:
   + `chromReads()`: Change chromosome filtering method.
   + `volcanoPlot()`: Allow dataframes without `DEG` column as input.
   + `volcanoPlot()`: Change `scale = FALSE` for `scale = "none"`. 
   
-<br>
   
 * `v1.1.3`:
   + `expressionHeatmap()` and `expressionHeatmap2()`: Fix error in labelling.
   
-<br>
   
 * `v1.1.4`:
   + `expressionHeatmap()` and `expressionHeatmap2()`: Add possibility to color the NA values.
   + `barDEGs()`: Change title format in. 
   
-<br>
   
 * `v2.0.0` *(2021-09-22)*:
   + Add new function: `chromRegions()`. 
-  
-<br>
-  
+
+
 * `v2.1.0` *(2021-09-26)*:
   + `chromRegions()`: Allow to take a list of regions as input.
   + `chromRegions()`: Allow to order the region sets.
-  
-<br>
+
   
 * `v3.0.0` *(2021-09-28)*:
   + Add new function: `circleRegions()`.
@@ -105,63 +96,53 @@ If you use this package, please cite [this repository](https://github.com/amitja
   + `chromRegions()`: Allow to add extra info.
   + `chromRegions()`: Allow to remove or change size of text in the Y axis.
   
-<br>
   
 * `v3.0.1` *(2021-09-30)*:
   + `circleRegions()`: Fix a minor bug about plotting the chromosome labels.
   + `ggVennPeaks()`: Fix a minor bug that caused an intersection with one region more than expected.
   + `getVennCounts()`: Remove `pkgcond` from required packages.
   
-<br>
-
+  
 * `v3.1.0` *(2021-10-04)*:
   + `ggVennPeaks()`and `getVennCounts()`: Allow to consider strand information.
   
-<br>
   
 * `v3.1.1` *(2021-10-07)*:
   + `barDEGs()` and `volcanoPlot()`: Change minor features.
   + `circleRegions()`: Exclude the chromosomes before looking if the chromosome names in regions are also in the chrom.sizes files.
   
-<br>
-
 * `v3.1.2` *(2021-10-12)*:
   + `circleRegions()`: Write the chromosome labels after drawing all the lines and points, so the labels won't be under many layers.
   + `circleRegions()`: Fix error to allow different assemblies.
   + `barDEGs()`: Add the possibility to add title and subtitle, and also to count the total number of genes in each contrast.
   + `barAnno()`: Add the possibility to add percentage/counts.
-  
-<br>
+
 
 * `v4.0.0` *(2021-10-27)*:
   + Add new function: `expressionCor()`.
   + `ggVennPeaks()`: Add the possibility to annotate the number of true overlaps for each set of peaks.
   + `barDEGs()`: Add the possibility to do a `prop.test()` and add the p-value to the plot.
 
-<br>
   
 * `v5.0.0` *(2021-11-29)*:
   + Add new function: `compareCounts()`.
   + `volcanoPlot()`: Add the possibility to draw grid lines.
   + `ggVennPeaks()`: Add the possibility to return the lists of overlapping peaks.
-  
-<br>
 
 * `v5.1.0` *(2021-12-03)*:
   + `chromRegions()`: Add the possibility to color the cytogenetic bands.
   + `expressionHeatmap()`: Add the possibility to have more fields in the data frame so it will be possible to use facets and scale.
   + `volcanoPlot()`: Fix plotting of `degLabels`.
   
-<br>
 
 * `v6.0.0` *(2022-02-11)*:
   + Add new function: `ggVennBed()`
   
-<br>
 
 * `v6.0.1` *(2022-03-09)*:
   + `volcanoPlot()`: change how DEG labels are written and colored, from `geom_text()` to `annotate()`.
-
+  
+ 
 * `v6.0.2` *(2022-06-02)*:
   + `barDEGs()`: add the option to avoid using the columns *log2FoldChange* and *padj* to define the DEGs by turning the parameters `log2FC` and `pval` to `NULL`.
   
