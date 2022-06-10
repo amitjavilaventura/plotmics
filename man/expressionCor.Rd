@@ -8,6 +8,7 @@ expressionCor(
   df,
   genes = NULL,
   samples = NULL,
+  samples_order = samples,
   corr_method = "pearson",
   plot_type = "lower",
   plot_diagonal = TRUE,

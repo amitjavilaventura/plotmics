@@ -44,6 +44,7 @@
 expressionCor <- function(df,
                           genes              = NULL,
                           samples            = NULL,
+                          samples_order      = samples,
                           corr_method        = "pearson",
                           plot_type          = "lower",
                           plot_diagonal      = TRUE,
@@ -103,13 +104,15 @@ expressionCor <- function(df,
     else if(plot_type == "lower") { corr[upper.tri(corr, diag = !plot_diagonal)] <- NA }
 
     # Melt correlation matrix
-    corr.m <- reshape2::melt(corr)
+    corr.m <- reshape2::melt(corr) %>% dplyr::as_tibble()
+    if(!is.null(samples_order)) { corr.m <- corr.m %>% dplyr::mutate(Var1 = factor(Var1, levels = sample_order), Var2 = factor(Var2, levels = sample_order)) }
 
     # Draw the plot ----
     # Initialize the plot and the squares
     g <- ggplot(corr.m, aes(Var1, Var2, fill = value)) + geom_tile(color = cell_border, na.rm = T)
 
   } else {
+
     # Add the group variable to the filtered data frame (inner join of the filtered data frame)
     df_filt <- df_filt %>% dplyr::inner_join(df %>% dplyr::select(Geneid, group))
 
@@ -135,7 +138,8 @@ expressionCor <- function(df,
     corr_list <- dplyr::bind_rows(corr_list)
 
     # Reshape the correlation dataframe
-    corr_list_melt <- corr_list %>% reshape2::melt()
+    corr_list_melt <- corr_list %>% reshape2::melt() %>% dplyr::as_tibble()
+    if(!is.null(samples_order)) { corr_list_melt <- corr_list_melt %>% dplyr::mutate(sample = factor(sample, levels = sample_order), variable = factor(variable, levels = sample_order)) }
 
     # Initialize the plot with facets
     g <- ggplot(corr_list_melt, aes(sample, variable, fill = value)) +
