@@ -33,7 +33,8 @@ expressionCor(
   subtitle_size = 11,
   caption_size = 6,
   axis_text_size = 8,
-  axis_text_color = "black"
+  axis_text_color = "black",
+  by_groups = F
 )
 }
 \arguments{
@@ -94,6 +95,8 @@ expressionCor(
 \item{axis_text_size}{Numerical of length 1. Size of the text in the axes. Default: 7.}
 
 \item{axis_text_color}{Character of length 1. Color of the text in the axes. Default: "Black".}
+
+\item{by_groups}{Logical of length 1. If TRUE, the function searches an extra column named 'group', whose values will be used to separate the plot into facets using facet_wrap(). Default: FALSE.}
 }
 \description{
 Function that takes a data frame with a Geneid column and several columns for

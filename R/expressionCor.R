@@ -37,10 +37,10 @@
 #' @param caption_size Numerical of length 1. Size of the plot caption. Default: 6.
 #' @param axis_text_size Numerical of length 1. Size of the text in the axes. Default: 7.
 #' @param axis_text_color Character of length 1. Color of the text in the axes. Default: "Black".
+#' @param by_groups Logical of length 1. If TRUE, the function searches an extra column named 'group', whose values will be used to separate the plot into facets using facet_wrap(). Default: FALSE.
 
 #'
 #' @export
-
 expressionCor <- function(df,
                           genes              = NULL,
                           samples            = NULL,
@@ -69,7 +69,8 @@ expressionCor <- function(df,
                           subtitle_size      = 11,
                           caption_size       = 6,
                           axis_text_size     = 8,
-                          axis_text_color    = "black") {
+                          axis_text_color    = "black",
+                          by_groups          = F) {
 
 
   # Load packages -----
@@ -87,18 +88,60 @@ expressionCor <- function(df,
   if(!is.null(genes)) { df_filt <- df_filt %>% dplyr::filter(Geneid %in% genes) }
   if(!is.null(samples)) { df_filt <- df_filt %>% dplyr::select(c("Geneid", samples)) }
 
-  # Do correlation and format the correlation matrix -----
-  corr <- df_filt %>% tibble::column_to_rownames("Geneid") %>% cor(method = corr_method)
+  # If the by_groups option is set to FALSE (default)
+  if(!by_groups){
 
-  if(plot_type == "full"){ corr <- corr }
-  else if(plot_type == "upper") { corr[lower.tri(corr, diag = !plot_diagonal)] <- NA }
-  else if(plot_type == "lower") { corr[upper.tri(corr, diag = !plot_diagonal)] <- NA }
+    # Remove group column is present
+    if("group" %in% colnames(df_filt)){ df_filt <- df_filt %>% dplyr::select(-group) }
 
-  corr.m <- reshape2::melt(corr)
+    # Do correlation and format the correlation matrix -----
+    corr <- df_filt %>% tibble::column_to_rownames("Geneid") %>% cor(method = corr_method)
 
-  # Draw the plot ----
-  # Initialize the plot and the squares
-  g <- ggplot(corr.m, aes(Var1, Var2, fill = value)) + geom_tile(color = cell_border, na.rm = T)
+    # Set plot type as full, upper or lower, including whether or not to plot the diagonal
+    if(plot_type == "full"){ corr <- corr }
+    else if(plot_type == "upper") { corr[lower.tri(corr, diag = !plot_diagonal)] <- NA }
+    else if(plot_type == "lower") { corr[upper.tri(corr, diag = !plot_diagonal)] <- NA }
+
+    # Melt correlation matrix
+    corr.m <- reshape2::melt(corr)
+
+    # Draw the plot ----
+    # Initialize the plot and the squares
+    g <- ggplot(corr.m, aes(Var1, Var2, fill = value)) + geom_tile(color = cell_border, na.rm = T)
+
+  } else {
+    # Add the group variable to the filtered data frame (inner join of the filtered data frame)
+    df_filt <- df_filt %>% dplyr::inner_join(df %>% dplyr::select(Geneid, group))
+
+    # Initialize list for correlation values
+    corr_list <- list()
+    # For each group, do:
+    for(i in unique(df_filt$group)){
+      # Filter the data frame by group and remove group variable
+      df_filt_group <- df_filt %>% dplyr::filter(group == i) %>% dplyr::select(-group)
+      # Compute correlation
+      corr <- df_filt_group %>% tibble::column_to_rownames("Geneid") %>% cor(method = corr_method)
+
+      # Format the correlation matrix to draw a full, upper or lower plot, including whether to plot the diagonal or not.
+      if(plot_type == "full"){ corr <- corr }
+      else if(plot_type == "upper") { corr[lower.tri(corr, diag = !plot_diagonal)] <- NA }
+      else if(plot_type == "lower") { corr[upper.tri(corr, diag = !plot_diagonal)] <- NA }
+
+      # Format the correlation matrix into a dataframe and add it to the correlation list
+      corr_list[[i]] <- corr %>% as.data.frame()  %>% tibble::rownames_to_column("sample") %>% dplyr::mutate(group = i)
+    }
+
+    # Bind all the elements in the correlation list into a unique data frame
+    corr_list <- dplyr::bind_rows(corr_list)
+
+    # Reshape the correlation dataframe
+    corr_list_melt <- corr_list %>% reshape2::melt()
+
+    # Initialize the plot with facets
+    g <- ggplot(corr_list_melt, aes(sample, variable, fill = value)) +
+      geom_tile(color = cell_border, na.rm = T) +
+      facet_wrap(~group)
+  }
 
   # Force size of the heatmap
   g <- g + ggh4x::force_panelsizes(rows = unit(plot_size, "mm"), cols = unit(plot_size, "mm")) +

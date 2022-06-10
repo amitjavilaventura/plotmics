@@ -18,7 +18,7 @@ expression data of different samples (e.g. TPMs, Log2FC...) and draws a correlat
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.3</span>
       </span>
     </div>
 
@@ -73,6 +73,9 @@ expression data of different samples (e.g. TPMs, Log2FC...) and draws a correlat
     </li>
     <li>
       <a href="../articles/13-ggVennBed.html">ggVennBed()</a>
+    </li>
+    <li>
+      <a href="../articles/14-expressionCor.html">expressionCor()</a>
     </li>
   </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
@@ -130,7 +133,8 @@ expression data of different samples (e.g. TPMs, Log2FC...) and draws a correlat
   subtitle_size <span class="op">=</span> <span class="fl">11</span>,
   caption_size <span class="op">=</span> <span class="fl">6</span>,
   axis_text_size <span class="op">=</span> <span class="fl">8</span>,
-  axis_text_color <span class="op">=</span> <span class="st">"black"</span>
+  axis_text_color <span class="op">=</span> <span class="st">"black"</span>,
+  by_groups <span class="op">=</span> <span class="cn">F</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -194,6 +198,8 @@ expression data of different samples (e.g. TPMs, Log2FC...) and draws a correlat
 <dd><p>Numerical of length 1. Size of the text in the axes. Default: 7.</p></dd>
 <dt>axis_text_color</dt>
 <dd><p>Character of length 1. Color of the text in the axes. Default: "Black".</p></dd>
+<dt>by_groups</dt>
+<dd><p>Logical of length 1. If TRUE, the function searches an extra column named 'group', whose values will be used to separate the plot into facets using facet_wrap(). Default: FALSE.</p></dd>
 </dl></div>
     <div id="author">
     <h2>Author</h2>
