@@ -105,7 +105,7 @@ expressionCor <- function(df,
 
     # Melt correlation matrix
     corr.m <- reshape2::melt(corr) %>% dplyr::as_tibble()
-    if(!is.null(samples_order)) { corr.m <- corr.m %>% dplyr::mutate(Var1 = factor(Var1, levels = sample_order), Var2 = factor(Var2, levels = sample_order)) }
+    if(!is.null(samples_order)) { corr.m <- corr.m %>% dplyr::mutate(Var1 = factor(Var1, levels = samples_order), Var2 = factor(Var2, levels = samples_order)) }
 
     # Draw the plot ----
     # Initialize the plot and the squares
@@ -139,7 +139,7 @@ expressionCor <- function(df,
 
     # Reshape the correlation dataframe
     corr_list_melt <- corr_list %>% reshape2::melt() %>% dplyr::as_tibble()
-    if(!is.null(samples_order)) { corr_list_melt <- corr_list_melt %>% dplyr::mutate(sample = factor(sample, levels = sample_order), variable = factor(variable, levels = sample_order)) }
+    if(!is.null(samples_order)) { corr_list_melt <- corr_list_melt %>% dplyr::mutate(sample = factor(sample, levels = samples_order), variable = factor(variable, levels = samples_order)) }
 
     # Initialize the plot with facets
     g <- ggplot(corr_list_melt, aes(sample, variable, fill = value)) +
@@ -183,14 +183,14 @@ expressionCor <- function(df,
   if(!is.null(plot_caption)) { g <- g + labs( caption  = plot_caption) }
 
   # Format theme
-  g <- g + theme(plot.title = element_text(face = title_face, size = title_size, hjust = title_hjust),
+  g <- g + theme(plot.title    = element_text(face = title_face, size = title_size, hjust = title_hjust),
                  plot.subtitle = element_text(face = subtitle_face, size = subtitle_size, hjust = title_hjust),
-                 plot.caption = element_text(size = caption_size),
-                 axis.title = element_blank(),
-                 axis.ticks = element_blank(),
-                 axis.text  = element_text(size = axis_text_size, colour = axis_text_color),
-                 axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5),
-                 panel.border = element_rect(size = 1.1))
+                 plot.caption  = element_text(size = caption_size),
+                 axis.title    = element_blank(),
+                 axis.ticks    = element_blank(),
+                 axis.text     = element_text(size = axis_text_size, colour = axis_text_color),
+                 axis.text.x   = element_text(angle = 90, hjust = 1, vjust = .5),
+                 panel.border  = element_rect(size = 1.1))
 
   return(g)
 }
