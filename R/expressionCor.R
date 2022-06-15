@@ -106,7 +106,8 @@ expressionCor <- function(df,
     if("group" %in% colnames(df_filt)){ df_filt <- df_filt %>% dplyr::select(-group) }
 
     # Do correlation and format the correlation matrix -----
-    corr <- df_filt %>% tibble::column_to_rownames("Geneid") %>% cor(method = corr_method)
+    if(!is.null(genes)) { corr <- df_filt %>% tibble::column_to_rownames("Geneid") %>% cor(method = corr_method) }
+    else { corr <- df_filt %>% cor(method = corr_method) }
 
     # Set plot type as full, upper or lower, including whether or not to plot the diagonal
     if(plot_type == "full"){ corr <- corr }
