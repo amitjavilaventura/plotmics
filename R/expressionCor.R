@@ -86,8 +86,15 @@ expressionCor <- function(df,
   # Format and filter data frame -----
   df_filt <- df %>% na.omit()
 
+  # Filter genes and samples if those are indicated
   if(!is.null(genes)) { df_filt <- df_filt %>% dplyr::filter(Geneid %in% genes) }
   if(!is.null(samples)) { df_filt <- df_filt %>% dplyr::select(c("Geneid", samples)) }
+
+  # If argument genes is NULL, don't use Geneid column
+  if(is.null(genes)){
+    if("Geneid" %in% colnames(df_filt)) { df_filt <- df_filt %>% dplyr::select(-Geneid)}
+    else { df_filt <- df_filt }
+  }
 
   # If the by_groups option is set to FALSE (default)
   if(!by_groups){
@@ -105,6 +112,7 @@ expressionCor <- function(df,
 
     # Melt correlation matrix
     corr.m <- reshape2::melt(corr) %>% dplyr::as_tibble()
+    # Add order for samples (or columns used to compute the correlation)
     if(!is.null(samples_order)) { corr.m <- corr.m %>% dplyr::mutate(Var1 = factor(Var1, levels = samples_order), Var2 = factor(Var2, levels = samples_order)) }
 
     # Draw the plot ----
@@ -123,7 +131,12 @@ expressionCor <- function(df,
       # Filter the data frame by group and remove group variable
       df_filt_group <- df_filt %>% dplyr::filter(group == i) %>% dplyr::select(-group)
       # Compute correlation
-      corr <- df_filt_group %>% tibble::column_to_rownames("Geneid") %>% cor(method = corr_method)
+      if("Geneid" %in% colnames(df_filt_group)){
+        if(!is.null(genes)) { corr <- df_filt_group %>% tibble::column_to_rownames("Geneid") %>% cor(method = corr_method) }
+        else { corr <- df_filt_group %>% dplyr::select(-Geneid) %>% cor(method = corr_method) }
+      } else {
+        corr <- df_filt_group %>% cor(method = corr_method)
+      }
 
       # Format the correlation matrix to draw a full, upper or lower plot, including whether to plot the diagonal or not.
       if(plot_type == "full"){ corr <- corr }

@@ -109,9 +109,8 @@ expressionHeatmap <- function(expr_df,
 
   # Format data frame -----
   ## Filter dataframe to get only desired genes
-  expr <- expr_df %>%
-    dplyr::relocate(Geneid) %>%
-    dplyr::filter(Geneid %in% genes)
+  expr <- expr_df %>% dplyr::relocate(Geneid)
+  if(!is.null(genes)) {expr <- expr %>% dplyr::filter(Geneid %in% genes) }
 
   # Look if there are extra columns
   extra_cols <- expr %>% dplyr::select(!where(is.numeric), -Geneid) %>% ncol()
