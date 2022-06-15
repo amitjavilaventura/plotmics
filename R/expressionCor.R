@@ -83,6 +83,9 @@ expressionCor <- function(df,
   require(ggpubr)
   require(scales)
 
+  # Check that inputs are OK
+  if(by_groups & !"group" %in% colnames(df)) { stop("If 'by_groups' is TRUE, a column named 'group' must be in the input 'df'.") }
+
   # Format and filter data frame -----
   df_filt <- df %>% na.omit()
 
@@ -121,22 +124,16 @@ expressionCor <- function(df,
 
   } else {
 
-    # Add the group variable to the filtered data frame (inner join of the filtered data frame)
-    df_filt <- df_filt %>% dplyr::inner_join(df %>% dplyr::select(Geneid, group))
-
     # Initialize list for correlation values
     corr_list <- list()
     # For each group, do:
     for(i in unique(df_filt$group)){
       # Filter the data frame by group and remove group variable
       df_filt_group <- df_filt %>% dplyr::filter(group == i) %>% dplyr::select(-group)
+
       # Compute correlation
-      if("Geneid" %in% colnames(df_filt_group)){
-        if(!is.null(genes)) { corr <- df_filt_group %>% tibble::column_to_rownames("Geneid") %>% cor(method = corr_method) }
-        else { corr <- df_filt_group %>% dplyr::select(-Geneid) %>% cor(method = corr_method) }
-      } else {
-        corr <- df_filt_group %>% cor(method = corr_method)
-      }
+      if(!is.null(genes)) { corr <- df_filt_group %>% tibble::column_to_rownames("Geneid") %>% cor(method = corr_method) }
+      else { corr <- df_filt_group %>% cor(method = corr_method) }
 
       # Format the correlation matrix to draw a full, upper or lower plot, including whether to plot the diagonal or not.
       if(plot_type == "full"){ corr <- corr }
