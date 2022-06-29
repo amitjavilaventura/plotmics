@@ -23,6 +23,7 @@ _pl**O**t**MICS**_ is an R package to visualize omics and sequencing data in R u
 * `expressionCor()`: function that computes the correlation of expression values between samples.
 * `compareCounts()`: function that draws a scatter plot of gene expression values between 2 samples.
 * `ggVennBed()`: draws a Venn diagram with the intersection of two BED files, obtained with `bedtoolsr::bt.intersect()`.
+* `expressionHeatmapBar()`: draws a heatmap with expression values and combines it with a barplots of sense/antisense expression values.
 
 ## Install `plotmics` 
 
@@ -171,5 +172,10 @@ If you use this package, please cite [this repository](https://github.com/amitja
 * `v6.0.3` *(2022-06-15)*:
   + `expressionCor()`: add the option to separate the correlation plot into facets with the `by_groups` parameter.
   + `expressionCor()`: allow to avoid the usage of a data frame with a *Geneid* column.
+
+  <br>
+
+* `v7.0.0` *(2022-06-29)*:
+  + Add new function: `expressionHeatmapBar()`.
   
   <br>
