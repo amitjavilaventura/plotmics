@@ -48,7 +48,7 @@ expressionHeatmapBar <- function(expr,
                                  hm_legend_size   = c(40, 7),
                                  bar_pos          = "fill",
                                  bar_xlab         = NULL,
-                                 bar_colors       = c("green", "tomato"),
+                                 bar_colors       = c("lightgreen", "lightpink"),
                                  combine_plots    = T,
                                  plot_title       = NULL){
 
@@ -127,7 +127,7 @@ expressionHeatmapBar <- function(expr,
     labs(x = bar_xlab, y = NULL, title = NULL) +
     ggmitji::theme_custom(legend = "right", x.text.angle = 90, x.text.hjust = 1, x.text.vjust = .5, title.face = "italic", axis.title.face = "plain", vgrid.major = .3, vgrid.minor = .3) +
     scale_y_discrete(guide = guide_axis(position = "right")) +
-    scale_fill_manual(bar_colors)
+    scale_fill_manual(values = bar_colors)
 
   # Combine plots or not -----
   if(combine_plots){
