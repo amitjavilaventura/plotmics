@@ -42,8 +42,8 @@ expressionHeatmapBar <- function(expr,
                                  hm_value_size    = 3,
                                  hm_value_color   = "black",
                                  hm_legend_colors = c("white", "cornflowerblue"),
-                                 hm_legend_limits = c(0,1e6),
-                                 hm_legend_breaks = seq(0,1e6, 1e5),
+                                 hm_legend_limits = c(0, expr %>% dplyr::select(is.numeric) %>% max()),
+                                 hm_legend_breaks = seq(hm_legend_limits[1],hm_legend_limits[2], 1e5),
                                  hm_legend_title  = "Counts",
                                  hm_legend_size   = c(40, 7),
                                  bar_pos          = "fill",
@@ -130,7 +130,7 @@ expressionHeatmapBar <- function(expr,
     scale_fill_manual(values = bar_colors)
 
   ## If barplot shows the "proportion" of sense/antisense, draw a line showing the 0.5
-  if( bar_pos == "fill" ) { expr_strand_barplot <- expr_strand_barplot + geom_vline(xintercept = .5) }
+  if( bar_pos == "fill" ) { expr_strand_barplot <- expr_strand_barplot + geom_vline(xintercept = .5, size = .5, linetype = "dashed") }
 
   # Combine plots or not -----
   if(combine_plots){
