@@ -129,6 +129,9 @@ expressionHeatmapBar <- function(expr,
     scale_y_discrete(guide = guide_axis(position = "right")) +
     scale_fill_manual(values = bar_colors)
 
+  ## If barplot shows the "proportion" of sense/antisense, draw a line showing the 0.5
+  if( bar_pos == "fill" ) { expr_strand_barplot <- expr_strand_barplot + geom_vline(xintercept = .5) }
+
   # Combine plots or not -----
   if(combine_plots){
     # Load patchwork

@@ -21,7 +21,7 @@ expressionHeatmapBar(
   hm_legend_size = c(40, 7),
   bar_pos = "fill",
   bar_xlab = NULL,
-  bar_colors = c("green", "tomato"),
+  bar_colors = c("lightgreen", "lightpink"),
   combine_plots = T,
   plot_title = NULL
 )
