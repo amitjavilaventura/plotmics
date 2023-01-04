@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">7.0.1</span>
       </span>
     </div>
 
@@ -102,42 +102,61 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">compareCounts</span><span class="op">(</span>
-  <span class="va">df</span>,
-  cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>,
-  lims <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>, <span class="va">cols</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">*</span> <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span>,
-  diag <span class="op">=</span> <span class="cn">TRUE</span>,
-  title <span class="op">=</span> <span class="cn">NULL</span>,
-  subtitle <span class="op">=</span> <span class="cn">NULL</span>,
-  writeN <span class="op">=</span> <span class="cn">TRUE</span>,
-  highlightGenes <span class="op">=</span> <span class="cn">NULL</span>,
-  writeGeneLabels <span class="op">=</span> <span class="cn">TRUE</span>,
-  geneLabelSize <span class="op">=</span> <span class="fl">3</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">compareCounts</span><span class="op">(</span></span>
+<span>  <span class="va">df</span>,</span>
+<span>  cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>,</span>
+<span>  lims <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>, <span class="va">cols</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">*</span> <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  diag <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  subtitle <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  writeN <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  highlightGenes <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  writeGeneLabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  geneLabelSize <span class="op">=</span> <span class="fl">3</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>Dataframe with at least three columns: Geneid and one column for the counts of each sample.</p></dd>
+
+
 <dt>cols</dt>
 <dd><p>Character of length 2. The names of the columns where the counts to be plotted are. Default: colnames(df)2:3.</p></dd>
+
+
 <dt>lims</dt>
 <dd><p>Numerical of length 2. Lower and upper limits of the axes. The same limits are used for both axes. Default: c(0,max(df[,cols1]*0.75)).</p></dd>
+
+
 <dt>diag</dt>
 <dd><p>Logical of length 1. Whether to draw a dashed line in the diagonal or not. Default: TRUE.</p></dd>
+
+
 <dt>title</dt>
 <dd><p>Character of length 1. Title of the plot. Default: NULL.</p></dd>
+
+
 <dt>subtitle</dt>
 <dd><p>Character of length 1. Subtitle of the plot. Default: NULL</p></dd>
+
+
 <dt>highlightGenes</dt>
 <dd><p>Character of undefined length or NULL. The names of the genes (values of Geneid column) to highlight. Default: NULL.</p></dd>
+
+
 <dt>writeGeneLabels</dt>
 <dd><p>Logical of length 1. Whether to write the labels of the highlighted genes. Only if highlightGenes is not null. Default: TRUE.</p></dd>
+
+
 <dt>geneLabelSize</dt>
 <dd><p>Numerical of length 1. Size of the gene label. Default: 3.</p></dd>
+
+
 <dt>writeN.</dt>
 <dd><p>Logical of length 1. Whether to write the total number of genes in the top left corner of the plot. Default: TRUE.</p></dd>
+
 </dl></div>
     <div id="author">
     <h2>Author</h2>
@@ -156,7 +175,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

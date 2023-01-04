@@ -18,7 +18,7 @@ expression data of different samples (e.g. TPMs, Log2FC...) and draws a correlat
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">7.0.1</span>
       </span>
     </div>
 
@@ -104,103 +104,162 @@ expression data of different samples (e.g. TPMs, Log2FC...) and draws a correlat
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">expressionCor</span><span class="op">(</span>
-  <span class="va">df</span>,
-  genes <span class="op">=</span> <span class="cn">NULL</span>,
-  samples <span class="op">=</span> <span class="cn">NULL</span>,
-  samples_order <span class="op">=</span> <span class="va">samples</span>,
-  corr_method <span class="op">=</span> <span class="st">"pearson"</span>,
-  plot_type <span class="op">=</span> <span class="st">"lower"</span>,
-  plot_diagonal <span class="op">=</span> <span class="cn">TRUE</span>,
-  plot_size <span class="op">=</span> <span class="fl">85</span>,
-  plot_border <span class="op">=</span> <span class="cn">TRUE</span>,
-  plot_colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Gold3"</span>, <span class="st">"White"</span>, <span class="st">"Cornflowerblue"</span><span class="op">)</span>,
-  plot_title <span class="op">=</span> <span class="cn">NULL</span>,
-  plot_subtitle <span class="op">=</span> <span class="cn">NULL</span>,
-  plot_caption <span class="op">=</span> <span class="cn">NULL</span>,
-  cell_border <span class="op">=</span> <span class="st">"Black"</span>,
-  legend_pos <span class="op">=</span> <span class="st">"right"</span>,
-  legend_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8</span>, <span class="va">plot_size</span><span class="op">)</span>,
-  legend_limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,
-  legend_breaks_by <span class="op">=</span> <span class="fl">0.5</span>,
-  legend_title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html" class="external-link">str_to_sentence</a></span><span class="op">(</span><span class="va">corr_method</span><span class="op">)</span>, <span class="st">"correlation"</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span>,
-  legend_title_size <span class="op">=</span> <span class="fl">10</span>,
-  coeffs_color <span class="op">=</span> <span class="st">"Black"</span>,
-  coeffs_size <span class="op">=</span> <span class="fl">4</span>,
-  title_hjust <span class="op">=</span> <span class="fl">0.5</span>,
-  title_face <span class="op">=</span> <span class="st">"plain"</span>,
-  title_size <span class="op">=</span> <span class="fl">12</span>,
-  subtitle_face <span class="op">=</span> <span class="st">"italic"</span>,
-  subtitle_size <span class="op">=</span> <span class="fl">11</span>,
-  caption_size <span class="op">=</span> <span class="fl">6</span>,
-  axis_text_size <span class="op">=</span> <span class="fl">8</span>,
-  axis_text_color <span class="op">=</span> <span class="st">"black"</span>,
-  by_groups <span class="op">=</span> <span class="cn">F</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">expressionCor</span><span class="op">(</span></span>
+<span>  <span class="va">df</span>,</span>
+<span>  genes <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  samples <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  samples_order <span class="op">=</span> <span class="va">samples</span>,</span>
+<span>  corr_method <span class="op">=</span> <span class="st">"pearson"</span>,</span>
+<span>  plot_type <span class="op">=</span> <span class="st">"lower"</span>,</span>
+<span>  plot_diagonal <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  plot_size <span class="op">=</span> <span class="fl">85</span>,</span>
+<span>  plot_border <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  plot_colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Gold3"</span>, <span class="st">"White"</span>, <span class="st">"Cornflowerblue"</span><span class="op">)</span>,</span>
+<span>  plot_title <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  plot_subtitle <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  plot_caption <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  cell_border <span class="op">=</span> <span class="st">"Black"</span>,</span>
+<span>  legend_pos <span class="op">=</span> <span class="st">"right"</span>,</span>
+<span>  legend_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8</span>, <span class="va">plot_size</span><span class="op">)</span>,</span>
+<span>  legend_limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  legend_breaks_by <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  legend_title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html" class="external-link">str_to_sentence</a></span><span class="op">(</span><span class="va">corr_method</span><span class="op">)</span>, <span class="st">"correlation"</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span>,</span>
+<span>  legend_title_size <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  coeffs_color <span class="op">=</span> <span class="st">"Black"</span>,</span>
+<span>  coeffs_size <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  title_hjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  title_face <span class="op">=</span> <span class="st">"plain"</span>,</span>
+<span>  title_size <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>  subtitle_face <span class="op">=</span> <span class="st">"italic"</span>,</span>
+<span>  subtitle_size <span class="op">=</span> <span class="fl">11</span>,</span>
+<span>  caption_size <span class="op">=</span> <span class="fl">6</span>,</span>
+<span>  axis_text_size <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>  axis_text_color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  by_groups <span class="op">=</span> <span class="cn">F</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>Dataframe with a 'Geneid' column and several columns with numerical expression data for different samples, such as TPMs or Log2FC.</p></dd>
+
+
 <dt>genes</dt>
 <dd><p>Character or NULL. Names of the genes to be used for the correlation analysis. They must present in the column 'Geneid' of 'df'. If NULL, all genes in the data frame are used. Default: NULL</p></dd>
+
+
 <dt>samples</dt>
 <dd><p>Character or NULL. Names of the samples to be used for the correlation analysis. They must be column names of 'df'. If NULL, all samples are used. Default: NULL.</p></dd>
+
+
 <dt>corr_method</dt>
 <dd><p>Character of length 1. Correlation method to be passed through <code><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor()</a></code>. One of <code>"pearson"</code>, <code>"spearman"</code> or <code>"kendall"</code>. Default: "pearson".</p></dd>
+
+
 <dt>plot_type</dt>
 <dd><p>Character of length 1. Type of the correlation plot. One of <code>"full"</code>, <code>"upper"</code> or <code>"lower"</code>. Default: "lower".</p></dd>
+
+
 <dt>plot_diagonal</dt>
 <dd><p>Logical of length 1. Whether to plot the diagonal or not if the plot type is upper or lower. Default: TRUE.</p></dd>
+
+
 <dt>plot_size</dt>
 <dd><p>Numerical of length 1. Size in milimeters of the plot. The same number is used for plot height and plot width Default: 85.</p></dd>
+
+
 <dt>plot_border</dt>
 <dd><p>Logical of length 1. Whether to draw a border in the panel or not. Default: TRUE.</p></dd>
+
+
 <dt>plot_colors</dt>
 <dd><p>Character of length 3. Colors of the lower, midpoint and higher limits of the scale. Default: c("Gold3", "White", "Cornflowerblue").</p></dd>
+
+
 <dt>plot_title</dt>
 <dd><p>Character of length 1 or NULL. Title of the plot. Defalut: NULL.</p></dd>
+
+
 <dt>plot_subtitle</dt>
 <dd><p>Character of length 1 or NULL. Subtitle of the plot. Defalut: NULL.</p></dd>
+
+
 <dt>plot_caption</dt>
 <dd><p>Character of length 1 or NULL. Caption of the plot. Defalut: NULL.</p></dd>
+
+
 <dt>cell_border</dt>
 <dd><p>Charachter of length 1, NULL or NA. Color of the cell border. Default: "Black".</p></dd>
+
+
 <dt>legend_pos</dt>
 <dd><p>Charachter of length 1. Position of the legend, to be passed through <code><a href="https://rpkgs.datanovia.com/ggpubr/reference/theme_pubr.html" class="external-link">ggpubr::theme_pubr()</a></code>. Default: "right".</p></dd>
+
+
 <dt>legend_size</dt>
 <dd><p>Numerical of length 2. Size of the legend. The first element is the width and the second is the height of the legend bar. Default: c(8,plot_size)</p></dd>
+
+
 <dt>legend_limits</dt>
 <dd><p>Numerical of length 2. Lower and upper limits of the correlation scale. Default: c(-1,1).</p></dd>
+
+
 <dt>legend_breaks_by</dt>
 <dd><p>Numerical of length 1. Size of the breaks in the legend. Default: 0.5.</p></dd>
+
+
 <dt>legend_title</dt>
 <dd><p>Character of length 1 or NULL. Title of the legend. Default: <code>paste(stringr::str_to_sentence(corr_method), "correlation", sep = " ")</code>.</p></dd>
+
+
 <dt>legend_title_size</dt>
 <dd><p>Numerical of length 1. Size of the legend title. Default: 10.</p></dd>
+
+
 <dt>coeffs_color</dt>
 <dd><p>Character of length 1 or NULL. Color of the correlation coeficients to be plotted. If NULL, no correlation coefficients are plotted. Default: "Black".</p></dd>
+
+
 <dt>coeffs_size</dt>
 <dd><p>Numerical of length 1. Size of the correlation coefficients. Default: 4.</p></dd>
+
+
 <dt>title_hjust</dt>
 <dd><p>Numerical of length 1. Horizontal justification of the title and the subtitle. Default: 0.5.</p></dd>
+
+
 <dt>title_face</dt>
 <dd><p>Character of length 1. Face of the title text. One of "plain", "italic", "bold". Default: "plain".</p></dd>
+
+
 <dt>title_size</dt>
 <dd><p>Numerical of length 1. Size of the title text. Default: 12.</p></dd>
+
+
 <dt>subtitle_face</dt>
 <dd><p>Character of length 1. Face of the subtitle text. One of "plain", "italic", "bold". Default: "italic".</p></dd>
+
+
 <dt>subtitle_size</dt>
 <dd><p>Numerical of length 1. Size of the subtitle text. Default: 11.</p></dd>
+
+
 <dt>caption_size</dt>
 <dd><p>Numerical of length 1. Size of the plot caption. Default: 6.</p></dd>
+
+
 <dt>axis_text_size</dt>
 <dd><p>Numerical of length 1. Size of the text in the axes. Default: 7.</p></dd>
+
+
 <dt>axis_text_color</dt>
 <dd><p>Character of length 1. Color of the text in the axes. Default: "Black".</p></dd>
+
+
 <dt>by_groups</dt>
 <dd><p>Logical of length 1. If TRUE, the function searches an extra column named 'group', whose values will be used to separate the plot into facets using facet_wrap(). Default: FALSE.</p></dd>
+
 </dl></div>
     <div id="author">
     <h2>Author</h2>
@@ -219,7 +278,7 @@ expression data of different samples (e.g. TPMs, Log2FC...) and draws a correlat
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

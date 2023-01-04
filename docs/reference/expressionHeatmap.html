@@ -18,7 +18,7 @@ and draws a heatmap using ggplot."><meta property="og:image" content="/logo.png"
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">7.0.1</span>
       </span>
     </div>
 
@@ -104,85 +104,158 @@ and draws a heatmap using ggplot.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">expressionHeatmap</span><span class="op">(</span><span class="va">expr_df</span>, <span class="va">genes</span>, clust_rows <span class="op">=</span> <span class="cn">T</span>, clust_cols <span class="op">=</span> <span class="cn">F</span>, show_dend_rows <span class="op">=</span> <span class="cn">F</span>, show_dend_cols <span class="op">=</span> <span class="cn">F</span>, dist_method <span class="op">=</span> <span class="st">"euclidean"</span>, hclust_method <span class="op">=</span> <span class="st">"ward.D"</span>, write_label <span class="op">=</span> <span class="cn">T</span>, label_size <span class="op">=</span> <span class="fl">4</span>, label_color <span class="op">=</span> <span class="st">"black"</span>, label_digits <span class="op">=</span> <span class="fl">2</span>, hm_height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">genes</span><span class="op">)</span><span class="op">*</span><span class="fl">10</span>, hm_width <span class="op">=</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">*</span><span class="fl">10</span>, hm_colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cornflowerblue"</span>, <span class="st">"white"</span>, <span class="st">"gold3"</span><span class="op">)</span>, legend_scale <span class="op">=</span> <span class="cn">NULL</span>, legend_breaks_num <span class="op">=</span> <span class="fl">5</span>, legend_midpoint <span class="op">=</span> <span class="fl">0</span>, legend_height <span class="op">=</span> <span class="va">hm_height</span>, legend_title <span class="op">=</span> <span class="cn">NULL</span>, dend_cols_prop <span class="op">=</span> <span class="fl">.1</span>, dend_rows_prop <span class="op">=</span> <span class="fl">.2</span>, title <span class="op">=</span> <span class="st">""</span>, subtitle <span class="op">=</span> <span class="st">""</span>, caption <span class="op">=</span> <span class="cn">NULL</span>, xlab <span class="op">=</span> <span class="st">""</span>, ylab <span class="op">=</span> <span class="cn">NULL</span>, axis_text_size <span class="op">=</span> <span class="fl">10</span>, x_axis_angle <span class="op">=</span> <span class="fl">90</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">expressionHeatmap</span><span class="op">(</span><span class="va">expr_df</span>, <span class="va">genes</span>, clust_rows <span class="op">=</span> <span class="cn">T</span>, clust_cols <span class="op">=</span> <span class="cn">F</span>, show_dend_rows <span class="op">=</span> <span class="cn">F</span>, show_dend_cols <span class="op">=</span> <span class="cn">F</span>, dist_method <span class="op">=</span> <span class="st">"euclidean"</span>, hclust_method <span class="op">=</span> <span class="st">"ward.D"</span>, write_label <span class="op">=</span> <span class="cn">T</span>, label_size <span class="op">=</span> <span class="fl">4</span>, label_color <span class="op">=</span> <span class="st">"black"</span>, label_digits <span class="op">=</span> <span class="fl">2</span>, hm_height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">genes</span><span class="op">)</span><span class="op">*</span><span class="fl">10</span>, hm_width <span class="op">=</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">*</span><span class="fl">10</span>, hm_colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cornflowerblue"</span>, <span class="st">"white"</span>, <span class="st">"gold3"</span><span class="op">)</span>, legend_scale <span class="op">=</span> <span class="cn">NULL</span>, legend_breaks_num <span class="op">=</span> <span class="fl">5</span>, legend_midpoint <span class="op">=</span> <span class="fl">0</span>, legend_height <span class="op">=</span> <span class="va">hm_height</span>, legend_title <span class="op">=</span> <span class="cn">NULL</span>, dend_cols_prop <span class="op">=</span> <span class="fl">.1</span>, dend_rows_prop <span class="op">=</span> <span class="fl">.2</span>, title <span class="op">=</span> <span class="st">""</span>, subtitle <span class="op">=</span> <span class="st">""</span>, caption <span class="op">=</span> <span class="cn">NULL</span>, xlab <span class="op">=</span> <span class="st">""</span>, ylab <span class="op">=</span> <span class="cn">NULL</span>, axis_text_size <span class="op">=</span> <span class="fl">10</span>, x_axis_angle <span class="op">=</span> <span class="fl">90</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>expr_df</dt>
 <dd><p>Dataframe with a 'Geneid' column and several columns with numerical expression data for different samples, such as TPMs or Log2FC.</p></dd>
+
+
 <dt>genes</dt>
 <dd><p>Character. Names of the genes to be plotted. They must present in the column 'Geneid' of 'df'.</p></dd>
+
+
 <dt>clust_rows</dt>
 <dd><p>Logical of length 1. Whether to cluster the rows (TRUE) or not (FALSE) using <code>hclust</code>. Default: T.</p></dd>
+
+
 <dt>clust_cols</dt>
 <dd><p>Logical of length 1. Whether to cluster the columns (TRUE) or not (FALSE) using <code>hclust</code>. Default: F.</p></dd>
+
+
 <dt>show_dend_rows</dt>
 <dd><p>Logical of length 1. Whether to draw the dendogram of the rows clustering (TRUE) or not (FALSE). It only works with 'clust_rows = T'. Default: F.</p></dd>
+
+
 <dt>show_dend_cols</dt>
 <dd><p>Logical of length 1. Whether to draw the dendogram of the columns clustering (TRUE) or not (FALSE). It only works with 'clust_cols = T'. Default: F.</p></dd>
+
+
 <dt>dist_method</dt>
 <dd><p>Character of length 1. Distance calculation. One of <code>"euclidean"</code>, <code>"maximum"</code>, <code>"manhattan"</code>, "<code>canberra"</code>, <code>"binary"</code> or <code>"minkowski"</code>. Default: "euclidean".</p></dd>
+
+
 <dt>hclust_method</dt>
 <dd><p>Character of length 1. Method for hierarchical clustering. One of <code>"ward.D"</code>, <code>"ward.D2"</code>, <code>"single"</code>, <code>"complete"</code>, <code>"average"</code> (= UPGMA), <code>"mcquitty"</code> (= WPGMA), <code>"median"</code> (= WPGMC) or <code>"centroid"</code> (= UPGMC). Default: "ward.D"</p></dd>
+
+
 <dt>write_label</dt>
 <dd><p>Logical of length 1. Whether to write the expression values in the heatmap (TRUE) or not (FALSE). Default: T.</p></dd>
+
+
 <dt>label_size</dt>
 <dd><p>Numerical of length 1. Size of the expression values written in each cell of the heatmap. Default: 3.</p></dd>
+
+
 <dt>label_color</dt>
 <dd><p>Character of length 1. Color of the expression values written in each cell of the heatmap. Default: "black".</p></dd>
+
+
 <dt>label_digits</dt>
 <dd><p>Numerical of length 1. Number of digits the expression values are rounded to. Defalut: 2.</p></dd>
+
+
 <dt>hm_height</dt>
 <dd><p>Numerical of length 1. Height of the heatmap in mm. Default: length(genes)*10.</p></dd>
+
+
 <dt>hm_width</dt>
 <dd><p>Numerical of length 1. Width of the heatmap in mm. Default: (ncol(df)-1)*10.</p></dd>
+
+
 <dt>hm_colors</dt>
 <dd><p>Character of length 3. Colors in the lower limit, midpoint (defined by 'legend_midpoint') and higher limit, respectively. Default: c("cornflowerblue", "white", "gold3").</p></dd>
+
+
 <dt>na_color</dt>
 <dd><p>Charachter of length 1. Color for the NA values. Default: "gray".</p></dd>
+
+
 <dt>border_color</dt>
 <dd><p>Character of length 1 or NA. Color of the border of each cell in the heatmap. Default: NA.</p></dd>
+
+
 <dt>legend_scale</dt>
 <dd><p>Numerical of length 2 or NULL. If NULL, the color scale of the heatmap will take the minimum and the maximum values as limits. If numerical, the color scale will take the first as the lower limit and the second element as the higher limit. Default: NULL.</p></dd>
+
+
 <dt>legend_breaks_num</dt>
 <dd><p>Numerical of length 1. Only 'legend_scale' is NULL. The number of breaks you want in the legend. Default: 5.</p></dd>
+
+
 <dt>legend_breaks_by</dt>
 <dd><p>Numerical of length 1. Only 'legend_scale' is numerical (e.g. <code>c(-1,1)</code>). The distance between the breaks of the legend. Default: .5.</p></dd>
+
+
 <dt>legend_midpoint</dt>
 <dd><p>Numerical of length 1. Only if 'legend_scale' is not NULL. Point where the central color of the legend will placed. Default: 0</p></dd>
+
+
 <dt>legend_height</dt>
 <dd><p>Numerical of length 1. Height of the legend which, by default, is the height of the heatmap. Default: hm_height.</p></dd>
+
+
 <dt>legend_title</dt>
 <dd><p>Character of length 1 or NULL. Title of the legend, placed in the right part of it. Default: NULL.</p></dd>
+
+
 <dt>dend_cols_prop</dt>
 <dd><p>Numerical of length 1. Proportion (from 0 to 1) of the columns dendogram compared to the heatmap height. Default: 0.1.</p></dd>
+
+
 <dt>dend_rows_prop</dt>
 <dd><p>Numerical of length 1. Proportion (from 0 to 1) of the rows dendogram compared to the heatmap width Default: 0.2.</p></dd>
+
+
 <dt>title</dt>
 <dd><p>Character of length 1 or NULL. Title of the plot. Default: "".</p></dd>
+
+
 <dt>subtitle</dt>
 <dd><p>Character of length 1 or NULL. Subtitle of the plot. Default: "".</p></dd>
+
+
 <dt>caption</dt>
 <dd><p>Character of length 1 or NULL. Caption of the plot; placed at the bottom. Default: NULL.</p></dd>
+
+
 <dt>xlab</dt>
 <dd><p>Character of length 1 or NULL. Title of the X axis. Default: "</p></dd>
+
+
 <dt>ylab</dt>
 <dd><p>Character of length 1 or NULL. Title of the Y axis. If row dendogram is plotted, the Y axis is placed to the right. Default: NULL.</p></dd>
+
+
 <dt>title_size</dt>
 <dd><p>Numerical of length 1. Size of the plot title. Default: 13.</p></dd>
+
+
 <dt>subtitle_size</dt>
 <dd><p>Numerical of length 1. Size of the plot subtitle. Default: 12.</p></dd>
+
+
 <dt>caption_size</dt>
 <dd><p>Numerical of length 1. Size of the plot caption. Default: 7.</p></dd>
+
+
 <dt>axis_text_size</dt>
 <dd><p>Numerical of length 1. Size of the text in the axes. Default: 10.</p></dd>
+
+
 <dt>axis_title_size</dt>
 <dd><p>Numerical of length 1. Size of the axes titles. Default: 11.</p></dd>
+
+
 <dt>title_hjust</dt>
 <dd><p>Numerical of length 1. Horizontal justification for the title and the subtitle. Default: 0.</p></dd>
+
+
 <dt>scale</dt>
 <dd><p>Character of length 1 or NULL. One of c("rows", "cols"). If "rows", it scales data by row; if "cols", it scales data by columns; if NULL (the default), it does not scale the data. Default: NULL.</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -207,7 +280,7 @@ and draws a heatmap using ggplot.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

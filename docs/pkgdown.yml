@@ -1,5 +1,5 @@
 pandoc: 2.11.4
-pkgdown: 2.0.3
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   00-install_and_sessioninfo: 00-install_and_sessioninfo.html
@@ -17,5 +17,5 @@ articles:
   12-circleRegions: 12-circleRegions.html
   13-ggVennBed: 13-ggVennBed.html
   14-expressionCor: 14-expressionCor.html
-last_built: 2022-06-15T07:54Z
+last_built: 2023-01-04T16:38Z
 

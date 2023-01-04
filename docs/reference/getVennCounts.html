@@ -19,7 +19,7 @@ It's a helper for other functions to draw Venn diagrams or UpSet plots for peak 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">7.0.1</span>
       </span>
     </div>
 
@@ -106,27 +106,36 @@ It's a helper for other functions to draw Venn diagrams or UpSet plots for peak 
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">getVennCounts</span><span class="op">(</span>
-  <span class="va">peaks</span>,
-  conds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">peaks</span><span class="op">)</span>,
-  conds_order <span class="op">=</span> <span class="va">conds</span>,
-  stranded <span class="op">=</span> <span class="cn">FALSE</span>,
-  plot <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">getVennCounts</span><span class="op">(</span></span>
+<span>  <span class="va">peaks</span>,</span>
+<span>  conds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">peaks</span><span class="op">)</span>,</span>
+<span>  conds_order <span class="op">=</span> <span class="va">conds</span>,</span>
+<span>  stranded <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  plot <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>peaks</dt>
 <dd><p>List of dataframes with the genomic coordinates of the regions to overlap. Dataframes must contain the columns seqnames, start, end.</p></dd>
+
+
 <dt>conds</dt>
 <dd><p>Character with the same length as the 'peaks' list. The names that are given to the diferente objects in the 'peaks' list. Default: 'names(peaks)'</p></dd>
+
+
 <dt>conds_order</dt>
 <dd><p>Character of the same length as 'conds'. Same values as in 'conds' but with the desired order of priority. Default: 'conds'.</p></dd>
+
+
 <dt>stranded</dt>
 <dd><p>Logical of length 1. If TRUE, it considers the strand information to do the overlaps. Default = FALSE.</p></dd>
+
+
 <dt>plot</dt>
 <dd><p>Logical of lenght 1. Whether to draw the the 'makeVennDiagram()' plot or not. Default: FALSE</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -149,7 +158,7 @@ It's a helper for other functions to draw Venn diagrams or UpSet plots for peak 
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -18,7 +18,7 @@ It uses the function idxstatsBam() from the Rsamtools R package. Run help("idxst
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">7.0.1</span>
       </span>
     </div>
 
@@ -104,35 +104,58 @@ It uses the function idxstatsBam() from the Rsamtools R package. Run help("idxst
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">chromReads</span><span class="op">(</span><span class="va">bamfile</span>, bamindex <span class="op">=</span> <span class="cn">NULL</span>, chr.filt <span class="op">=</span> <span class="st">""</span>, main <span class="op">=</span> <span class="cn">NULL</span>, main.size <span class="op">=</span> <span class="fl">13</span>, subtitle <span class="op">=</span> <span class="cn">NULL</span>, sub.size <span class="op">=</span> <span class="fl">11</span>, xlab <span class="op">=</span> <span class="st">"Mapped reads"</span>, ylab <span class="op">=</span> <span class="st">"Chromosome"</span>, axis.size <span class="op">=</span> <span class="fl">9</span>, percent.label <span class="op">=</span> <span class="cn">T</span>, percent.size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">chromReads</span><span class="op">(</span><span class="va">bamfile</span>, bamindex <span class="op">=</span> <span class="cn">NULL</span>, chr.filt <span class="op">=</span> <span class="st">""</span>, main <span class="op">=</span> <span class="cn">NULL</span>, main.size <span class="op">=</span> <span class="fl">13</span>, subtitle <span class="op">=</span> <span class="cn">NULL</span>, sub.size <span class="op">=</span> <span class="fl">11</span>, xlab <span class="op">=</span> <span class="st">"Mapped reads"</span>, ylab <span class="op">=</span> <span class="st">"Chromosome"</span>, axis.size <span class="op">=</span> <span class="fl">9</span>, percent.label <span class="op">=</span> <span class="cn">T</span>, percent.size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>bamfile</dt>
 <dd><p>Character of lenght 1. Path to the BAM file whose reads are to be mapped.</p></dd>
+
+
 <dt>bamindex</dt>
 <dd><p>Character of length 1 or NULL. Path to the index of the BAM file in 'bamfile'. If null, it will search a file with the same base name as the 'bamfile' and extension '.bam.bai'. Default: NULL</p></dd>
+
+
 <dt>chr.filt</dt>
 <dd><p>Character. Vector of undefined length with strings to filter chromosomes (i.e. "Un" would filter all chromosomes containing "Un" in their name). Default: c("Un", "random", "GL", "JH", "\*").</p></dd>
+
+
 <dt>main</dt>
 <dd><p>Character of lenght 1. Title of the plot. Default: NULL.</p></dd>
+
+
 <dt>main.size</dt>
 <dd><p>Numeric of length 1. Font size of the title. It works only if main is not NULL. Default: 13.</p></dd>
+
+
 <dt>subtitle</dt>
 <dd><p>Character of lenght 1. Subtitle of the bar plot. It works only if main is not NULL. Default: NULL.</p></dd>
+
+
 <dt>sub.size</dt>
 <dd><p>Numeric of length 1. Font size of the subtitle. It works only if main is not NULL. Default: 11.</p></dd>
+
+
 <dt>xlab</dt>
 <dd><p>Character of lenght 1. Title of the X axis. Default: "Mapped reads".</p></dd>
+
+
 <dt>ylab</dt>
 <dd><p>Character of lenght 1. Title of the Y axis. Default: "Chromosome".</p></dd>
+
+
 <dt>axis.size</dt>
 <dd><p>Numeric of length 1. Size of the axis labels. Default: 9</p></dd>
+
+
 <dt>percent.label</dt>
 <dd><p>Logical of lenght 1. If TRUE, it draws the percentage of reads in each chromosome.</p></dd>
+
+
 <dt>percent.size</dt>
 <dd><p>Character of lenght 1. Size of the percentage drawn in the plot.</p></dd>
+
 </dl></div>
     <div id="author">
     <h2>Author</h2>
@@ -151,7 +174,7 @@ It uses the function idxstatsBam() from the Rsamtools R package. Run help("idxst
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

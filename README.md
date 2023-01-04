@@ -180,7 +180,7 @@ If you use this package, please cite [this repository](https://github.com/amitja
   
   <br>
   
-* `v7.0.1` *(2023-01-05)*:
+* `v7.0.1` *(devel)*:
   + `volcanoPlot()`: change arguments of `scale_color_manual()`, because it was dropping the unused levels in the legend.
   
   <br>

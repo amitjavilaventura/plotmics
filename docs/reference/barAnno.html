@@ -20,7 +20,7 @@ As a ggplot2-based function, it allows to add more layers to format the plot.'><
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">7.0.1</span>
       </span>
     </div>
 
@@ -108,66 +108,101 @@ As a ggplot2-based function, it allows to add more layers to format the plot.</p
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">barAnno</span><span class="op">(</span>
-  <span class="va">anno_list</span>,
-  anno_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">anno_list</span><span class="op">)</span>,
-  names_order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">anno_names</span><span class="op">)</span>,
-  protein <span class="op">=</span> <span class="cn">NULL</span>,
-  protein_order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">protein</span><span class="op">)</span>,
-  main <span class="op">=</span> <span class="cn">NULL</span>,
-  subtitle <span class="op">=</span> <span class="cn">NULL</span>,
-  ylab <span class="op">=</span> <span class="cn">NULL</span>,
-  xlab <span class="op">=</span> <span class="cn">NULL</span>,
-  color_palette <span class="op">=</span> <span class="st">"Set2"</span>,
-  legend_position <span class="op">=</span> <span class="st">"right"</span>,
-  anno_num <span class="op">=</span> <span class="fl">2</span>,
-  fill_position <span class="op">=</span> <span class="cn">T</span>,
-  xangle <span class="op">=</span> <span class="fl">20</span>,
-  width <span class="op">=</span> <span class="fl">0.6</span>,
-  counts_label <span class="op">=</span> <span class="cn">F</span>,
-  counts_angle <span class="op">=</span> <span class="fl">90</span>,
-  counts_size <span class="op">=</span> <span class="fl">3</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">barAnno</span><span class="op">(</span></span>
+<span>  <span class="va">anno_list</span>,</span>
+<span>  anno_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">anno_list</span><span class="op">)</span>,</span>
+<span>  names_order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">anno_names</span><span class="op">)</span>,</span>
+<span>  protein <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  protein_order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">protein</span><span class="op">)</span>,</span>
+<span>  main <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  subtitle <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  color_palette <span class="op">=</span> <span class="st">"Set2"</span>,</span>
+<span>  legend_position <span class="op">=</span> <span class="st">"right"</span>,</span>
+<span>  anno_num <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  fill_position <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>  xangle <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>  width <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span>  counts_label <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>  counts_angle <span class="op">=</span> <span class="fl">90</span>,</span>
+<span>  counts_size <span class="op">=</span> <span class="fl">3</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>anno_list</dt>
 <dd><p>Named list of annotation objects that come from annotatePeak().</p></dd>
+
+
 <dt>anno_names</dt>
 <dd><p>Charachter vector of the same length as 'anno_list'. Names that will be given to each of the objects in anno_list. Not that will be the names plotted in the bargraph</p></dd>
+
+
 <dt>names_order</dt>
 <dd><p>Character vector with the same entries as 'names' with the order wanted to plot the data. Defaults to: unique(names).</p></dd>
+
+
 <dt>protein</dt>
 <dd><p>NULL or haracter vector of the same length as 'anno_list' with the protein chipped in each dataframe of anno_list. If not NULL, these names will be passed through <code>facet_wrap()</code>. Default: NULL.</p></dd>
+
+
 <dt>protein_order</dt>
 <dd><p>Character vector with the same entries as 'protein' with the order wanted to plot the data. Defaults to: unique(protein).</p></dd>
+
+
 <dt>main</dt>
 <dd><p>Character of lenght 1. Title of the plot. Default: NULL.</p></dd>
+
+
 <dt>subtitle</dt>
 <dd><p>Character of lenght 1. Subtitle of the plot. Default: NULL.</p></dd>
+
+
 <dt>ylab</dt>
 <dd><p>Character of lenght 1. Title of the Y axis. Default: NULL.</p></dd>
+
+
 <dt>xlab</dt>
 <dd><p>Character of lenght 1. Title of the X axis. Default: NULL</p></dd>
+
+
 <dt>legend_position</dt>
 <dd><p>Character of lenght 1. Position of the legend. One of c("none", "bottom", "right", "left," "top"). Default: "right"</p></dd>
+
+
 <dt>anno_num</dt>
 <dd><p>Numerical or character of length 1. Number of annotations to plot, either 2 (Promoter/Distal), 3 (Promoter/Gene body/Distal) or 'all' (the annotatePeak() default). Default: 2.</p></dd>
+
+
 <dt>fill_position</dt>
 <dd><p>Logical. If TRUE (default), it the plotted bars will represent proportion of peaks in each feature. If FALSE, the bars will have the height of the total number of peaks with the correspondent feature color.</p></dd>
+
+
 <dt>xangle</dt>
 <dd><p>Numerical of length 1. Angle of the text in the X axis. Default: 20.</p></dd>
+
+
 <dt>width</dt>
 <dd><p>Numerical of length 1. Width of the bar in relative units. Default: 0.6</p></dd>
+
+
 <dt>counts_label</dt>
 <dd><p>Logical of length 1. Whether to write the number and percentage of observations in each annotation. Default: FALSE.</p></dd>
+
+
 <dt>counts_angle</dt>
 <dd><p>Numerical of length 1. Angle of the number and percentage labels. Default: 90</p></dd>
+
+
 <dt>counts_size</dt>
 <dd><p>Numerical of length 1. Size of the number and percentage labels. Default: 3</p></dd>
+
+
 <dt>palette</dt>
 <dd><p>Character of lenght 1. Color palette used to color the bars through the function <code>scale_fill_brewer()</code>. Default: "Set1".</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -190,7 +225,7 @@ As a ggplot2-based function, it allows to add more layers to format the plot.</p
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

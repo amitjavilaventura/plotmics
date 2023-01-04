@@ -57,7 +57,7 @@ head(expr2)
 
 
 ```{r fig.width=14, fig.height=5}
-expressionCor(df = expr2, samples = colnames(expr)[-1], by_groups = T)
+expressionCor(df = expr2, samples = colnames(expr2)[-1], by_groups = T)
 ```
 
 ## Options

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">7.0.1</span>
       </span>
     </div>
 
@@ -102,35 +102,50 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">upsetPeaks</span><span class="op">(</span>
-  <span class="va">peaks</span>,
-  conds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">peaks</span><span class="op">)</span>,
-  conds_order <span class="op">=</span> <span class="va">conds</span>,
-  order.by <span class="op">=</span> <span class="st">"freq"</span>,
-  mainbar.y.label <span class="op">=</span> <span class="st">"Intersect size"</span>,
-  sets.x.label <span class="op">=</span> <span class="st">"Set size"</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">upsetPeaks</span><span class="op">(</span></span>
+<span>  <span class="va">peaks</span>,</span>
+<span>  conds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">peaks</span><span class="op">)</span>,</span>
+<span>  conds_order <span class="op">=</span> <span class="va">conds</span>,</span>
+<span>  order.by <span class="op">=</span> <span class="st">"freq"</span>,</span>
+<span>  mainbar.y.label <span class="op">=</span> <span class="st">"Intersect size"</span>,</span>
+<span>  sets.x.label <span class="op">=</span> <span class="st">"Set size"</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>peaks</dt>
 <dd><p>List of dataframes with the genomic coordinates of the regions to overlap. Dataframes must contain the columns seqnames, start, end.</p></dd>
+
+
 <dt>conds</dt>
 <dd><p>Character with the same length as the 'peaks' list. The names that are given to the diferente objects in the 'peaks' list. Default: 'names(peaks)'</p></dd>
+
+
 <dt>conds_order</dt>
 <dd><p>Character of the same length as 'conds'. Same values as in 'conds' but with the desired order of priority. Default: 'conds'.</p></dd>
+
+
 <dt>order.by</dt>
 <dd><p>Same as in UpSetR::upset(). One of "freq", "degree" or both.</p></dd>
+
+
 <dt>mainbar.y.label</dt>
 <dd><p>Same as in UpSetR::upset().</p></dd>
+
+
 <dt>sets.x.label</dt>
 <dd><p>Same as in UpSetR::upset().</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Further arguments to be passed through 'UpSetR::upset()'.</p></dd>
+
+
 <dt>title</dt>
 <dd><p>(Not available yet) Character of length 1 or NULL. Title of the plot shown at the top. Passed through grid.arrange(). If NULL, title is not shown. Default: NULL</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -154,7 +169,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

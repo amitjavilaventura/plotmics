@@ -18,7 +18,7 @@ draws an horizontal barplot with the up (right) and downregulated (left) genes."
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">plotmics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">6.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">7.0.1</span>
       </span>
     </div>
 
@@ -104,67 +104,102 @@ draws an horizontal barplot with the up (right) and downregulated (left) genes.<
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">barDEGs</span><span class="op">(</span>
-  <span class="va">deg_list</span>,
-  deg_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">deg_list</span><span class="op">)</span>,
-  name_pos <span class="op">=</span> <span class="st">"min"</span>,
-  xlim <span class="op">=</span> <span class="cn">NULL</span>,
-  position_num <span class="op">=</span> <span class="fl">10</span>,
-  xaxis <span class="op">=</span> <span class="cn">F</span>,
-  yaxis <span class="op">=</span> <span class="cn">F</span>,
-  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span>,
-  alpha <span class="op">=</span> <span class="fl">0.5</span>,
-  num_size <span class="op">=</span> <span class="fl">3</span>,
-  name_size <span class="op">=</span> <span class="fl">3</span>,
-  log2FC <span class="op">=</span> <span class="fl">1</span>,
-  pval <span class="op">=</span> <span class="fl">0.05</span>,
-  total <span class="op">=</span> <span class="cn">FALSE</span>,
-  title <span class="op">=</span> <span class="cn">NULL</span>,
-  subtitle <span class="op">=</span> <span class="cn">NULL</span>,
-  prop_test <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">barDEGs</span><span class="op">(</span></span>
+<span>  <span class="va">deg_list</span>,</span>
+<span>  deg_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">deg_list</span><span class="op">)</span>,</span>
+<span>  name_pos <span class="op">=</span> <span class="st">"min"</span>,</span>
+<span>  xlim <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  position_num <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  xaxis <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>  yaxis <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  num_size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  name_size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  log2FC <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  pval <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  total <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  subtitle <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  prop_test <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>deg_list</dt>
 <dd><p>Named list of dataframes with, at least, a column named DEG with the values 'Downregulated', "Upregulated" and "NS"</p></dd>
+
+
 <dt>deg_names</dt>
 <dd><p>Character vector of equal length to 'deg_list' names of the elements in 'deg_list'. Default: names(deg_list)</p></dd>
+
+
 <dt>name_pos</dt>
 <dd><p>Character of length 1. Where to write the name of each contrast. One of c('min', 'left', 'right', 'none'). If 'min', the name of the contrast will be written at the side where there are less DE genes; if 'right', the name of the contrast will be written to the right side of the plot; if 'left', the name of the contrast will be written to the left side of the plot; if 'none' the name of the contrast won't be written. Default: 'min'.</p></dd>
+
+
 <dt>xlim</dt>
 <dd><p>Numeric of length 2 or NULL. The limits of the X axis. If NULL, the limits of the X axis are the default. Useful when 'name_pos' is 'left' or 'right'. Default: NULL</p></dd>
+
+
 <dt>position_num</dt>
 <dd><p>Numeric of length 1. The position of the number of DEGs in each bar and the position of the contrast label. Default = 10.</p></dd>
+
+
 <dt>xaxis</dt>
 <dd><p>Logical of length 1. Whether to draw the text of the X axis (number of DE) or not. Default: FALSE.</p></dd>
+
+
 <dt>yaxis</dt>
 <dd><p>Logical of length 1. Whether to draw the text of the Y axis (contrast names) or not. Default: FALSE.</p></dd>
+
+
 <dt>colors</dt>
 <dd><p>Character of length 2. Colors for the downregulated and upregulated genes. Default: c("green", "red")</p></dd>
+
+
 <dt>alpha</dt>
 <dd><p>Numeric of length 1. Alpha (transparency) value for the vars. Deefault: 0.5.</p></dd>
+
+
 <dt>num_size</dt>
 <dd><p>Numeric of length 1. Size of the number of DEGs written in the bars. Default: 3.</p></dd>
+
+
 <dt>name_size</dt>
 <dd><p>Numeric of length 1. Size of the names of the contrasts  written next to the bars. Default: 3.</p></dd>
+
+
 <dt>log2FC</dt>
 <dd><p>Numeric of length 1 or NULL. Threshold for the log2FoldChange to define a gene as differentially expressed. Default: 1.</p></dd>
+
+
 <dt>pval</dt>
 <dd><p>Numeric of length 1 or NULL. Threshold for the adjusted p-value to define a gene as differentially expressed. Default: 0.05.</p></dd>
+
+
 <dt>total</dt>
 <dd><p>Logical of length 1. If TRUE, it counts the total number of features in each elements of deg_list and writes them in the caption. Default: FALSE.</p></dd>
+
+
 <dt>title</dt>
 <dd><p>Charachter of length 1 or NULL. Title of the plot. Default: NULL.</p></dd>
+
+
 <dt>subtitle</dt>
 <dd><p>Charachter of lenght 1 or NULL. Subtitle of the plot. Default: NULL.</p></dd>
+
+
 <dt>prop_test</dt>
 <dd><p>Logical of length 1. Whether to do a <code><a href="https://rdrr.io/r/stats/prop.test.html" class="external-link">prop.test()</a></code> to check whether the proportions of up and downregulated genes are significantly different from the expected proportions of 0.5. Default: FALSE.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A ggplot2-based barplot with the upregulated and downregulated genes in each contrast.</p>
+    
+
+<p>A ggplot2-based barplot with the upregulated and downregulated genes in each contrast.</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -183,7 +218,7 @@ draws an horizontal barplot with the up (right) and downregulated (left) genes.<
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
