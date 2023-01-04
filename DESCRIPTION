@@ -1,6 +1,6 @@
 Package: plotmics
 Title: Visualization of Omics And Sequencing Data In R
-Version: 7.0.0
+Version: 7.0.1
 Author: Adria Mitjavila-Ventura
 Maintainer: Adria Mitjavila Ventura <adria.mitjavila94@gmail.com>
 Description: The goal of this package is to provide simple functions to visualize several types of omics and sequencing data.
@@ -8,5 +8,5 @@ License: MIT
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.3
 URL: https://amitjavilaventura.github.io/plotmics/index.html, https://github.com/amitjavilaventura/plotmics

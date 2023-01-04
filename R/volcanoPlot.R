@@ -41,28 +41,28 @@
 #' @export
 
 volcanoPlot <- function(df,
-                        xlim = c(-10,10),
-                        ylim = c(0,30),
-                        pval = 0.05,
-                        log2FC = 1,
-                        main = NULL,
-                        mainSize = 9,
-                        sub = NULL,
-                        subSize = 8,
-                        labelSize = 5,
-                        labelColor = c("darkgreen", "red"),
-                        labelPos = 0,
-                        xlab = bquote(~Log[2]~ "FC"),
-                        ylab = (bquote(~-Log[10]~italic(P))),
+                        xlim          = c(-10,10),
+                        ylim          = c(0,30),
+                        pval          = 0.05,
+                        log2FC        = 1,
+                        main          = NULL,
+                        mainSize      = 9,
+                        sub           = NULL,
+                        subSize       = 8,
+                        labelSize     = 5,
+                        labelColor    = c("darkgreen", "red"),
+                        labelPos      = 0,
+                        xlab          = bquote(~Log[2]~ "FC"),
+                        ylab          = (bquote(~-Log[10]~italic(P))),
                         axisLabelSize = 10,
-                        axisTextSize = 9,
-                        pointColor = c("darkgreen", "gray", "red"),
-                        legendTitle = FALSE,
-                        legendPos = "bottom",
-                        degsLabel = FALSE,
-                        degsLabelNum=5,
+                        axisTextSize  = 9,
+                        pointColor    = c("darkgreen", "gray", "red"),
+                        legendTitle   = FALSE,
+                        legendPos     = "bottom",
+                        degsLabel     = FALSE,
+                        degsLabelNum  = 5,
                         degsLabelSize = 3,
-                        gridLines = TRUE) {
+                        gridLines     = TRUE) {
 
   # Load packages
   require(ggplot2)
@@ -130,7 +130,8 @@ volcanoPlot <- function(df,
     annotate(geom = "text", label = downdegs$number[1], x = downdegs$xpos[1]*0.9, y = ylim[1], color = labelColor[1], size = labelSize)
 
   # Basic formatting
-  p <- p +
+  p <-
+    p +
 
     # Stablish a predefined theme
     theme_classic() +
@@ -151,9 +152,11 @@ volcanoPlot <- function(df,
     xlab(xlab) + ylab(ylab) + theme(axis.title = element_text(size = axisLabelSize, face = "bold")) +
 
     # Format the color of the points
-    scale_colour_manual(values=c("Downregulated" = pointColor[1], "NS" = pointColor[2], "Upregulated" = pointColor[3]),
+    scale_colour_manual(values = c("Downregulated" = pointColor[1], "NS" = pointColor[2], "Upregulated" = pointColor[3]),
                         labels = c("Downregulated" = "Downregulated", "NS" = "NS", "Upregulated" = "Upregulated"),
-                        drop = FALSE) +
+                        breaks = c("Downregulated", "NS", "Upregulated"),
+                        limits = c("Downregulated", "NS", "Upregulated"),
+                        drop   = F) +
 
     # Remove the legend for shape
     guides(shape="none") +
