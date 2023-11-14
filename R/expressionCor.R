@@ -27,6 +27,9 @@
 #' @param legend_breaks_by Numerical of length 1. Size of the breaks in the legend. Default: 0.5.
 #' @param legend_title Character of length 1 or NULL. Title of the legend. Default: `paste(stringr::str_to_sentence(corr_method), "correlation", sep = " ")`.
 #' @param legend_title_size Numerical of length 1. Size of the legend title. Default: 10.
+#' @param legend_frame_width Numerical of length 1. Width of the line surrounding the colorbar legend. Default: 0.5.
+#' @param ticks Logical of length 1. Whether to show the ticks of the colourbar legend or not. Default: FALSE.
+#' @param ticks_color Character of length 1. Color of the ticks of the colourbar legend. Default: NA.
 #' @param coeffs_color Character of length 1 or NULL. Color of the correlation coeficients to be plotted. If NULL, no correlation coefficients are plotted. Default: "Black".
 #' @param coeffs_size Numerical of length 1. Size of the correlation coefficients. Default: 4.
 #' @param title_hjust Numerical of length 1. Horizontal justification of the title and the subtitle. Default: 0.5.
@@ -61,6 +64,9 @@ expressionCor <- function(df,
                           legend_breaks_by   = 0.5,
                           legend_title       = paste(stringr::str_to_sentence(corr_method), "correlation", sep = " "),
                           legend_title_size  = 10,
+                          legend_frame_width = 0.5,
+                          ticks              = F,
+                          ticks_color        = NA,
                           coeffs_color       = "Black",
                           coeffs_size        = 4,
                           title_hjust        = .5,
@@ -181,8 +187,8 @@ expressionCor <- function(df,
                                                        title.theme = element_text(angle = legend_title_angle,
                                                                                   hjust = .5, vjust = .5,
                                                                                   size = legend_title_size),
-                                                       frame.colour = "black", frame.linewidth = 1.5,
-                                                       ticks.colour = NA,
+                                                       frame.colour = "black", frame.linewidth = legend_frame_width,
+                                                       ticks = ticks, ticks.colour = ticks_color,
                                                        barheight = unit(legend_height, "mm"),
                                                        barwidth  = unit(legend_width, "mm")))
 
