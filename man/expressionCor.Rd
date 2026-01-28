@@ -25,6 +25,9 @@ expressionCor(
   legend_breaks_by = 0.5,
   legend_title = paste(stringr::str_to_sentence(corr_method), "correlation", sep = " "),
   legend_title_size = 10,
+  legend_frame_width = 0.5,
+  ticks = F,
+  ticks_color = "Black",
   coeffs_color = "Black",
   coeffs_size = 4,
   title_hjust = 0.5,
@@ -76,6 +79,12 @@ expressionCor(
 \item{legend_title}{Character of length 1 or NULL. Title of the legend. Default: \code{paste(stringr::str_to_sentence(corr_method), "correlation", sep = " ")}.}
 
 \item{legend_title_size}{Numerical of length 1. Size of the legend title. Default: 10.}
+
+\item{legend_frame_width}{Numerical of length 1. Width of the line surrounding the colorbar legend. Default: 0.5.}
+
+\item{ticks}{Logical of length 1. Whether to show the ticks of the colourbar legend or not. Default: FALSE.}
+
+\item{ticks_color}{Character of length 1. Color of the ticks of the colourbar legend. Default: "Black".}
 
 \item{coeffs_color}{Character of length 1 or NULL. Color of the correlation coeficients to be plotted. If NULL, no correlation coefficients are plotted. Default: "Black".}
 
