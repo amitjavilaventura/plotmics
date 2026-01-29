@@ -77,7 +77,8 @@ ggVennBed <- function(a,
   data <- list(rep("A",2), rep("B",2)) %>% magrittr::set_names(setnames)
 
   # Draw the Venn diagram setting text color to NA
-  venn <- ggvenn::ggvenn(data, show_percentage = F, fill_color = color, fill_alpha = alpha, stroke_color = "black", set_name_size = namesize, text_color = NA, text_size = 0)
+  venn <- ggvenn::ggvenn(data, show_percentage = F, fill_color = color, fill_alpha = alpha, stroke_color = "black",
+                         set_name_size = namesize, text_color = NA, text_size = 0)
 
   # Annotate the unique peaks and overlaps in the Venn diagram
   venn <- venn +
